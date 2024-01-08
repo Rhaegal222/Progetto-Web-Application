@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from './models/user.model'; // Assicurati di definire la classe User
+import { User } from '../models/user.model'; // Assicurati di avere un modello User
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private authUrl = 'api/auth'; // URL del tuo endpoint di autenticazione
+  private authUrl = 'your-backend-api-url'; // Sostituisci con il tuo URL API
 
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string): Observable<User> {
-    return this.http.post<User>(this.authUrl + '/login', { username, password });
+    return this.http.post<User>(`${this.authUrl}/login`, { username, password });
   }
 
-  // Aggiungi altri metodi come needed per logout, verifica dello stato di login, ecc.
+  logout(): void {
+    // Implementa la logica di logout
+  }
+
+  // Aggiungi altri metodi come necessario
 }
