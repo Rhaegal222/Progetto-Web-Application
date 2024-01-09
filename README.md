@@ -34,10 +34,8 @@ Funzionalità comuni:
 
 - Addetti del magazzino:
   - Possono aggiungere o rimuovere un prodotto
-  - Possono assegnare un prodotto ad una persona 
+  - Possono assegnare un prodotto ad una persona
   - Possono vedere a chi è assegnato e dove si trova ogni prodotto
   - Possono modificare le caratteristiche dei prodotti
   - Possono essere contattati dai dipendenti dell’università tramite un modulo di contatto
   - Possono aggiungere note ai prodotti
-
-
