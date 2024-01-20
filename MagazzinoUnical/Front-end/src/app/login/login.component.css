@@ -1,0 +1,77 @@
+/* Stile del contenitore principale */
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Assicurati che l'elemento occupi l'intero viewport */
+  cursor: pointer; /* Cambia il cursore per indicare che è cliccabile */
+  flex-direction: column; /* Allinea gli elementi in colonna */
+}
+
+h1 {
+  margin: 0; /* Rimuovi il margine di default */
+}
+
+/* Stili per il contenuto che appare */
+.displayContent {
+  margin-top: 20px; /* Aggiungi spazio sopra il contenuto aggiuntivo */
+}
+
+.container {
+  max-width: 600px; /* Limita la larghezza massima del form */
+  margin: auto; /* Centra il form nella pagina */
+  padding: 20px; /* Spazio intorno al contenitore */
+  background-color: #f8f9fa; /* Sfondo leggero per il form */
+  border-radius: 8px; /* Bordi arrotondati */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+}
+
+/* Stile delle righe del form */
+.form-group.row {
+  margin-bottom: 15px; /* Spazio tra le righe del form */
+}
+
+/* Uniforma la dimensione e l'allineamento delle etichette */
+.col-form-label {
+  font-size: 16px; /* Dimensione del testo */
+  line-height: 1.5; /* Altezza della linea */
+  text-align: right; /* Allineamento testo a destra */
+  padding-right: 15px; /* Spazio a destra delle etichette */
+}
+
+/* Stile degli input */
+.form-control {
+  height: 38px; /* Altezza degli input */
+  border-radius: 4px; /* Bordi arrotondati degli input */
+}
+
+/* Stile della checkbox */
+.form-check-input {
+  width: 20px; /* Larghezza della checkbox */
+  height: 20px; /* Altezza della checkbox */
+  margin-top: 10px; /* Rimuovi margini aggiuntivi */
+  vertical-align: middle; /* Allinea verticalmente */
+}
+
+/* Stile del bottone */
+.btn-primary {
+  background-color: #ff0000; /* Colore di sfondo */
+  border-color: #ff0000; /* Colore del bordo */
+  padding: 10px 20px; /* Padding intorno al testo */
+  font-size: 16px; /* Dimensione del testo */
+  border-radius: 4px; /* Bordi arrotondati */
+}
+
+.btn-primary:hover {
+  background-color: #ff000022; /* Colore di sfondo al hover */
+  border-color: #ff000022; /* Colore del bordo al hover */
+  color: black; /* Colore del testo al hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .col-form-label {
+    text-align: left; /* Allinea a sinistra su schermi piccoli */
+    padding-right: 0; /* Rimuovi padding a destra su schermi piccoli */
+  }
+}

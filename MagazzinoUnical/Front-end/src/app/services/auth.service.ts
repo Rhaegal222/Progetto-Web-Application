@@ -1,23 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { User } from '../models/user.model'; // Assicurati di avere un modello User
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private authUrl = 'your-backend-api-url'; // Sostituisci con il tuo URL API
+  private showLoginSubject = new BehaviorSubject<boolean>(false);
+  showLogin$ = this.showLoginSubject.asObservable();
 
-  constructor(private http: HttpClient) {}
-
-  login(username: string, password: string): Observable<User> {
-    return this.http.post<User>(`${this.authUrl}/login`, { username, password });
+  toggleLogin() {
+    this.showLoginSubject.next(!this.showLoginSubject.value);
   }
-
-  logout(): void {
-    // Implementa la logica di logout
-  }
-
-  // Aggiungi altri metodi come necessario
 }

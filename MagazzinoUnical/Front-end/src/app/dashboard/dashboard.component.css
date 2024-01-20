@@ -1,0 +1,19 @@
+/* dashboard.component.css */
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Assicurati che l'elemento occupi l'intero viewport */
+    cursor: pointer; /* Cambia il cursore per indicare che è cliccabile */
+    flex-direction: column; /* Allinea gli elementi in colonna */
+  }
+  
+  h1 {
+    margin: 0; /* Rimuovi il margine di default */
+  }
+  
+  /* Stili per il contenuto che appare */
+  .displayContent {
+    margin-top: 20px; /* Aggiungi spazio sopra il contenuto aggiuntivo */
+  }
+  
