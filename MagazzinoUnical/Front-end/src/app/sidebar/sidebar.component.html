@@ -1,20 +1,34 @@
-<div #appSidebar class="sidebar">
-    <!-- Logo o titolo dell'applicazione -->
-    <div class="sidebar-header">
-        <img src="https://www.idemedia.com/wp-content/uploads/2021/04/unical-logo-white.png" alt="logo" class="img-fluid">
-        <h3>Magazzino Unical</h3>
-    </div>
-  
+<div class="menu">
+  <!-- Logo o titolo dell'applicazione -->
+  <div class="menu-header">
+    <img src="https://www.idemedia.com/wp-content/uploads/2021/04/unical-logo-white.png" alt="logo" class="img-fluid">
+    <h3>Magazzino Unical</h3>
+
     <!-- Lista di navigazione -->
-    <ul class="list-unstyled components">
-      <li routerLinkActive="active"><a routerLink="/dashboard">Dashboard</a></li>
-      <li>
-        <a href="#">Items</a>
-      </li>
-      <li>
-        <a href="#">Search</a>
-      </li>
-      <li routerLinkActive="active"><a routerLink="/login">Login</a></li>
+    <ul class="items">
+      <li routerLinkActive="active" routerLink="/dashboard">Riepilogo</li>
+      <li routerLinkActive="active" routerLink="/warehouse">Magazzino</li>
+      <li routerLinkActive="active" routerLink="/map">Mappa</li>
+      <li>Search</li>
+      <li class="no-line" routerLinkActive="active" routerLink="/login">Login</li>
     </ul>
+  </div>
 </div>
-  
+<div class="only-mobile">
+  <ul class="menu-toggle">
+    <li>
+      <h3>Magazzino Unical</h3>
+    </li>
+    <!-- Inserisce l'icona del menu per quando aprire il menu sui dispositivi mobili -->
+    <li class="menu-button" routerLinkActive="active">
+      <a routerLink="/menu">
+        <div class="menu-icon">
+          <span class="line"></span>
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>
+

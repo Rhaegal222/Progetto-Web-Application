@@ -1,11 +1,18 @@
 /* Stile del contenitore principale */
 .content {
-  display: flex;
+  display: flex; /* Allinea gli elementi in riga */
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Assicurati che l'elemento occupi l'intero viewport */
-  cursor: pointer; /* Cambia il cursore per indicare che è cliccabile */
   flex-direction: column; /* Allinea gli elementi in colonna */
+
+  /* Allinea il contenuto al centro in altezza*/
+  height: calc(100vh - 80px);
+
+  /* Allina i componenti al centro della pagina rispetto allo spazio non occupato dalla barra laterale */
+  margin-left: 250px;
+  padding: 20px;
+  /* Imposta la larghezza massima del contenitore principale */
+  max-width: 100%;
 }
 
 h1 {
@@ -19,11 +26,33 @@ h1 {
 
 .container {
   max-width: 600px; /* Limita la larghezza massima del form */
-  margin: auto; /* Centra il form nella pagina */
   padding: 20px; /* Spazio intorno al contenitore */
   background-color: #f8f9fa; /* Sfondo leggero per il form */
   border-radius: 8px; /* Bordi arrotondati */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+}
+
+/* Stile del bottone di login */
+.btn-primary {
+  background-color: #ff0000; /* Colore di sfondo */
+  border-color: #ff0000; /* Colore del bordo */
+  border-radius: 8px;
+  color: white; /* Colore del testo */
+  font-size: 16px; /* Dimensione del testo */
+  padding: 10px 16px; /* Spazio interno */
+  width: auto; /* Larghezza massima */
+}
+
+.btn-primary:hover {
+  background-color: #ff000022; /* Colore di sfondo al hover */
+  border-color: #ff000022; /* Colore del bordo al hover */
+  color: black; /* Colore del testo al hover */
+}
+
+.container .btn-primary {
+  /* Allinea il bottone al centro */
+  margin: 0 auto;
+  display: block;
 }
 
 /* Stile delle righe del form */
@@ -53,25 +82,36 @@ h1 {
   vertical-align: middle; /* Allinea verticalmente */
 }
 
-/* Stile del bottone */
-.btn-primary {
-  background-color: #ff0000; /* Colore di sfondo */
-  border-color: #ff0000; /* Colore del bordo */
-  padding: 10px 20px; /* Padding intorno al testo */
-  font-size: 16px; /* Dimensione del testo */
-  border-radius: 4px; /* Bordi arrotondati */
-}
-
-.btn-primary:hover {
-  background-color: #ff000022; /* Colore di sfondo al hover */
-  border-color: #ff000022; /* Colore del bordo al hover */
-  color: black; /* Colore del testo al hover */
-}
-
 /* Responsive adjustments */
-@media (max-width: 768px) {
-  .col-form-label {
-    text-align: left; /* Allinea a sinistra su schermi piccoli */
-    padding-right: 0; /* Rimuovi padding a destra su schermi piccoli */
+
+@media (min-width: 992px) and (max-width: 1099px) {
+  .content {
+    display: flex; /* Allinea gli elementi in riga */
+    margin-left: 0;
+    /* Imposta la larghezza massima del contenitore principale */
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.5px) {
+  .content {
+    display: flex; /* Allinea gli elementi in riga */
+    /* Allinea il contenuto al centro rispetto a tutta la larghezza della pagina */
+    height: calc(100vh - 80px);
+    margin-left: 0;
+    /* Imposta la larghezza massima del contenitore principale */
+    max-width: 100%;
+  }
+}
+
+/* Stili per schermi piccoli (Mobile) */
+@media (max-width: 767px) {
+  .content {
+    display: flex; /* Allinea gli elementi in riga */
+    /* Allinea il contenuto al centro rispetto a tutta la larghezza della pagina */
+    height: calc(100vh - 80px);
+    margin-left: 0;
+    /* Imposta la larghezza massima del contenitore principale */
+    max-width: 100%;
   }
 }

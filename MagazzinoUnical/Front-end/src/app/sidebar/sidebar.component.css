@@ -1,4 +1,4 @@
-.sidebar {
+.menu {
     width: 250px; /* o la larghezza desiderata */
     position: fixed;
     top: 0;
@@ -7,45 +7,173 @@
     background: #ff0000; /* il colore rosso mostrato */
     color: white;
     transition: all 0.3s;
-  }
+}
 
-  .sidebar-header {
+.menu-header {
     background: #ff0000; /* Sostituisci con il colore desiderato */
     padding: 20px; /* Spazio intorno al logo */
     text-align: center; /* Allinea il logo al centro */
-  }
-  
-  .sidebar-header img {
+}
+
+.menu-header h3 {
+    color: white; /* Colore del testo */
+    font-size: 1.2em; /* Dimensione del testo */
+    margin-top: 0; /* Spazio sopra il testo */
+    margin-bottom: 20px; /* Spazio sotto il testo */
+}
+
+.menu-header img {
     max-width: 100%; /* Imposta una larghezza massima */
     height: auto; /* Mantiene il rapporto di aspetto */
     max-height: 150px; /* Altezza massima del logo */
     margin-bottom: 10px; /* Spazio sotto il logo se necessario */
+}
+
+.items {
+  list-style: none; /* Rimuovi i punti elenco */
+  padding: 0; /* Rimuovi il padding */
+  margin: 50px 30px 0 30px;
+}
+
+.items li {
+  text-align: left;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: white;
+  display: block;
+  transition: 0.3s;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+}
+
+.items li:hover {
+  color: rgb(190, 190, 190);
+  text-decoration: none;
+}
+
+.only-mobile {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (min-width: 992px) and (max-width: 1099px) {
+  .menu {
+    width: 100%;
+    height: auto;
+    position: relative;
+    background: #ff0000;
+    color: white;
+    transition: all 0.3s;
+    padding: 0.75%;
   }
-  
-  .components {
-    padding-left: 0;
+  .menu-header {
+    padding: 0;
+  }
+  /* Rimuove il nome del sito */
+  .menu-header h3 {
+    display: none;
+  }
+  /* Rimuove il logo */
+  .menu-header img {
+    display: none;
+  }
+  .items {
+    list-style: none; /* Rimuovi i punti elenco */
+    padding: 0; /* Rimuovi il padding */
+    margin: 0; /* Rimuovi il margine */
+    display: flex; /* Allinea gli elementi in riga */
+    justify-content: center; /* Allinea gli elementi al centro */
+    flex-wrap: wrap; /* Imposta il wrap degli elementi */
+  }
+  .items li {
+    text-align: center; /* Allinea il testo al centro */
+    border-bottom: 0;
+    border-right: 1px solid #ccc;
+  }
+  .items .no-line {
+    border-right: 0;
+  }
+}
+@media (min-width: 768px) and (max-width: 991.5px) {
+  .menu {
+    width: 100%;
+    height: auto;
+    position: relative;
+    background: #ff0000;
+    color: white;
+    transition: all 0.3s;
+    padding: 0.75%;
+  }
+  .menu-header {
+    padding: 0;
+  }
+  /* Rimuove il nome del sito */
+  .menu-header h3 {
+    display: none;
+  }
+  /* Rimuove il logo */
+  .menu-header img {
+    display: none;
+  }
+  .items {
+    list-style: none; /* Rimuovi i punti elenco */
+    padding: 0; /* Rimuovi il padding */
+    margin: 0; /* Rimuovi il margine */
+    display: flex; /* Allinea gli elementi in riga */
+    justify-content: center; /* Allinea gli elementi al centro */
+    flex-wrap: wrap; /* Imposta il wrap degli elementi */
+  }
+  .items li {
+    text-align: center; /* Allinea il testo al centro */
+    border-bottom: 0;
+    border-right: 1px solid #ccc;
+  }
+  .items .no-line {
+    border-right: 0;
+  }
+}
+@media (max-width: 767px){
+  .menu {
+    display: none;
+  }
+  .only-mobile {
+    display: block;
+  }
+  .menu-toggle {
+    width: 100%;
+    height: auto;
+    background: #ff0000;
+    transition: all 0.3s;
     list-style: none;
+    /* Metti gli elementi in linea */
+    display: flex;
+    margin: 0;
+    padding: 0;
+    min-height: 55px;
+    max-height: 60px;
   }
-  
-  .components li a {
-    padding: 10px;
-    font-size: 1.2em;
-    font-weight: bold;
+  .menu-toggle h3 {
     color: white;
     display: block;
-    transition: 0.3s;
-  }
-  
-  .components li a:hover {
-    color: #f1f1f1;
-    text-decoration: none;
-  }
-  
-  .sidebar-footer {
-    position: absolute;
-    bottom: 0;
     width: 100%;
-    padding: 20px;
-    background: #6d071a; /* un colore più scuro */
+    margin: 10% 15%;
   }
-  
+  .menu-toggle .menu-button {
+    padding: 2% 6%;
+    /* Allinea il pulsante tutto a destra */
+    margin-left: auto;
+  }
+  .menu-icon{
+    cursor: pointer;
+  }
+  .line {
+    display: block;
+    width: 30px;
+    height: 4px;
+    background-color: white; /* Colore delle linee */
+    margin: 25% 0; /* Spazio tra le linee */
+  }
+}
+
