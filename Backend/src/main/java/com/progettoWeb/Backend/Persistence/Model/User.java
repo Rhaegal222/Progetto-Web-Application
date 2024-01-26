@@ -11,17 +11,23 @@ import lombok.ToString;
 @EqualsAndHashCode
 
 public class User {
-    String username, password,name, surname;
+    String id_user, name, surname, role, username, password;
 
-    public User(String username, String password, String name, String surname) {
-        this.username = username;
-        this.password = password;
+    public User(){}
+    //Costruttore per creare un nuovo utente
+    public User(String id_user, String name, String surname, String role, String username, String password){
+        this.id_user = id_user;
         this.name = name;
         this.surname = surname;
-    }
-
-    public User (String username, String password){
+        this.role = role;
         this.username = username;
         this.password = password;
     }
+
+    //Costruttore per cercare un utente tramite id_user (che è primary key)
+    public User(String id_user){
+        this.id_user = id_user;
+    }
+
+
 }
