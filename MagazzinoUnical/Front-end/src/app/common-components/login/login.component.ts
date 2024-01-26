@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
+import {FormControl, Validators} from "@angular/forms";
+
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrl: './registration.component.css'
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
 })
-export class RegistrationComponent {
+export class LoginComponent {  
   password: string = '';
   passwordInputType: string = 'password';
   passwordVisible: boolean = false;

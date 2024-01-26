@@ -4,7 +4,7 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './common-components/sidebar/sidebar.component';
-import { LoginComponent } from './employee-components/login/login.component';
+import { LoginComponent } from './common-components/login/login.component';
 import { DashboardComponent } from './common-components/dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";
