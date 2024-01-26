@@ -28,7 +28,8 @@ public class RegisterServlet extends HttpServlet {
                         request.getParameter("surname"),
                         request.getParameter("role"),
                         request.getParameter("username"),
-                        request.getParameter("password")
+                        request.getParameter("password"),
+                        request.getParameter("email")
                 );
 
         if(DatabaseHandler.getInstance().getUserDao().findByPrimaryKey(request.getParameter("username")) == null){

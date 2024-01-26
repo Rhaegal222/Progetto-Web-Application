@@ -50,5 +50,4 @@ public class DatabaseHandler {
     public ItemDao getItemDao(){
         return new ItemDaoPostgres(getConnection());
     }
-
 }

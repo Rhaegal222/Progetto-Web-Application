@@ -11,16 +11,17 @@ import lombok.ToString;
 @EqualsAndHashCode
 
 public class User {
-    String name, surname, role, username, password;
+    String name, surname, role, username, password, email;
 
     public User(){}
     //Costruttore per creare un nuovo utente
-    public User( String name, String surname, String role, String username, String password){
+    public User( String name, String surname, String role, String email, String username, String password){
         this.name = name;
         this.surname = surname;
         this.role = role;
         this.username = username;
         this.password = password;
+        this.email = email;
     }
 
 

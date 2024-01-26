@@ -7,4 +7,6 @@ public interface UserDao {
     void insertUser(User user);//inserisce un nuovo utente
 
     public void deleteUser(String id_user); //elimina un utente
+
+    boolean checkUsername(String username);
 }
