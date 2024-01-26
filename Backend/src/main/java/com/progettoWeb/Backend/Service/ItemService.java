@@ -12,7 +12,7 @@ public class ItemService {
         String name = insertItemRequest.getName();
         String description = insertItemRequest.getDescription();
         String type = insertItemRequest.getType();
-        String quantity = insertItemRequest.getQuantity();
+        Integer quantity = Integer.valueOf(insertItemRequest.getQuantity());
 
         // Verifica se l'item esiste nel database
         Item item = DatabaseHandler.getInstance().getItemDao().findByPrimaryKey(name);
@@ -27,5 +27,9 @@ public class ItemService {
         }
         // Restituisci un messaggio di successo
         return ResponseEntity.ok().body("{\"message\": \"Item inserted\"}");
+    }
+
+    public ResponseEntity<?> allItems() {
+        return ResponseEntity.ok().body(DatabaseHandler.getInstance().getItemDao().findAll());
     }
 }

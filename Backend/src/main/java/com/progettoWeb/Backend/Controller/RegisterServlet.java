@@ -24,12 +24,12 @@ public class RegisterServlet extends HttpServlet {
         // METTERLA NELLA CLASSE SERVICE
         User u = new User
                 (
-                        request.getParameter("id_user"),
                         request.getParameter("name"),
                         request.getParameter("surname"),
                         request.getParameter("role"),
                         request.getParameter("username"),
-                        request.getParameter("password")
+                        request.getParameter("password"),
+                        request.getParameter("email")
                 );
 
         if(DatabaseHandler.getInstance().getUserDao().findByPrimaryKey(request.getParameter("username")) == null){

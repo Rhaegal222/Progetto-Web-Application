@@ -21,4 +21,9 @@ public class ItemController {
         return itemService.insertItem(insertItemRequest);
     }
 
+    @PostMapping("/api/allItems")
+    public ResponseEntity<?> allItems(){
+        return itemService.allItems();
+    }
+
 }

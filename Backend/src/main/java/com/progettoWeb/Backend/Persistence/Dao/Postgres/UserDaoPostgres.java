@@ -16,19 +16,19 @@ public class UserDaoPostgres implements UserDao {
     public User findByPrimaryKey(String username) {
         try {
             con = DatabaseHandler.getInstance().getConnection();
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM user WHERE username = ?");
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM users WHERE username = ?");
             stmt.setString(1, username);
             ResultSet res = stmt.executeQuery();
 
             User u = null;
             if (res.next()) {
-                String id_user = res.getString("id_user");
                 String name = res.getString("name");
                 String surname = res.getString("surname");
                 String role = res.getString("role");
                 String password = res.getString("password");
+                String email = res.getString("email");
 
-                u = new User(id_user, name, surname, role, username, password);
+                u = new User(name, surname, role, email, username, password);
             }
 
             res.close();
@@ -41,19 +41,35 @@ public class UserDaoPostgres implements UserDao {
         }
     }
 
+    public boolean checkUsername(String username){
+        try{
+            boolean output = false;
+            PreparedStatement stmt = con.prepareStatement("SELECT username FROM users WHERE username = ?");
+            stmt.setString(1, username);
+            ResultSet res = stmt.executeQuery();
+
+            if(res.next()) output = true;
+
+            res.close();
+            stmt.close();
+            return output;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void insertUser(User user) {
         try {
             con = DatabaseHandler.getInstance().getConnection();
-            PreparedStatement stmt = con.prepareStatement(
-                    "INSERT INTO user (id_user, name, surname, role, username, password) VALUES (?, ?, ?, ?, ?, ?)"
-            );
+            String query =  "INSERT INTO users (name, surname, role, email, username, password) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement stmt = con.prepareStatement(query);
 
             // Impostare i parametri della query con i dati dell'utente
-            stmt.setString(1, user.getId_user());
-            stmt.setString(2, user.getName());
-            stmt.setString(3, user.getSurname());
-            stmt.setString(4, user.getRole());
+            stmt.setString(1, user.getName());
+            stmt.setString(2, user.getSurname());
+            stmt.setString(3, user.getRole());
+            stmt.setString(4, user.getEmail());
             stmt.setString(5, user.getUsername());
             stmt.setString(6, user.getPassword());
 
@@ -65,7 +81,7 @@ public class UserDaoPostgres implements UserDao {
             DatabaseHandler.getInstance().closeConnection();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.fillInStackTrace();
         }
     }
 

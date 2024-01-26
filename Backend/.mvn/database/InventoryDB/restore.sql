@@ -62,6 +62,56 @@ ALTER SCHEMA public OWNER TO pg_database_owner;
 COMMENT ON SCHEMA public IS 'standard public schema';
 
 
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: User; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."User" (
+    name character varying,
+    surname character varying,
+    role character varying,
+    username character varying,
+    password character varying
+);
+
+
+ALTER TABLE public."User" OWNER TO postgres;
+
+--
+-- Name: item; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.item (
+    id_item character varying,
+    name character varying,
+    type character varying,
+    description character varying,
+    quantity integer
+);
+
+
+ALTER TABLE public.item OWNER TO postgres;
+
+--
+-- Data for Name: User; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."User" (name, surname, role, username, password) FROM stdin;
+\.
+COPY public."User" (name, surname, role, username, password) FROM '$$PATH$$/4834.dat';
+
+--
+-- Data for Name: item; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.item (id_item, name, type, description, quantity) FROM stdin;
+\.
+COPY public.item (id_item, name, type, description, quantity) FROM '$$PATH$$/4835.dat';
+
 --
 -- PostgreSQL database dump complete
 --
