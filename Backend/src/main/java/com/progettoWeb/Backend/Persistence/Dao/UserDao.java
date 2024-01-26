@@ -5,8 +5,9 @@ import com.progettoWeb.Backend.Persistence.Model.User;
 import java.util.ArrayList;
 
 public interface UserDao {
-    public ArrayList<User> findAll();
-    public User findByPrimaryKey(String username);
+    public User findByPrimaryKey(String id_user); //trova un utente tramite id_user
 
-    public void insertUser(User User);
+    void insertUser(User user);//inserisce un nuovo utente
+
+    public void deleteUser(String id_user); //elimina un utente
 }

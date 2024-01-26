@@ -1,8 +1,11 @@
 package com.progettoWeb.Backend.Persistence;
 
 
+import com.progettoWeb.Backend.Persistence.Dao.ItemDao;
+import com.progettoWeb.Backend.Persistence.Dao.Postgres.ItemDaoPostgres;
 import com.progettoWeb.Backend.Persistence.Dao.Postgres.UserDaoPostgres;
 import com.progettoWeb.Backend.Persistence.Dao.UserDao;
+import com.progettoWeb.Backend.Persistence.Model.Item;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,6 +25,14 @@ public class DatabaseHandler {
 
     Connection con = null;
 
+    public void closeConnection(){
+        try{
+            con.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public Connection getConnection(){
         if (con == null){
             try {
@@ -36,4 +47,8 @@ public class DatabaseHandler {
     public UserDao getUserDao(){
         return new UserDaoPostgres(getConnection());
     }
+    public ItemDao getItemDao(){
+        return new ItemDaoPostgres(getConnection());
+    }
+
 }
