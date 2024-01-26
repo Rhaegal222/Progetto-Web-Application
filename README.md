@@ -39,3 +39,24 @@ Funzionalità comuni:
   - Possono modificare le caratteristiche dei prodotti
   - Possono essere contattati dai dipendenti dell’università tramite un modulo di contatto
   - Possono aggiungere note ai prodotti
+
+**Componenti Comuni a Entrambi:**
+
+1. **Sidebar**: Componente per l'intestazione dell'applicazione.
+2. **Dashboard**: Componente per la visualizzazione dei prodotti in magazzino.
+3. **Menu**: Componente per il piè di pagina dell'applicazione.
+4. **Login**: Componente per la gestione dell'autenticazione e dell'accesso degli utenti.
+5. **Registration**: Componente per la gestione della registrazione degli utenti.
+
+**Componenti per l'Amministratore:**
+
+1. **UserManagement**: Componente per la gestione degli utenti, inclusa l'aggiunta, la modifica e la cancellazione degli utenti, nonché la gestione dei ruoli.
+2. **InventoryManagement**: Componente per la gestione dell'inventario, inclusa l'aggiunta, la rimozione e la modifica dei prodotti, nonché l'assegnazione dei prodotti.
+
+**Componenti per il Dipendente:**
+
+1. **ProductList**: Componente per visualizzare l'elenco dei prodotti in magazzino.
+2. **ProductDetail**: Componente per visualizzare i dettagli di un prodotto specifico.
+3. **RequestManagement**: Componente per l'avanzamento delle richieste relative ai prodotti, inclusi ordini, segnalazioni e richieste di reso o cambio.
+4. **LocationMap**: Componente per visualizzare una mappa con la posizione degli uffici e le informazioni sui prodotti consegnati a ciascun ufficio.
+5. **Reports**: Componente per generare rapporti e statistiche sull'inventario e sull'utilizzo dei prodotti.

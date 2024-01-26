@@ -18,8 +18,13 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatSidenav, MatSidenavContainer, MatSidenavContent} from "@angular/material/sidenav";
 import {MatNavList} from "@angular/material/list";
 import { MenuComponent } from './menu/menu.component';
-import { WarehouseComponent } from './warehouse/warehouse.component';
-import { MapComponent } from './map/map.component';
+import { LocationMapComponent } from './location-map/location-map.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { UserManagementComponent } from './user-management/user-management.component';
+import { RequestManagementComponent } from './request-management/request-management.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { ReportsComponent } from './reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +33,13 @@ import { MapComponent } from './map/map.component';
     DashboardComponent,
     LoginComponent,
     MenuComponent,
-    WarehouseComponent,
-    MapComponent
+    RegistrationComponent,
+    ProductDetailComponent,
+    UserManagementComponent,
+    RequestManagementComponent,
+    ProductListComponent,
+    LocationMapComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,

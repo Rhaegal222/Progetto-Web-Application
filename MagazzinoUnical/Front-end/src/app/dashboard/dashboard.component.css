@@ -4,14 +4,14 @@
   align-items: center;
   flex-direction: column; /* Allinea gli elementi in colonna */
 
-  height: calc(100vh - 80px);
-
   /* Allina i componenti al centro della pagina rispetto allo spazio non occupato dalla barra laterale */
   margin-left: 250px;
   padding: 20px;
 
   /* Imposta la larghezza massima del contenitore principale */
   max-width: 100%;
+  /* Allinea verticalmente gli elementi */
+  height: 100vh;
 }
 
 .container {
@@ -41,15 +41,14 @@
 }
 
 /* Responsive adjustments */
-
 @media (min-width: 992px) and (max-width: 1099px) {
   .content {
     /* Allinea i componenti in colonna */
     flex-direction: column;
-    /* Imposta la larghezza massima del contenitore principale */
     width: 100%;
     margin: 0;
     padding: 0;
+    height: auto;    
   }
 }
 
@@ -57,22 +56,22 @@
   .content {
     /* Allinea i componenti in colonna */
     flex-direction: column;
-    /* Imposta la larghezza massima del contenitore principale */
     width: 100%;
     margin: 0;
     padding: 0;
+    height: auto;
   }
 }
 
 /* Stili per schermi piccoli (Mobile) */
 @media (min-width: 576px) and (max-width: 767px) {
   .content {
-    /* Allinea i componenti in colonna */
     flex-direction: column;
-    /* Imposta la larghezza massima del contenitore principale */
+    height: auto;
     width: 100%;
     margin: 0;
     padding: 0;
+    height: auto;
   }
 }
 
@@ -80,19 +79,12 @@
   .content {
     /* Allinea i componenti in colonna */
     flex-direction: column;
-    /* Imposta la larghezza massima del contenitore principale */
+    height: auto;
     width: 100%;
     margin: 0;
-    padding: 0;
-}
-  
-  .container {
-    
+    padding: 0; 
+    height: auto;
   }
-  
-  .component {
-    
-  }  
 }
 
   

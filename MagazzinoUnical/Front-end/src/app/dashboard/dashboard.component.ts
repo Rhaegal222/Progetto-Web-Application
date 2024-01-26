@@ -12,4 +12,10 @@ export class DashboardComponent {
   toggleDisplay(): void {
     this.displayContent = !this.displayContent;
   }
+
+  admin = false;
+
+  ngAfterContentChecked() {
+    this.admin = false;
+  }
 }

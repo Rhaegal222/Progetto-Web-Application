@@ -3,15 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import {MenuComponent} from "./menu/menu.component";
-import { WarehouseComponent } from './warehouse/warehouse.component';
-import { MapComponent } from './map/map.component';
+import { LocationMapComponent } from './location-map/location-map.component';
+import { ProductListComponent } from './product-list/product-list.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'warehouse', component: WarehouseComponent},
+  { path: 'product-list', component: ProductListComponent},
   { path: 'login', component: LoginComponent },
   { path: 'menu', component: MenuComponent },
-  { path: 'map', component: MapComponent},
+  { path: 'location-map', component: LocationMapComponent},
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' }, // Default route
 
 ];
