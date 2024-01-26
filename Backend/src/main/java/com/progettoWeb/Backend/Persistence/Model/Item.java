@@ -9,10 +9,10 @@ public class Item {
     private String name;
     private String description;
     private String type;
-    private String quantity;
+    private Integer quantity;
     //private String image;
 
-    public Item(String name, String description, String type, String quantity) {
+    public Item(String name, String description, String type, Integer quantity) {
         this.name = name;
         this.description = description;
         this.type = type;

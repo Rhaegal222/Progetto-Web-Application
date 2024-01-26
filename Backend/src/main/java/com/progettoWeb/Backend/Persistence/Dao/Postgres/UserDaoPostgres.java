@@ -28,7 +28,7 @@ public class UserDaoPostgres implements UserDao {
                 String role = res.getString("role");
                 String password = res.getString("password");
 
-                u = new User(id_user, name, surname, role, username, password);
+                u = new User(name, surname, role, username, password);
             }
 
             res.close();
@@ -45,17 +45,15 @@ public class UserDaoPostgres implements UserDao {
     public void insertUser(User user) {
         try {
             con = DatabaseHandler.getInstance().getConnection();
-            PreparedStatement stmt = con.prepareStatement(
-                    "INSERT INTO user (id_user, name, surname, role, username, password) VALUES (?, ?, ?, ?, ?, ?)"
-            );
+            String query =  "INSERT INTO \"user\" (name, surname, role, username, password) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement stmt = con.prepareStatement(query);
 
             // Impostare i parametri della query con i dati dell'utente
-            stmt.setString(1, user.getId_user());
-            stmt.setString(2, user.getName());
-            stmt.setString(3, user.getSurname());
-            stmt.setString(4, user.getRole());
-            stmt.setString(5, user.getUsername());
-            stmt.setString(6, user.getPassword());
+            stmt.setString(1, user.getName());
+            stmt.setString(2, user.getSurname());
+            stmt.setString(3, user.getRole());
+            stmt.setString(4, user.getUsername());
+            stmt.setString(5, user.getPassword());
 
             // Eseguire la query di inserimento
             stmt.executeUpdate();
@@ -65,7 +63,7 @@ public class UserDaoPostgres implements UserDao {
             DatabaseHandler.getInstance().closeConnection();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.fillInStackTrace();
         }
     }
 

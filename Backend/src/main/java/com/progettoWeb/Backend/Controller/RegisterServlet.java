@@ -24,7 +24,6 @@ public class RegisterServlet extends HttpServlet {
         // METTERLA NELLA CLASSE SERVICE
         User u = new User
                 (
-                        request.getParameter("id_user"),
                         request.getParameter("name"),
                         request.getParameter("surname"),
                         request.getParameter("role"),

@@ -36,7 +36,7 @@ public class DatabaseHandler {
     public Connection getConnection(){
         if (con == null){
             try {
-                con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Riepilogo", "postgres", "postgres");
+                con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/InventoryDB", "postgres", "postgres");
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
