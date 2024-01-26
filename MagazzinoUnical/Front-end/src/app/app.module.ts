@@ -24,7 +24,10 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { UserManagementComponent } from './user-management/user-management.component';
 import { RequestManagementComponent } from './request-management/request-management.component';
 import { ProductListComponent } from './product-list/product-list.component';
-import { ReportsComponent } from './reports/reports.component';
+import { ReportComponent } from './report/report.component';
+import { ProductManagementComponent } from './product-management/product-management.component';
+import { ProductRequestComponent } from './product-request/product-request.component';
+import { ProductReturnComponent } from './product-return/product-return.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { ReportsComponent } from './reports/reports.component';
     RequestManagementComponent,
     ProductListComponent,
     LocationMapComponent,
-    ReportsComponent
+    ReportComponent,
+    ProductManagementComponent,
+    ProductRequestComponent,
+    ProductReturnComponent
   ],
   imports: [
     BrowserModule,

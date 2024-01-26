@@ -51,12 +51,18 @@ Funzionalità comuni:
 **Componenti per l'Amministratore:**
 
 1. **UserManagement**: Componente per la gestione degli utenti, inclusa l'aggiunta, la modifica e la cancellazione degli utenti, nonché la gestione dei ruoli.
-2. **InventoryManagement**: Componente per la gestione dell'inventario, inclusa l'aggiunta, la rimozione e la modifica dei prodotti, nonché l'assegnazione dei prodotti.
 
-**Componenti per il Dipendente:**
+**Componenti per l'Addetto al Magazzino:**
 
-1. **ProductList**: Componente per visualizzare l'elenco dei prodotti in magazzino.
-2. **ProductDetail**: Componente per visualizzare i dettagli di un prodotto specifico.
-3. **RequestManagement**: Componente per l'avanzamento delle richieste relative ai prodotti, inclusi ordini, segnalazioni e richieste di reso o cambio.
-4. **LocationMap**: Componente per visualizzare una mappa con la posizione degli uffici e le informazioni sui prodotti consegnati a ciascun ufficio.
-5. **Reports**: Componente per generare rapporti e statistiche sull'inventario e sull'utilizzo dei prodotti.
+1. **LocationMap**: Componente per la visualizzazione della mappa con la posizione dei prodotti.
+2. **RequestManagement**: Componente per la gestione delle richieste dei dipendenti dell'università.
+3. **ProductManagement**: Componente per la gestione dei prodotti, inclusa l'aggiunta, la modifica e la cancellazione dei prodotti, nonché la gestione delle note.
+4. **Report**: Componente per le statistiche sui prodotti.
+
+**Componenti per il Dipendente dell'Università:**
+
+1. **Registration**: Componente per la gestione della registrazione degli utenti.
+2. **ProductList**: Componente per la visualizzazione dei prodotti in magazzino.
+3. **ProductDetail**: Componente per la visualizzazione dei dettagli di un prodotto.
+4. **ProductRequest**: Componente per richiedere un prodotto.
+5. **ProductReturn**: Componente per richiedere il reso di un prodotto.
