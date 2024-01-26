@@ -14,6 +14,7 @@ import { ProductManagementComponent } from './storekeeper-components/product-man
 import { ProductRequestComponent } from './employee-components/product-request/product-request.component';
 import { ProductReturnComponent } from './employee-components/product-return/product-return.component';
 import { SettingsComponent } from './common-components/settings/settings.component';
+import { LocationManagementComponent } from './admin-components/location-management/location-management.component';
 
 const routes: Routes = [
   // Componenti comuni a tutti gli utenti
@@ -24,6 +25,7 @@ const routes: Routes = [
 
   // Componenti per l'amministratore
   { path: 'user-management', component: UserManagementComponent},
+  { path: 'location-management', component: LocationManagementComponent},
 
   // Componenti per l'addetto al magazzino e l'amministratore
   { path: 'location-map', component: LocationMapComponent},

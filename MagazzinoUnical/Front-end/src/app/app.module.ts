@@ -29,6 +29,7 @@ import { ProductManagementComponent } from './storekeeper-components/product-man
 import { ProductRequestComponent } from './employee-components/product-request/product-request.component';
 import { ProductReturnComponent } from './employee-components/product-return/product-return.component';
 import { SettingsComponent } from './common-components/settings/settings.component';
+import { LocationManagementComponent } from './admin-components/location-management/location-management.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { SettingsComponent } from './common-components/settings/settings.compone
     ProductManagementComponent,
     ProductRequestComponent,
     ProductReturnComponent,
-    SettingsComponent
+    SettingsComponent,
+    LocationManagementComponent
   ],
   imports: [
     BrowserModule,

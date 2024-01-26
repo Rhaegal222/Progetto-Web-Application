@@ -43,6 +43,7 @@ Funzionalità comuni:
 **Componenti per l'Amministratore:**
 
 1. **UserManagement**: Componente per la gestione degli utenti, inclusa l'aggiunta, la modifica e la cancellazione degli utenti, nonché la gestione dei ruoli.
+2. **LocationManagement**: Componente per la gestione delle posizioni, inclusa l'aggiunta, la modifica e la cancellazione delle posizioni.
 
 **Componenti per l'Addetto al Magazzino:**
 
