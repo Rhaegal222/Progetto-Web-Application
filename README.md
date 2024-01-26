@@ -40,14 +40,6 @@ Funzionalità comuni:
   - Possono essere contattati dai dipendenti dell’università tramite un modulo di contatto
   - Possono aggiungere note ai prodotti
 
-**Componenti Comuni a Entrambi:**
-
-1. **Sidebar**: Componente per l'intestazione dell'applicazione.
-2. **Dashboard**: Componente per la visualizzazione dei prodotti in magazzino.
-3. **Menu**: Componente per il piè di pagina dell'applicazione.
-4. **Login**: Componente per la gestione dell'autenticazione e dell'accesso degli utenti.
-5. **Registration**: Componente per la gestione della registrazione degli utenti.
-
 **Componenti per l'Amministratore:**
 
 1. **UserManagement**: Componente per la gestione degli utenti, inclusa l'aggiunta, la modifica e la cancellazione degli utenti, nonché la gestione dei ruoli.
@@ -66,3 +58,11 @@ Funzionalità comuni:
 3. **ProductDetail**: Componente per la visualizzazione dei dettagli di un prodotto.
 4. **ProductRequest**: Componente per richiedere un prodotto.
 5. **ProductReturn**: Componente per richiedere il reso di un prodotto.
+
+**Componenti Comuni a Tutti:**
+
+1. **Sidebar**: Componente per l'intestazione dell'applicazione.
+2. **Dashboard**: Componente per la visualizzazione dei prodotti in magazzino.
+3. **Settings**: Componente per la gestione delle impostazioni.
+4. **Menu**: Componente per il menu a tendina su dispositivi mobili.
+5. **Login**: Componente per la gestione dell'autenticazione e dell'accesso degli utenti.
