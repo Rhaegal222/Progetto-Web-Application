@@ -5,23 +5,12 @@
     <h3>Magazzino Unical</h3>
   </div>
 
-  <div class="menu-content">
-    <!-- Lista di navigazione -->
-    <ul class="items">
-      <li routerLinkActive="active" routerLink="/dashboard">Riepilogo</li>
-      <li routerLinkActive="active" routerLink="/location-map">Mappa</li>
-      <li routerLinkActive="active" routerLink="/product-list">Magazzino</li>
-      <li routerLinkActive="active" routerLink="/report">Report</li>
-      <li routerLinkActive="active" routerLink="/request-management">Gestore richieste</li>
-      <li routerLinkActive="active" routerLink="/settings">Impostazioni</li>
-    </ul>
-  </div>
-
-  <div class="menu-content">
-    <ul class="items">
-      <li routerLinkActive="active" routerLink="/login">Accedi</li>
-      <li routerLinkActive="active" routerLink="/registration">Registrati</li>
-    </ul>
+  <!-- Menu per ogni ruolo -->
+  <div class="components">
+    <app-menu-admin class="menu-component"></app-menu-admin>
+    <app-menu-storekeeper class="menu-component"></app-menu-storekeeper>
+    <app-menu-employee class="menu-component"></app-menu-employee>
+    <app-menu-auth class="menu-component"></app-menu-auth>
   </div>
 </div>
 
