@@ -11,4 +11,6 @@ public interface UserDao {
     boolean checkUsername(String username);
 
     boolean checkEmail(String email);
+
+    String selectPassword(String username);
 }

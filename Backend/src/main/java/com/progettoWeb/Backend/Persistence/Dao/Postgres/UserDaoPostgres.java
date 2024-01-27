@@ -75,6 +75,24 @@ public class UserDaoPostgres implements UserDao {
     }
 
     @Override
+    public String selectPassword(String username) {
+        try{
+            String output = "";
+            PreparedStatement stmt = con.prepareStatement("SELECT password FROM users WHERE username = ?");
+            stmt.setString(1, username);
+            ResultSet res = stmt.executeQuery();
+
+            if(res.next()) output = res.getString("password");
+
+            res.close();
+            stmt.close();
+            return output;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public void insertUser(User user) {
         try {
             con = DatabaseHandler.getInstance().getConnection();

@@ -17,7 +17,6 @@ public class RegistrationService {
         String password = registrationRequest.getPassword();
         String email = registrationRequest.getEmail();
 
-        //TODO: aggiungere controlli sulla registrazione
         if(!DatabaseHandler.getInstance().getUserDao().checkUsername(username)) { //controlla che non ci sia uno username uguale
             if (!(RegexHandler.getInstance().checkOnlyChar(name) && RegexHandler.getInstance().checkOnlyChar(surname))) {
                 return ResponseEntity.status(401).body("{\"message\": \"Name and surname must contain only letters\"}");
@@ -35,7 +34,8 @@ public class RegistrationService {
                             return ResponseEntity.status(401).body("{\"message\": \"Password not valid\"}");
                         }
                         else{
-                            User user = new User(name, surname, role, email, username, password);
+                            String encryptedPass = RegexHandler.getInstance().encryptPassword(password);
+                            User user = new User(name, surname, role, email, username, encryptedPass);
                             DatabaseHandler.getInstance().getUserDao().insertUser(user);
                             return ResponseEntity.ok().body("{\"message\": \"You are registered\"}");
                         }
