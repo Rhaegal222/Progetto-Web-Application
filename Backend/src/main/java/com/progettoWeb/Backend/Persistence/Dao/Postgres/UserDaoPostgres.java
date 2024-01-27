@@ -15,7 +15,6 @@ public class UserDaoPostgres implements UserDao {
     @Override
     public User findByPrimaryKey(String username) {
         try {
-            con = DatabaseHandler.getInstance().getConnection();
             PreparedStatement stmt = con.prepareStatement("SELECT * FROM users WHERE username = ?");
             stmt.setString(1, username);
             ResultSet res = stmt.executeQuery();
@@ -33,7 +32,6 @@ public class UserDaoPostgres implements UserDao {
 
             res.close();
             stmt.close();
-            DatabaseHandler.getInstance().closeConnection();
             return u;
 
         } catch (SQLException e) {
@@ -49,6 +47,42 @@ public class UserDaoPostgres implements UserDao {
             ResultSet res = stmt.executeQuery();
 
             if(res.next()) output = true;
+
+            res.close();
+            stmt.close();
+            return output;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public boolean checkEmail(String email) {
+        try{
+            boolean output = false;
+            PreparedStatement stmt = con.prepareStatement("SELECT email FROM users WHERE email = ?");
+            stmt.setString(1, email);
+            ResultSet res = stmt.executeQuery();
+
+            if(res.next()) output = true;
+
+            res.close();
+            stmt.close();
+            return output;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public String selectPassword(String username) {
+        try{
+            String output = "";
+            PreparedStatement stmt = con.prepareStatement("SELECT password FROM users WHERE username = ?");
+            stmt.setString(1, username);
+            ResultSet res = stmt.executeQuery();
+
+            if(res.next()) output = res.getString("password");
 
             res.close();
             stmt.close();
@@ -78,8 +112,6 @@ public class UserDaoPostgres implements UserDao {
 
             // Chiudere le risorse
             stmt.close();
-            DatabaseHandler.getInstance().closeConnection();
-
         } catch (SQLException e) {
             e.fillInStackTrace();
         }

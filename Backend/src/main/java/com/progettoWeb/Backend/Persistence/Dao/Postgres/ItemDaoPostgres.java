@@ -28,7 +28,7 @@ public class ItemDaoPostgres implements ItemDao{
             //String name, String description, String type, String quantity
             con = DatabaseHandler.getInstance().getConnection();
             PreparedStatement stmt = con.prepareStatement(
-                    "INSERT INTO item (name, description, type, quantity) VALUES (?, ?, ?, ?)"
+                    "INSERT INTO items (name, description, type, quantity) VALUES (?, ?, ?, ?)"
             );
             // Impostare i parametri della query con i dati dell'utente
             stmt.setString(1, item.getName());
@@ -41,7 +41,6 @@ public class ItemDaoPostgres implements ItemDao{
 
             // Chiudere le risorse
             stmt.close();
-            DatabaseHandler.getInstance().closeConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
