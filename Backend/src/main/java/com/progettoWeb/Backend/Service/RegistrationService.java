@@ -12,7 +12,6 @@ public class RegistrationService {
     public ResponseEntity<?> doRegistration(RegistrationRequest registrationRequest) {
         String name = registrationRequest.getName();
         String surname = registrationRequest.getSurname();
-        String role = registrationRequest.getRole();
         String username = registrationRequest.getUsername();
         String password = registrationRequest.getPassword();
         String email = registrationRequest.getEmail();
@@ -35,9 +34,15 @@ public class RegistrationService {
                         }
                         else{
                             String encryptedPass = RegexHandler.getInstance().encryptPassword(password);
-                            User user = new User(name, surname, role, email, username, encryptedPass);
-                            DatabaseHandler.getInstance().getUserDao().insertUser(user);
-                            return ResponseEntity.ok().body("{\"message\": \"You are registered\"}");
+                            User user = new User(name, surname, null, email, username, encryptedPass);
+                            //DatabaseHandler.getInstance().getUserDao().insertUser(user);
+                            if(DatabaseHandler.getInstance().getUserDao().insertUser(user)){
+                                return ResponseEntity.ok().body("{\"message\": \"You are registered\"}");
+                            }
+                            else {
+                                return ResponseEntity.status(401).body("{\"message\": \"Error during registration\"}");
+                            }
+
                         }
                     }
                 }

@@ -93,9 +93,9 @@ public class UserDaoPostgres implements UserDao {
     }
 
     @Override
-    public void insertUser(User user) {
+    public boolean insertUser(User user) {
+        boolean done = false;
         try {
-            con = DatabaseHandler.getInstance().getConnection();
             String query =  "INSERT INTO users (name, surname, role, email, username, password) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = con.prepareStatement(query);
 
@@ -108,13 +108,16 @@ public class UserDaoPostgres implements UserDao {
             stmt.setString(6, user.getPassword());
 
             // Eseguire la query di inserimento
+            System.out.println("PRIMA DELL'INSERT");
             stmt.executeUpdate();
-
-            // Chiudere le risorse
             stmt.close();
+            done = true;
+            System.out.println("DOPO L'INSERT");
+
         } catch (SQLException e) {
-            e.fillInStackTrace();
+            e.printStackTrace();
         }
+        return done;
     }
 
     @Override
