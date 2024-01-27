@@ -47,9 +47,9 @@ Funzionalità comuni:
 
 **Componenti per l'Addetto al Magazzino:**
 
-1. **LocationMap**: Componente per la visualizzazione della mappa con la posizione dei prodotti.
-2. **RequestManagement**: Componente per la gestione delle richieste dei dipendenti dell'università.
-3. **ProductManagement**: Componente per la gestione dei prodotti, inclusa l'aggiunta, la modifica e la cancellazione dei prodotti, nonché la gestione delle note.
+1. **RequestManagement**: Componente per la gestione delle richieste dei dipendenti dell'università.
+2. **ProductManagement**: Componente per la gestione dei prodotti, inclusa l'aggiunta, la modifica e la cancellazione dei prodotti, nonché la gestione delle note.
+3. **LocationMap**: Componente per la visualizzazione della mappa con la posizione dei prodotti.
 4. **Report**: Componente per le statistiche sui prodotti.
 
 **Componenti per il Dipendente dell'Università:**
@@ -59,6 +59,7 @@ Funzionalità comuni:
 3. **ProductDetail**: Componente per la visualizzazione dei dettagli di un prodotto.
 4. **ProductRequest**: Componente per richiedere un prodotto.
 5. **ProductReturn**: Componente per richiedere il reso di un prodotto.
+6. **RequestForawarded**: Componente per visualizzare le richieste inoltrate.
 
 **Componenti Comuni a Tutti:**
 

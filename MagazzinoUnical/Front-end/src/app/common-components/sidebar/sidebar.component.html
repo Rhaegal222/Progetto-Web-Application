@@ -1,28 +1,22 @@
-<div class="menu">
+<div id="menu" class="menu">
   <!-- Logo o titolo dell'applicazione -->
   <div class="menu-header">
     <img src="https://www.idemedia.com/wp-content/uploads/2021/04/unical-logo-white.png" alt="logo" class="img-fluid">
     <h3>Magazzino Unical</h3>
   </div>
 
-  <div class="menu-content">
-    <!-- Lista di navigazione -->
-    <ul class="items">
-      <li routerLinkActive="active" routerLink="/dashboard">Riepilogo</li>
-      <li routerLinkActive="active" routerLink="/location-map">Mappa</li>
-      <li routerLinkActive="active" routerLink="/product-list">Magazzino</li>
-      <li routerLinkActive="active" routerLink="/report">Report</li>
-      <li routerLinkActive="active" routerLink="/request-management">Gestore richieste</li>
-      <li routerLinkActive="active" routerLink="/settings">Impostazioni</li>
-    </ul>
+  <!-- Menu per ogni ruolo -->
+  <div class="components">
+    <app-menu-admin class="menu-component"></app-menu-admin>
+    <app-menu-storekeeper class="menu-component"></app-menu-storekeeper>
+    <app-menu-employee class="menu-component"></app-menu-employee>
+    <app-menu-auth class="menu-component"></app-menu-auth>
   </div>
+</div>
 
-  <div class="menu-content">
-    <ul class="items">
-      <li routerLinkActive="active" routerLink="/login">Accedi</li>
-      <li routerLinkActive="active" routerLink="/registration">Registrati</li>
-    </ul>
-  </div>
+<!--Freccia per chiudere la sidebar-->
+<div id="arrow" class="arrow" (click)="hideSidebar()">
+  <span class="material-icons">arrow_back_ios</span>
 </div>
 
 <div class="only-mobile">
@@ -31,14 +25,12 @@
       <h3>Magazzino Unical</h3>
     </li>
     <!-- Inserisce l'icona del menu per quando aprire il menu sui dispositivi mobili -->
-    <li class="menu-button" routerLinkActive="active">
-      <a routerLink="/menu">
+    <li class="menu-button" (click)="toggleMenuClose()">
         <div class="menu-icon">
           <span class="line"></span>
           <span class="line"></span>
           <span class="line"></span>
         </div>
-      </a>
     </li>
   </ul>
 </div>

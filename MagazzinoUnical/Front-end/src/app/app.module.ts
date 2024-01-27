@@ -17,7 +17,7 @@ import {MatRadioModule} from "@angular/material/radio";
 import {MatSelectModule} from "@angular/material/select";
 import {MatSidenav, MatSidenavContainer, MatSidenavContent} from "@angular/material/sidenav";
 import {MatNavList} from "@angular/material/list";
-import { MenuComponent } from './common-components/menu/menu.component';
+import { MenuComponent } from './common-components/sidebar/menu-mobile/menu.component';
 import { LocationMapComponent } from './storekeeper-components/location-map/location-map.component';
 import { RegistrationComponent } from './employee-components/registration/registration.component';
 import { ProductDetailComponent } from './employee-components/product-detail/product-detail.component';
@@ -30,6 +30,11 @@ import { ProductRequestComponent } from './employee-components/product-request/p
 import { ProductReturnComponent } from './employee-components/product-return/product-return.component';
 import { SettingsComponent } from './common-components/settings/settings.component';
 import { LocationManagementComponent } from './admin-components/location-management/location-management.component';
+import { MenuAdminComponent } from './common-components/sidebar/menus/menu-admin/menu-admin.component';
+import { MenuEmployeeComponent } from './common-components/sidebar/menus/menu-employee/menu-employee.component';
+import { MenuStorekeeperComponent } from './common-components/sidebar/menus/menu-storekeeper/menu-storekeeper.component';
+import { MenuAuthComponent } from './common-components/sidebar/menus/menu-auth/menu-auth.component';
+import { RequestsForwardedComponent } from './employee-components/requests-forwarded/requests-forwarded.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +54,12 @@ import { LocationManagementComponent } from './admin-components/location-managem
     ProductRequestComponent,
     ProductReturnComponent,
     SettingsComponent,
-    LocationManagementComponent
+    LocationManagementComponent,
+    MenuAdminComponent,
+    MenuEmployeeComponent,
+    MenuStorekeeperComponent,
+    MenuAuthComponent,
+    RequestsForwardedComponent
   ],
   imports: [
     BrowserModule,
