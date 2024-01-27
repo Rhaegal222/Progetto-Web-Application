@@ -2,10 +2,7 @@
 
 ## Introduzione
 
-Applicazione web per la gestione del magazzino dell’ufficio ITC dell’UNICAL.
-Lo scopo è quello di facilitare la gestione dell’inventario, l’organizzazione e la ricerca dei prodotti presenti in magazzino o assegnati ai dipendenti dell’università.
-I prodotti sono suddivisi per tipologia: prodotti hardware, software, laptop, pc, accessori (mouse, keyboard, telecamere, monitor), ecc…
-Sono previste 3 tipologie di utente: amministratore, dipendente dell’università e addetto al magazzino. Di seguito le funzionalità previste.
+Applicazione web per la gestione del magazzino dell’ufficio ITC dell’UNICAL. Lo scopo è quello di facilitare la gestione dell’inventario, l’organizzazione e la ricerca dei prodotti presenti in magazzino o assegnati ai dipendenti dell’università. I prodotti sono suddivisi per tipologia: prodotti hardware, software, laptop, pc, accessori (mouse, keyboard, telecamere, monitor) e altri. Sono previste 3 tipologie di utente: amministratore, dipendente dell’università e addetto al magazzino. Di seguito le funzionalità previste.
 
 ### Amministratore
 
@@ -38,6 +35,8 @@ Il dipendente può:
 6. Segnalazione di un prodotto non disponibile: Nel caso in cui un prodotto non sia disponibile nel magazzino, il dipendente può fare una segnalazione tramite l'applicazione. Questo aiuta a identificare i prodotti mancanti o danneggiati e a prendere le opportune azioni correttive.
 
 7. Richiesta di cambio o reso di un prodotto: Se il dipendente è in possesso di un prodotto e desidera richiedere un cambio o un reso, può farlo tramite l'applicazione. Questo semplifica il processo di gestione dei prodotti e garantisce che i dipendenti abbiano accesso ai prodotti adeguati alle loro esigenze.
+
+### Componenti dell'applicazione
 
 **Componenti per l'Amministratore:**
 
