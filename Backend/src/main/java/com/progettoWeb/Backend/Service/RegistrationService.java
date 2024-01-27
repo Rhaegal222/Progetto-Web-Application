@@ -27,13 +27,18 @@ public class RegistrationService {
                     return ResponseEntity.status(401).body("{\"message\": \"Email not valid\"}");
                 }
                 else{
-                    if(!RegexHandler.getInstance().checkPassword(password)){
-                        return ResponseEntity.status(401).body("{\"message\": \"Password not valid\"}");
+                    if(DatabaseHandler.getInstance().getUserDao().checkEmail(email)){
+                        return ResponseEntity.status(401).body("{\"message\": \"Email is already used\"}");
                     }
                     else{
-                        User user = new User(name, surname, role, email, username, password);
-                        DatabaseHandler.getInstance().getUserDao().insertUser(user);
-                        return ResponseEntity.ok().body("{\"message\": \"You are registered\"}");
+                        if(!RegexHandler.getInstance().checkPassword(password)){
+                            return ResponseEntity.status(401).body("{\"message\": \"Password not valid\"}");
+                        }
+                        else{
+                            User user = new User(name, surname, role, email, username, password);
+                            DatabaseHandler.getInstance().getUserDao().insertUser(user);
+                            return ResponseEntity.ok().body("{\"message\": \"You are registered\"}");
+                        }
                     }
                 }
             }

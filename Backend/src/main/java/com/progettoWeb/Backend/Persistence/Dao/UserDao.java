@@ -9,4 +9,6 @@ public interface UserDao {
     public void deleteUser(String id_user); //elimina un utente
 
     boolean checkUsername(String username);
+
+    boolean checkEmail(String email);
 }
