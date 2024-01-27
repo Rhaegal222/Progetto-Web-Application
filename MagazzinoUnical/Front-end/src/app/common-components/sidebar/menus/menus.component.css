@@ -2,7 +2,6 @@
     list-style: none; /* Rimuovi i punti elenco */
     padding: 0; /* Rimuovi il padding */
     margin: 20px 30px;
-    padding: 0;
   }
   
 .items li {
@@ -46,17 +45,25 @@
     list-style: none; /* Rimuovi i punti elenco */
     padding: 0; /* Rimuovi il padding */
     margin: 0; /* Rimuovi il margine */
+
     display: flex; /* Allinea gli elementi in riga */
     justify-content: center; /* Allinea gli elementi al centro */
     flex-wrap: wrap; /* Imposta il wrap degli elementi */
   }
+  
   .items li {
-    text-align: center; /* Allinea il testo al centro */
-    border-bottom: 0;
-    border-right: 1px solid #ccc;
+    /* Allinea il testo al centro del box */
+    text-align: center;
+    border: 0;
+    margin: 0;
+    margin-right: 5px;
+    padding: 5px;
+    border: #ccc solid 1px;
   }
-  .items .no-line {
-    border-right: 0;
+    
+  .items li:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.5);
   }
 }
 @media (max-width: 767.5px) {

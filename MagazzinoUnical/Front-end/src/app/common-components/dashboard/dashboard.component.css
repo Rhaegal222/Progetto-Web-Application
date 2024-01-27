@@ -1,28 +1,25 @@
-.content {
+.container { 
   display: flex; /* Allinea gli elementi in riga */
   justify-content: center;
   align-items: center;
   flex-direction: column; /* Allinea gli elementi in colonna */
 
-  /* Allina i componenti al centro della pagina rispetto allo spazio non occupato dalla barra laterale */
-  margin-left: 250px;
+  /* Allinea il contenuto al centro in altezza*/
+  height: calc(100vh - 80px);
   padding: 20px;
-
   /* Imposta la larghezza massima del contenitore principale */
   max-width: 100%;
-  /* Allinea verticalmente gli elementi */
-  height: 100vh;
 }
 
-.container {
+.content {
   /* Allinea i componenti in riga */
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
-  /* Imposta la larghezza massima del contenitore principale */
-  max-width: 100%;
+  
+
 }
 
 .component {
@@ -42,7 +39,7 @@
 
 /* Responsive adjustments */
 @media (min-width: 992px) and (max-width: 1099px) {
-  .content {
+  .container {
     /* Allinea i componenti in colonna */
     flex-direction: column;
     width: 100%;
@@ -53,7 +50,7 @@
 }
 
 @media (min-width: 768px) and (max-width: 991.5px) {
-  .content {
+  .container {
     /* Allinea i componenti in colonna */
     flex-direction: column;
     width: 100%;
@@ -65,7 +62,7 @@
 
 /* Stili per schermi piccoli (Mobile) */
 @media (min-width: 576px) and (max-width: 767px) {
-  .content {
+  .container {
     flex-direction: column;
     height: auto;
     width: 100%;
@@ -76,7 +73,7 @@
 }
 
 @media (max-width: 575.98px) {
-  .content {
+  .container {
     /* Allinea i componenti in colonna */
     flex-direction: column;
     height: auto;
