@@ -13,7 +13,7 @@ constructor(private http:HttpClient, private router:Router) { }
   login(username: string, password: string){
     var user:User = {"username": username, "password": password};
 
-    this.http.post<AuthToken>("http://localhost:4200/login", user, {withCredentials: true}).subscribe({
+    this.http.post<AuthToken>("http://localhost:8080/api/login", user, {withCredentials: true}).subscribe({
       next: (response) => {
         localStorage.setItem("token", response.token);
         this.router.navigate(["/dashboard"]);
@@ -22,7 +22,24 @@ constructor(private http:HttpClient, private router:Router) { }
         console.log(error);
       }
     });
-
-   console.log("Provo a fare il login");
   }
+
+  logout(){
+    localStorage.removeItem("token");
+    this.router.navigate(["/login"]);
+  }
+
+  register(name:string, surname:string, username:string, password:string){
+    var user:User = {"name": name, "surname": surname, "username": username, "password": password};
+    this.http.post("http://localhost:8080/api/register", user, {withCredentials: true}).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
+  }
+
+
 }

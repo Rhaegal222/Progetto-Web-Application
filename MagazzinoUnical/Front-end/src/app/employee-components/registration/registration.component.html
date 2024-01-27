@@ -3,16 +3,16 @@
         <h2>Registrati</h2>
         <form>
             <div class="form-group">
-                <input type="text" class="form-control" id="firstName" placeholder="Nome">
+                <input type="text" class="form-control" id="firstName" placeholder="Nome" [formControl]="firstName">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="lastName" placeholder="Cognome">
+                <input type="text" class="form-control" id="lastName" placeholder="Cognome" [formControl]="lastName">
             </div>
             <div class="form-group">
-                <input type="email" class="form-control" id="email" placeholder="Email">
+                <input type="email" class="form-control" id="email" placeholder="Email" [formControl]="email">
             </div>
             <div class="form-group position-relative">
-                <input [type]="passwordInputType" class="form-control" id="password" placeholder="Password" [(ngModel)]="password" name="password">
+                <input [type]="passwordInputType" class="form-control" id="password" placeholder="Password" name="password" [formControl]="password">
                 
                 <button type="button" class="btn btn-outline-secondary position-absolute end-0 top-0" 
                     (mousedown)="togglePasswordVisibility(true)"
