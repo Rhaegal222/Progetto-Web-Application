@@ -35,6 +35,7 @@ import { MenuEmployeeComponent } from './common-components/sidebar/menus/menu-em
 import { MenuStorekeeperComponent } from './common-components/sidebar/menus/menu-storekeeper/menu-storekeeper.component';
 import { MenuAuthComponent } from './common-components/sidebar/menus/menu-auth/menu-auth.component';
 import { RequestsForwardedComponent } from './employee-components/requests-forwarded/requests-forwarded.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,8 @@ import { RequestsForwardedComponent } from './employee-components/requests-forwa
     MatNavList,
     MatSidenavContent,
     MatSidenavContainer,
+    HttpClientModule,
+    BrowserModule
   ],
   providers: [
     provideClientHydration()

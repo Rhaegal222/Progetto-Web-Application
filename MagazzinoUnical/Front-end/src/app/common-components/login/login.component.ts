@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import {FormControl, Validators} from "@angular/forms";
+import { FormControl, Validators } from "@angular/forms";
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -7,13 +8,25 @@ import {FormControl, Validators} from "@angular/forms";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {  
-  password: string = '';
+export class LoginComponent {
+  
+  username = new FormControl();
+  password = new FormControl();
+
   passwordInputType: string = 'password';
   passwordVisible: boolean = false;
 
   togglePasswordVisibility(visible: boolean): void {
     this.passwordVisible = visible;
     this.passwordInputType = this.passwordVisible ? 'text' : 'password';
+  }
+  
+  constructor(private authService: AuthService) { }
+
+  login(){
+    var username = this.username.value;
+    var password = this.password.value;
+
+    this.authService.login(username, password);
   }
 }

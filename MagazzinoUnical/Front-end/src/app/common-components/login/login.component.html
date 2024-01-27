@@ -3,10 +3,10 @@
     <h2>Accedi</h2>
     <form>
       <div class="form-group">
-        <input type="email" class="form-control" id="username" placeholder="Email">
+        <input type="text" class="form-control" id="username" placeholder="Email" [formControl]="username">
       </div>
       <div class="form-group position-relative">
-        <input [type]="passwordInputType" class="form-control" id="password" placeholder="Password" [(ngModel)]="password" name="password">
+        <input type="password" [type]="passwordInputType" class="form-control" id="password" placeholder="Password" name="password" [formControl]="password">
         
         <button type="button" class="btn btn-outline-secondary position-absolute end-0 top-0" 
             (mousedown)="togglePasswordVisibility(true)"
@@ -16,7 +16,9 @@
             <i class="eye-icon bi bi-eye" *ngIf="passwordVisible"></i>
         </button>
     </div>
-      <button type="submit" class="btn btn-primary">Accedi</button>
+      <button type="submit" class="btn btn-primary"
+      (click)="login()">
+      Accedi</button>
     </form>
   </div>
 </div>

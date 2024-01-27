@@ -1,12 +1,12 @@
 .menu {
   width: 250px; /* o la larghezza desiderata */
+  display: block;
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
   background: #ff0000; /* il colore rosso mostrato */
   color: white;
-  display: block;
 }
 
 .menu-header {
@@ -31,7 +31,8 @@
 .arrow{
   position: absolute;
   top: 50%;
-  margin-left: 260px;
+  margin-left: 250px;
+  padding: 10px;
   color: red;
   cursor: pointer;
   transform: rotate(0deg);
@@ -50,73 +51,26 @@
 /* Responsive adjustments */
 @media (min-width: 992px) and (max-width: 1099px) {
   .menu {
-    width: 100%;
-    height: auto;
-    position: relative;
-    background: #ff0000;
-    color: white;
-    transition: all 0.3s;
-    padding: 0.75%;
-  }
-  .menu-header {
-    padding: 0;
-  }
-  /* Rimuove il nome del sito */
-  .menu-header h3 {
     display: none;
   }
-  /* Rimuove il logo */
-  .menu-header img {
-    display: none;
-  }
-  .components {
-    list-style: none; /* Rimuovi i punti elenco */
-    padding: 0; /* Rimuovi il padding */
-    margin: 0; /* Rimuovi il margine */
-    display: flex; /* Allinea gli elementi in riga */
-    justify-content: center; /* Allinea gli elementi al centro */
-    flex-wrap: wrap; /* Imposta il wrap degli elementi */
-  }
-  .menu-component {
+  .arrow {
+    transform: rotate(180deg);
+    margin-left: 0;
     padding: 0;
   }
 }
 @media (min-width: 768px) and (max-width: 991.5px) {
   .menu {
-    width: 100%;
-    height: auto;
-    position: relative;
-    background: #ff0000;
-    color: white;
-    transition: all 0.3s;
-    padding: 0.75%;
-  }
-  .menu-header {
-    padding: 0;
-  }
-  /* Rimuove il nome del sito */
-  .menu-header h3 {
     display: none;
-  }
-  /* Rimuove il logo */
-  .menu-header img {
-    display: none;
-  }
-  .components {
-    list-style: none; /* Rimuovi i punti elenco */
-    padding: 0; /* Rimuovi il padding */
-    margin: 0; /* Rimuovi il margine */
-    display: flex; /* Allinea gli elementi in riga */
-    justify-content: center; /* Allinea gli elementi al centro */
-    flex-wrap: wrap; /* Imposta il wrap degli elementi */
-  }
-  .menu-component {
-    padding: 0;
   }
 }
 @media (max-width: 767px){
   .menu {
     display: none;
+  }
+  .arrow {
+    display: none;
+    padding: 0;
   }
   .only-mobile {
     display: block;
