@@ -18,8 +18,6 @@
   background-color: #f8f9fa; /* Sfondo leggero per il form */
   border-radius: 8px; /* Bordi arrotondati */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
-
-  margin-left: 250px;
 }
 
 /* Stile del bottone di login */

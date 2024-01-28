@@ -1,12 +1,22 @@
-.menu {
-  width: 250px; /* o la larghezza desiderata */
-  display: block;
+.menu{
   position: fixed;
   top: 0;
   left: 0;
+  width: 0;
+  display: none;
   height: 100%;
   background: #ff0000; /* il colore rosso mostrato */
   color: white;
+}
+
+.menu-open {
+  width: 250px; /* o la larghezza desiderata */
+  display: block;
+}
+
+.menu-close {
+  width: 0;
+  display: none;
 }
 
 .menu-header {
@@ -31,10 +41,19 @@
 .arrow{
   position: absolute;
   top: 50%;
-  margin-left: 250px;
-  padding: 10px;
   color: red;
   cursor: pointer;
+  margin-left: 0px;
+  transform: rotate(180deg);
+}
+
+.arrow-right{
+  margin-left: 0px;
+  transform: rotate(180deg);
+}
+
+.arrow-left{
+  margin-left: 260px;
   transform: rotate(0deg);
 }
 
@@ -49,22 +68,7 @@
 }
 
 /* Responsive adjustments */
-@media (min-width: 992px) and (max-width: 1099px) {
-  .menu {
-    display: none;
-  }
-  .arrow {
-    transform: rotate(180deg);
-    margin-left: 0;
-    padding: 0;
-  }
-}
-@media (min-width: 768px) and (max-width: 991.5px) {
-  .menu {
-    display: none;
-  }
-}
-@media (max-width: 767px){
+@media (max-width: 767.33px){
   .menu {
     display: none;
   }
