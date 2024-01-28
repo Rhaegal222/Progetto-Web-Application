@@ -18,23 +18,25 @@ export class SidebarComponent implements OnInit {
           this.lastComponentLoaded = event.urlAfterRedirects;
         }
       }
+    
+
+      // se la finestra è più grande di 768px, il menu è sempre aperto
+      if (window.innerWidth >= 992) {
+        let sidebar = document.getElementById('menu');
+        let arrow = document.getElementById('arrow');
+
+        sidebar?.classList.toggle('menu-open');
+        arrow?.classList.toggle('arrow-left');
+      } else if ((window.innerWidth >= 768) && (window.innerWidth < 992)) {
+        let sidebar = document.getElementById('menu');
+        let arrow = document.getElementById('arrow');
+
+        sidebar?.classList.toggle('menu-close');
+        arrow?.classList.toggle('arrow-right');
+      }
     });
-
-    // se la finestra è più grande di 768px, il menu è sempre aperto
-    if (window.innerWidth >= 992) {
-      let sidebar = document.getElementById('menu');
-      let arrow = document.getElementById('arrow');
-
-      sidebar?.classList.toggle('menu-open');
-      arrow?.classList.toggle('arrow-left');
-    } else if ((window.innerWidth >= 768) && (window.innerWidth < 992)) {
-      let sidebar = document.getElementById('menu');
-      let arrow = document.getElementById('arrow');
-
-      sidebar?.classList.toggle('menu-close');
-      arrow?.classList.toggle('arrow-right');
-    }
   }
+
 
   toggleMenuClose(){
     let url = this.router.url;
@@ -46,6 +48,7 @@ export class SidebarComponent implements OnInit {
   }
 
   slideInSidebar(sidebar: HTMLElement, arrow: HTMLElement){
+    sidebar.style.zIndex = '-1';
     sidebar.classList.remove('menu-close');
     sidebar.classList.toggle('menu-open');
     let pos = -250; 
@@ -56,7 +59,7 @@ export class SidebarComponent implements OnInit {
       if (pos == 0) {
         clearInterval(id);
       } else {
-        pos+=2; 
+        pos+=2.5; 
         sidebar.style.left = pos + 'px';
         arrow.style.left = (pos + 250 + 10) + 'px';
       }
@@ -67,10 +70,11 @@ export class SidebarComponent implements OnInit {
 
       sidebar.removeAttribute('style');
       arrow.removeAttribute('style');
-    }, 1500);
+    }, 1000);
   }
 
   slideOutSidebar(sidebar: HTMLElement, arrow: HTMLElement){
+    sidebar.style.zIndex = '-1';
     let pos = 0; 
     sidebar.style.left = pos + 'px';
 
@@ -79,7 +83,7 @@ export class SidebarComponent implements OnInit {
       if (pos == -250) {
         clearInterval(id);
       } else {
-        pos-=2; 
+        pos-=2.5; 
         sidebar.style.left = pos + 'px';
         arrow.style.left = (pos - 10) + 'px';
       }
@@ -94,7 +98,7 @@ export class SidebarComponent implements OnInit {
 
       sidebar.removeAttribute('style');
       arrow.removeAttribute('style');
-    }, 1500);
+    }, 1000); // 1000 = 1 secondo
    
   }
 
@@ -107,7 +111,7 @@ export class SidebarComponent implements OnInit {
         if (pos == 180) {
           clearInterval(id);
         } else {
-          pos+=2; 
+          pos+=3; 
           arrow.style.transform = 'matrix(1, 0, 0, 1, 0, 0) rotate(' + pos + 'deg)';
         }
       }
@@ -118,7 +122,7 @@ export class SidebarComponent implements OnInit {
         if (pos == 0) {
           clearInterval(id);
         } else {
-          pos-=2; 
+          pos-=3; 
           arrow.style.transform = 'matrix(1, 0, 0, 1, 0, 0) rotate(' + pos + 'deg)';
         }
       }

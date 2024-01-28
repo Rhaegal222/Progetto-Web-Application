@@ -45,6 +45,7 @@
   cursor: pointer;
   margin-left: 0px;
   transform: rotate(180deg);
+  scale: 1.2;
 }
 
 .arrow-right{
@@ -52,10 +53,15 @@
   transform: rotate(180deg);
 }
 
+.arrow:hover{
+  scale: 1.35;
+}
+
 .arrow-left{
   margin-left: 260px;
   transform: rotate(0deg);
 }
+
 
 .components {
   list-style: none; /* Rimuovi i punti elenco */
@@ -105,7 +111,7 @@
     justify-content: center;
   }
   .menu-button:hover {
-    background: rgba(255, 255, 255, 0.5);
+    scale: 1.2;
     cursor: pointer;
   }
   .menu-toggle .menu-button {

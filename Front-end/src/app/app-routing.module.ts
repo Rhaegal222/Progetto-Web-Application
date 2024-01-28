@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './common-components/dashboard/dashboard.component';
 import { LoginComponent } from './common-components/login/login.component';
-import {MenuComponent} from "./common-components/sidebar/menu-mobile/menu.component";
+import { MenuComponent } from "./common-components/sidebar/menu-mobile/menu.component";
 import { LocationMapComponent } from './storekeeper-components/location-map/location-map.component';
 import { ProductListComponent } from './employee-components/product-list/product-list.component';
 import { UserManagementComponent } from './admin-components/user-management/user-management.component';
