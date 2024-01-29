@@ -1,11 +1,3 @@
-.content {
-    max-width: 600px; /* Limita la larghezza massima del form */
-    padding: 20px; /* Spazio intorno al contenitore */
-    background-color: #f8f9fa; /* Sfondo leggero per il form */
-    border-radius: 8px; /* Bordi arrotondati */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
-}
-
 /* Stile del bottone di login */
 .btn-primary {
     background-color: #ff0000; /* Colore di sfondo */
@@ -29,49 +21,6 @@
     display: block;
 }
 
-/* Stile delle righe del form */
-.form-group {
-    margin-bottom: 15px; /* Spazio tra le righe del form */
-}
-
-/* Stile degli input */
-.form-control {
-    width: 350px; /* Larghezza degli input */
-    height: 40px; /* Altezza degli input */
-    border-radius: 4px; /* Bordi arrotondati degli input */
-    padding-right: 2.375rem; /* Spazio aggiuntivo a destra per il bottone dell'icona */
-}
-
-.form-control:focus {
-    color: #495057;
-    background-color: #fff;
-    border-color: #ff0000;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.25);
-}
-.form-control:hover {
-    border-color: #ff0000;
-}
-
-.position-relative {
-    position: relative;
-}
-  
-.position-absolute {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    border: none;
-    background: transparent;
-    padding: .375rem .75rem; /* Altezza e padding allineati con il form-control */
-}
-
-/* Stile normale dell'icona */
-.eye-icon {
-    color: #000; /* Colore dell'icona normale */
-}
-
 .btn-outline-secondary {
     color: #000; /* Colore del testo */
     background-color: transparent; /* Sfondo trasparente */
@@ -86,12 +35,4 @@
     .eye-icon {
         color: #ff0000; /* Colore dell'icona al hover */
     }
-}
-
-/* Stile della checkbox */
-.form-check-input {
-    width: 20px; /* Larghezza della checkbox */
-    height: 20px; /* Altezza della checkbox */
-    margin-top: 10px; /* Rimuovi margini aggiuntivi */
-    vertical-align: middle; /* Allinea verticalmente */
 }

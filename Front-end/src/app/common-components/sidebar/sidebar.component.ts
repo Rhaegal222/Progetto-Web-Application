@@ -12,14 +12,7 @@ export class SidebarComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        if(event.urlAfterRedirects != "/menu"){
-          this.lastComponentLoaded = event.urlAfterRedirects;
-        }
-      }
-    });
-
+    this.toggleMenuClose();
     this.handleInitialBehavior();
 
     let resizeObserver = new ResizeObserver(entries => {
@@ -27,6 +20,14 @@ export class SidebarComponent implements OnInit {
     });
 
     resizeObserver.observe(document.body);
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        if (event.url != '/menu') {
+          this.toggleMenuClose();
+        }
+      }
+    });
   }
 
   // se la finestra è più grande di 768px, il menu è sempre aperto
@@ -40,16 +41,47 @@ export class SidebarComponent implements OnInit {
       } else if ((window.innerWidth >= 768) && (window.innerWidth < 992)) {
         sidebar.classList.toggle('menu-close');
         arrow.classList.toggle('arrow-right');
+      } 
+    }
+  }
+
+  isOpen : boolean = false;
+  previousUrl: string = '';
+
+  toggleMenuOpen(){
+    if (this.router.url != '/menu') {
+      this.previousUrl = this.router.url;
+    }
+
+    let lineTop = document.getElementById('lineTop');
+    let lineMid = document.getElementById('lineMid');
+    let lineBot = document.getElementById('lineBot');
+
+    if (lineTop && lineMid && lineBot) {
+      if (!this.isOpen) {
+        lineTop.classList.toggle('line-top', true);
+        lineMid.classList.toggle('line-mid', true);
+        lineBot.classList.toggle('line-bot', true);
+        this.isOpen = true;
+        this.router.navigate(['/menu']);
+      }
+      else {
+        this.toggleMenuClose();
+        this.isOpen = false;
+        this.router.navigate([this.previousUrl]);
       }
     }
   }
 
   toggleMenuClose(){
-    let url = this.router.url;
-    if(url == "/menu"){
-      this.router.navigate([this.lastComponentLoaded]);
-    } else {
-      this.router.navigate(['/menu']);
+    let lineTop = document.getElementById('lineTop');
+    let lineMid = document.getElementById('lineMid');
+    let lineBot = document.getElementById('lineBot');
+
+    if (lineTop && lineMid && lineBot) {
+      lineTop.classList.toggle('line-top', false);
+      lineMid.classList.toggle('line-mid', false);
+      lineBot.classList.toggle('line-bot', false);
     }
   }
 

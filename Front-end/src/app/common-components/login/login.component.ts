@@ -8,6 +8,8 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: [
     '../../styles/container.css',
+    '../../styles/content.css',
+    '../../styles/form.css',
     './login.component.css'
   ],
 })

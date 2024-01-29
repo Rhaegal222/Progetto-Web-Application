@@ -1,0 +1,50 @@
+/* Stile degli input */
+.form-control {
+    width: 100%; /* Larghezza massima */
+    height: 40px; /* Altezza degli input */
+    border-radius: 4px; /* Bordi arrotondati degli input */
+    padding-right: 2.375rem; /* Spazio aggiuntivo a destra per il bottone dell'icona */
+  }
+  
+  .form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #ff0000;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.25);
+  }
+  .form-control:hover {
+    border-color: #ff0000;
+  }
+
+  /* Stile delle righe del form */
+.form-group {
+    margin-bottom: 15px; /* Spazio tra le righe del form */
+  }
+  
+  .position-relative {
+    position: relative;
+  }
+  
+  .position-absolute {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    border: none;
+    background: transparent;
+    padding: .375rem .75rem; /* Altezza e padding allineati con il form-control */
+  }
+  
+  /* Stile normale dell'icona */
+  .eye-icon {
+    color: #000; /* Colore dell'icona normale */
+  }
+
+  /* Stile della checkbox */
+.form-check-input {
+    width: 20px; /* Larghezza della checkbox */
+    height: 20px; /* Altezza della checkbox */
+    margin-top: 10px; /* Rimuovi margini aggiuntivi */
+    vertical-align: middle; /* Allinea verticalmente */
+  }
