@@ -1,1 +1,26 @@
-<p>user-management works!</p>
+
+<div class="container">
+  <table class="content table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">posizione</th>
+        <th scope="col">Actions</th> <!-- Aggiunta una nuova colonna per le azioni -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of userList">
+        <th scope="row">1</th>
+        <td>{{user[0]}}</td>
+        <td>{{user[1]}}</td>
+        <td>{{user[2]}}</td>
+        <td> <!-- Aggiunti due pulsanti per ogni riga -->
+          <button class="btn btn-success"style="background-color: green;">Promuovi</button>
+          <button class="btn btn-danger" style="background-color: red;">Banna</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

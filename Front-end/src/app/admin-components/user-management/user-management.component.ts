@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrl: './user-management.component.css'
 })
 export class UserManagementComponent {
+  userList: any[] = [
+    ["Cazzo", "Culo", "Tette", ],
+    ["asad", "asdas", "sadas"],
+    ["Cane", "asff","sadsa"]
+  ]
 
 }
