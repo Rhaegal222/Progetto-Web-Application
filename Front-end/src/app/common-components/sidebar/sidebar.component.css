@@ -20,28 +20,47 @@
   display: none;
 }
 
+.menu-content {
+  /* Allinea al centro verticalmente */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
 .menu-header {
-  padding: 20px; /* Spazio intorno al logo */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center; /* Allinea il logo al centro */
+  margin: 0;
+  padding: 0;
 }
 
 .menu-header h3 {
-  color: white; /* Colore del testo */
-  font-size: 1.2em; /* Dimensione del testo */
-  margin-top: 0; /* Spazio sopra il testo */
-  margin-bottom: 20px; /* Spazio sotto il testo */
+  margin: 20px 0 0 0; /*top right bottom left*/
+  padding: 0;
 }
 
 .menu-header img {
-  max-width: 100%; /* Imposta una larghezza massima */
+  /*Dimensioni del logo*/
+  width: 50%;
+  height: 100%;
+  /*Allinea al centro orizzontalmente */
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
   height: auto; /* Mantiene il rapporto di aspetto */
-  max-height: 150px; /* Altezza massima del logo */
-  margin-bottom: 10px; /* Spazio sotto il logo se necessario */
 }
 
 .arrow{
-  position: absolute;
-  top: 50%;
+  display: flex; /* Allinea gli elementi in riga */
+  flex-direction: column; /* Allinea gli elementi in colonna */
+  justify-content: center; /* Allinea gli elementi al centro */
+  align-items: center; /* Allinea gli elementi al centro */
+  height: 100vh; /* Altezza massima */
+
+  position: fixed;
   color: red;
   cursor: pointer;
   margin-left: 0px;
@@ -49,14 +68,14 @@
   scale: 1.2;
 }
 
-.arrow-right{
-  margin-left: 0px;
-  transform: rotate(180deg);
-}
-
 .arrow:hover{
   scale: 1.35;
   filter: drop-shadow(0px 0px 5px rgba(0,0,0,0.5));
+}
+
+.arrow-right{
+  margin-left: 0px;
+  transform: rotate(180deg);
 }
 
 .arrow-left{
@@ -64,11 +83,10 @@
   transform: rotate(0deg);
 }
 
-
 .components {
   list-style: none; /* Rimuovi i punti elenco */
   padding: 0; /* Spazio sopra il primo elemento */
-  margin: 0;
+  margin: 0; /* Rimuovi il margine */
 }
 
 .only-mobile {
@@ -76,6 +94,23 @@
 }
 
 /* Responsive adjustments */
+
+@media (min-height: 545.33px) and (max-height: 715.33px){
+  .menu-header img {
+    display: none;
+  }
+}
+@media (max-height: 545px){
+  .menu {
+    overflow-y: scroll;
+  }
+  .menu-header img{
+    display: none;
+  }
+  .menu-content {
+    height: auto;
+  }
+}
 @media (max-width: 767.33px){
   .menu {
     display: none;

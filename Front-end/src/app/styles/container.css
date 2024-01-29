@@ -1,0 +1,40 @@
+/* Stile del contenitore principale */
+.container {
+    display: flex; /* Allinea gli elementi in riga */
+    flex-direction: column; /* Allinea gli elementi in colonna */
+    justify-content: center; /* Allinea gli elementi al centro */
+    align-items: center; /* Allinea gli elementi al centro */
+    height: 100vh; /* Altezza massima */
+    padding: 20px; /* Spazio intorno al contenitore */
+    /* Imposta la larghezza massima del contenitore principale */
+    max-width: 100%;
+
+}
+/* Responsive adjustments */
+@media (max-height: 767.33px){
+    .container {
+        padding: 0;
+        margin: 0;
+    }
+}
+@media (min-width: 992px) and (max-width: 1099px) {
+    .container {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.5px) {
+    .container {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+/* Stili per schermi piccoli (Mobile) */
+@media (max-width: 767px) {
+    .container {
+        padding: 0;
+        margin: 0;
+    }
+}

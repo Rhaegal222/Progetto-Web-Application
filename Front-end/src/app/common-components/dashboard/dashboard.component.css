@@ -1,16 +1,3 @@
-.container { 
-  display: flex; /* Allinea gli elementi in riga */
-  justify-content: center;
-  align-items: center;
-  flex-direction: column; /* Allinea gli elementi in colonna */
-
-  /* Allinea il contenuto al centro in altezza*/
-  height: calc(100vh - 80px);
-  padding: 20px;
-  /* Imposta la larghezza massima del contenitore principale */
-  max-width: 100%;
-}
-
 .content {
   /* Allinea i componenti in riga */
   display: flex;

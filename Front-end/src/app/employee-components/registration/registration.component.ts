@@ -5,7 +5,10 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrl: './registration.component.css'
+  styleUrls: [
+    '../../styles/container.css',
+    './registration.component.css'
+  ]
 })
 export class RegistrationComponent {
   firstName: FormControl = new FormControl();

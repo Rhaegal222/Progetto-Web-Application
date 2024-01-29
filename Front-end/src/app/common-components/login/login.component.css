@@ -1,18 +1,5 @@
-/* Stile del contenitore principale */
-.container {
-  display: flex; /* Allinea gli elementi in riga */
-  justify-content: center;
-  align-items: center;
-  flex-direction: column; /* Allinea gli elementi in colonna */
-
-  /* Allinea il contenuto al centro in altezza*/
-  height: calc(100vh - 80px);
-  padding: 20px;
-  /* Imposta la larghezza massima del contenitore principale */
-  max-width: 100%;
-}
-
 .content {
+  /* Allinea al entro verticalmente */
   max-width: 600px; /* Limita la larghezza massima del form */
   padding: 20px; /* Spazio intorno al contenitore */
   background-color: #f8f9fa; /* Sfondo leggero per il form */
@@ -108,36 +95,4 @@
   height: 20px; /* Altezza della checkbox */
   margin-top: 10px; /* Rimuovi margini aggiuntivi */
   vertical-align: middle; /* Allinea verticalmente */
-}
-
-/* Responsive adjustments */
-@media (min-width: 992px) and (max-width: 1099px) {
-  .container {
-      padding: 0;
-      margin: 0;
-  }
-  .content{
-      margin-left: 0;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 991.5px) {
-  .container {
-      padding: 0;
-      margin: 0;
-  }
-  .content{
-      margin-left: 0;
-  }
-}
-
-/* Stili per schermi piccoli (Mobile) */
-@media (max-width: 767px) {
-  .container {
-      padding: 0;
-      margin: 0;
-  }
-  .content{
-      margin-left: 0;
-  }
 }
