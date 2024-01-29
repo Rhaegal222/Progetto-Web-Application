@@ -9,8 +9,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: [
     '../../styles/container.css',
     '../../styles/content.css',
-    '../../styles/form.css',
-    './login.component.css'
+    '../../styles/form.css'
   ],
 })
 export class LoginComponent {
@@ -21,9 +20,9 @@ export class LoginComponent {
   passwordInputType: string = 'password';
   passwordVisible: boolean = false;
 
-  togglePasswordVisibility(visible: boolean): void {
-    this.passwordVisible = visible;
-    this.passwordInputType = this.passwordVisible ? 'text' : 'password';
+  togglePasswordVisibility(): void {
+    this.passwordVisible = !this.passwordVisible;
+    this.passwordInputType = this.passwordVisible ? 'text' : 'password';    
   }
   
   constructor(private authService: AuthService) { }

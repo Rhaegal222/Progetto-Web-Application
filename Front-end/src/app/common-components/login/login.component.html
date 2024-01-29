@@ -8,10 +8,9 @@
       <div class="form-group position-relative">
         <input type="password" [type]="passwordInputType" class="form-control" id="password" placeholder="Password" name="password" [formControl]="password">
         
-        <button type="button" class="btn btn-outline-secondary position-absolute end-0 top-0" 
-            (mousedown)="togglePasswordVisibility(true)"
-            (mouseup)="togglePasswordVisibility(false)"
-            (mouseleave)="togglePasswordVisibility(false)">
+        <button type="button" class="btn btn-outline-secondary position-absolute end-0 top-0"
+        (click)="togglePasswordVisibility()"
+        >
             <i class="eye-icon bi bi-eye-slash" *ngIf="!passwordVisible"></i>
             <i class="eye-icon bi bi-eye" *ngIf="passwordVisible"></i>
         </button>

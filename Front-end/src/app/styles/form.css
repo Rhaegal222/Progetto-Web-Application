@@ -6,45 +6,110 @@
     padding-right: 2.375rem; /* Spazio aggiuntivo a destra per il bottone dell'icona */
   }
   
-  .form-control:focus {
-    color: #495057;
-    background-color: #fff;
-    border-color: #ff0000;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.25);
-  }
-  .form-control:hover {
-    border-color: #ff0000;
-  }
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #ff0000;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.25);
+}
+.form-control:hover {
+  border-color: #ff0000;
+}
 
   /* Stile delle righe del form */
 .form-group {
-    margin-bottom: 15px; /* Spazio tra le righe del form */
-  }
+  margin-bottom: 15px; /* Spazio tra le righe del form */
+}
+
+.inputBox {
+  position: relative;
+}
+
+.inputBox input{
+  padding-left: 15px 20px;
+  outline: none;
+  background: transparent;
+  border-radius: 5px;
+  color: #fff;
+  border: 1px solid #fff;
+  transition: 0.5s cubic-bezier (0.05, 0.81, 0, 0.93);
+}
+
+.inputBox input:focus ~span, .inputBox input:valid ~span{
+  transform: translateX(14px) translateY(-26px);
+  padding: 0 5px;
+  border-radius: 2px;
+  background: #212121;
+  letter-spacing: 0em;
+  border: 1px solid #ff0000;
+  font-size: 0.7em;
+}
+
+
   
-  .position-relative {
-    position: relative;
-  }
-  
-  .position-absolute {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    border: none;
-    background: transparent;
-    padding: .375rem .75rem; /* Altezza e padding allineati con il form-control */
-  }
-  
-  /* Stile normale dell'icona */
-  .eye-icon {
-    color: #000; /* Colore dell'icona normale */
-  }
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  border: none;
+  background: transparent;
+  padding: .375rem .75rem; /* Altezza e padding allineati con il form-control */
+}
+
+/* Stile normale dell'icona */
+.eye-icon {
+  color: #000; /* Colore dell'icona normale */
+}
 
   /* Stile della checkbox */
 .form-check-input {
-    width: 20px; /* Larghezza della checkbox */
-    height: 20px; /* Altezza della checkbox */
-    margin-top: 10px; /* Rimuovi margini aggiuntivi */
-    vertical-align: middle; /* Allinea verticalmente */
+  width: 20px; /* Larghezza della checkbox */
+  height: 20px; /* Altezza della checkbox */
+  margin-top: 10px; /* Rimuovi margini aggiuntivi */
+  vertical-align: middle; /* Allinea verticalmente */
+}
+
+/* Stile del bottone di login */
+.btn-primary {
+  background-color: #ff0000; /* Colore di sfondo */
+  border-color: #ff0000; /* Colore del bordo */
+  border-radius: 8px;
+  color: white; /* Colore del testo */
+  font-size: 16px; /* Dimensione del testo */
+  width: auto; /* Larghezza massima */
+  height: 40px; /* Altezza massima */
+}
+
+.btn-primary:focus {
+  background-color: #ff000022; /* Colore di sfondo al hover */
+  border-color: #ff000022; /* Colore del bordo al hover */
+  color: black; /* Colore del testo al hover */
+}
+
+.content .btn-primary {
+  /* Allinea il bottone al centro */
+  margin: 0 auto;
+  display: block;
+}
+
+.btn-outline-secondary {
+  color: #000; /* Colore del testo */
+  background-color: transparent; /* Sfondo trasparente */
+  background-image: none; /* Rimuovi l'immagine di sfondo */
+  border-color: #000; /* Colore del bordo */
+}
+
+.btn-outline-secondary:hover {
+  color: #000; /* Colore del testo al passaggio del mouse */
+  background-color: #00000022; /* Colore di sfondo al passaggio del mouse */
+  border-color: #000; /* Colore del bordo al passaggio del mouse */
+  .eye-icon {
+      color: #ff0000; /* Colore dell'icona al hover */
   }
+}

@@ -1,5 +1,6 @@
 .content {
-    max-width: 600px; /* Limita la larghezza massima del form */
+    max-width: 450px; /* Limita la larghezza massima del form */
+    width: 100%;
     padding: 20px; /* Spazio intorno al contenitore */
     background-color: #f8f9fa; /* Sfondo leggero per il form */
     border-radius: 8px; /* Bordi arrotondati */
@@ -8,7 +9,7 @@
 /* Responsive adjustments */
 @media (min-width: 992px) and (max-width: 1099px) {
     .content {
-        max-width: 600px; /* Limita la larghezza massima del form */
+        width: calc(100vw - 40px); /* Limita la larghezza massima del form */
         padding: 20px; /* Spazio intorno al contenitore */
         background-color: #f8f9fa; /* Sfondo leggero per il form */
         border-radius: 8px; /* Bordi arrotondati */
@@ -17,7 +18,7 @@
 }
 @media (min-width: 768px) and (max-width: 991.5px) {
     .content {
-        max-width: 600px; /* Limita la larghezza massima del form */
+        width: calc(100vw - 40px); /* Limita la larghezza massima del form */
         padding: 20px; /* Spazio intorno al contenitore */
         background-color: #f8f9fa; /* Sfondo leggero per il form */
         border-radius: 8px; /* Bordi arrotondati */
@@ -28,7 +29,7 @@
 /* Stili per schermi piccoli (Mobile) */
 @media (max-width: 767px) {
     .content {
-        max-width: calc(100vw - 40px); /* Limita la larghezza massima del form */ 
+        width: calc(100vw - 40px); /* Limita la larghezza massima del form */ 
         padding: 20px; /* Spazio intorno al contenitore */
         background-color: #f8f9fa; /* Sfondo leggero per il form */
         border-radius: 8px; /* Bordi arrotondati */

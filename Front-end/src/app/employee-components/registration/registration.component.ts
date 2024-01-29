@@ -8,8 +8,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: [
     '../../styles/container.css',
     '../../styles/content.css',
-    '../../styles/form.css',
-    './registration.component.css'
+    '../../styles/form.css'
   ]
 })
 export class RegistrationComponent {
@@ -21,8 +20,8 @@ export class RegistrationComponent {
   passwordInputType: string = 'password';
   passwordVisible: boolean = false;
 
-  togglePasswordVisibility(visible: boolean): void {
-    this.passwordVisible = visible;
+  togglePasswordVisibility(): void {
+    this.passwordVisible = !this.passwordVisible;
     this.passwordInputType = this.passwordVisible ? 'text' : 'password';
   }
 
