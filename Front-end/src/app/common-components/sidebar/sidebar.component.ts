@@ -18,25 +18,31 @@ export class SidebarComponent implements OnInit {
           this.lastComponentLoaded = event.urlAfterRedirects;
         }
       }
-    
-
-      // se la finestra è più grande di 768px, il menu è sempre aperto
-      if (window.innerWidth >= 992) {
-        let sidebar = document.getElementById('menu');
-        let arrow = document.getElementById('arrow');
-
-        sidebar?.classList.toggle('menu-open');
-        arrow?.classList.toggle('arrow-left');
-      } else if ((window.innerWidth >= 768) && (window.innerWidth < 992)) {
-        let sidebar = document.getElementById('menu');
-        let arrow = document.getElementById('arrow');
-
-        sidebar?.classList.toggle('menu-close');
-        arrow?.classList.toggle('arrow-right');
-      }
     });
+
+    this.handleInitialBehavior();
+
+    let resizeObserver = new ResizeObserver(entries => {
+      this.handleInitialBehavior();
+    });
+
+    resizeObserver.observe(document.body);
   }
 
+  // se la finestra è più grande di 768px, il menu è sempre aperto
+  windowsSize(){
+    let sidebar = document.getElementById('menu');
+    let arrow = document.getElementById('arrow');
+    if (sidebar && arrow) {
+      if (window.innerWidth >= 992) {
+        sidebar.classList.toggle('menu-open');
+        arrow.classList.toggle('arrow-left');
+      } else if ((window.innerWidth >= 768) && (window.innerWidth < 992)) {
+        sidebar.classList.toggle('menu-close');
+        arrow.classList.toggle('arrow-right');
+      }
+    }
+  }
 
   toggleMenuClose(){
     let url = this.router.url;
@@ -51,55 +57,51 @@ export class SidebarComponent implements OnInit {
     sidebar.style.zIndex = '-1';
     sidebar.classList.remove('menu-close');
     sidebar.classList.toggle('menu-open');
+
     let pos = -250; 
     sidebar.style.left = pos + 'px';
-    
-    let id = setInterval(frame, 0.25);
+
     function frame() {
       if (pos == 0) {
-        clearInterval(id);
+        arrow.classList.remove('arrow-right');
+        arrow.classList.toggle('arrow-left');
+
+        sidebar.removeAttribute('style');
+        arrow.removeAttribute('style');
       } else {
-        pos+=2.5; 
+        pos+=10; 
         sidebar.style.left = pos + 'px';
         arrow.style.left = (pos + 250 + 10) + 'px';
+        requestAnimationFrame(frame);
       }
-    }  
-    setTimeout(() => {
-      arrow.classList.remove('arrow-right');
-      arrow.classList.toggle('arrow-left');
-
-      sidebar.removeAttribute('style');
-      arrow.removeAttribute('style');
-    }, 1000);
+    }
+    requestAnimationFrame(frame);
   }
 
   slideOutSidebar(sidebar: HTMLElement, arrow: HTMLElement){
     sidebar.style.zIndex = '-1';
+
     let pos = 0; 
     sidebar.style.left = pos + 'px';
 
-    let id = setInterval(frame, 0.25);
     function frame() {
       if (pos == -250) {
-        clearInterval(id);
+        sidebar.classList.remove('menu-open');
+        sidebar.classList.toggle('menu-close');
+
+        arrow.classList.remove('arrow-left');
+        arrow.classList.toggle('arrow-right');
+
+        sidebar.removeAttribute('style');
+        arrow.removeAttribute('style');
       } else {
-        pos-=2.5; 
+        pos-=10; 
         sidebar.style.left = pos + 'px';
         arrow.style.left = (pos - 10) + 'px';
+        requestAnimationFrame(frame);
       }
-    } 
-
-    setTimeout(() => {
-      sidebar.classList.remove('menu-open');
-      sidebar.classList.toggle('menu-close');
-  
-      arrow.classList.remove('arrow-left');
-      arrow.classList.toggle('arrow-right');
-
-      sidebar.removeAttribute('style');
-      arrow.removeAttribute('style');
-    }, 1000); // 1000 = 1 secondo
-   
+    }
+    requestAnimationFrame(frame);   
   }
 
   rotationArrow(arrow: HTMLElement){
@@ -142,6 +144,30 @@ export class SidebarComponent implements OnInit {
         this.slideInSidebar(sidebar, arrow);
       }
       this.rotationArrow(arrow);
+    }
+  }
+
+  handleInitialBehavior(){
+    let sidebar = document.getElementById('menu');
+    let arrow = document.getElementById('arrow');
+
+    if (sidebar && arrow) {
+      if (window.innerWidth >= 992) {
+        sidebar.classList.toggle('menu-open', true);
+        sidebar.classList.toggle('menu-close', false);
+        arrow.classList.toggle('arrow-left', true);
+        arrow.classList.toggle('arrow-right', false);
+      } else if ((window.innerWidth >= 768) && (window.innerWidth < 992)) {
+        sidebar.classList.toggle('menu-close', true);
+        sidebar.classList.toggle('menu-open', false);
+        arrow.classList.toggle('arrow-left', false);
+        arrow.classList.toggle('arrow-right', true);
+      } else {
+        sidebar.classList.toggle('menu-close', false);
+        sidebar.classList.toggle('menu-open', false);
+        arrow.classList.toggle('arrow-left', false);
+        arrow.classList.toggle('arrow-right', false);
+      }
     }
   }
 }
