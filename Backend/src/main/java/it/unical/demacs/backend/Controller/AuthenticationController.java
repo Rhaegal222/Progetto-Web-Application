@@ -18,11 +18,13 @@ public class AuthenticationController {
     public ResponseEntity<?> loginWithCredentials(@RequestBody LoginRequest loginRequest) {
         return authenticationService.loginWithCredentials(loginRequest);
     }
-
+/*
     @PostMapping("/api/login/login")
     public ResponseEntity<?> loginWithGoogle(@RequestBody GoogleRequest googleRequest) {
         return authenticationService.loginWithGoogle(googleRequest);
     }
+
+ */
 
 
 
