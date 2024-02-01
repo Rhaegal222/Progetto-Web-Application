@@ -1,0 +1,336 @@
+.menu{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  display: none;
+  height: 100%;
+  background: #ff0000; /* il colore rosso mostrato */
+  color: white;
+  /* Aggiungi transizione per un effetto di scorrimento */
+}
+
+.menu-open {
+  width: 250px; /* o la larghezza desiderata */
+  display: block;
+}
+
+.menu-close {
+  width: 0;
+  display: none;
+}
+
+.menu-content {
+  /* Allinea al centro verticalmente */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.menu-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center; /* Allinea il logo al centro */
+  margin: 0;
+  padding: 0;
+}
+
+.menu-header h3 {
+  margin: 20px 0 0 0; /*top right bottom left*/
+  padding: 0;
+}
+
+.menu-header img {
+  /*Dimensioni del logo*/
+  width: 50%;
+  height: 100%;
+  /*Allinea al centro orizzontalmente */
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  height: auto; /* Mantiene il rapporto di aspetto */
+}
+
+.arrow{
+  display: flex; /* Allinea gli elementi in riga */
+  flex-direction: column; /* Allinea gli elementi in colonna */
+  justify-content: center; /* Allinea gli elementi al centro */
+  align-items: center; /* Allinea gli elementi al centro */
+  height: 100vh; /* Altezza massima */
+
+  position: fixed;
+  color: red;
+  cursor: pointer;
+  margin-left: 0px;
+  transform: rotate(180deg);
+  scale: 1.2;
+}
+
+.arrow:hover{
+  scale: 1.35;
+  filter: drop-shadow(0px 0px 5px rgba(0,0,0,0.5));
+}
+
+.arrow-right{
+  margin-left: 0px;
+  transform: rotate(180deg);
+}
+
+.arrow-left{
+  margin-left: 260px;
+  transform: rotate(0deg);
+}
+
+.components {
+  list-style: none; /* Rimuovi i punti elenco */
+  padding: 0; /* Spazio sopra il primo elemento */
+  margin: 0; /* Rimuovi il margine */
+}
+
+.only-mobile {
+  display: none;
+}
+
+.menu{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  display: none;
+  height: 100%;
+  background: #ff0000; /* il colore rosso mostrato */
+  color: white;
+  /* Aggiungi transizione per un effetto di scorrimento */
+}
+
+.menu-open {
+  width: 250px; /* o la larghezza desiderata */
+  display: block;
+}
+
+.menu-close {
+  width: 0;
+  display: none;
+}
+
+.menu-content {
+  /* Allinea al centro verticalmente */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.menu-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center; /* Allinea il logo al centro */
+  margin: 0;
+  padding: 0;
+}
+
+.menu-header h3 {
+  margin: 20px 0 0 0; /*top right bottom left*/
+  padding: 0;
+}
+
+.menu-header img {
+  /*Dimensioni del logo*/
+  width: 50%;
+  height: 100%;
+  /*Allinea al centro orizzontalmente */
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  height: auto; /* Mantiene il rapporto di aspetto */
+}
+
+.arrow{
+  display: flex; /* Allinea gli elementi in riga */
+  flex-direction: column; /* Allinea gli elementi in colonna */
+  justify-content: center; /* Allinea gli elementi al centro */
+  align-items: center; /* Allinea gli elementi al centro */
+  height: 100vh; /* Altezza massima */
+
+  position: fixed;
+  color: red;
+  cursor: pointer;
+  margin-left: 0px;
+  transform: rotate(180deg);
+  scale: 1.2;
+}
+
+.arrow:hover{
+  scale: 1.35;
+  filter: drop-shadow(0px 0px 5px rgba(0,0,0,0.5));
+}
+
+.arrow-right{
+  margin-left: 0px;
+  transform: rotate(180deg);
+}
+
+.arrow-left{
+  margin-left: 260px;
+  transform: rotate(0deg);
+}
+
+.components {
+  list-style: none; /* Rimuovi i punti elenco */
+  padding: 0; /* Spazio sopra il primo elemento */
+  margin: 0; /* Rimuovi il margine */
+}
+
+.only-mobile {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.33px){
+  .menu {
+    display: block;    
+    width: 100%;
+    height: 55px;
+  }
+  .menu-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;    
+  }
+  .menu-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;  
+    width: 100%;
+  }
+  .only-mobile {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+  .menu-header h3 {
+    margin: 0;
+    padding: 0;
+  }
+  .menu-header img{
+    display: none;
+  }
+  .arrow {
+    display: none;
+    padding: 0;
+  }
+  .components {
+    display: none;
+  }
+  
+  .menu-icon{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .line {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    margin: 3.5px;
+  }
+  .line-top{
+    margin: 0;
+    margin-right: 25px;
+    transform: rotate(45deg);
+    position: fixed;
+  }
+  .line-mid{
+    margin: 0;
+    margin-right: 25px;
+    transform: rotate(-45deg);
+    position: fixed;
+  }
+  .line-bot{
+    display: none;
+  }
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 767.33px){
+  .menu {
+    display: block;    
+    width: 100%;
+    height: 55px;
+  }
+  .menu-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;    
+  }
+  .menu-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;  
+    width: 100%;
+    margin: 0 35px;
+  }
+  .only-mobile {
+    display: block;
+    width: 25px;
+    height: 100%;
+  }
+  .menu-header h3 {
+    margin: 0;
+    padding: 0;
+  }
+  .menu-header img{
+    display: none;
+  }
+  .arrow {
+    display: none;
+    padding: 0;
+  }
+  .components {
+    display: none;
+  }
+  
+  .menu-icon{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .line {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    margin: 3.5px 0;
+  }
+  .line-top{
+    margin: 0 3.5px;
+    transform: rotate(45deg);
+    position: fixed;
+  }
+  .line-mid{
+    margin: 0 3.5px;
+    transform: rotate(-45deg);
+    position: fixed;
+  }
+  .line-bot{
+    display: none;
+  }
+}
+

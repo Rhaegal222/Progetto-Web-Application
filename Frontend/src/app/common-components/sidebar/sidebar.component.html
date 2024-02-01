@@ -1,0 +1,31 @@
+<!-- Se il menu esegui toggleMenuOpen() altrimernti toggleMenuCLone() -->
+<div id="menu" class="menu">
+  <div class="menu-content">
+    <!-- Logo o titolo dell'applicazione -->
+    <div class="menu-header">
+      <img src="https://www.idemedia.com/wp-content/uploads/2021/04/unical-logo-white.png" alt="logo" class="img-fluid">
+      <h3>Magazzino Unical</h3>
+      <div class="only-mobile" (click)="toggleMenuOpen()">
+          <div class="menu-icon">
+            <span id="lineTop" class="line line-top"></span>
+            <span id="lineMid" class="line line-mid"></span>
+            <span id="lineBot" class="line line-bot"></span>
+          </div>
+      </div>
+    </div>
+
+    <!-- Menu per ogni ruolo -->
+    <div class="components">
+      <app-menu-admin></app-menu-admin>
+      <app-menu-storekeeper></app-menu-storekeeper>
+      <app-menu-employee></app-menu-employee>
+      <app-menu-auth></app-menu-auth>
+    </div>
+  </div>
+</div>
+
+<!--Freccia per chiudere la sidebar-->
+<div id="arrow" class="arrow" (click)="hideSidebar()">
+  <span class="material-icons">arrow_back_ios</span>
+</div>
+

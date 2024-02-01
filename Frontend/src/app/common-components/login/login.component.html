@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="content">
+    <h2>Accedi</h2>
+    <form>
+      <div class="form-group">
+        <input type="text" class="form-control" id="username" placeholder="Email" [formControl]="username">
+      </div>
+      <div class="form-group position-relative">
+        <input type="password" [type]="passwordInputType" class="form-control" id="password" placeholder="Password" name="password" [formControl]="password">
+        
+        <button type="button" class="btn btn-outline-secondary position-absolute end-0 top-0"
+        (click)="togglePasswordVisibility()"
+        >
+            <i class="eye-icon bi bi-eye-slash" *ngIf="!passwordVisible"></i>
+            <i class="eye-icon bi bi-eye" *ngIf="passwordVisible"></i>
+        </button>
+    </div>
+      <button type="submit" class="btn btn-primary"
+      (click)="login()">
+      Accedi</button>
+    </form>
+  </div>
+</div>

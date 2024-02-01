@@ -1,0 +1,5 @@
+  .content td,
+  .content th {
+    text-align: center; /* Centra il testo nelle celle */
+  }
+  
