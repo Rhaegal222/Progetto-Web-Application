@@ -26,7 +26,8 @@ public class UserDaoPostgres implements UserDao {
                 String password = res.getString("password");
                 String email = res.getString("email");
 
-                u = new User(name, surname, role, email, username, password);
+                u = new User(name, surname, email, username, password);
+                u.setRole(role);
             }
 
             res.close();

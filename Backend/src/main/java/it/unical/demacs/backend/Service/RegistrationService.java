@@ -34,8 +34,7 @@ public class RegistrationService {
                         }
                         else{
                             String encryptedPass = RegexHandler.getInstance().encryptPassword(password);
-                            User user = new User(name, surname, null, email, username, encryptedPass);
-                            //DatabaseHandler.getInstance().getUserDao().insertUser(user);
+                            User user = new User(name, surname, email, username, encryptedPass);
                             if(DatabaseHandler.getInstance().getUserDao().insertUser(user)){
                                 return ResponseEntity.ok().body("{\"message\": \"You are registered\"}");
                             }
