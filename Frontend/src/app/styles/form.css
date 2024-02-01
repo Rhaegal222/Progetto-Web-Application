@@ -5,7 +5,7 @@
     border-radius: 4px; /* Bordi arrotondati degli input */
     padding-right: 2.375rem; /* Spazio aggiuntivo a destra per il bottone dell'icona */
   }
-  
+
 .form-control:focus {
   color: #495057;
   background-color: #fff;
@@ -22,32 +22,6 @@
   margin-bottom: 15px; /* Spazio tra le righe del form */
 }
 
-.inputBox {
-  position: relative;
-}
-
-.inputBox input{
-  padding-left: 15px 20px;
-  outline: none;
-  background: transparent;
-  border-radius: 5px;
-  color: #fff;
-  border: 1px solid #fff;
-  transition: 0.5s cubic-bezier (0.05, 0.81, 0, 0.93);
-}
-
-.inputBox input:focus ~span, .inputBox input:valid ~span{
-  transform: translateX(14px) translateY(-26px);
-  padding: 0 5px;
-  border-radius: 2px;
-  background: #212121;
-  letter-spacing: 0em;
-  border: 1px solid #ff0000;
-  font-size: 0.7em;
-}
-
-
-  
 .position-relative {
   position: relative;
 }
