@@ -1,7 +1,6 @@
 package it.unical.demacs.backend.Service;
 
 import it.unical.demacs.backend.Persistence.DatabaseHandler;
-import it.unical.demacs.backend.Service.Request.GoogleRequest;
 import it.unical.demacs.backend.Service.Request.LoginRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
