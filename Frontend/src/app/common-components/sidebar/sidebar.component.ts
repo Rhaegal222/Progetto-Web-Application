@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
+var arrow : any;
+var sidebar : any;
+var resizeObserver : any;
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -15,11 +19,12 @@ export class SidebarComponent implements OnInit {
     this.toggleMenuClose();
     this.handleInitialBehavior();
 
-    let resizeObserver = new ResizeObserver(entries => {
-      this.handleInitialBehavior();
-    });
-
-    resizeObserver.observe(document.body);
+    if ( typeof window !== 'undefined' ) {
+      resizeObserver = new ResizeObserver(entries => {
+        this.handleInitialBehavior();
+      });
+      resizeObserver.observe(document.body);
+    }
 
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -32,8 +37,8 @@ export class SidebarComponent implements OnInit {
 
   // se la finestra è più grande di 768px, il menu è sempre aperto
   windowsSize(){
-    let sidebar = document.getElementById('menu');
-    let arrow = document.getElementById('arrow');
+    sidebar = document.getElementById('menu');
+    arrow = document.getElementById('arrow');
     if (sidebar && arrow) {
       if (window.innerWidth >= 992) {
         sidebar.classList.toggle('menu-open');
@@ -74,14 +79,17 @@ export class SidebarComponent implements OnInit {
   }
 
   toggleMenuClose(){
-    let lineTop = document.getElementById('lineTop');
-    let lineMid = document.getElementById('lineMid');
-    let lineBot = document.getElementById('lineBot');
+    if ( typeof window !== 'undefined' ) {
+      let lineTop = document.getElementById('lineTop');
+      let lineMid = document.getElementById('lineMid');
+      let lineBot = document.getElementById('lineBot');
+    
 
-    if (lineTop && lineMid && lineBot) {
-      lineTop.classList.toggle('line-top', false);
-      lineMid.classList.toggle('line-mid', false);
-      lineBot.classList.toggle('line-bot', false);
+      if (lineTop && lineMid && lineBot) {
+        lineTop.classList.toggle('line-top', false);
+        lineMid.classList.toggle('line-mid', false);
+        lineBot.classList.toggle('line-bot', false);
+      }
     }
   }
 
@@ -164,8 +172,8 @@ export class SidebarComponent implements OnInit {
   }
 
   hideSidebar() {
-    let sidebar = document.getElementById('menu');
-    let arrow = document.getElementById('arrow');
+    sidebar = document.getElementById('menu');
+    arrow = document.getElementById('arrow');
 
     if (sidebar && arrow) {
       sidebar.style.display = window.getComputedStyle(sidebar).display; 
@@ -180,8 +188,10 @@ export class SidebarComponent implements OnInit {
   }
 
   handleInitialBehavior(){
-    let sidebar = document.getElementById('menu');
-    let arrow = document.getElementById('arrow');
+    if ( typeof window !== 'undefined' ) {
+      sidebar = document.getElementById('menu');
+      arrow = document.getElementById('arrow');
+    }
 
     if (sidebar && arrow) {
       if (window.innerWidth >= 992) {
