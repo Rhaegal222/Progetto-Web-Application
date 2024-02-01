@@ -7,6 +7,9 @@ import it.unical.demacs.backend.Persistence.RegexHandler;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+
 @Service
 public class RegistrationService {
     public ResponseEntity<?> doRegistration(RegistrationRequest registrationRequest) {
@@ -35,12 +38,22 @@ public class RegistrationService {
                         else{
                             String encryptedPass = RegexHandler.getInstance().encryptPassword(password);
                             User user = new User(name, surname, email, username, encryptedPass);
-                            if(DatabaseHandler.getInstance().getUserDao().insertUser(user)){
-                                return ResponseEntity.ok().body("{\"message\": \"You are registered\"}");
+                            // Supponendo che insertUser restituisca un CompletableFuture<Boolean>
+                            CompletableFuture<Boolean> insertResult = DatabaseHandler.getInstance().getUserDao().insertUser(user);
+
+                            try {
+                                // Attendi il completamento dell'inserimento
+                                Boolean success = insertResult.get();
+
+                                if (success) {
+                                    return ResponseEntity.ok().body("{\"message\": \"You are registered\"}");
+                                } else {
+                                    return ResponseEntity.status(401).body("{\"message\": \"Error during registration\"}");
+                                }
+                            } catch (InterruptedException | ExecutionException e) {
+                                return ResponseEntity.status(500).body("{\"message\": \"Internal Server Error\"}");
                             }
-                            else {
-                                return ResponseEntity.status(401).body("{\"message\": \"Error during registration\"}");
-                            }
+
 
                         }
                     }

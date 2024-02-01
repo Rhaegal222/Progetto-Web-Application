@@ -2,8 +2,12 @@ package it.unical.demacs.backend.Persistence.Dao.Postgres;
 
 import it.unical.demacs.backend.Persistence.Dao.UserDao;
 import it.unical.demacs.backend.Persistence.Model.User;
+import org.springframework.scheduling.annotation.Async;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
+
 public class UserDaoPostgres implements UserDao {
 
     Connection con;
@@ -12,7 +16,37 @@ public class UserDaoPostgres implements UserDao {
     }
 
     @Override
-    public User findByPrimaryKey(String username) {
+    @Async
+    public CompletableFuture<ArrayList<User>> findAll() {
+        ArrayList<User> users = new ArrayList<>();
+        String query = "SELECT * FROM users";
+        try (
+                Statement st = this.con.createStatement();
+                ResultSet rs = st.executeQuery(query)) {
+            while (rs.next()) {
+                User user = new User();
+                setting(rs, user);
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return CompletableFuture.completedFuture(users);
+    }
+
+    private void setting(ResultSet rs, User user) throws SQLException {
+        user.setPassword(rs.getString(1));
+        user.setName(rs.getString(2));
+        user.setSurname(rs.getString(3));
+        user.setEmail(rs.getString(4));
+        user.setRole(rs.getString(5));
+        user.setUsername(rs.getString(6));
+    }
+
+
+    @Override
+    @Async
+    public CompletableFuture<User> findByPrimaryKey(String username) {
         try {
             PreparedStatement stmt = con.prepareStatement("SELECT * FROM users WHERE username = ?");
             stmt.setString(1, username);
@@ -32,13 +66,32 @@ public class UserDaoPostgres implements UserDao {
 
             res.close();
             stmt.close();
-            return u;
+            return CompletableFuture.completedFuture(u);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+    @Override
+    @Async
+    public CompletableFuture<User> findByEmail(String email) {
+        User user = new User();
+        String query = "SELECT * FROM users WHERE email = ?";
+        try {
+            PreparedStatement st = this.con.prepareStatement(query);
+            st.setString(1, email);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                setting(rs, user);
+            }
+        } catch (SQLException e) {
+            e.fillInStackTrace();
+        }
+        return CompletableFuture.completedFuture(user);
+    }
+
+    @Override
     public boolean checkUsername(String username){
         try{
             boolean output = false;
@@ -93,37 +146,51 @@ public class UserDaoPostgres implements UserDao {
     }
 
     @Override
-    public boolean insertUser(User user) {
-        boolean done = false;
+    @Async
+    public CompletableFuture<Boolean> insertUser(User user) {
+        String query =  "INSERT INTO users (username, password, email, name, surname) VALUES (?, ?, ?, ?, ?)";
         try {
-            String query =  "INSERT INTO users (name, surname, role, email, username, password) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getPassword());
+            stmt.setString(3, user.getEmail());
+            stmt.setString(4, user.getName());
+            stmt.setString(5, user.getSurname());
 
-            // Impostare i parametri della query con i dati dell'utente
-            stmt.setString(1, user.getName());
-            stmt.setString(2, user.getSurname());
-            stmt.setString(3, user.getRole());
-            stmt.setString(4, user.getEmail());
-            stmt.setString(5, user.getUsername());
-            stmt.setString(6, user.getPassword());
-
-            // Eseguire la query di inserimento
-            System.out.println("PRIMA DELL'INSERT");
-            stmt.executeUpdate();
+            int rowsAffected = stmt.executeUpdate();
             stmt.close();
-            done = true;
-            System.out.println("DOPO L'INSERT");
 
+            return CompletableFuture.completedFuture(rowsAffected > 0);
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
         }
-        return done;
+        return CompletableFuture.completedFuture(false);
     }
 
     @Override
-    public void deleteUser(String id_user) {
+    @Async
+    public CompletableFuture<Boolean> deleteUser(String username) {
+        String query = "DELETE FROM users WHERE username = ?";
+        try {
+            PreparedStatement st = this.con.prepareStatement(query);
+            st.setString(1, username);
+            st.executeUpdate();
+            int rowsAffected = st.executeUpdate();
+            st.close();
 
+            return CompletableFuture.completedFuture(rowsAffected > 0);
+        } catch (SQLException ignored) {}
+
+        return CompletableFuture.completedFuture(false);
     }
+
+    @Override
+    @Async
+    public CompletableFuture<Boolean> updateUser(String username) {
+
+        return null;
+    }
+
 
 }
 

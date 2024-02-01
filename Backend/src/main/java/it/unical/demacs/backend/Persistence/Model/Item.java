@@ -6,16 +6,24 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Item {
+    private Integer idItem;
     private String name;
-    private String description;
     private String type;
-    private Integer quantity;
-    //private String image;
+    private String description;
+    private String location;
+    private String category;
+    private String image;
 
-    public Item(String name, String description, String type, Integer quantity) {
+    public Item() {}
+
+
+    public Item(String name, String type, String description, String location, String category, String image) {
         this.name = name;
-        this.description = description;
         this.type = type;
-        this.quantity = quantity;
+        this.description = description;
+        this.location = location;
+        this.category = category;
+        this.image = image;
     }
+
 }

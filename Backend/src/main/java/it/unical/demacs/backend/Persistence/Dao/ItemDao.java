@@ -2,13 +2,20 @@ package it.unical.demacs.backend.Persistence.Dao;
 
 import it.unical.demacs.backend.Persistence.Model.Item;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
 
 public interface ItemDao {
-    public Item findByPrimaryKey(String id_item);
+    public CompletableFuture<ArrayList<Item>> findAll();
 
-    void insertItem(Item item);
-    void deleteItem(String id_item);
+    public CompletableFuture<Item> findByPrimaryKey(Long id);
 
-    ArrayList<Item> findAll();
+    public CompletableFuture<Item> findByName(String name) throws SQLException;
+
+    public CompletableFuture<Boolean> insertItem(Item Item);
+
+    public CompletableFuture<Boolean> updateItem(Item Item);
+
+    public CompletableFuture<Boolean> deleteItem(Long id);
 }
