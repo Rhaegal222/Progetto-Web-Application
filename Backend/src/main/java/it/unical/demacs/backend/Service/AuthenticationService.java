@@ -1,15 +1,17 @@
 package it.unical.demacs.backend.Service;
 
 import it.unical.demacs.backend.Persistence.DatabaseHandler;
+import it.unical.demacs.backend.Service.Request.GoogleRequest;
 import it.unical.demacs.backend.Service.Request.LoginRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Service
-public class AuthenticationService {
-    public ResponseEntity<?> doLogin(@RequestBody LoginRequest loginRequest) {
+public class AuthenticationService{
+
+    public ResponseEntity<?> loginWithCredentials(LoginRequest loginRequest) {
         String username = loginRequest.getUsername();
         String password = loginRequest.getPassword();
 
@@ -20,4 +22,7 @@ public class AuthenticationService {
             return ResponseEntity.status(401).body("{\"message\": \"Incorrect password\"}");
         }
     }
+
+
+
 }
