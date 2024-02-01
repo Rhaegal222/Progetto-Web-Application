@@ -148,15 +148,14 @@ public class UserDaoPostgres implements UserDao {
     @Override
     @Async
     public CompletableFuture<Boolean> insertUser(User user) {
-        String query =  "INSERT INTO users (name, surname, role, email, username, password) VALUES (?, ?, ?, ?, ?, ?)";
+        String query =  "INSERT INTO users (username, password, email, name, surname) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement stmt = con.prepareStatement(query);
-            stmt.setString(1, user.getName());
-            stmt.setString(2, user.getSurname());
-            stmt.setString(3, user.getRole());
-            stmt.setString(4, user.getEmail());
-            stmt.setString(5, user.getUsername());
-            stmt.setString(6, user.getPassword());
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getPassword());
+            stmt.setString(3, user.getEmail());
+            stmt.setString(4, user.getName());
+            stmt.setString(5, user.getSurname());
 
             int rowsAffected = stmt.executeUpdate();
             stmt.close();
