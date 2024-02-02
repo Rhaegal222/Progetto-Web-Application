@@ -24,10 +24,10 @@ export class ProductListComponent {
 
   getProducts(){
     this.productService.getProducts().subscribe({
-      next: (response: Product[]) => {
-        this.products = response;
+      next: (data) => {
+        this.products = data;
       },
-      error: (error: any) => {
+      error: (error) => {
         console.log('There was an error!', error);
       }
     });
