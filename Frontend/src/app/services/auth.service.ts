@@ -19,7 +19,7 @@ constructor(private http:HttpClient, private router:Router) { }
         this.router.navigate(["/dashboard"]);
       },
       error: (error) => {
-        console.log(error);
+        this.router.navigate(["/login"]);
       }
     });
   }
@@ -33,6 +33,19 @@ constructor(private http:HttpClient, private router:Router) { }
     var user:User = {"name": name, "surname": surname, "username": username, "password": password, "email": email};
     this.http.post("http://localhost:8080/api/register", user, {withCredentials: true}).subscribe({
       next: (response) => {
+        this.router.navigate(["/login"]);
+        console.log(response);
+      },
+      error: (error) => {
+        this.router.navigate(["/dashboard"]);
+        console.log(error);
+      }
+    });
+  }
+
+  debug(){
+    this.http.get("http://localhost:4200/api/debug").subscribe({
+      next: (response) => {
         console.log(response);
       },
       error: (error) => {
@@ -40,6 +53,4 @@ constructor(private http:HttpClient, private router:Router) { }
       }
     });
   }
-
-
 }

@@ -35,7 +35,7 @@ import { MenuEmployeeComponent } from './common-components/sidebar/menus/menu-em
 import { MenuStorekeeperComponent } from './common-components/sidebar/menus/menu-storekeeper/menu-storekeeper.component';
 import { MenuAuthComponent } from './common-components/sidebar/menus/menu-auth/menu-auth.component';
 import { RequestsForwardedComponent } from './employee-components/requests-forwarded/requests-forwarded.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { AddProductComponent } from './storekeeper-components/product-management/add-product/add-product.component';
 
 @NgModule({
@@ -88,7 +88,9 @@ import { AddProductComponent } from './storekeeper-components/product-management
     MatSidenavContent,
     MatSidenavContainer,
     HttpClientModule,
-    BrowserModule
+    BrowserModule,
+    HttpClientModule,
+    HttpClientJsonpModule
   ],
   providers: [
     provideClientHydration()

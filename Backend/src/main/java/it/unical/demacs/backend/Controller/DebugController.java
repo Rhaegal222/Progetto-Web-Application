@@ -1,6 +1,8 @@
 package it.unical.demacs.backend.Controller;
 
+import it.unical.demacs.backend.Service.DebugService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,12 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200")
+public class DebugController {
 
-public class DegubController {
+    private final DebugService debugService;
 
     @GetMapping("/api/debug")
-    public String debug() {
-        return "Debugging";
+    public ResponseEntity<?> debug() {
+        return debugService.debug();
     }
 
 

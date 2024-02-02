@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../model/product';
+import { response } from 'express';
 
 @Component({
   selector: 'app-product-list',
@@ -18,18 +19,17 @@ export class ProductListComponent {
 
   
   ngOnInit(): void {
-    
-    /*
-    // get all products in a json array
+    this.getProducts();
+  }
+
+  getProducts(){
     this.productService.getProducts().subscribe({
-      next: (response) => {
+      next: (response: Product[]) => {
         this.products = response;
       },
-      error: (error) => {
-        console.log(error);
+      error: (error: any) => {
+        console.log('There was an error!', error);
       }
     });
-    */
   }
-  
 }

@@ -8,7 +8,8 @@ import { Product } from '../model/product';
 export class ProductService {
   constructor(private http:HttpClient) { }
 
+  // Get all products
   getProducts(){
-    this.http.get<Product[]>("http://localhost:8080/api/products");
+    return this.http.get<Product[]>("http://localhost:8080/api/products", {withCredentials: true});
   }
 }
