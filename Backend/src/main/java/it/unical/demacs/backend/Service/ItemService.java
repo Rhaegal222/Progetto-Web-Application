@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -62,7 +63,8 @@ public class ItemService {
     }
 
     public ResponseEntity<?> allItems() {
-        return ResponseEntity.ok().body(DatabaseHandler.getInstance().getItemDao().findAll());
+        ArrayList<Item> items = DatabaseHandler.getInstance().getItemDao().findAll().join();
+        return ResponseEntity.ok().body(items);
     }
 
     public ResponseEntity<?> getItem(@RequestBody GetItemRequest getItemRequest) throws ExecutionException, InterruptedException {
