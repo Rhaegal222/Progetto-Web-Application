@@ -1,9 +1,9 @@
 /* Stile del contenitore principale */
 .container {
-    max-width: 100%; /* Larghezza massima */
     display: flex; /* Allinea gli elementi in riga */
     flex-wrap: wrap; /* Allinea gli elementi in colonna */
     justify-content: center; /* Allinea gli elementi al centro */
     align-items: center; /* Allinea gli elementi al centro */
-    height: 100vh; /* Altezza massima */
+    max-width: 100%; /* Larghezza massima */
+    height: 100vh;    
 }

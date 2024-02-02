@@ -95,19 +95,15 @@ export class SidebarComponent implements OnInit {
 
   slideInSidebar(sidebar: HTMLElement, arrow: HTMLElement){
     sidebar.style.zIndex = '-1';
-    sidebar.classList.remove('menu-close');
-    sidebar.classList.toggle('menu-open');
 
     let pos = -250; 
     sidebar.style.left = pos + 'px';
 
     function frame() {
       if (pos == 0) {
-        arrow.classList.remove('arrow-right');
-        arrow.classList.toggle('arrow-left');
-
+        sidebar.classList.toggle('menu-open', true);
+        sidebar.classList.toggle('menu-close', false);
         sidebar.removeAttribute('style');
-        arrow.removeAttribute('style');
       } else {
         pos+=10; 
         sidebar.style.left = pos + 'px';
@@ -126,14 +122,9 @@ export class SidebarComponent implements OnInit {
 
     function frame() {
       if (pos == -250) {
-        sidebar.classList.remove('menu-open');
-        sidebar.classList.toggle('menu-close');
-
-        arrow.classList.remove('arrow-left');
-        arrow.classList.toggle('arrow-right');
-
+        sidebar.classList.toggle('menu-open', false);
+        sidebar.classList.toggle('menu-close', true);
         sidebar.removeAttribute('style');
-        arrow.removeAttribute('style');
       } else {
         pos-=10; 
         sidebar.style.left = pos + 'px';
@@ -145,26 +136,31 @@ export class SidebarComponent implements OnInit {
   }
 
   rotationArrow(arrow: HTMLElement){
-    arrow.style.transform = window.getComputedStyle(arrow).transform;
-    if (arrow.style.transform == 'matrix(1, 0, 0, 1, 0, 0)') {
-      let pos = 0;
-      let id = setInterval(frame, 0.25);
-      function frame() {
-        if (pos == 180) {
-          clearInterval(id);
-        } else {
-          pos+=3; 
-          arrow.style.transform = 'matrix(1, 0, 0, 1, 0, 0) rotate(' + pos + 'deg)';
-        }
-      }
-    } else {
+    if (arrow.classList.contains('arrow-right')) {
       let pos = 180;
-      let id = setInterval(frame, 0.25);
+      let id = setInterval(frame, 5);
       function frame() {
         if (pos == 0) {
           clearInterval(id);
+          arrow.classList.toggle('arrow-left', true);
+          arrow.classList.toggle('arrow-right', false);
+          arrow.removeAttribute('style');
         } else {
           pos-=3; 
+          arrow.style.transform = 'matrix(1, 0, 0, 1, 0, 0) rotate(' + pos + 'deg)';
+        }
+      }
+    } else if (arrow.classList.contains('arrow-left')){
+      let pos = 0;
+      let id = setInterval(frame, 5);
+      function frame() {
+        if (pos == 180) {
+          clearInterval(id);
+          arrow.classList.toggle('arrow-left', false);
+          arrow.classList.toggle('arrow-right', true);
+          arrow.removeAttribute('style');
+        } else {
+          pos+=3;
           arrow.style.transform = 'matrix(1, 0, 0, 1, 0, 0) rotate(' + pos + 'deg)';
         }
       }
@@ -176,18 +172,18 @@ export class SidebarComponent implements OnInit {
     arrow = document.getElementById('arrow');
 
     if (sidebar && arrow) {
-      sidebar.style.display = window.getComputedStyle(sidebar).display; 
-      if (sidebar.style.display == 'block') {
+      this.rotationArrow(arrow);
+      if (sidebar.classList.contains('menu-open')) {
         this.slideOutSidebar(sidebar, arrow);
       } else {
-        sidebar.style.display = 'block';
+        console.log('slideInSidebar');
         this.slideInSidebar(sidebar, arrow);
       }
-      this.rotationArrow(arrow);
     }
   }
 
   handleInitialBehavior(){
+    console.log('handleInitialBehavior');
     if ( typeof window !== 'undefined' ) {
       sidebar = document.getElementById('menu');
       arrow = document.getElementById('arrow');

@@ -16,8 +16,10 @@ export class ProductListComponent {
 
   products: Product[] = [];
 
-  /*
+  
   ngOnInit(): void {
+    
+    /*
     // get all products in a json array
     this.productService.getProducts().subscribe({
       next: (response) => {
@@ -27,6 +29,7 @@ export class ProductListComponent {
         console.log(error);
       }
     });
+    */
   }
-  */
+  
 }

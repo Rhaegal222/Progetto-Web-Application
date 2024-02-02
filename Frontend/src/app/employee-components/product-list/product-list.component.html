@@ -1,67 +1,86 @@
 <div class="container">
-    <div class="grid">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Scheda video</h5>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
-                <p class="card-text">Hardware</p>
+    <div class="content">
+        <!---Barra di ricerca--->
+        <div class="search-bar">
+            <!--Menu a tendiba categorie-->
+            <div class="dropdown">
+                <button class="dropbtn">Categorie</button>
+                <div class="dropdown-content">
+                    <a href="#">Hardware</a>
+                    <a href="#">Software</a>
+                    <a href="#">Periferiche</a>
+                    <a href="#">Altro</a>
+                </div>
             </div>
+            <input type="text" class="search-bar" placeholder="Cerca...">
+            <button class="search-button">
+                <span class="material-icons">search</span>
+            </button>
         </div>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Scheda video</h5>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
-                <p class="card-text">Hardware</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Scheda video</h5>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
-                <p class="card-text">Hardware</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Scheda video</h5>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
-                <p class="card-text">Hardware</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Scheda video</h5>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
-                <p class="card-text">Hardware</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Scheda video</h5>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
-                <p class="card-text">Hardware</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Scheda video</h5>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
-                <p class="card-text">Hardware</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Scheda video</h5>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
-                <p class="card-text">Hardware</p>
-            </div>
-        </div>
-        <div *ngFor="let product of products">
+        <div class="grid">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <img [src]="'data:image/png;base64,'+product.imageBase64" class="card-img-top" alt="...">
-                    <p class="card-text">{{ product.category }}</p>
+                    <h5 class="card-title">Scheda video</h5>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
+                    <p class="card-text">Hardware</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Scheda video</h5>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
+                    <p class="card-text">Hardware</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Scheda video</h5>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
+                    <p class="card-text">Hardware</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Scheda video</h5>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
+                    <p class="card-text">Hardware</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Scheda video</h5>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
+                    <p class="card-text">Hardware</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Scheda video</h5>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
+                    <p class="card-text">Hardware</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Scheda video</h5>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
+                    <p class="card-text">Hardware</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Scheda video</h5>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
+                    <p class="card-text">Hardware</p>
+                </div>
+            </div>
+            <div *ngFor="let product of products">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <img [src]="'data:image/png;base64,'+product.imageBase64" class="card-img-top" alt="...">
+                        <p class="card-text">{{ product.category }}</p>
+                    </div>
                 </div>
             </div>
         </div>

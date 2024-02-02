@@ -9,8 +9,7 @@ export class ProductService {
   constructor(private http:HttpClient) { }
 
   getProducts(){
-    // get all products in a json array
-    return this.http.get<Product[]>("http://localhost:8080/api/products");
+    this.http.get<Product[]>("http://localhost:8080/api/products");
   }
 
 
