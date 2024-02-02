@@ -37,7 +37,7 @@ constructor(private http:HttpClient, private router:Router) { }
         console.log(response);
       },
       error: (error) => {
-        this.router.navigate(["/dashboard"]);
+        this.router.navigate(["/location-map"]);
         console.log(error);
       }
     });
