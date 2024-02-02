@@ -1,6 +1,7 @@
 package it.unical.demacs.backend.Service;
 
 import it.unical.demacs.backend.Persistence.DatabaseHandler;
+import it.unical.demacs.backend.Persistence.Model.User;
 import it.unical.demacs.backend.Service.Request.LoginRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -14,11 +15,18 @@ public class AuthenticationService{
         String username = loginRequest.getUsername();
         String password = loginRequest.getPassword();
 
-        if(DatabaseHandler.getInstance().getUserDao().checkUsername(username) && BCrypt.checkpw(password,DatabaseHandler.getInstance().getUserDao().selectPassword(username))){
-            return ResponseEntity.ok().body("{\"message\": \"You are logged in\"}");
+        User user = DatabaseHandler.getInstance().getUserDao().findByUsername(username).join();
+        if(user == null){
+            if(!BCrypt.checkpw(password, user.getPassword())){
+                return ResponseEntity.badRequest().body("{\"message\": \"Wrong username/password\"}");
+            }
+            else{
+                return ResponseEntity.ok().body("{\"message\": \"Login successful\"}");
+            }
+
         }
         else{
-            return ResponseEntity.status(401).body("{\"message\": \"Incorrect password\"}");
+            return ResponseEntity.ok().body("{\"message\": \"Login successful\"}");
         }
     }
 
