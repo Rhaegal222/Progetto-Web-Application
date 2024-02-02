@@ -20,19 +20,21 @@ public class ItemController {
     //Arrivano le richieste HTTP
     private final ItemService itemService;
 
-    @PostMapping("/api/insertItem")
+    @PostMapping("/api/insertProduct")
     public ResponseEntity<?> insertItem(@RequestBody InsertItemRequest insertItemRequest) {
         return itemService.insertItem(insertItemRequest);
     }
 
-    @PostMapping("/api/allItems")
+    @PostMapping("/api/products")
     public ResponseEntity<?> allItems(){
         return itemService.allItems();
     }
 
-    @PostMapping("/api/getItem")
+    /*
+    @PostMapping("/api/product")
     public ResponseEntity<?> getItem(@RequestBody GetItemRequest getItemRequest) throws ExecutionException, InterruptedException {
         return itemService.getItem(getItemRequest);
     }
+    */
 
 }
