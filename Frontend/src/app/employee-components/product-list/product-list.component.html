@@ -18,71 +18,16 @@
             </button>
         </div>
         <div class="grid">
-            <div class="card">
+            <div *ngFor="let product of products" class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Scheda video</h5>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
-                    <p class="card-text">Hardware</p>
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <img [src]="'data:image/png;base64,'+product.imageBase64" class="card-img-top" alt="...">
+                    <p class="card-text">{{ product.category }}</p>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Scheda video</h5>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
-                    <p class="card-text">Hardware</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Scheda video</h5>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
-                    <p class="card-text">Hardware</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Scheda video</h5>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
-                    <p class="card-text">Hardware</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Scheda video</h5>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
-                    <p class="card-text">Hardware</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Scheda video</h5>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
-                    <p class="card-text">Hardware</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Scheda video</h5>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
-                    <p class="card-text">Hardware</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Scheda video</h5>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/NVIDIA-GTX-1070-FoundersEdition-FL.jpg">
-                    <p class="card-text">Hardware</p>
-                </div>
-            </div>
-            <div *ngFor="let product of products">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ product.name }}</h5>
-                        <img [src]="'data:image/png;base64,'+product.imageBase64" class="card-img-top" alt="...">
-                        <p class="card-text">{{ product.category }}</p>
-                    </div>
-                </div>
-            </div>
+        </div>
+        <div *ngIf="products.length == 0" class="no-products">
+            <h1>Nessun prodotto</h1>
         </div>
     </div>
 </div>

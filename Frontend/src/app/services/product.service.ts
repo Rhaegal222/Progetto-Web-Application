@@ -11,7 +11,4 @@ export class ProductService {
   getProducts(){
     this.http.get<Product[]>("http://localhost:8080/api/products");
   }
-
-
-
 }
