@@ -19,6 +19,7 @@ public class RegistrationService {
         String password = registrationRequest.getPassword();
         String email = registrationRequest.getEmail();
 
+
         if(!DatabaseHandler.getInstance().getUserDao().checkUsername(username)) { //controlla che non ci sia uno username uguale
             if (!(RegexHandler.getInstance().checkOnlyChar(name) && RegexHandler.getInstance().checkOnlyChar(surname))) {
                 return ResponseEntity.status(401).body("{\"message\": \"Name and surname must contain only letters\"}");
@@ -53,8 +54,6 @@ public class RegistrationService {
                             } catch (InterruptedException | ExecutionException e) {
                                 return ResponseEntity.status(500).body("{\"message\": \"Internal Server Error\"}");
                             }
-
-
                         }
                     }
                 }

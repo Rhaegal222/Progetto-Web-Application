@@ -10,6 +10,5 @@ public class InsertItemRequest {
     private String type;
     private String description;
     private String location;
-    private String category;
     private String image;
 }

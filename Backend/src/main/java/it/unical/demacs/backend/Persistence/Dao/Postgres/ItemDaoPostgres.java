@@ -31,13 +31,11 @@ public class ItemDaoPostgres implements ItemDao{
                 ResultSet rs = st.executeQuery()) {
             while (rs.next()) {
                 Item item = new Item();
-                item.setIdItem(rs.getInt(1));
-                item.setName(rs.getString(2));
-                item.setType(rs.getString(3));
-                item.setDescription(rs.getString(4));
-                item.setLocation(rs.getString(5));
-                item.setCategory(rs.getString(6));
-                item.setImage(rs.getString(7));
+                item.setName(rs.getString(1));
+                item.setType(rs.getString(2));
+                item.setDescription(rs.getString(3));
+                item.setLocation(rs.getString(4));
+                item.setImage(rs.getString(5));
                 itemsList.add(item);
             }
         } catch (SQLException e) {
@@ -80,7 +78,7 @@ public class ItemDaoPostgres implements ItemDao{
     @Override
     @Async
     public CompletableFuture<Boolean> insertItem(Item Item) {
-        String query = "INSERT INTO items (name, type, description, location, category, image_base64) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO items (name, type, description, location, image_base64) VALUES (?, ?, ?, ?, ?, ?)";
         try (
                 PreparedStatement st = this.con.prepareStatement(query)) {
             settingItem(Item, st);
@@ -94,7 +92,7 @@ public class ItemDaoPostgres implements ItemDao{
     @Override
     @Async
     public CompletableFuture<Boolean> updateItem(Item Item) {
-        String query = "UPDATE items SET name = ?, type = ?, description = ?, location = ?, category = ?, image = ? WHERE id_item = ?";
+        String query = "UPDATE items SET name = ?, type = ?, description = ?, location = ?, image_base64 = ? WHERE id_item = ?";
         try (
                 PreparedStatement st = this.con.prepareStatement(query)) {
             settingItem(Item, st);
@@ -126,8 +124,7 @@ public class ItemDaoPostgres implements ItemDao{
                 item.setType(rs.getString(3));
                 item.setDescription(rs.getString(4));
                 item.setLocation(rs.getString(5));
-                item.setCategory(rs.getString(6));
-                item.setImage(rs.getString(7));
+                item.setImage(rs.getString(6));
             }
         }
     }
@@ -136,7 +133,6 @@ public class ItemDaoPostgres implements ItemDao{
         st.setString(2, Item.getType());
         st.setString(3, Item.getDescription());
         st.setString(4, Item.getLocation());
-        st.setString(5, Item.getCategory());
-        st.setString(6, Item.getImage());
+        st.setString(5, Item.getImage());
     }
 }

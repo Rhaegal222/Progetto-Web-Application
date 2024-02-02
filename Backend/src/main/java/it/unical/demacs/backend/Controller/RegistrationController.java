@@ -16,7 +16,7 @@ public class RegistrationController {
     //Arrivano le richieste HTTP
     private final RegistrationService registrationService;
 
-    @PostMapping("/api/register")
+    @PostMapping("/api/registration")
     public ResponseEntity<?> doRegistration(@RequestBody RegistrationRequest registrationRequest){
         return registrationService.doRegistration(registrationRequest);
     }

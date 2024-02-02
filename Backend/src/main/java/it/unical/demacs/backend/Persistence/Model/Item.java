@@ -11,18 +11,16 @@ public class Item {
     private String type;
     private String description;
     private String location;
-    private String category;
     private String image;
 
     public Item() {}
 
 
-    public Item(String name, String type, String description, String location, String category, String image) {
+    public Item(String name, String type, String description, String location, String image) {
         this.name = name;
         this.type = type;
         this.description = description;
         this.location = location;
-        this.category = category;
         this.image = image;
     }
 

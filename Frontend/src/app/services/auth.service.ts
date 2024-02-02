@@ -31,7 +31,7 @@ constructor(private http:HttpClient, private router:Router) { }
 
   register(name:string, surname:string, username:string, password:string, email:string){
     var user:User = {"name": name, "surname": surname, "username": username, "password": password, "email": email};
-    this.http.post("http://localhost:8080/api/register", user, {withCredentials: true}).subscribe({
+    this.http.post("http://localhost:8080/api/registration", user, {withCredentials: true}).subscribe({
       next: (response) => {
         this.router.navigate(["/login"]);
         console.log(response);

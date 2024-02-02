@@ -148,7 +148,7 @@ public class UserDaoPostgres implements UserDao {
     @Override
     @Async
     public CompletableFuture<Boolean> insertUser(User user) {
-        String query =  "INSERT INTO users (username, password, email, name, surname) VALUES (?, ?, ?, ?, ?)";
+        String query =  "INSERT INTO users (username, password, email, name, surname, role) VALUES (?, ?, ?, ?, ?, 'U')";
         try {
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setString(1, user.getUsername());

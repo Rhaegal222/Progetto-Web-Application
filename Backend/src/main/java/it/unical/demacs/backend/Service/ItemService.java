@@ -22,7 +22,6 @@ public class ItemService {
         String type = insertItemRequest.getType();
         String description = insertItemRequest.getDescription();
         String location = insertItemRequest.getLocation();
-        String category = insertItemRequest.getCategory();
         String image = insertItemRequest.getImage();
 
         try {
@@ -42,7 +41,6 @@ public class ItemService {
             newItem.setType(type);
             newItem.setDescription(description);
             newItem.setLocation(location);
-            newItem.setCategory(category);
             newItem.setImage(image);
 
             CompletableFuture<Boolean> insertResult = DatabaseHandler.getInstance().getItemDao().insertItem(newItem);
