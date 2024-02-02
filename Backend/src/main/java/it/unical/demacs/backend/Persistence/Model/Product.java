@@ -5,8 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Item {
-    private Integer idItem;
+public class Product {
+    private Integer idProduct;
     private String name;
     private String type;
     private String description;
@@ -14,10 +14,10 @@ public class Item {
     private String category;
     private String image;
 
-    public Item() {}
+    public Product() {}
 
 
-    public Item(String name, String type, String description, String location, String category, String image) {
+    public Product(String name, String type, String description, String location, String category, String image) {
         this.name = name;
         this.type = type;
         this.description = description;

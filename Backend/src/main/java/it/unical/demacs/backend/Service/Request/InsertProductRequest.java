@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class InsertItemRequest {
+public class InsertProductRequest {
     private String name;
     private String type;
     private String description;
