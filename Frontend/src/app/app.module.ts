@@ -36,6 +36,7 @@ import { MenuStorekeeperComponent } from './common-components/sidebar/menus/menu
 import { MenuAuthComponent } from './common-components/sidebar/menus/menu-auth/menu-auth.component';
 import { RequestsForwardedComponent } from './employee-components/requests-forwarded/requests-forwarded.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AddProductComponent } from './storekeeper-components/product-management/add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MenuEmployeeComponent,
     MenuStorekeeperComponent,
     MenuAuthComponent,
-    RequestsForwardedComponent
+    RequestsForwardedComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,
