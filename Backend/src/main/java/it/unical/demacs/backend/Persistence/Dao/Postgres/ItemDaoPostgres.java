@@ -31,11 +31,11 @@ public class ItemDaoPostgres implements ItemDao{
                 ResultSet rs = st.executeQuery()) {
             while (rs.next()) {
                 Item item = new Item();
-                item.setName(rs.getString(1));
-                item.setType(rs.getString(2));
-                item.setDescription(rs.getString(3));
-                item.setLocation(rs.getString(4));
-                item.setImage(rs.getString(5));
+                item.setName(rs.getString(2));
+                item.setType(rs.getString(3));
+                item.setDescription(rs.getString(4));
+                item.setLocation(rs.getString(5));
+                item.setImage(rs.getString(6));
                 itemsList.add(item);
             }
         } catch (SQLException e) {
@@ -78,7 +78,7 @@ public class ItemDaoPostgres implements ItemDao{
     @Override
     @Async
     public CompletableFuture<Boolean> insertItem(Item Item) {
-        String query = "INSERT INTO items (name, type, description, location, image_base64) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO items (name, type, description, location, image_base64) VALUES (?, ?, ?, ?, ?)";
         try (
                 PreparedStatement st = this.con.prepareStatement(query)) {
             settingItem(Item, st);
@@ -96,7 +96,7 @@ public class ItemDaoPostgres implements ItemDao{
         try (
                 PreparedStatement st = this.con.prepareStatement(query)) {
             settingItem(Item, st);
-            st.setInt(7, Item.getIdItem());
+            st.setInt(6, Item.getIdItem());
             st.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

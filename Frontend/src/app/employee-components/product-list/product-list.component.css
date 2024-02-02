@@ -71,7 +71,7 @@
     background-color: black;
     border: 1px solid black;
     padding: 0.25rem;
-    height: 150px;
+    height: 250px;
     width: 200px;
 
     display: flex;
@@ -98,13 +98,17 @@
     align-items: center;
 }
 .card-title {
-    font-size: 1rem;
-    margin: 0.25rem;    
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
 }
 .card-text:last-child {
-    margin: 0.25rem;
+    font-size: 0.8rem;
+    text-align: left;
+    word-wrap: break-word;
 }
-.card img {
+.card-img-top {
     width: 50%;
     height: 50%;
 }

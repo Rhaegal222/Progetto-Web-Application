@@ -20,9 +20,18 @@
         <div class="grid">
             <div *ngFor="let product of products" class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <img [src]="'data:image/png;base64,'+product.imageBase64" class="card-img-top" alt="...">
-                    <p class="card-text">{{ product.category }}</p>
+                    <!--Se l'immagine non é presente, viene visualizzata un'immagine di default-->
+                    <div *ngIf="!product.imageBase64" class="card-img-top" alt="...">
+                        Image not found
+                    </div>
+                    <div *ngIf="product.imageBase64" class="card-img-top" alt="...">
+                        <!--Converte l'immagine da base64-->
+                        <img [src]="'data:image/png;base64,' + product.imageBase64" alt="...">
+                    </div>
+                    <div class="card-footer">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description }}</p>
+                    </div>
                 </div>
             </div>
         </div>
