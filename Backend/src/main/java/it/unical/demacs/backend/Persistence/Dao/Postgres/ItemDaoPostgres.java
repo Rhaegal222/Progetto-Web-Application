@@ -20,21 +20,26 @@ public class ItemDaoPostgres implements ItemDao{
     @Override
     @Async
     public CompletableFuture<ArrayList<Item>> findAll() {
-        ArrayList<Item> itemsList = new ArrayList<>();
+        ArrayList<Item> items = new ArrayList<>();
         String query = "SELECT * FROM items";
         try (
                 PreparedStatement st = this.con.prepareStatement(query);
                 ResultSet rs = st.executeQuery()) {
             while (rs.next()) {
                 Item item = new Item();
-                executeQuery(item, st);
-                itemsList.add(item);
+                item.setIdItem(rs.getInt("id_item"));
+                item.setName(rs.getString("name"));
+                item.setType(rs.getString("type"));
+                item.setDescription(rs.getString("description"));
+                item.setLocation(rs.getString("location"));
+                item.setImage(rs.getString("image_base64"));
+                items.add(item);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return CompletableFuture.completedFuture(items);
 
-        return CompletableFuture.completedFuture(itemsList);
     }
     @Override
     @Async
@@ -44,12 +49,21 @@ public class ItemDaoPostgres implements ItemDao{
         try (
                 PreparedStatement st = this.con.prepareStatement(query)) {
             st.setLong(1, id);
-            executeQuery(item, st);
+            try (ResultSet rs = st.executeQuery()) {
+                if (rs.next()) {
+                    item.setIdItem(rs.getInt("id_item"));
+                    item.setName(rs.getString("name"));
+                    item.setType(rs.getString("type"));
+                    item.setDescription(rs.getString("description"));
+                    item.setLocation(rs.getString("location"));
+                    item.setImage(rs.getString("image_base64"));
+                }
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         return CompletableFuture.completedFuture(item);
+
     }
 
     @Override
@@ -60,11 +74,19 @@ public class ItemDaoPostgres implements ItemDao{
         try (
                 PreparedStatement st = this.con.prepareStatement(query)) {
             st.setString(1, name);
-            executeQuery(item, st);
+            try (ResultSet rs = st.executeQuery()) {
+                if (rs.next()) {
+                    item.setIdItem(rs.getInt("id_item"));
+                    item.setName(rs.getString("name"));
+                    item.setType(rs.getString("type"));
+                    item.setDescription(rs.getString("description"));
+                    item.setLocation(rs.getString("location"));
+                    item.setImage(rs.getString("image_base64"));
+                }
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         return CompletableFuture.completedFuture(item);
     }
     @Override
@@ -108,18 +130,6 @@ public class ItemDaoPostgres implements ItemDao{
         return CompletableFuture.completedFuture(true);
     }
 
-    private void executeQuery(Item item, PreparedStatement st) throws SQLException {
-        try (ResultSet rs = st.executeQuery()) {
-            if (rs.next()) {
-                item.setIdItem(rs.getInt(1));
-                item.setName(rs.getString(2));
-                item.setType(rs.getString(3));
-                item.setDescription(rs.getString(4));
-                item.setLocation(rs.getString(5));
-                item.setImage(rs.getString(6));
-            }
-        }
-    }
     private void settingItem(Item Item, PreparedStatement st) throws SQLException {
         st.setString(1, Item.getName());
         st.setString(2, Item.getType());
