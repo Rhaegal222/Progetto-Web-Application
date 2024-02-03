@@ -43,7 +43,7 @@ export class LoginComponent {
       next: (response) => {
       this.authtoken = response;
         if(this.authtoken.accessToken != ''){
-          console.log('Login successful:', this.authtoken.accessToken);
+          console.log('Login successful:', this.authtoken.accessToken, response);
         } else {
           console.log('Login failed:', response);
         }

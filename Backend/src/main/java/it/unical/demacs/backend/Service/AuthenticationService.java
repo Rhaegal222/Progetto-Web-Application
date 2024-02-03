@@ -37,7 +37,7 @@ public class AuthenticationService{
             }
 
         } else {
-            return ResponseEntity.ok().body("{\"message\": \"User not found\"}");
+            return ResponseEntity.status(401).body("{\"message\": \"User not found\"}");
         }
 
 
