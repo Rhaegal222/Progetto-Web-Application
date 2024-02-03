@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 public class AuthenticationService{
 
     public ResponseEntity<?> loginWithCredentials(LoginRequest loginRequest) {
-        String username = loginRequest.getUsername();
+        String email = loginRequest.getEmail();
         String password = loginRequest.getPassword();
 
-        User user = DatabaseHandler.getInstance().getUserDao().findByUsername(username).join();
+        User user = DatabaseHandler.getInstance().getUserDao().findByEmail(email).join();
         if (user != null) {
             if (BCrypt.checkpw(password, user.getPassword())) {
                 if(user.getBanned()){

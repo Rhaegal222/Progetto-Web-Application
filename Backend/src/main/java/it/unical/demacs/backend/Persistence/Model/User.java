@@ -7,7 +7,6 @@ import lombok.*;
 @EqualsAndHashCode
 public class User {
     private String idUser;
-    private String username;
     private String email;
     private String password;
     private String name;
@@ -16,8 +15,7 @@ public class User {
     private Boolean banned;
 
 
-    public User(String username, String password, String email, String name, String surname, boolean b) {
-        this.username = username;
+    public User(String password, String email, String name, String surname, boolean b) {
         this.password = password;
         this.email = email;
         this.name = name;

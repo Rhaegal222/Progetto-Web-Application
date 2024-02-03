@@ -17,7 +17,6 @@ public class UserDaoPostgres implements UserDao {
 
     private void setting(ResultSet rs, User user) throws SQLException {
         user.setIdUser(rs.getString("iduser"));
-        user.setUsername(rs.getString("username"));
         user.setEmail(rs.getString("email"));
         user.setPassword(rs.getString("password"));
         user.setName(rs.getString("name"));
@@ -53,15 +52,14 @@ public class UserDaoPostgres implements UserDao {
 
             User u = null;
             if (res.next()) {
-                String username = res.getString("username");
                 String email = res.getString("email");
                 String password = res.getString("password");
                 String name = res.getString("name");
                 String surname = res.getString("surname");
                 String role = res.getString("role");
-                Boolean banned = res.getBoolean("banned");
+                boolean banned = res.getBoolean("banned");
 
-                u = new User(username, email, password, name, surname, banned);
+                u = new User(password, email, name, surname, banned);
                 u.setIdUser(idUser);
                 u.setRole(role);
             }
@@ -85,14 +83,13 @@ public class UserDaoPostgres implements UserDao {
             User u = null;
             if (res.next()) {
                 String idUser = res.getString("iduser");
-                String username = res.getString("username");
                 String password = res.getString("password");
                 String name = res.getString("name");
                 String surname = res.getString("surname");
                 String role = res.getString("role");
-                Boolean banned = res.getBoolean("banned");
+                boolean banned = res.getBoolean("banned");
 
-                u = new User(username, email, password, name, surname, banned);
+                u = new User(password, email, name, surname, banned);
                 u.setIdUser(idUser);
                 u.setRole(role);
             }
@@ -105,54 +102,7 @@ public class UserDaoPostgres implements UserDao {
             throw new RuntimeException(e);
         }
     }
-    @Override
-    @Async
-    public CompletableFuture<User> findByUsername(String username) {
-        try {
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM users WHERE username = ?");
-            stmt.setString(1, username);
-            ResultSet res = stmt.executeQuery();
 
-            User u = null;
-            if (res.next()) {
-                String idUser = res.getString("iduser");
-                String password = res.getString("password");
-                String email = res.getString("email");
-                String name = res.getString("name");
-                String surname = res.getString("surname");
-                String role = res.getString("role");
-                Boolean banned = res.getBoolean("banned");
-
-                u = new User(username, password, email, name, surname, banned);
-                u.setIdUser(idUser);
-                u.setRole(role);
-            }
-
-            res.close();
-            stmt.close();
-            return CompletableFuture.completedFuture(u);
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    @Override
-    public boolean checkUsername(String username){
-        try{
-            boolean output = false;
-            PreparedStatement stmt = con.prepareStatement("SELECT username FROM users WHERE username = ?");
-            stmt.setString(1, username);
-            ResultSet res = stmt.executeQuery();
-
-            if(res.next()) output = true;
-
-            res.close();
-            stmt.close();
-            return output;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
     @Override
     public boolean checkEmail(String email) {
         try{
@@ -187,7 +137,6 @@ public class UserDaoPostgres implements UserDao {
             throw new RuntimeException(e);
         }
     }
-
     @Override
     public String autoIncrement() {
         String query = "SELECT COUNT(*) FROM users";
@@ -208,15 +157,14 @@ public class UserDaoPostgres implements UserDao {
     @Override
     @Async
     public CompletableFuture<Boolean> insertUser(User user) {
-        String query = "INSERT INTO users (username, email, password, name, surname, banned) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO users (email, password, name, surname, banned) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement st = this.con.prepareStatement(query);
-            st.setString(1, user.getUsername());
-            st.setString(2, user.getEmail());
-            st.setString(3, user.getPassword());
-            st.setString(4, user.getName());
-            st.setString(5, user.getSurname());
-            st.setBoolean(6, user.getBanned());
+            st.setString(1, user.getEmail());
+            st.setString(2, user.getPassword());
+            st.setString(3, user.getName());
+            st.setString(4, user.getSurname());
+            st.setBoolean(5, user.getBanned());
 
             int rowsAffected = st.executeUpdate();
             st.close();
@@ -246,7 +194,8 @@ public class UserDaoPostgres implements UserDao {
     }
 
     @Override
-    public CompletableFuture<Boolean> banningUser(String email) {
+    @Async
+    public void banningUser(String email) {
         String query = "UPDATE users SET banned = ? WHERE email = ?";
         try {
             PreparedStatement st = this.con.prepareStatement(query);
@@ -256,11 +205,12 @@ public class UserDaoPostgres implements UserDao {
             int rowsAffected = st.executeUpdate();
             st.close();
 
-            return CompletableFuture.completedFuture(rowsAffected > 0);
+            CompletableFuture.completedFuture(rowsAffected > 0);
+            return;
         } catch (SQLException e) {
             e.printStackTrace();  // In una situazione di produzione, gestire l'eccezione in modo appropriato
         }
-        return CompletableFuture.completedFuture(false);
+        CompletableFuture.completedFuture(false);
     }
 
 

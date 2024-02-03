@@ -1,12 +1,9 @@
 package it.unical.demacs.backend.Persistence.Dao.Postgres;
 
 import it.unical.demacs.backend.Persistence.Dao.ItemDao;
-import it.unical.demacs.backend.Persistence.DatabaseHandler;
 import it.unical.demacs.backend.Persistence.Model.Item;
-import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 
-import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +17,6 @@ public class ItemDaoPostgres implements ItemDao{
         this.con = con;
     }
 
-
     @Override
     @Async
     public CompletableFuture<ArrayList<Item>> findAll() {
@@ -31,12 +27,7 @@ public class ItemDaoPostgres implements ItemDao{
                 ResultSet rs = st.executeQuery()) {
             while (rs.next()) {
                 Item item = new Item();
-                item.setIdItem(rs.getInt(1));
-                item.setName(rs.getString(2));
-                item.setType(rs.getString(3));
-                item.setDescription(rs.getString(4));
-                item.setLocation(rs.getString(5));
-                item.setImage(rs.getString(6));
+                executeQuery(item, st);
                 itemsList.add(item);
             }
         } catch (SQLException e) {

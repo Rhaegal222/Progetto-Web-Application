@@ -26,7 +26,6 @@ public class RegisterServlet extends HttpServlet {
                 (
                         request.getParameter("name"),
                         request.getParameter("surname"),
-                        request.getParameter("username"),
                         request.getParameter("password"),
                         request.getParameter("email"),
                         false
