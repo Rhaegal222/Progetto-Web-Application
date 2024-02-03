@@ -7,7 +7,6 @@ import { Product } from '../../model/product';
   templateUrl: './product-list.component.html',
   styleUrls: [
     './product-list.component.css',
-    '../../styles/container.css',
   ]
 })
 export class ProductListComponent {
@@ -16,7 +15,6 @@ export class ProductListComponent {
 
   products: Product[] = [];
 
-  
   ngOnInit(): void {
     this.getProducts();
   }

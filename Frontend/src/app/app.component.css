@@ -1,5 +1,9 @@
 .full-width {
-  margin-left: 0px;
+  margin: 0; /* top, right, bottom, left */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .sidebar-open{

@@ -1,33 +1,17 @@
-<header>
-<!---Barra di ricerca--->
-    <div class="search-bar">
-        <!--Menu a tendiba categorie-->
-        <div class="dropdown">
-            <button class="dropbtn">Categorie</button>
-            <div class="dropdown-content">
-                <a href="#">Hardware</a>
-                <a href="#">Software</a>
-                <a href="#">Periferiche</a>
-                <a href="#">Altro</a>
-            </div>
-        </div>
-        <input type="text" class="search-bar" placeholder="Cerca...">
-        <button class="search-button">
-            <span class="material-icons">search</span>
-        </button>
-    </div>
-</header>
+<div style="position: sticky;">
+    <app-search-bar></app-search-bar>
+</div>
 <div class="container">
     <div class="grid">
         <div *ngFor="let product of products" class="card">
             <div class="card-body">
                 <!--Se l'immagine non é presente, viene visualizzata un'immagine di default-->
-                <div *ngIf="!product.imageBase64" class="card-img-top" alt="...">
+                <div *ngIf="!product.image" class="card-img-top" alt="...">
                     Image not found
                 </div>
-                <div *ngIf="product.imageBase64" class="card-img-top" alt="...">
+                <div *ngIf="product.image" class="card-img-top" alt="...">
                     <!--Converte l'immagine da base64-->
-                    <img [src]="'data:image/png;base64,' + product.imageBase64" alt="...">
+                    <img [src]="product.image" alt="...">
                 </div>
                 <div class="card-footer">
                     <h5 class="card-title">{{ product.name }}</h5>

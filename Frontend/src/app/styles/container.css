@@ -5,5 +5,5 @@
     justify-content: center; /* Allinea gli elementi al centro */
     align-items: center; /* Allinea gli elementi al centro */
     max-width: 100%; /* Larghezza massima */
-    height: 100vh;    
+    height: 100vh; /* Altezza massima */
 }

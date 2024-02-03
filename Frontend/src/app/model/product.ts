@@ -1,9 +1,9 @@
 export interface Product{
-    id?:number;
+    id:string;
     name:string;
     type:string;
     description:string;
     location:string;
-    imageBase64?:string;
+    image:string;
     category:string;
 }
