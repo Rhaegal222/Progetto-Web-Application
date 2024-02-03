@@ -16,7 +16,7 @@ public class UserDaoPostgres implements UserDao {
     }
 
     private void setting(ResultSet rs, User user) throws SQLException {
-        user.setIdUser(rs.getString("id_user"));
+        user.setIdUser(rs.getString("iduser"));
         user.setUsername(rs.getString("username"));
         user.setEmail(rs.getString("email"));
         user.setPassword(rs.getString("password"));
@@ -47,7 +47,7 @@ public class UserDaoPostgres implements UserDao {
     @Async
     public CompletableFuture<User> findByPrimaryKey(String idUser) {
         try {
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM users WHERE id_user = ?");
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM users WHERE iduser = ?");
             stmt.setString(1, idUser);
             ResultSet res = stmt.executeQuery();
 
@@ -84,7 +84,7 @@ public class UserDaoPostgres implements UserDao {
 
             User u = null;
             if (res.next()) {
-                String idUser = res.getString("id_user");
+                String idUser = res.getString("iduser");
                 String username = res.getString("username");
                 String password = res.getString("password");
                 String name = res.getString("name");
@@ -246,10 +246,21 @@ public class UserDaoPostgres implements UserDao {
     }
 
     @Override
-    @Async
-    public CompletableFuture<Boolean> updateUser(String username) {
+    public CompletableFuture<Boolean> banningUser(String email) {
+        String query = "UPDATE users SET banned = ? WHERE email = ?";
+        try {
+            PreparedStatement st = this.con.prepareStatement(query);
+            st.setBoolean(1, true);
+            st.setString(2, email);
 
-        return null;
+            int rowsAffected = st.executeUpdate();
+            st.close();
+
+            return CompletableFuture.completedFuture(rowsAffected > 0);
+        } catch (SQLException e) {
+            e.printStackTrace();  // In una situazione di produzione, gestire l'eccezione in modo appropriato
+        }
+        return CompletableFuture.completedFuture(false);
     }
 
 

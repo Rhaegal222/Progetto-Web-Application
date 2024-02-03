@@ -11,7 +11,7 @@ public interface UserDao {
     public CompletableFuture<User> findByUsername(String username); //trova un utente tramite username
     public CompletableFuture<Boolean> insertUser(User user);//inserisce un nuovo utente
     public CompletableFuture<Boolean> deleteUser(String username); //elimina un utente
-    public CompletableFuture<Boolean> updateUser(String username);
+    public CompletableFuture<Boolean> banningUser(String email); //banna un utente
     public boolean checkUsername(String username);
     public boolean checkEmail(String email);
     public String selectPassword(String username);

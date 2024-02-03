@@ -18,7 +18,12 @@ public class AuthenticationService{
         User user = DatabaseHandler.getInstance().getUserDao().findByUsername(username).join();
         if (user != null) {
             if (BCrypt.checkpw(password, user.getPassword())) {
-                return ResponseEntity.ok().body("{\"message\": \"Login successful\"}");
+                if(user.getBanned()){
+                    return ResponseEntity.status(401).body("{\"message\": \"User is banned\"}");
+                }
+                else{
+                    return ResponseEntity.ok().body("{\"message\": \"Login successful\"}");
+                }
             } else {
                 return ResponseEntity.badRequest().body("{\"message\": \"Wrong username/password\"}");
             }
