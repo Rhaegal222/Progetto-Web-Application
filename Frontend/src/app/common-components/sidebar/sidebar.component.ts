@@ -176,14 +176,12 @@ export class SidebarComponent implements OnInit {
       if (sidebar.classList.contains('menu-open')) {
         this.slideOutSidebar(sidebar, arrow);
       } else {
-        console.log('slideInSidebar');
         this.slideInSidebar(sidebar, arrow);
       }
     }
   }
 
   handleInitialBehavior(){
-    console.log('handleInitialBehavior');
     if ( typeof window !== 'undefined' ) {
       sidebar = document.getElementById('menu');
       arrow = document.getElementById('arrow');

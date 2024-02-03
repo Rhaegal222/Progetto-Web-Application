@@ -1,17 +1,24 @@
-.content{
-    height: 100%;
-    width: clamp(300px, calc(100vw - 40px), 450px);
+header {
+    /* é sempre fissa non si muove */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: absolute;
     padding: 0.5rem;
+    background-color: black;
+    color: white;
+    width: 100%;
 }
 .search-bar {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 0.5rem;
+    margin: 0.5rem, 0;
     width: clamp(150px, calc(100% - 20px), 500px);
 }
 .search-bar input {
@@ -58,11 +65,10 @@
 .dropdown:hover .dropdown-content {
     display: block;
 }
-
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(10rem, 100%), 1fr));
-    grid-gap: calc(1rem + 3vw);
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: clamp(2.5px, 5%, 10px);
     margin: 0;
     padding: 0;
     width: clamp(300px, calc(100vw - 100px), calc(100vw - 100px));
@@ -70,10 +76,8 @@
 .card {
     background-color: black;
     border: 1px solid black;
-    padding: 0.25rem;
     height: 250px;
     width: 200px;
-
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -81,9 +85,6 @@
     text-align: center;
     color: white;
     font-size: 10px;
-    margin: 10px;
-    padding: 0%;
-
     cursor: pointer;
 }
 .card-body {
@@ -96,19 +97,37 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    padding: 0;
 }
 .card-title {
     font-size: 0.8rem;
     font-weight: bold;
     margin: 0;
     text-align: center;
+    /* tronca il testo se è troppo lungo  di 1 rigo*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0.5rem;
+    padding-bottom: 0;
+    
 }
 .card-text:last-child {
+    padding: 0.5rem;
+    padding-top: 0;
     font-size: 0.8rem;
     text-align: left;
-    word-wrap: break-word;
+    /* tronca il testo se è troppo lungo in verticale*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .card-img-top {
-    width: 50%;
-    height: 50%;
+    width: 100%;
+    height: 70%;
+}
+.card-footer {
+    width: 100%;
+    height: 30%;
+    padding: 0;
 }
