@@ -36,7 +36,7 @@ export class LoginComponent {
   }
 
   test(){
-    var email = 'john_doe@gmail.com';
+    var email = 'john_doe@mail.com';
     var password = 'P@ssw0rd1';
     
     this.authService.login(email, password).subscribe({
@@ -44,12 +44,14 @@ export class LoginComponent {
       this.authtoken = response;
         if(this.authtoken.accessToken != ''){
           console.log('Login successful:', this.authtoken.accessToken, response);
-        } else {
-          console.log('Login failed:', response);
         }
       },
       error: (error) => {
-        console.error(error)
+        if (error.status == 401) {
+          console.error('Login failed:', error.error.message);
+        } else {
+          console.error('An error occurred:', error.error.message);
+        }
       }
     });  
   }
