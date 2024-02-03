@@ -32,25 +32,30 @@ public class RegistrationService {
                     return ResponseEntity.badRequest().body("{\"message\": \"Invalid email\"}");
                 }
                 else{
-                    if(!RegexHandler.getInstance().checkPassword(password)){
-                        return ResponseEntity.badRequest().body("{\"message\": \"Password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character\"}");
+                    if(DatabaseHandler.getInstance().getUserDao().checkEmail(email)){
+                        return ResponseEntity.badRequest().body("{\"message\": \"Email already in use\"}");
                     }
                     else{
-                        String encryptedPass = RegexHandler.getInstance().encryptPassword(password);
-                        User user = new User(encryptedPass, email, name, surname, false);
-                        CompletableFuture<Boolean> insertResult = DatabaseHandler.getInstance().getUserDao().insertUser(user);
+                        if(!RegexHandler.getInstance().checkPassword(password)){
+                            return ResponseEntity.badRequest().body("{\"message\": \"Password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character\"}");
+                        }
+                        else{
+                            String encryptedPass = RegexHandler.getInstance().encryptPassword(password);
+                            User user = new User(encryptedPass, email, name, surname, false);
+                            CompletableFuture<Boolean> insertResult = DatabaseHandler.getInstance().getUserDao().insertUser(user);
 
-                        try {
-                            // Attendi il completamento dell'inserimento
-                            Boolean success = insertResult.get();
+                            try {
+                                // Attendi il completamento dell'inserimento
+                                Boolean success = insertResult.get();
 
-                            if (success) {
-                                return ResponseEntity.ok().body("{\"message\": \"You are registered\"}");
-                            } else {
-                                return ResponseEntity.status(401).body("{\"message\": \"Error during registration\"}");
+                                if (success) {
+                                    return ResponseEntity.ok().body("{\"message\": \"You are registered\"}");
+                                } else {
+                                    return ResponseEntity.status(401).body("{\"message\": \"Error during registration\"}");
+                                }
+                            } catch (InterruptedException | ExecutionException e) {
+                                return ResponseEntity.status(500).body("{\"message\": \"Internal Server Error\"}");
                             }
-                        } catch (InterruptedException | ExecutionException e) {
-                            return ResponseEntity.status(500).body("{\"message\": \"Internal Server Error\"}");
                         }
                     }
                 }

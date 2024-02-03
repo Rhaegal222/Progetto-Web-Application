@@ -179,18 +179,7 @@ public class UserDaoPostgres implements UserDao {
     @Override
     @Async
     public CompletableFuture<Boolean> deleteUser(String username) {
-        String query = "DELETE FROM users WHERE username = ?";
-        try {
-            PreparedStatement st = this.con.prepareStatement(query);
-            st.setString(1, username);
-            st.executeUpdate();
-            int rowsAffected = st.executeUpdate();
-            st.close();
-
-            return CompletableFuture.completedFuture(rowsAffected > 0);
-        } catch (SQLException ignored) {}
-
-        return CompletableFuture.completedFuture(false);
+        return null;
     }
 
     @Override
