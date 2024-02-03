@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from "@angular/forms";
 import { AuthService } from '../../services/auth.service';
+import { AuthToken } from '../../model/user';
 
 
 @Component({
@@ -16,7 +17,9 @@ export class LoginComponent {
   
   email = new FormControl();
   password = new FormControl();
-  token: string = '';
+
+  authtoken: AuthToken = {accessToken: ''};
+  
 
   passwordInputType: string = 'password';
   passwordVisible: boolean = false;
@@ -28,22 +31,42 @@ export class LoginComponent {
   
   constructor(private authService: AuthService) { }
 
+  ngOnInit(): void {
+    this.test();
+  }
+
+  test(){
+    var email = 'john_doe@gmail.com';
+    var password = 'P@ssw0rd1';
+    
+    this.authService.login(email, password).subscribe({
+      next: (response) => {
+      this.authtoken = response;
+        if(this.authtoken.accessToken != ''){
+          console.log('Login successful:', this.authtoken.accessToken);
+        } else {
+          console.log('Login failed:', response);
+        }
+      },
+      error: (error) => {
+        console.error(error)
+      }
+    });  
+  }
+
   login(){
     var email = this.email.value;
     var password = this.password.value;
 
-    if(this.authService.login(email, password).subscribe(
-      (response) => {
-        this.token = response.token;
-        if(this.token != null){
-          localStorage.setItem("token", this.token);
-        }       
+    this.authService.login(email, password).subscribe({
+      next: (response) => {
+      // Handle successful response
+      console.log('Login successful:', response);
+      this.authtoken = response;
       },
-      (error) => {
-        console.log("Error: " + error);
+      error: (error) => {
+        console.error(error)
       }
-    )){
-      console.log("Login successful");
-    }
+    });
   }
 }

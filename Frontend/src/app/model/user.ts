@@ -20,5 +20,5 @@ export interface User{
 }
 
 export interface AuthToken{
-    token:string;
+    accessToken:string;
 }

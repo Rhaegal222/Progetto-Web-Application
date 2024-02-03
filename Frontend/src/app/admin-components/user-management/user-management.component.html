@@ -16,8 +16,8 @@
         <td>{{ user.surname }}</td>
         <td>{{ user.role }}</td>
         <td>
-          <button class="btn btn-primary" (click)="promoteUser(user.idUser)">Edit</button> <!-- Aggiunto un bottone per modificare l'utente -->
-          <button class="btn btn-danger" (click)="promoteUser(user.idUser)">Delete</button> <!-- Aggiunto un bottone per eliminare l'utente -->
+          <button class="btn btn-primary" (click)="promoteUser(user.idUser)">Promuovi</button> <!-- Aggiunto un bottone per modificare l'utente -->
+          <button class="btn btn-danger" (click)="banUser(user.idUser)">Banna</button> <!-- Aggiunto un bottone per eliminare l'utente -->
         </td>
       </tr>
     </tbody>
