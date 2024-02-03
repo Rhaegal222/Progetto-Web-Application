@@ -27,7 +27,7 @@ export class ProductListComponent {
         this.products = data;
       },
       error: (error) => {
-        console.log('There was an error!', error);
+        console.error(error)
       }
     });
   }
