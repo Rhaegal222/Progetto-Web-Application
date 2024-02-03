@@ -10,8 +10,8 @@ export class AuthService {
 
 constructor(private http:HttpClient, private router:Router) { }
 
-  login(username: string, password: string){
-    var user:User = {"username": username, "password": password};
+  login(email: string, password: string){
+    var user:User = {"email": email, "password": password};
 
     this.http.post<AuthToken>("http://localhost:8080/api/login", user, {withCredentials: true}).subscribe({
       next: (response) => {
@@ -29,8 +29,8 @@ constructor(private http:HttpClient, private router:Router) { }
     this.router.navigate(["/login"]);
   }
 
-  register(name:string, surname:string, username:string, password:string, email:string){
-    var user:User = {"name": name, "surname": surname, "username": username, "password": password, "email": email};
+  register(name:string, surname:string, email:string, password:string){
+    var user:User = {"name": name, "surname": surname, "email": email, "password": password};
     this.http.post("http://localhost:8080/api/registration", user, {withCredentials: true}).subscribe({
       next: (response) => {
         this.router.navigate(["/login"]);

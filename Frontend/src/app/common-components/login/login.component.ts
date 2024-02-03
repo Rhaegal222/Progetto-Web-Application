@@ -14,7 +14,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent {
   
-  username = new FormControl();
+  email = new FormControl();
   password = new FormControl();
 
   passwordInputType: string = 'password';
@@ -28,9 +28,9 @@ export class LoginComponent {
   constructor(private authService: AuthService) { }
 
   login(){
-    var username = this.username.value;
+    var email = this.email.value;
     var password = this.password.value;
 
-    this.authService.login(username, password);
+    this.authService.login(email, password);
   }
 }

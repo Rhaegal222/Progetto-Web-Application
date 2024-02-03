@@ -31,10 +31,9 @@ export class RegistrationComponent {
     var name = this.firstName.value;
     var surname = this.lastName.value;
     var email = this.email.value;
-    var username = this.email.value;
     var password = this.password.value;
     
-    this.authService.register(name, surname, username, password, email);
+    this.authService.register(name, surname, password, email);
   }
 
 }

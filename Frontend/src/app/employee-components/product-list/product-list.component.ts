@@ -19,10 +19,18 @@ export class ProductListComponent {
     this.getProducts();
   }
 
+  isAnImage(image : string): boolean {
+    if(image == null || image == "" || !image.startsWith('data:image/')){
+      return false;
+    }
+    return true;
+  }
+
   getProducts(){
     this.productService.getProducts().subscribe({
       next: (data) => {
         this.products = data;
+        console.log(data);
       },
       error: (error) => {
         console.error(error)
