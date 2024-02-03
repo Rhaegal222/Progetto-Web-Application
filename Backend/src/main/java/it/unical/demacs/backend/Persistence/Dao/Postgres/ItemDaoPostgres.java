@@ -31,6 +31,7 @@ public class ItemDaoPostgres implements ItemDao{
                 ResultSet rs = st.executeQuery()) {
             while (rs.next()) {
                 Item item = new Item();
+                item.setIdItem(rs.getInt(1));
                 item.setName(rs.getString(2));
                 item.setType(rs.getString(3));
                 item.setDescription(rs.getString(4));
