@@ -16,20 +16,17 @@ public class AuthenticationService{
         String password = loginRequest.getPassword();
 
         User user = DatabaseHandler.getInstance().getUserDao().findByUsername(username).join();
-        if(user == null){
-            if(!BCrypt.checkpw(password, user.getPassword())){
+        if (user != null) {
+            if (BCrypt.checkpw(password, user.getPassword())) {
+                return ResponseEntity.ok().body("{\"message\": \"Login successful\"}");
+            } else {
                 return ResponseEntity.badRequest().body("{\"message\": \"Wrong username/password\"}");
             }
-            else{
-                return ResponseEntity.ok().body("{\"message\": \"Login successful\"}");
-            }
 
+        } else {
+            return ResponseEntity.ok().body("{\"message\": \"User not found\"}");
         }
-        else{
-            return ResponseEntity.ok().body("{\"message\": \"Login successful\"}");
-        }
+
+
     }
-
-
-
 }

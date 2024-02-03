@@ -115,7 +115,7 @@ public class UserDaoPostgres implements UserDao {
 
             User u = null;
             if (res.next()) {
-                String idUser = res.getString("id_user");
+                String idUser = res.getString("iduser");
                 String password = res.getString("password");
                 String email = res.getString("email");
                 String name = res.getString("name");
@@ -123,8 +123,7 @@ public class UserDaoPostgres implements UserDao {
                 String role = res.getString("role");
                 Boolean banned = res.getBoolean("banned");
 
-
-                u = new User(username, email, password, name, surname, banned);
+                u = new User(username, password, email, name, surname, banned);
                 u.setIdUser(idUser);
                 u.setRole(role);
             }

@@ -41,6 +41,6 @@ public class RegexHandler {
     }
 
     public String encryptPassword(String password){
-        return BCrypt.hashpw(password, BCrypt.gensalt(12));
+        return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 }

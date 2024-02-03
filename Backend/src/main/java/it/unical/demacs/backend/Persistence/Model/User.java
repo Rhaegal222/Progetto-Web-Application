@@ -16,9 +16,9 @@ public class User {
     private Boolean banned;
 
 
-    public User(String username, String encryptedPass, String email, String name, String surname, boolean b) {
+    public User(String username, String password, String email, String name, String surname, boolean b) {
         this.username = username;
-        this.password = encryptedPass;
+        this.password = password;
         this.email = email;
         this.name = name;
         this.surname = surname;
