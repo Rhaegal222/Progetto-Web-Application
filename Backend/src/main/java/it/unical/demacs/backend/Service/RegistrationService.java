@@ -13,14 +13,14 @@ import java.util.concurrent.ExecutionException;
 @Service
 public class RegistrationService {
     public ResponseEntity<?> doRegistration(RegistrationRequest registrationRequest) {
+        String username = registrationRequest.getUsername();
         String name = registrationRequest.getName();
         String surname = registrationRequest.getSurname();
-        String username = registrationRequest.getUsername();
         String password = registrationRequest.getPassword();
         String email = registrationRequest.getEmail();
 
 
-        if(!DatabaseHandler.getInstance().getUserDao().checkUsername(username)) { //controlla che non ci sia uno username uguale
+        if(!DatabaseHandler.getInstance().getUserDao().checkUsername(username)) {
             if (!(RegexHandler.getInstance().checkOnlyChar(name) && RegexHandler.getInstance().checkOnlyChar(surname))) {
                 return ResponseEntity.status(401).body("{\"message\": \"Name and surname must contain only letters\"}");
             }
@@ -38,8 +38,7 @@ public class RegistrationService {
                         }
                         else{
                             String encryptedPass = RegexHandler.getInstance().encryptPassword(password);
-                            User user = new User(name, surname, email, username, encryptedPass);
-                            // Supponendo che insertUser restituisca un CompletableFuture<Boolean>
+                            User user = new User(username, encryptedPass, email, name, surname, false);
                             CompletableFuture<Boolean> insertResult = DatabaseHandler.getInstance().getUserDao().insertUser(user);
 
                             try {
@@ -63,4 +62,5 @@ public class RegistrationService {
             return ResponseEntity.status(401).body("{\"message\": \"Username already exists\"}");
         }
     }
+
 }
