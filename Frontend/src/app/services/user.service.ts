@@ -10,6 +10,6 @@ export class UserManagementService {
 
   // Get all products
   getUsers(): Observable<any[]>{
-     return this.http.get<any[]>("http://localhost:8080/api/allUsers");
+     return this.http.get<any[]>("http://localhost:8080/api/user-management");
   }
 }

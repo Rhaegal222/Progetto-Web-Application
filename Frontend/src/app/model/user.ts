@@ -1,9 +1,13 @@
 export interface User{
+    idUser?:number;
     email:string;
     password:string;
     name?:string;
     surname?:string;
     role?:string;
+    banned?:boolean;
+
+    // Optional fields
     phone?:string;
     address?:string;
     city?:string;
@@ -13,7 +17,6 @@ export interface User{
     birthDate?:Date;
     registrationDate?:Date;
     lastAccessDate?:Date;
-    enabled?:boolean;
 }
 
 export interface AuthToken{

@@ -16,6 +16,7 @@ export class LoginComponent {
   
   email = new FormControl();
   password = new FormControl();
+  token: string = '';
 
   passwordInputType: string = 'password';
   passwordVisible: boolean = false;
@@ -31,6 +32,18 @@ export class LoginComponent {
     var email = this.email.value;
     var password = this.password.value;
 
-    this.authService.login(email, password);
+    if(this.authService.login(email, password).subscribe(
+      (response) => {
+        this.token = response.token;
+        if(this.token != null){
+          localStorage.setItem("token", this.token);
+        }       
+      },
+      (error) => {
+        console.log("Error: " + error);
+      }
+    )){
+      console.log("Login successful");
+    }
   }
 }

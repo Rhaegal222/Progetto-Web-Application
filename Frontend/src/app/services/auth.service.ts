@@ -12,16 +12,7 @@ constructor(private http:HttpClient, private router:Router) { }
 
   login(email: string, password: string){
     var user:User = {"email": email, "password": password};
-
-    this.http.post<AuthToken>("http://localhost:8080/api/login", user, {withCredentials: true}).subscribe({
-      next: (response) => {
-        localStorage.setItem("token", response.token);
-        this.router.navigate(["/dashboard"]);
-      },
-      error: (error) => {
-        this.router.navigate(["/login"]);
-      }
-    });
+    return this.http.post<AuthToken>("http://localhost:8080/api/login", user, {withCredentials: true})
   }
 
   logout(){
@@ -31,26 +22,6 @@ constructor(private http:HttpClient, private router:Router) { }
 
   register(name:string, surname:string, email:string, password:string){
     var user:User = {"name": name, "surname": surname, "email": email, "password": password};
-    this.http.post("http://localhost:8080/api/registration", user, {withCredentials: true}).subscribe({
-      next: (response) => {
-        this.router.navigate(["/login"]);
-        console.log(response);
-      },
-      error: (error) => {
-        this.router.navigate(["/location-map"]);
-        console.log(error);
-      }
-    });
-  }
-
-  debug(){
-    this.http.get("http://localhost:4200/api/debug").subscribe({
-      next: (response) => {
-        console.log(response);
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    });
+    return this.http.post("http://localhost:8080/api/registration", user, {withCredentials: true});
   }
 }

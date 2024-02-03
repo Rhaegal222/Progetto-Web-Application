@@ -4,15 +4,16 @@ import { User } from '../../model/user';
 @Component({
   selector: 'app-user-management',
   templateUrl: './user-management.component.html',
-  styleUrl: './user-management.component.css',
+  styleUrls: [
+    './user-management.component.css',
+    '../../styles/container.css',
+  ]
 })
 export class UserManagementComponent {
 
-
-  
-
   constructor(private userService: UserManagementService) {}
-  userList: User[] = []
+  
+  userList: User[] = [];
 
   ngOnInit(): void {
      this.getUsers();
@@ -20,12 +21,12 @@ export class UserManagementComponent {
   
   getUsers(){
     this.userService.getUsers().subscribe({
-      next: (response: User[]) => { // Use User[] as the type for response
-        return response;
+      next: (data) => {
+        this.userList = data;
+        console.log(data);
       },
       error: (error: any) => {
         console.log('There was an error!', error);
-        return []
       }
     });
   }
