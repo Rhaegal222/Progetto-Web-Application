@@ -1,6 +1,7 @@
 package it.unical.demacs.backend.Persistence.Dao.Postgres;
 
 import it.unical.demacs.backend.Persistence.Model.Item;
+import it.unical.demacs.backend.Persistence.Model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,4 +34,25 @@ public class ItemProxy extends Item {
         }
         return super.getDescription();
     }
+
+    @Override
+    public String getLocation(){
+        if(super.getLocation() == null){
+            String query = "SELECT location FROM items WHERE id_item = ?";
+            try (
+                    PreparedStatement st = this.con.prepareStatement(query)) {
+                st.setLong(1, getIdItem());
+                try (ResultSet rs = st.executeQuery()) {
+                    if (rs.next()) {
+                       super.setLocation(rs.getString(1));
+                       return rs.getString(1);
+                    }
+                }
+            } catch (SQLException e) {
+                e.fillInStackTrace();
+            }
+        }
+        return super.getLocation();
+    }
+
 }

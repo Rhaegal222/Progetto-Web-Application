@@ -1,7 +1,9 @@
 package it.unical.demacs.backend.Service;
 
+import it.unical.demacs.backend.Persistence.Dao.Postgres.ItemProxy;
 import it.unical.demacs.backend.Persistence.DatabaseHandler;
 import it.unical.demacs.backend.Persistence.Model.Item;
+import it.unical.demacs.backend.Persistence.Model.User;
 import it.unical.demacs.backend.Service.Request.GetItemRequest;
 import it.unical.demacs.backend.Service.Request.InsertItemRequest;
 import org.springframework.http.HttpStatus;
@@ -66,8 +68,25 @@ public class ItemService {
     }
 
     public ResponseEntity<?> getItem(@RequestBody GetItemRequest getItemRequest) {
-        return ResponseEntity.ok().body("prova");
+        long idItem = getItemRequest.getIdItem();
+        try {
+            ItemProxy item = (ItemProxy) DatabaseHandler.getInstance().getItemDao().findByPrimaryKey(idItem).join();
+            if (item == null) {
+                return ResponseEntity.badRequest().body("{\"message\": \"No item found\"}");
+            } else {
+                String description = (item.getDescription() != null) ? item.getDescription() : "";
+                String location = (item.getLocation() != null) ? item.getLocation() : "";
+                String responseBody = "{\"description\": \"" + description +
+                        "\", \"location\": \"" + location + "\"}";
+
+                return ResponseEntity.ok(responseBody);
+            }
+        } finally {
+            DatabaseHandler.getInstance().closeConnection();
+        }
     }
+
+
 
     public ResponseEntity<?> getItemProxy(long idItem) {
         try {

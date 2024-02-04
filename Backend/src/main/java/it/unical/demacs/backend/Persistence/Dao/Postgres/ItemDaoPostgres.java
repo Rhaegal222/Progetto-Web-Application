@@ -27,13 +27,16 @@ public class ItemDaoPostgres implements ItemDao{
                 PreparedStatement st = this.con.prepareStatement(query);
                 ResultSet rs = st.executeQuery()) {
             while (rs.next()) {
-                Item item = new Item();
+                Item item = new ItemProxy(con);
                 item.setIdItem(rs.getInt("id_item"));
                 item.setName(rs.getString("name"));
                 item.setType(rs.getString("type"));
                 item.setImage(rs.getString("image_base64"));
                 if(rs.getLong("assigned_user") != 0){
                     item.setAssignedUser(new User(rs.getLong("assigned_user")));
+                }
+                else{
+                    item.setAssignedUser(null);
                 }
                 items.add(item);
             }
@@ -46,7 +49,7 @@ public class ItemDaoPostgres implements ItemDao{
     @Override
     @Async
     public CompletableFuture<Item> findByPrimaryKey(Long id) {
-        Item item = new Item();
+        Item item = new ItemProxy(con);
         String query = "SELECT * FROM items WHERE id_item = ?";
         try (
                 PreparedStatement st = this.con.prepareStatement(query)) {
@@ -56,9 +59,13 @@ public class ItemDaoPostgres implements ItemDao{
                     item.setIdItem(rs.getInt("id_item"));
                     item.setName(rs.getString("name"));
                     item.setType(rs.getString("type"));
-                    item.setDescription(rs.getString("description"));
-                    item.setLocation(rs.getString("location"));
                     item.setImage(rs.getString("image_base64"));
+                    if(rs.getLong("assigned_user") != 0){
+                        item.setAssignedUser(new User(rs.getLong("assigned_user")));
+                    }
+                    else{
+                            item.setAssignedUser(null);
+                        }
                 }
             }
         } catch (SQLException e) {
@@ -71,7 +78,7 @@ public class ItemDaoPostgres implements ItemDao{
     @Override
     @Async
     public CompletableFuture<Item> findByName(String name) {
-        Item item = new Item();
+        Item item = new ItemProxy(con);
         String query = "SELECT * FROM items WHERE name = ?";
         try (
                 PreparedStatement st = this.con.prepareStatement(query)) {
@@ -81,9 +88,13 @@ public class ItemDaoPostgres implements ItemDao{
                     item.setIdItem(rs.getInt("id_item"));
                     item.setName(rs.getString("name"));
                     item.setType(rs.getString("type"));
-                    item.setDescription(rs.getString("description"));
-                    item.setLocation(rs.getString("location"));
                     item.setImage(rs.getString("image_base64"));
+                    if(rs.getLong("assigned_user") != 0){
+                        item.setAssignedUser(new User(rs.getLong("assigned_user")));
+                    }
+                    else{
+                        item.setAssignedUser(null);
+                    }
                 }
             }
         } catch (SQLException e) {
