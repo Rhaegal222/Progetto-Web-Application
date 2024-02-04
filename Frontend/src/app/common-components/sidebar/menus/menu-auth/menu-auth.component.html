@@ -1,4 +1,5 @@
 <ul class="items">
-    <li routererLinkActive="active" routerLink="/login">Accedi</li>
-    <li routererLinkActive="active" routerLink="/registration">Registrati</li>
+    <li *ngIf="!isAuth" routererLinkActive="active" routerLink="/login">Accedi</li>
+    <li *ngIf="!isAuth" routererLinkActive="active" routerLink="/registration">Registrati</li>
+    <li *ngIf="isAuth" routerLinkActive="active" routerLink="/login" (click)="logout()">Esci</li>
 </ul>

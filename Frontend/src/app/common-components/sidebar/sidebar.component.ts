@@ -12,8 +12,23 @@ var resizeObserver : any;
 })
 export class SidebarComponent implements OnInit {
   lastComponentLoaded: string = '';
-
+  authToken: string = '';
+  isAuth: boolean = false;
+  
   constructor(private router: Router) {}
+
+  ngDoCheck() {
+    if (typeof localStorage !== 'undefined') {
+      this.authToken = localStorage.getItem('token') || '';
+      if (this.authToken) {
+        this.isAuth = true;
+      } else {
+        this.isAuth = false;
+      }
+    } else {
+      this.isAuth = false;
+    }
+  }
 
   ngOnInit() {
     this.toggleMenuClose();
@@ -34,6 +49,7 @@ export class SidebarComponent implements OnInit {
       }
     });
   }
+
 
   // se la finestra è più grande di 768px, il menu è sempre aperto
   windowsSize(){

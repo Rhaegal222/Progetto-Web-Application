@@ -1,6 +1,6 @@
 <ul class="items">
-    <li routererLinkActive="active" routerLink="/request-management">Gestione richieste</li>
-    <li routererLinkActive="active" routerLink="/product-management">Gestione prodotti</li>
-    <li routererLinkActive="active" routerLink="/location-map">Mappa</li>
-    <li routererLinkActive="active" routerLink="/report">Report</li>
+    <li *ngIf="isAuth" routererLinkActive="active" routerLink="/request-management">Gestione richieste</li>
+    <li *ngIf="isAuth" routererLinkActive="active" routerLink="/product-management">Gestione prodotti</li>
+    <li *ngIf="isAuth" routererLinkActive="active" routerLink="/location-map">Mappa</li>
+    <li *ngIf="isAuth" routererLinkActive="active" routerLink="/report">Report</li>
 </ul>

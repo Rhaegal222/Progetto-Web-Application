@@ -1,5 +1,5 @@
 <ul class="items">
-    <li routererLinkActive="active" routerLink="/product-list">Prodotti</li>
-    <li routerLinkActive="active" routerLink="/requests-forwarded">Richieste inoltrate</li>
-    <li routerLinkActive="active" routerLink="/dashboard">Dashboard</li>
+    <li *ngIf="isAuth" routererLinkActive="active" routerLink="/product-list">Prodotti</li>
+    <li *ngIf="isAuth" routerLinkActive="active" routerLink="/requests-forwarded">Richieste inoltrate</li>
+    <li *ngIf="isAuth" routerLinkActive="active" routerLink="/dashboard">Dashboard</li>
 </ul>

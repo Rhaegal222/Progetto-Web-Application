@@ -42,7 +42,7 @@ const routes: Routes = [
   { path: 'product-return', component: ProductReturnComponent},
   { path: 'requests-forwarded', component: RequestsForwardedComponent},
 
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' }, // Default route
+  { path: '', redirectTo: '/prodotti', pathMatch: 'full' }, // Default route
 
 ];
 

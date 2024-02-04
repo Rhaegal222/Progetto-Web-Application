@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormControl } from "@angular/forms";
 import { AuthService } from '../../services/auth.service';
 import { AuthToken } from '../../model/user';
-
 
 @Component({
   selector: 'app-login',
@@ -14,12 +14,17 @@ import { AuthToken } from '../../model/user';
   ],
 })
 export class LoginComponent {
+
+  constructor(private authService: AuthService, private router: Router) { }
+
+  ngOnInit() {
+    this.test();
+  }
   
   email = new FormControl();
   password = new FormControl();
 
-  authtoken: AuthToken = {accessToken: ''};
-  
+  authtoken: AuthToken = {accessToken: ''};  
 
   passwordInputType: string = 'password';
   passwordVisible: boolean = false;
@@ -29,46 +34,60 @@ export class LoginComponent {
     this.passwordInputType = this.passwordVisible ? 'text' : 'password';    
   }
   
-  constructor(private authService: AuthService) { }
-
-  ngOnInit(): void {
-    this.test();
-  }
-
   test(){
-    var email = 'john_doe@mail.com';
+    var email = 'john_doe@gmail.com';
     var password = 'P@ssw0rd1';
-    
-    this.authService.login(email, password).subscribe({
-      next: (response) => {
-      this.authtoken = response;
-        if(this.authtoken.accessToken != ''){
-          console.log('Login successful:', this.authtoken.accessToken, response);
+
+    if (this.authtoken.accessToken == '')  {
+      this.authService.login(email, password).subscribe({
+        next: (response) => {
+        this.authtoken = response;
+          if(this.authtoken.accessToken != ''){
+            if (typeof localStorage !== 'undefined' ) {
+              console.log('Local storage available');
+              localStorage.setItem('token', this.authtoken.accessToken);
+              this.router.navigate(['/product-list']);
+            } else {
+              console.error('Local storage not available');
+            }
+          }
+        },
+        error: (error) => {
+          if (error.status == 401) {
+            console.error('Login failed:', error.error.message);
+          } else {
+            console.error('An error occurred:', error.error.message);
+          }
         }
-      },
-      error: (error) => {
-        if (error.status == 401) {
-          console.error('Login failed:', error.error.message);
-        } else {
-          console.error('An error occurred:', error.error.message);
-        }
-      }
-    });  
+      });
+    }
   }
 
   login(){
     var email = this.email.value;
     var password = this.password.value;
 
-    this.authService.login(email, password).subscribe({
-      next: (response) => {
-      // Handle successful response
-      console.log('Login successful:', response);
-      this.authtoken = response;
-      },
-      error: (error) => {
-        console.error(error)
-      }
-    });
+    if (this.authtoken.accessToken == '')  {
+      this.authService.login(email, password).subscribe({
+        next: (response) => {
+        this.authtoken = response;
+          if(this.authtoken.accessToken != ''){
+            if (typeof localStorage !== 'undefined' ) {
+              console.log('Local storage available');
+              localStorage.setItem('token', this.authtoken.accessToken);
+            } else {
+              console.error('Local storage not available');
+            }
+          }
+        },
+        error: (error) => {
+          if (error.status == 401) {
+            console.error('Login failed:', error.error.message);
+          } else {
+            console.error('An error occurred:', error.error.message);
+          }
+        }
+      });
+    }
   }
 }

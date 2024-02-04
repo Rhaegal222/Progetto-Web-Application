@@ -7,4 +7,22 @@ import { Component } from '@angular/core';
 })
 export class MenuStorekeeperComponent {
 
+  authToken: string = '';
+  isAuth: boolean = false;
+
+  constructor() {}
+
+  ngDoCheck() {
+    if (typeof localStorage !== 'undefined') {
+      this.authToken = localStorage.getItem('token') || '';
+      if (this.authToken) {
+        this.isAuth = true;
+      } else {
+        this.isAuth = false;
+      }
+    } else {
+      this.isAuth = false;
+    }
+  }
+
 }

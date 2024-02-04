@@ -7,4 +7,20 @@ import { Component } from '@angular/core';
 })
 export class MenuEmployeeComponent {
 
+  authToken: string = '';
+  isAuth: boolean = false;
+
+  ngDoCheck() {
+    if (typeof localStorage !== 'undefined') {
+      this.authToken = localStorage.getItem('token') || '';
+      if (this.authToken) {
+        this.isAuth = true;
+      } else {
+        this.isAuth = false;
+      }
+    } else {
+      this.isAuth = false;
+    }
+  }
+
 }

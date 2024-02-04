@@ -1,4 +1,4 @@
 <ul class="items">
-    <li routererLinkActive="active" routerLink="/user-management">Gestione utenti</li>
-    <li routererLinkActive="active" routerLink="/location-management">Gestione mappa</li>
+    <li *ngIf="isAuth" routererLinkActive="active" routerLink="/user-management">Gestione utenti</li>
+    <li *ngIf="isAuth" routererLinkActive="active" routerLink="/location-management">Gestione mappa</li>
 </ul>

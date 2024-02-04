@@ -30,7 +30,6 @@ export class ProductListComponent {
     this.productService.getProducts().subscribe({
       next: (data) => {
         this.products = data;
-        console.log(data);
       },
       error: (error) => {
         console.error(error)
