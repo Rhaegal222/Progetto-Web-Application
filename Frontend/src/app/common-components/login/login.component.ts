@@ -10,7 +10,8 @@ import { AuthToken } from '../../model/user';
   styleUrls: [
     '../../styles/container.css',
     '../../styles/content.css',
-    '../../styles/form.css'
+    '../../styles/form.css',
+    '../../styles/buttons.css'
   ],
 })
 export class LoginComponent {
@@ -42,7 +43,7 @@ export class LoginComponent {
       this.authService.login(email, password).subscribe({
         next: (response) => {
         this.authtoken = response;
-          if(this.authtoken.accessToken != ''){
+        if(this.authtoken.accessToken != ''){
             if (typeof localStorage !== 'undefined' ) {
               console.log('Local storage available');
               localStorage.setItem('token', this.authtoken.accessToken);

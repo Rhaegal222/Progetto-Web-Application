@@ -7,6 +7,7 @@ import { User } from '../../model/user';
   styleUrls: [
     './user-management.component.css',
     '../../styles/container.css',
+    '../../styles/buttons.css'
   ]
 })
 export class UserManagementComponent {

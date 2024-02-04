@@ -7,6 +7,7 @@ import { Product } from '../../model/product';
   templateUrl: './product-list.component.html',
   styleUrls: [
     './product-list.component.css',
+    '../../styles/buttons.css',
   ]
 })
 export class ProductListComponent {

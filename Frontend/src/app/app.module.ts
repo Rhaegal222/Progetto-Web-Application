@@ -30,10 +30,12 @@ import { MenuAuthComponent } from './common-components/sidebar/menus/menu-auth/m
 import { RequestsForwardedComponent } from './employee-components/requests-forwarded/requests-forwarded.component';
 import { AddProductComponent } from './storekeeper-components/product-management/add-product/add-product.component';
 import { SearchBarComponent } from './common-components/search-bar/search-bar.component';
+import { ToolsBarComponent } from './common-components/tools-bar/tools-bar.component';
 
 import { AuthService } from './services/auth.service';
 import { PageNotFoundComponent } from './common-components/page-not-found/page-not-found.component';
 import { ProfileComponent } from './common-components/profile/profile.component';
+
 
 
 @NgModule({
@@ -63,7 +65,8 @@ import { ProfileComponent } from './common-components/profile/profile.component'
     AddProductComponent,
     SearchBarComponent,
     PageNotFoundComponent,
-    ProfileComponent
+    ProfileComponent,
+    ToolsBarComponent
   ],
   imports: [
     BrowserModule,

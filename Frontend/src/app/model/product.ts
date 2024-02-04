@@ -5,4 +5,5 @@ export interface Product{
     description:string;
     location:string;
     image:string;
+    assigned_user:string;
 }

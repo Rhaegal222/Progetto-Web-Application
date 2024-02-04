@@ -8,7 +8,8 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: [
     '../../styles/container.css',
     '../../styles/content.css',
-    '../../styles/form.css'
+    '../../styles/form.css',
+    '../../styles/buttons.css'
   ]
 })
 export class RegistrationComponent {
