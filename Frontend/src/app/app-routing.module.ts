@@ -16,33 +16,41 @@ import { ProductReturnComponent } from './employee-components/product-return/pro
 import { SettingsComponent } from './common-components/settings/settings.component';
 import { LocationManagementComponent } from './admin-components/location-management/location-management.component';
 import { RequestsForwardedComponent } from './employee-components/requests-forwarded/requests-forwarded.component';
+import { PageNotFoundComponent } from './common-components/page-not-found/page-not-found.component';
+import { AuthGuard } from './guards/auth.guard';
+import { ProfileComponent } from './common-components/profile/profile.component';
 
 const routes: Routes = [
   // Componenti comuni a tutti gli utenti
-  { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'menu', component: MenuComponent },
-  { path: 'settings', component: SettingsComponent},
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'menu', component: MenuComponent, canActivate: [AuthGuard] },
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
 
   // Componenti per l'amministratore
-  { path: 'user-management', component: UserManagementComponent},
-  { path: 'location-management', component: LocationManagementComponent},
+  { path: 'user-management', component: UserManagementComponent, canActivate: [AuthGuard] },
+  { path: 'location-management', component: LocationManagementComponent, canActivate: [AuthGuard] },
 
   // Componenti per l'addetto al magazzino e l'amministratore
-  { path: 'location-map', component: LocationMapComponent},
-  { path: 'request-management', component: RequestManagementComponent},
-  { path: 'product-management', component: ProductManagementComponent},
-  { path: 'report', component: ReportComponent},
+  { path: 'location-map', component: LocationMapComponent, canActivate: [AuthGuard] },
+  { path: 'request-management', component: RequestManagementComponent, canActivate: [AuthGuard] },
+  { path: 'product-management', component: ProductManagementComponent, canActivate: [AuthGuard] },
+  { path: 'report', component: ReportComponent, canActivate: [AuthGuard] },
 
   // Componenti per il dipendente dell'università
-  { path: 'registration', component: RegistrationComponent },
-  { path: 'product-list', component: ProductListComponent},
-  { path: 'product-detail', component: ProductDetailComponent},
-  { path: 'product-request', component: ProductRequestComponent},
-  { path: 'product-return', component: ProductReturnComponent},
-  { path: 'requests-forwarded', component: RequestsForwardedComponent},
+  { path: 'registration', component: RegistrationComponent, canActivate: [AuthGuard] },
+  { path: 'product-list', component: ProductListComponent, canActivate: [AuthGuard] },
+  { path: 'product-detail', component: ProductDetailComponent, canActivate: [AuthGuard] },
+  { path: 'product-request', component: ProductRequestComponent, canActivate: [AuthGuard] },
+  { path: 'product-return', component: ProductReturnComponent, canActivate: [AuthGuard] },
+  { path: 'requests-forwarded', component: RequestsForwardedComponent, canActivate: [AuthGuard] },
 
-  { path: '', redirectTo: '/prodotti', pathMatch: 'full' }, // Default route
+  // Default route
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+
+  // Route per pagina non trovata
+  { path: '**', component: PageNotFoundComponent }
 
 ];
 

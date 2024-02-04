@@ -18,7 +18,17 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.test();
+    // ripeti fino a quando localStorage non è disponibile
+    setTimeout(() => {
+      if (typeof localStorage !== 'undefined') {
+        console.log('Local storage available');
+        console.log('Token:', localStorage.getItem('token'));
+      } else {
+        console.error('Local storage not available');
+      }
+    }, 1000);
+
+    //this.test();
   }
   
   email = new FormControl();
@@ -47,6 +57,7 @@ export class LoginComponent {
               console.log('Local storage available');
               localStorage.setItem('token', this.authtoken.accessToken);
               this.router.navigate(['/product-list']);
+              console.log('Response:', response);
             } else {
               console.error('Local storage not available');
             }
@@ -75,6 +86,8 @@ export class LoginComponent {
             if (typeof localStorage !== 'undefined' ) {
               console.log('Local storage available');
               localStorage.setItem('token', this.authtoken.accessToken);
+              this.router.navigate(['/product-list']);
+              console.log('Response:', response);
             } else {
               console.error('Local storage not available');
             }

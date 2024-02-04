@@ -7,11 +7,11 @@ import { Component } from '@angular/core';
 })
 export class MenuAdminComponent {
 
-  authToken: string = '';
-  isAuth: boolean = false;
-
   constructor() {}
 
+  authToken: string = '';
+  isAuth: boolean = false;
+  
   ngDoCheck() {
     if (typeof localStorage !== 'undefined') {
       this.authToken = localStorage.getItem('token') || '';

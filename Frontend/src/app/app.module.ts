@@ -1,18 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormField, MatFormFieldModule} from "@angular/material/form-field";
-import { MatIcon, MatIconModule} from "@angular/material/icon";
-import { MatInputModule} from "@angular/material/input";
-import { MatButtonModule} from "@angular/material/button";
 import { FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { MatCheckboxModule} from "@angular/material/checkbox";
-import { MatRadioModule} from "@angular/material/radio";
-import { MatSelectModule} from "@angular/material/select";
-import { MatSidenav, MatSidenavContainer, MatSidenavContent} from "@angular/material/sidenav";
-import { MatNavList} from "@angular/material/list";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -41,6 +31,10 @@ import { RequestsForwardedComponent } from './employee-components/requests-forwa
 import { AddProductComponent } from './storekeeper-components/product-management/add-product/add-product.component';
 import { SearchBarComponent } from './common-components/search-bar/search-bar.component';
 
+import { AuthService } from './services/auth.service';
+import { PageNotFoundComponent } from './common-components/page-not-found/page-not-found.component';
+import { ProfileComponent } from './common-components/profile/profile.component';
+
 
 @NgModule({
   declarations: [
@@ -67,39 +61,22 @@ import { SearchBarComponent } from './common-components/search-bar/search-bar.co
     MenuAuthComponent,
     RequestsForwardedComponent,
     AddProductComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    PageNotFoundComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatFormField,
-    MatIcon,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
     ReactiveFormsModule,
     FormsModule,
     ReactiveFormsModule,
-    MatCheckboxModule,
-    MatRadioModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatIconModule,
-    MatSidenav,
-    MatNavList,
-    MatSidenavContent,
-    MatSidenavContainer,
     HttpClientModule,
-    BrowserModule,
-    HttpClientModule,
-    HttpClientJsonpModule,
-    MatDialogModule
+    HttpClientJsonpModule
   ],
   providers: [
-    provideClientHydration()
+    AuthService,
   ],
   bootstrap: [AppComponent]
 })
