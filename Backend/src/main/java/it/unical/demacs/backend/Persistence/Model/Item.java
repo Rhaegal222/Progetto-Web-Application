@@ -12,16 +12,18 @@ public class Item {
     private String description;
     private String location;
     private String image;
+    private User assignedUser;
 
     public Item() {}
 
 
-    public Item(String name, String type, String description, String location, String image) {
+    public Item(String name, String type, String description, String location, String image, User assignedUser) {
         this.name = name;
         this.type = type;
         this.description = description;
         this.location = location;
         this.image = image;
+        this.assignedUser = assignedUser;
     }
 
 }

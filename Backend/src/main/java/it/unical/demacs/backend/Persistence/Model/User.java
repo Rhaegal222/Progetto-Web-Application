@@ -1,4 +1,5 @@
 package it.unical.demacs.backend.Persistence.Model;
+import it.unical.demacs.backend.Persistence.DatabaseHandler;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class User implements UserDetails {
-    private String idUser;
+    private long idUser;
     private String email;
     private String password;
     private String name;
@@ -29,6 +30,17 @@ public class User implements UserDetails {
         this.name = name;
         this.surname = surname;
         this.banned = b;
+    }
+
+    public User(long idUser) {
+        User u = DatabaseHandler.getInstance().getUserDao().findByPrimaryKey(idUser).join();
+        this.idUser = u.getIdUser();
+        this.email = u.getEmail();
+        this.password = u.getPassword();
+        this.name = u.getName();
+        this.surname = u.getSurname();
+        this.role = u.getRole();
+        this.banned = u.getBanned();
     }
 
 

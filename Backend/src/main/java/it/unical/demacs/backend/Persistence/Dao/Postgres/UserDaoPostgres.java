@@ -16,7 +16,7 @@ public class UserDaoPostgres implements UserDao {
     }
 
     private void setting(ResultSet rs, User user) throws SQLException {
-        user.setIdUser(rs.getString("id_user"));
+        user.setIdUser(rs.getLong("id_user"));
         user.setEmail(rs.getString("email"));
         user.setPassword(rs.getString("password"));
         user.setName(rs.getString("name"));
@@ -44,10 +44,10 @@ public class UserDaoPostgres implements UserDao {
     }
     @Override
     @Async
-    public CompletableFuture<User> findByPrimaryKey(String idUser) {
+    public CompletableFuture<User> findByPrimaryKey(long idUser) {
         try {
             PreparedStatement stmt = con.prepareStatement("SELECT * FROM users WHERE id_user = ?");
-            stmt.setString(1, idUser);
+            stmt.setLong(1, idUser);
             ResultSet res = stmt.executeQuery();
 
             User u = null;
@@ -82,7 +82,7 @@ public class UserDaoPostgres implements UserDao {
 
             User u = null;
             if (res.next()) {
-                String idUser = res.getString("id_user");
+                long idUser = res.getLong("id_user");
                 String password = res.getString("password");
                 String name = res.getString("name");
                 String surname = res.getString("surname");

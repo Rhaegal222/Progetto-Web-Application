@@ -2,6 +2,7 @@ package it.unical.demacs.backend.Persistence.Dao.Postgres;
 
 import it.unical.demacs.backend.Persistence.Dao.ItemDao;
 import it.unical.demacs.backend.Persistence.Model.Item;
+import it.unical.demacs.backend.Persistence.Model.User;
 import org.springframework.scheduling.annotation.Async;
 
 import java.sql.Connection;
@@ -30,9 +31,10 @@ public class ItemDaoPostgres implements ItemDao{
                 item.setIdItem(rs.getInt("id_item"));
                 item.setName(rs.getString("name"));
                 item.setType(rs.getString("type"));
-                item.setDescription(rs.getString("description"));
-                item.setLocation(rs.getString("location"));
                 item.setImage(rs.getString("image_base64"));
+                if(rs.getLong("assigned_user") != 0){
+                    item.setAssignedUser(new User(rs.getLong("assigned_user")));
+                }
                 items.add(item);
             }
         } catch (SQLException e) {

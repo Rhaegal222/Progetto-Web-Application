@@ -28,7 +28,7 @@ public class ItemController {
     }
 
     @PostMapping("/api/getItem")
-    public ResponseEntity<?> getItem(@RequestBody GetItemRequest getItemRequest) throws ExecutionException, InterruptedException {
+    public ResponseEntity<?> getItem(@RequestBody GetItemRequest getItemRequest){
         return itemService.getItem(getItemRequest);
     }
 

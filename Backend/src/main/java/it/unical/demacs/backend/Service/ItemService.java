@@ -65,17 +65,8 @@ public class ItemService {
         return ResponseEntity.ok().body(items);
     }
 
-    public ResponseEntity<?> getItem(@RequestBody GetItemRequest getItemRequest) throws ExecutionException, InterruptedException {
-        CompletableFuture<Item> existingItemFuture = DatabaseHandler.getInstance().getItemDao().findByPrimaryKey(getItemRequest.getIdItem());
-        Item existingItem = existingItemFuture.get();
-
-        if (existingItem.getIdItem() == null) {
-            // Item with the same name already exists, return an error response
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("Item doesn't exists.");
-        } else {
-            return ResponseEntity.ok().body(DatabaseHandler.getInstance().getItemDao().findByPrimaryKey(getItemRequest.getIdItem()));
-        }
+    public ResponseEntity<?> getItem(@RequestBody GetItemRequest getItemRequest) {
+        return ResponseEntity.ok().body("prova");
     }
 
     public ResponseEntity<?> getItemProxy(long idItem) {
