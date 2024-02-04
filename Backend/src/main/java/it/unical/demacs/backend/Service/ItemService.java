@@ -77,4 +77,18 @@ public class ItemService {
             return ResponseEntity.ok().body(DatabaseHandler.getInstance().getItemDao().findByPrimaryKey(getItemRequest.getIdItem()));
         }
     }
+
+    public ResponseEntity<?> getItemProxy(long idItem) {
+        try {
+            Item item = DatabaseHandler.getInstance().getItemDao().findByPrimaryKey(idItem).join();
+            if (item == null) {
+                return ResponseEntity.badRequest().body("{\"message\": \"No item found\"}");
+            } else {
+                return ResponseEntity.ok(item);
+            }
+        }
+        finally {
+            DatabaseHandler.getInstance().closeConnection();
+        }
+    }
 }

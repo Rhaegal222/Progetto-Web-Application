@@ -5,6 +5,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Getter
@@ -30,10 +31,17 @@ public class User implements UserDetails {
         this.banned = b;
     }
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(this.role));
+        String role = this.role;
+        if (role == null || role.trim().isEmpty()) {
+            // Se il ruolo è nullo o vuoto, restituisci una lista vuota di autorità
+            return Collections.emptyList();
+        }
+        return List.of(new SimpleGrantedAuthority(role));
     }
+
 
     @Override
     public String getUsername() {

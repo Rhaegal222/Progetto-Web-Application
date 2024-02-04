@@ -47,15 +47,25 @@ public class JwtService {
     }
 
     public String generateToken(UserDetails userDetails){
-        HashMap<String, String > claims = new HashMap<>();
+        HashMap<String, String> claims = new HashMap<>();
         claims.put("email", userDetails.getUsername());
-        claims.put("role", userDetails.getAuthorities().toArray()[0].toString());
+
+        // Verifica se ci sono autorità prima di accedere al primo elemento
+        if (!userDetails.getAuthorities().isEmpty()) {
+            claims.put("role", userDetails.getAuthorities().iterator().next().getAuthority());
+        }
+        else{
+            //metti ruolo di default user
+            claims.put("role", "ROLE_USER");
+        }
+
         return Jwts
                 .builder()
                 .setClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+1000*60*24))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
+
 }
