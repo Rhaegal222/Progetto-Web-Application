@@ -18,17 +18,7 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    // ripeti fino a quando localStorage non è disponibile
-    setTimeout(() => {
-      if (typeof localStorage !== 'undefined') {
-        console.log('Local storage available');
-        console.log('Token:', localStorage.getItem('token'));
-      } else {
-        console.error('Local storage not available');
-      }
-    }, 1000);
-
-    //this.test();
+    this.test();
   }
   
   email = new FormControl();
