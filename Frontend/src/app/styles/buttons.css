@@ -8,31 +8,34 @@
     width: auto; /* Larghezza massima */
     height: 40px; /* Altezza massima */
   }
+
+.btn-primary:active {
+    background-color: #000000; /* Colore di sfondo al click */
+    border-color: #ff0000; /* Colore del bordo al click */
+    color: white; /* Colore del testo al click */
+}
   
-  .btn-primary:focus {
+.btn-primary:focus {
     background-color: #ff000022; /* Colore di sfondo al hover */
     border-color: #ff000022; /* Colore del bordo al hover */
     color: black; /* Colore del testo al hover */
-  }
-  
-  .content .btn-primary {
+}
+
+.content .btn-primary {
     /* Allinea il bottone al centro */
     margin: 0 auto;
     display: block;
-  }
-  
-  .btn-outline-secondary {
+}
+
+.btn-outline-secondary {
     color: #000; /* Colore del testo */
     background-color: transparent; /* Sfondo trasparente */
     background-image: none; /* Rimuovi l'immagine di sfondo */
     border-color: #000; /* Colore del bordo */
-  }
-  
-  .btn-outline-secondary:hover {
+}
+
+.btn-outline-secondary:hover {
     color: #000; /* Colore del testo al passaggio del mouse */
     background-color: #00000022; /* Colore di sfondo al passaggio del mouse */
     border-color: #000; /* Colore del bordo al passaggio del mouse */
-    .eye-icon {
-        color: #ff0000; /* Colore dell'icona al hover */
-    }
-  }
+}

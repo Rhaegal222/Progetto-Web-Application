@@ -1,3 +1,29 @@
-<div>
-    <app-add-product></app-add-product>
+<header>
+    <app-search-bar></app-search-bar>
+    <app-tools-bar></app-tools-bar>
+</header>
+<div class="container">
+    <div id="box" class="grid">
+        <div *ngFor="let product of products" class="item">
+            <div class="item-body">
+                <div *ngIf="!isAnImage(product.image)" class="item-no-img">
+                    <span class="material-icons">image</span>
+                    <p>Immagine non disponibile</p>
+                </div>
+                <div *ngIf="isAnImage(product.image)" class="item-img">
+                    <img [src]="product.image">
+                </div>
+                <div class="item-footer">
+                    <h5 class="item-title">{{ product.name }}</h5>
+                </div>
+                <div class="item-buttons">
+                    <button class="btn btn-primary">Modifica</button>
+                    <button class="btn btn-primary">Elimina</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="products.length == 0" class="no-products">
+        <h1>Nessun prodotto</h1>
+    </div>
 </div>

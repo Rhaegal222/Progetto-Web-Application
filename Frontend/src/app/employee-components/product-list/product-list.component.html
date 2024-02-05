@@ -3,19 +3,18 @@
     <app-tools-bar></app-tools-bar>
 </header>
 <div class="container">
-    <div class="grid">
-        <div *ngFor="let product of products" class="card">
-            <div class="card-body">
-                <div *ngIf="!isAnImage(product.image)" class="card-img-top">
-                    <span class="material-icons" style="font-size: 100px;">image</span>
+    <div id="box" class="grid">
+        <div *ngFor="let product of products" class="item">
+            <div class="item-body">
+                <div *ngIf="!isAnImage(product.image)" class="item-no-img">
+                    <span class="material-icons">image</span>
                     <p>Immagine non disponibile</p>
                 </div>
-                <div *ngIf="isAnImage(product.image)" class="card-img-top">
+                <div *ngIf="isAnImage(product.image)" class="item-img">
                     <img [src]="product.image">
                 </div>
-                <div class="card-footer">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="card-text">{{ product.description }}</p>
+                <div class="item-footer">
+                    <h5 class="item-title">{{ product.name }}</h5>
                 </div>
             </div>
         </div>
