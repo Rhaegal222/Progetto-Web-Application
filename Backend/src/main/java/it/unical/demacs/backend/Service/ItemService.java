@@ -3,13 +3,13 @@ package it.unical.demacs.backend.Service;
 import it.unical.demacs.backend.Persistence.Dao.Postgres.ItemProxy;
 import it.unical.demacs.backend.Persistence.DatabaseHandler;
 import it.unical.demacs.backend.Persistence.Model.Item;
-import it.unical.demacs.backend.Service.Request.GetItemRequest;
-import it.unical.demacs.backend.Service.Request.InsertItemRequest;
+import it.unical.demacs.backend.Service.Request.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 
@@ -80,4 +80,19 @@ public class ItemService {
 
     }
 
+    public ResponseEntity<?> searchItem(@RequestBody SearchItemRequest searchItemRequest) {
+        String category = searchItemRequest.getCategory();
+        String fieldContent = searchItemRequest.getFieldContent();
+
+        ArrayList<Item> items = DatabaseHandler.getInstance().getItemDao().findByCategory(category).join();
+
+        for (Item item : items) {
+            if (item.getName().contains(fieldContent) || item.getDescription().contains(fieldContent)) {
+                return ResponseEntity.ok().body(item);
+            }
+        }
+
+        return ResponseEntity.badRequest().body("No item found");
+
+    }
 }

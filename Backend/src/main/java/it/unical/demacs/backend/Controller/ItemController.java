@@ -3,6 +3,7 @@ package it.unical.demacs.backend.Controller;
 import it.unical.demacs.backend.Service.Request.GetItemRequest;
 import it.unical.demacs.backend.Service.Request.InsertItemRequest;
 import it.unical.demacs.backend.Service.ItemService;
+import it.unical.demacs.backend.Service.Request.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,11 @@ public class ItemController {
     @PostMapping("/api/getItem")
     public ResponseEntity<?> getItem(@RequestBody GetItemRequest getItemRequest){
         return itemService.getItemProxy(getItemRequest);
+    }
+
+    @GetMapping("/api/searchItem")
+    public ResponseEntity<?> searchItem(@RequestParam SearchItemRequest searchItemRequest){
+        return itemService.searchItem(searchItemRequest);
     }
 
 }
