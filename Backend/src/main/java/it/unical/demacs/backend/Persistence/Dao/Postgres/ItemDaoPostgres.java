@@ -25,7 +25,8 @@ public class ItemDaoPostgres implements ItemDao {
         String query = "SELECT * FROM items";
         try (
                 PreparedStatement st = this.con.prepareStatement(query);
-                ResultSet rs = st.executeQuery()) {
+                ResultSet rs = st.executeQuery())
+        {
             while (rs.next()) {
                 Item item = new Item();
                 item.setIdItem(rs.getInt("id_item"));
@@ -40,7 +41,8 @@ public class ItemDaoPostgres implements ItemDao {
                 }
                 items.add(item);
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return CompletableFuture.completedFuture(items);
