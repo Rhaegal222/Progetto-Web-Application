@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../model/product';
+import { Observable } from 'rxjs';
+import { get } from 'http';
 
 @Component({
   selector: 'app-product-list',
@@ -10,31 +12,48 @@ import { Product } from '../../model/product';
     '../../styles/buttons.css',
   ]
 })
-export class ProductListComponent {
-
+export class ProductListComponent{
   constructor(private productService: ProductService) { }
 
   products: Product[] = [];
+  length: number = 0;
 
   ngOnInit(): void {
-    this.getProducts();
+    this.initObservable();
+    this.getAllProducts();
   }
+
+  // create an observable that emits the length of the products list
+  initObservable(){
+    const observable = new Observable((observer) => {
+      observer.next(this.products.length);
+    });
+
+    // Iscriversi all'observable
+    observable.subscribe((length: unknown) => {
+      if (typeof length === 'number') {
+        const anyLength: any = length;
+        // Ora è possibile utilizzare anyLength come valore di tipo any
+        this.length = anyLength;
+      }
+    });
+  }
+
+  // Get all products
+  getAllProducts(){
+    this.products = this.productService.getAllProducts();
+  }
+
+  // Declare search(event) function
+  search(event: string) {
+    this.products = this.productService.getProducts(event);
+  }
+
 
   isAnImage(image : string): boolean {
     if(image == null || image == "" || !image.startsWith('data:image/')){
       return false;
     }
     return true;
-  }
-
-  getProducts(){
-    this.productService.getProducts().subscribe({
-      next: (data) => {
-        this.products = data;
-      },
-      error: (error) => {
-        console.error(error)
-      }
-    });
   }
 }

@@ -18,7 +18,7 @@ export class ProductManagementComponent {
   products: Product[] = [];
 
   ngOnInit(): void {
-    this.getProducts();
+    this.getAllProducts();
   }
 
   isAnImage(image : string): boolean {
@@ -28,14 +28,7 @@ export class ProductManagementComponent {
     return true;
   }
 
-  getProducts(){
-    this.productService.getProducts().subscribe({
-      next: (data) => {
-        this.products = data;
-      },
-      error: (error) => {
-        console.error(error)
-      }
-    });
+  getAllProducts(){
+    this.products = this.productService.getAllProducts();
   }
 }

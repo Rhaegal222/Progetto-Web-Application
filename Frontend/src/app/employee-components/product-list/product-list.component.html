@@ -1,5 +1,6 @@
 <header>
-    <app-search-bar></app-search-bar>
+    <!--La barra di ricerca passa il valore al metodo search()-->
+    <app-search-bar (searchEvent)="search($event)"></app-search-bar>
     <app-tools-bar></app-tools-bar>
 </header>
 <div class="container">

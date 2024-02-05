@@ -13,8 +13,10 @@
                 <a href="#">Altro</a>
             </div>
         </div>
-        <input type="text" class="search-bar" placeholder="Cerca...">
-        <button class="btn-primary">
+        <!--Barra di ricerca-->
+        <!--Prende il valore dalla barra di ricerca quando clicco sul bottone-->
+        <input type="text" placeholder="Cerca..." [(ngModel)]="searchValue">
+        <button class="btn-primary" (click)="search()">
             <span class="material-icons">search</span>
         </button>
     </div>

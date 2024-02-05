@@ -18,7 +18,8 @@ var boxItemButtons : any;
 
 export class ToolsBarComponent {
   constructor() { }
-
+  
+  // Cambia la vista dei prodotti da lista a griglia e viceversa
   isActive : boolean = true;
 
   changeView() {
@@ -38,7 +39,6 @@ export class ToolsBarComponent {
       box.classList.toggle('list', true);
       box.classList.toggle('grid', false);
     }
-
   }
 
 }
