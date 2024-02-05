@@ -4,19 +4,22 @@
         <!--Menu a tendiba categorie-->
         <div class="dropdown">
             <button class="btn-primary" type="button">
-                <span>Categoria</span>
+                <!--Prende il valore dalla categoria selezionata-->
+                <span>{{category}}</span>
             </button>
             <div class="dropdown-content">
-                <a href="#">Hardware</a>
-                <a href="#">Software</a>
-                <a href="#">Periferiche</a>
-                <a href="#">Altro</a>
+                <!---->
+                <a (click)="setCategory('Tutti')">Tutti</a>
+                <a (click)="setCategory('Hardware')">Hardware</a>
+                <a (click)="setCategory('Software')">Software</a>
+                <a (click)="setCategory('Periferiche')">Periferiche</a>
+                <a (click)="setCategory('Altro')">Altro</a>
             </div>
         </div>
         <!--Barra di ricerca-->
         <!--Prende il valore dalla barra di ricerca quando clicco sul bottone-->
         <input type="text" placeholder="Cerca..." [(ngModel)]="searchValue">
-        <button class="btn-primary" (click)="search()">
+        <button class="btn-primary" (click)="emitEvent()">
             <span class="material-icons">search</span>
         </button>
     </div>

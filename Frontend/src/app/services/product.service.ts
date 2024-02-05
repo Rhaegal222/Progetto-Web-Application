@@ -22,6 +22,7 @@ export class ProductService {
         console.error(error)
       }
     });
+    console.log(this.products);
     return this.products;
   }
 
@@ -31,9 +32,9 @@ export class ProductService {
   }
 
   // Get all products with search and filter
-  getProducts(fieldContent: string){
+  getProducts(fieldContent: string, category: string){
     this.products = [];
-    this.http.get<any>("http://localhost:8080/api/items?search="+fieldContent).subscribe({
+    this.http.get<any>("http://localhost:8080/api/items/"+fieldContent+"/"+category).subscribe({
       next: (data) => {
         this.products = data;
       },
