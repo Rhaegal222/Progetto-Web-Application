@@ -1,6 +1,7 @@
 ## Altre cose da sistemare
 1. Uniformare gli url
 2. Mettere il controllo del ruolo sull'inserimento prodotti (solo admin e magazziniere)
+3. Decidere che api usare
 
 
 ## Gestione dei ruoli
