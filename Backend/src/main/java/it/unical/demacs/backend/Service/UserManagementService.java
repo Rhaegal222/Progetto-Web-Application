@@ -13,20 +13,31 @@ import java.util.ArrayList;
 public class UserManagementService {
 
     public ResponseEntity<?> findAllUser() {
-        ArrayList<User> users = DatabaseHandler.getInstance().getUserDao().findAll().join();
-        return ResponseEntity.ok().body(users);
+        try{
+            DatabaseHandler.getInstance().openConnection();
+            ArrayList<User> users = DatabaseHandler.getInstance().getUserDao().findAll().join();
+            return ResponseEntity.ok().body(users);
+        }
+        finally {
+            DatabaseHandler.getInstance().closeConnection();
+        }
     }
 
     public ResponseEntity<?> banUser(@RequestBody BanRequest banRequest) {
-        String email = banRequest.getEmail();
-        User user = DatabaseHandler.getInstance().getUserDao().findByEmail(email).join();
-        if(user.getBanned()){
-            return ResponseEntity.status(401).body("User is already banned");
+        try{
+            String email = banRequest.getEmail();
+            User user = DatabaseHandler.getInstance().getUserDao().findByEmail(email).join();
+            if(user.getBanned()){
+                return ResponseEntity.status(401).body("User is already banned");
+            }
+            else{
+                user.setBanned(true);
+                DatabaseHandler.getInstance().getUserDao().banningUser(banRequest.getEmail());
+                return ResponseEntity.ok().body("User banned");
+            }
         }
-        else{
-            user.setBanned(true);
-            DatabaseHandler.getInstance().getUserDao().banningUser(banRequest.getEmail());
-            return ResponseEntity.ok().body("User banned");
+        finally {
+            DatabaseHandler.getInstance().closeConnection();
         }
 
     }
