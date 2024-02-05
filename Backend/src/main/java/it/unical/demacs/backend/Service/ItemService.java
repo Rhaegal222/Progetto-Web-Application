@@ -3,7 +3,6 @@ package it.unical.demacs.backend.Service;
 import it.unical.demacs.backend.Persistence.Dao.Postgres.ItemProxy;
 import it.unical.demacs.backend.Persistence.DatabaseHandler;
 import it.unical.demacs.backend.Persistence.Model.Item;
-import it.unical.demacs.backend.Persistence.Model.User;
 import it.unical.demacs.backend.Service.Request.GetItemRequest;
 import it.unical.demacs.backend.Service.Request.InsertItemRequest;
 import org.springframework.http.HttpStatus;
@@ -11,10 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 @Service
 public class ItemService {
@@ -67,7 +64,7 @@ public class ItemService {
         return ResponseEntity.ok().body(items);
     }
 
-    public ResponseEntity<?> getItem(@RequestBody GetItemRequest getItemRequest) {
+    public ResponseEntity<?> getItemProxy(@RequestBody GetItemRequest getItemRequest) {
         long idItem = getItemRequest.getIdItem();
             ItemProxy item = (ItemProxy) DatabaseHandler.getInstance().getItemDao().findByPrimaryKey(idItem).join();
             if (item == null) {
@@ -83,19 +80,4 @@ public class ItemService {
 
     }
 
-
-
-    public ResponseEntity<?> getItemProxy(long idItem) {
-        try {
-            Item item = DatabaseHandler.getInstance().getItemDao().findByPrimaryKey(idItem).join();
-            if (item == null) {
-                return ResponseEntity.badRequest().body("{\"message\": \"No item found\"}");
-            } else {
-                return ResponseEntity.ok(item);
-            }
-        }
-        finally {
-            DatabaseHandler.getInstance().closeConnection();
-        }
-    }
 }

@@ -1,8 +1,6 @@
 package it.unical.demacs.backend.Persistence.Dao.Postgres;
 
 import it.unical.demacs.backend.Persistence.Model.Item;
-import it.unical.demacs.backend.Persistence.Model.User;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

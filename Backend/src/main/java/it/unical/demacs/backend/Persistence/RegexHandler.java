@@ -30,7 +30,7 @@ public class RegexHandler {
 
         Pattern pattern = Pattern.compile(regex);// Compila l'espressione regolare in un oggetto Pattern
         Matcher matcher = pattern.matcher(string);// Crea un oggetto Matcher per confrontare la stringa con la regex
-        return matcher.matches();
+        return !matcher.matches();
     }
 
     public boolean checkEmail(String email) {

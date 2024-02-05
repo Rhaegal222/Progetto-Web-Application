@@ -72,6 +72,7 @@ public class UserDaoPostgres implements UserDao {
             throw new RuntimeException(e);
         }
     }
+
     @Override
     @Async
     public CompletableFuture<User> findByEmail(String email) {
@@ -197,7 +198,7 @@ public class UserDaoPostgres implements UserDao {
             CompletableFuture.completedFuture(rowsAffected > 0);
             return;
         } catch (SQLException e) {
-            e.printStackTrace();  // In una situazione di produzione, gestire l'eccezione in modo appropriato
+            e.fillInStackTrace();
         }
         CompletableFuture.completedFuture(false);
     }

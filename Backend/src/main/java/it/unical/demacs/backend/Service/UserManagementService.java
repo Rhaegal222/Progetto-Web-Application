@@ -18,7 +18,8 @@ public class UserManagementService {
     }
 
     public ResponseEntity<?> banUser(@RequestBody BanRequest banRequest) {
-        User user = DatabaseHandler.getInstance().getUserDao().findByEmail(banRequest.getEmail()).join();
+        String email = banRequest.getEmail();
+        User user = DatabaseHandler.getInstance().getUserDao().findByEmail(email).join();
         if(user.getBanned()){
             return ResponseEntity.status(401).body("User is already banned");
         }

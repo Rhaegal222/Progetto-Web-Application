@@ -6,7 +6,6 @@ import it.unical.demacs.backend.Service.Request.LoginRequest;
 import it.unical.demacs.backend.Service.Response.JwtAuthResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +29,7 @@ public class AuthenticationService{
                     return ResponseEntity.status(401).body("{\"message\": \"User is banned\"}");
                 }
                 else{
-                    return ResponseEntity.ok(new JwtAuthResponse(jwtService.generateToken((UserDetails) user)));
+                    return ResponseEntity.ok(new JwtAuthResponse(jwtService.generateToken(user)));
                 }
             } else {
                 return ResponseEntity.badRequest().body("{\"message\": \"Wrong username/password\"}");

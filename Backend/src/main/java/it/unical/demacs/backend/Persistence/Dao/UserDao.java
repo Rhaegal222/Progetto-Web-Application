@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 
 public interface UserDao {
-    public CompletableFuture<ArrayList<User>> findAll(); //trova tutti gli utenti
-    public CompletableFuture<User> findByPrimaryKey(long id_user); //trova un utente tramite id_user
-    public CompletableFuture<User> findByEmail(String email); //trova un utente tramite email
-    public CompletableFuture<Boolean> insertUser(User user);//inserisce un nuovo utente
-    public CompletableFuture<Boolean> deleteUser(String username); //elimina un utente
-    public void banningUser(String email); //banna un utente
-    public boolean checkEmail(String email);
-    public String selectPassword(String username);
+    CompletableFuture<ArrayList<User>> findAll(); //trova tutti gli utenti
+    CompletableFuture<User> findByPrimaryKey(long id_user); //trova un utente tramite id_user
+    CompletableFuture<User> findByEmail(String email); //trova un utente tramite email
+    CompletableFuture<Boolean> insertUser(User user);//inserisce un nuovo utente
+    CompletableFuture<Boolean> deleteUser(String username); //elimina un utente
+    void banningUser(String email); //banna un utente
+    boolean checkEmail(String email);
+    String selectPassword(String username);
 
     String autoIncrement();
 }

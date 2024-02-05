@@ -24,7 +24,7 @@ public class RegistrationService {
             return ResponseEntity.badRequest().body("{\"message\": \"Missing fields\"}");
         }
         else {
-            if(!RegexHandler.getInstance().checkOnlyChar(name) || !RegexHandler.getInstance().checkOnlyChar(surname)){
+            if(RegexHandler.getInstance().checkOnlyChar(name) || RegexHandler.getInstance().checkOnlyChar(surname)){
                 return ResponseEntity.badRequest().body("{\"message\": \"Name and surname must contain only letters\"}");
             }
             else{
