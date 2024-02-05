@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200")
 public class RegistrationController {
-    //Arrivano le richieste HTTP
+
     private final RegistrationService registrationService;
 
     @PostMapping("/api/registration")

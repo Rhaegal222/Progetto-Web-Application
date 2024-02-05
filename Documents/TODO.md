@@ -1,3 +1,8 @@
+## Altre cose da sistemare
+1. Uniformare gli url
+2. Mettere il controllo del ruolo sull'inserimento prodotti (solo admin e magazziniere)
+
+
 ## Gestione dei ruoli
 
 Se il ruolo è null all'utente esce: "in attesa di approvazone da parte dell'amministratore"

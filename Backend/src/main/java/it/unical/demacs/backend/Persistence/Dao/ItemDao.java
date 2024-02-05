@@ -18,4 +18,7 @@ public interface ItemDao {
     CompletableFuture<Boolean> updateItem(Item Item);
 
     CompletableFuture<Boolean> deleteItem(Long id);
+
+    CompletableFuture<ArrayList<Item>> findByCategory(String category);
+
 }

@@ -12,13 +12,17 @@ public class UserManagementController {
 
     private final UserManagementService userManagementService;
 
+    // POS
+    @PostMapping("/api/ban-user")
+    public ResponseEntity<?> banUser(@RequestBody BanRequest banRequest){
+        return userManagementService.banUser(banRequest);
+    }
+
+    // GET
     @GetMapping("/api/user-management")
     public ResponseEntity<?> findAllUser(){
         return userManagementService.findAllUser();
     }
 
-    @PostMapping("/api/ban-user")
-    public ResponseEntity<?> banUser(@RequestBody BanRequest banRequest){
-        return userManagementService.banUser(banRequest);
-    }
+
 }

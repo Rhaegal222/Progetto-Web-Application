@@ -3,8 +3,7 @@ package it.unical.demacs.backend.Service;
 import it.unical.demacs.backend.Persistence.Dao.Postgres.ItemProxy;
 import it.unical.demacs.backend.Persistence.DatabaseHandler;
 import it.unical.demacs.backend.Persistence.Model.Item;
-import it.unical.demacs.backend.Service.Request.GetItemRequest;
-import it.unical.demacs.backend.Service.Request.InsertItemRequest;
+import it.unical.demacs.backend.Service.Request.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -24,17 +23,15 @@ public class ItemService {
         String image = insertItemRequest.getImage();
 
         try {
-            // Check if the item already exists by name
-            CompletableFuture<Item> existingItemFuture = DatabaseHandler.getInstance().getItemDao().findByName(name);
-            Item existingItem = existingItemFuture.get();
+            DatabaseHandler.getInstance().openConnection();
+
+            Item  existingItem = DatabaseHandler.getInstance().getItemDao().findByName(name).join();
 
             if (existingItem.getIdItem() != null) {
-                // Item with the same name already exists, return an error response
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body("Item with name '" + name + "' already exists.");
             }
 
-            // Item doesn't exist, proceed with insertion
             Item newItem = new Item();
             newItem.setName(name);
             newItem.setType(type);
@@ -57,15 +54,27 @@ public class ItemService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error processing the request: " + e.getMessage());
         }
+        finally {
+            DatabaseHandler.getInstance().closeConnection();
+        }
     }
 
     public ResponseEntity<?> allItems() {
-        ArrayList<Item> items = DatabaseHandler.getInstance().getItemDao().findAll().join();
-        return ResponseEntity.ok().body(items);
+        try{
+            DatabaseHandler.getInstance().openConnection();
+            ArrayList<Item> items = DatabaseHandler.getInstance().getItemDao().findAll().join();
+            return ResponseEntity.ok().body(items);
+        }
+        finally {
+            DatabaseHandler.getInstance().closeConnection();
+        }
+
     }
 
     public ResponseEntity<?> getItemProxy(@RequestBody GetItemRequest getItemRequest) {
-        long idItem = getItemRequest.getIdItem();
+        try {
+            DatabaseHandler.getInstance().openConnection();
+            long idItem = getItemRequest.getIdItem();
             ItemProxy item = (ItemProxy) DatabaseHandler.getInstance().getItemDao().findByPrimaryKey(idItem).join();
             if (item == null) {
                 return ResponseEntity.badRequest().body("{\"message\": \"No item found\"}");
@@ -77,7 +86,32 @@ public class ItemService {
 
                 return ResponseEntity.ok(responseBody);
             }
+        }
+        finally {
+            DatabaseHandler.getInstance().closeConnection();
+        }
 
     }
 
+    public ResponseEntity<?> searchItem(@RequestBody SearchItemRequest searchItemRequest) {
+        try{
+            DatabaseHandler.getInstance().openConnection();
+            String category = searchItemRequest.getCategory();
+            String fieldContent = searchItemRequest.getFieldContent();
+
+            ArrayList<Item> items = DatabaseHandler.getInstance().getItemDao().findByCategory(category).join();
+
+            for (Item item : items) {
+                if (item.getName().contains(fieldContent) || item.getDescription().contains(fieldContent)) {
+                    return ResponseEntity.ok().body(item);
+                }
+            }
+
+            return ResponseEntity.badRequest().body("No item found");
+        }
+        finally {
+            DatabaseHandler.getInstance().closeConnection();
+        }
+
+    }
 }

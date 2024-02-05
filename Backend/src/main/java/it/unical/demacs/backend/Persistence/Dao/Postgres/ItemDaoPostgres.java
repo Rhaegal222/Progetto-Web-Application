@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 
-public class ItemDaoPostgres implements ItemDao{
+public class ItemDaoPostgres implements ItemDao {
     Connection con;
     public ItemDaoPostgres(Connection con){
         this.con = con;
@@ -142,6 +142,39 @@ public class ItemDaoPostgres implements ItemDao{
         }
         return CompletableFuture.completedFuture(true);
     }
+
+    @Override
+    @Async
+    public CompletableFuture<ArrayList<Item>> findByCategory(String category) {
+        ArrayList<Item> items = new ArrayList<>();
+        String query = "SELECT * FROM items WHERE type = ?";
+        try (
+                PreparedStatement st = this.con.prepareStatement(query)) {
+            st.setString(1, category);
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    Item item = new Item();
+                    item.setIdItem(rs.getInt("id_item"));
+                    item.setName(rs.getString("name"));
+                    item.setType(rs.getString("type"));
+                    item.setImage(rs.getString("image_base64"));
+                    if(rs.getLong("assigned_user") != 0){
+                        item.setAssignedUser(new User(rs.getLong("assigned_user")));
+                    }
+                    else{
+                        item.setAssignedUser(null);
+                    }
+                    items.add(item);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return CompletableFuture.completedFuture(items);
+    }
+
+
+
 
     private void settingItem(Item Item, PreparedStatement st) throws SQLException {
         st.setString(1, Item.getName());
