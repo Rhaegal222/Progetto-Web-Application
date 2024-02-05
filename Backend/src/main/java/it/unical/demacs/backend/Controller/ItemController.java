@@ -12,22 +12,24 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200")
 public class ItemController {
-    //Arrivano le richieste HTTP
+
     private final ItemService itemService;
 
+    // POST
     @PostMapping("/api/insertItem")
     public ResponseEntity<?> insertItem(@RequestBody InsertItemRequest insertItemRequest) {
         return itemService.insertItem(insertItemRequest);
     }
 
-    @GetMapping("/api/allItems")
-    public ResponseEntity<?> allItems(){
-        return itemService.allItems();
-    }
-
     @PostMapping("/api/getItem")
     public ResponseEntity<?> getItem(@RequestBody GetItemRequest getItemRequest){
         return itemService.getItemProxy(getItemRequest);
+    }
+
+    // GET
+    @GetMapping("/api/allItems")
+    public ResponseEntity<?> allItems(){
+        return itemService.allItems();
     }
 
     @GetMapping("/api/searchItem")

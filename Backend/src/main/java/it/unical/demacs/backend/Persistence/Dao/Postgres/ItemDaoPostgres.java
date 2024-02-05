@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 
-public class ItemDaoPostgres implements ItemDao{
+public class ItemDaoPostgres implements ItemDao {
     Connection con;
     public ItemDaoPostgres(Connection con){
         this.con = con;
