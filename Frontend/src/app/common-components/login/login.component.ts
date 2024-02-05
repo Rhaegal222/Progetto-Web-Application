@@ -19,7 +19,7 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.test();
+    //this.test();
   }
   
   email = new FormControl();
@@ -39,59 +39,13 @@ export class LoginComponent {
     var email = 'john_doe@gmail.com';
     var password = 'P@ssw0rd1';
 
-    if (this.authtoken.accessToken == '')  {
-      this.authService.login(email, password).subscribe({
-        next: (response) => {
-        this.authtoken = response;
-        if(this.authtoken.accessToken != ''){
-            if (typeof localStorage !== 'undefined' ) {
-              console.log('Local storage available');
-              localStorage.setItem('token', this.authtoken.accessToken);
-              this.router.navigate(['/product-list']);
-              console.log('Response:', response);
-            } else {
-              console.error('Local storage not available');
-            }
-          }
-        },
-        error: (error) => {
-          if (error.status == 401) {
-            console.error('Login failed:', error.error.message);
-          } else {
-            console.error('An error occurred:', error.error.message);
-          }
-        }
-      });
-    }
+    this.authService.login(email, password);
   }
 
   login(){
     var email = this.email.value;
     var password = this.password.value;
 
-    if (this.authtoken.accessToken == '')  {
-      this.authService.login(email, password).subscribe({
-        next: (response) => {
-        this.authtoken = response;
-          if(this.authtoken.accessToken != ''){
-            if (typeof localStorage !== 'undefined' ) {
-              console.log('Local storage available');
-              localStorage.setItem('token', this.authtoken.accessToken);
-              this.router.navigate(['/product-list']);
-              console.log('Response:', response);
-            } else {
-              console.error('Local storage not available');
-            }
-          }
-        },
-        error: (error) => {
-          if (error.status == 401) {
-            console.error('Login failed:', error.error.message);
-          } else {
-            console.error('An error occurred:', error.error.message);
-          }
-        }
-      });
-    }
+    this.authService.login(email, password);
   }
 }
