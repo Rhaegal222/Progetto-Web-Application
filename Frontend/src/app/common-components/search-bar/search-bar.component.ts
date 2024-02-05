@@ -10,11 +10,29 @@ import { Output, EventEmitter } from '@angular/core'; // New line with Output an
   ]
 })
 export class SearchBarComponent {
-  searchValue: string = '';
-  @Output() searchEvent = new EventEmitter<string>(); // New line with Output and EventEmitter
 
-  // Emit the search value
-  search(){
-    this.searchEvent.emit(this.searchValue);
+  searchValue: string = '';
+  category: string = 'all';
+
+  setCategory(category: string){
+    // prende il valore del nome del bottone che la chiama
+    this.category = category;
   }
+
+  @Output() onEvent = new EventEmitter<MyEventData>();
+
+  constructor() {}
+
+  emitEvent() {
+    const eventData: MyEventData = {
+      firstString: this.searchValue,
+      secondString: this.category,
+    };
+    this.onEvent.emit(eventData);
+  }
+}
+
+export interface MyEventData {
+  firstString: string;
+  secondString: string;
 }

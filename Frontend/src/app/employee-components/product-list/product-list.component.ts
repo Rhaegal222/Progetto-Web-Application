@@ -39,16 +39,16 @@ export class ProductListComponent{
     });
   }
 
+
+  onEvent(eventData: MyEventData) {
+    console.log(eventData.firstString, eventData.secondString);
+  }
+
   // Get all products
   getAllProducts(){
     this.products = this.productService.getAllProducts();
+    console.log(this.products);
   }
-
-  // Declare search(event) function
-  search(event: string) {
-    this.products = this.productService.getProducts(event);
-  }
-
 
   isAnImage(image : string): boolean {
     if(image == null || image == "" || !image.startsWith('data:image/')){
@@ -56,4 +56,9 @@ export class ProductListComponent{
     }
     return true;
   }
+}
+
+export interface MyEventData {
+  firstString: string;
+  secondString: string;
 }
