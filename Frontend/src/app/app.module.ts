@@ -31,7 +31,6 @@ import { RequestsForwardedComponent } from './employee-components/requests-forwa
 import { AddProductComponent } from './storekeeper-components/product-management/add-product/add-product.component';
 import { SearchBarComponent } from './common-components/search-bar/search-bar.component';
 import { ToolsBarComponent } from './common-components/tools-bar/tools-bar.component';
-
 import { AuthService } from './services/auth.service';
 import { PageNotFoundComponent } from './common-components/page-not-found/page-not-found.component';
 import { ProfileComponent } from './common-components/profile/profile.component';
