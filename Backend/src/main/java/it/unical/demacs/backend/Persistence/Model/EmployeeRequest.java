@@ -11,7 +11,7 @@ public class EmployeeRequest {
     private long idUser;
     private long idItem;
     private String requestContent;
-    private Data data;
+    private Data requestDate;
 
 
 }
