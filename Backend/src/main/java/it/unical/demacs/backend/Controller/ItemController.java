@@ -31,7 +31,7 @@ public class ItemController {
     }
 
     @GetMapping("/api/searchItem")
-    public ResponseEntity<?> searchItem(@RequestParam SearchItemRequest searchItemRequest){
+    public ResponseEntity<?> searchItem(@RequestBody SearchItemRequest searchItemRequest){
         return itemService.searchItem(searchItemRequest);
     }
 
