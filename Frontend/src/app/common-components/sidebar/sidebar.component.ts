@@ -110,20 +110,25 @@ export class SidebarComponent implements OnInit {
   }
 
   slideInSidebar(sidebar: HTMLElement, arrow: HTMLElement){
-    sidebar.style.zIndex = '-1';
+    sidebar.classList.toggle('menu-close', false);
+    sidebar.classList.toggle('menu-open', true);
 
-    let pos = -250; 
-    sidebar.style.left = pos + 'px';
+    let posA = -250;
+    let posB = 10; 
+    sidebar.style.left = posA + 'px';
+    arrow.style.left = posB + 'px';
 
     function frame() {
-      if (pos == 0) {
+      if (posA == 0) {
         sidebar.classList.toggle('menu-open', true);
-        sidebar.classList.toggle('menu-close', false);
+        arrow.classList.toggle('arrow-left', true);
         sidebar.removeAttribute('style');
+        arrow.removeAttribute('style');
       } else {
-        pos+=10; 
-        sidebar.style.left = pos + 'px';
-        arrow.style.left = (pos + 250 + 10) + 'px';
+        posA+=10;
+        posB+=10; 
+        sidebar.style.left = posA + 'px';
+        arrow.style.left = posB + 'px';
         requestAnimationFrame(frame);
       }
     }
@@ -131,21 +136,27 @@ export class SidebarComponent implements OnInit {
   }
 
   slideOutSidebar(sidebar: HTMLElement, arrow: HTMLElement){
-    sidebar.style.zIndex = '-1';
-
-    let pos = 0; 
-    sidebar.style.left = pos + 'px';
+    let posA = 0;
+    let posB = 260;
+    sidebar.style.left = posA + 'px';
+    sidebar.style.left = posB + 'px';
 
     function frame() {
-      if (pos == -250) {
-        sidebar.classList.toggle('menu-open', false);
-        sidebar.classList.toggle('menu-close', true);
-        sidebar.removeAttribute('style');
-      } else {
-        pos-=10; 
-        sidebar.style.left = pos + 'px';
-        arrow.style.left = (pos - 10) + 'px';
+      if (posA > -265){
+        posA-=10;
+        posB-=10;
+        sidebar.style.left = posA + 'px';
+        arrow.style.left = posB + 'px';
         requestAnimationFrame(frame);
+        if (posA == -250) {
+          sidebar.classList.toggle('menu-open', false);
+          sidebar.classList.toggle('menu-close', true);
+          sidebar.removeAttribute('style');
+        }
+      } else {
+        arrow.classList.toggle('arrow-left', false);
+        arrow.classList.toggle('arrow-right', true);
+        arrow.removeAttribute('style');
       }
     }
     requestAnimationFrame(frame);   
@@ -160,7 +171,6 @@ export class SidebarComponent implements OnInit {
           clearInterval(id);
           arrow.classList.toggle('arrow-left', true);
           arrow.classList.toggle('arrow-right', false);
-          arrow.removeAttribute('style');
         } else {
           pos-=3; 
           arrow.style.transform = 'matrix(1, 0, 0, 1, 0, 0) rotate(' + pos + 'deg)';
@@ -174,7 +184,6 @@ export class SidebarComponent implements OnInit {
           clearInterval(id);
           arrow.classList.toggle('arrow-left', false);
           arrow.classList.toggle('arrow-right', true);
-          arrow.removeAttribute('style');
         } else {
           pos+=3;
           arrow.style.transform = 'matrix(1, 0, 0, 1, 0, 0) rotate(' + pos + 'deg)';

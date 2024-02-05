@@ -8,7 +8,6 @@
             <div class="item-body">
                 <div *ngIf="!isAnImage(product.image)" class="item-no-img">
                     <span class="material-icons">image</span>
-                    <p>Immagine non disponibile</p>
                 </div>
                 <div *ngIf="isAnImage(product.image)" class="item-img">
                     <img [src]="product.image">
