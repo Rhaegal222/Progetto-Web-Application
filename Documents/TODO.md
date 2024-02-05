@@ -1,6 +1,5 @@
 ## Altre cose da sistemare
 1. Uniformare gli url
-2. Cambiare il backend da item a product (usare product ovunque)
 
 
 ## Gestione dei ruoli
