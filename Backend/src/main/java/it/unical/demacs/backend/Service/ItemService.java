@@ -98,8 +98,13 @@ public class ItemService {
             DatabaseHandler.getInstance().openConnection();
             String category = searchItemRequest.getCategory();
             String fieldContent = searchItemRequest.getFieldContent();
-
-            ArrayList<Item> items = DatabaseHandler.getInstance().getItemDao().findByCategory(category).join();
+            ArrayList<Item> items;
+            if(category.equals("all")){
+                items = DatabaseHandler.getInstance().getItemDao().findAll().join();
+            }
+            else{
+                items = DatabaseHandler.getInstance().getItemDao().findByCategory(category).join();
+            }
 
             for (Item item : items) {
                 if (item.getName().contains(fieldContent) || item.getDescription().contains(fieldContent)) {
