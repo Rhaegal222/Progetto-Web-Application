@@ -68,6 +68,12 @@ export class ProductManagementComponent {
     this.addProductWindow = eventData.addProductWindow;
   }
 
+  onClose(eventData: addProductEventData) {
+    console.log(eventData.addProductWindow);
+    this.addProductWindow = eventData.addProductWindow;
+  }
+
+
   // Get all products
   getAllProducts(){
     this.productService.getAllProducts().subscribe({

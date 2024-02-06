@@ -39,3 +39,11 @@
     background-color: #00000022; /* Colore di sfondo al passaggio del mouse */
     border-color: #000; /* Colore del bordo al passaggio del mouse */
 }
+
+.btn-row {
+    display: flex; /* Disponi gli elementi in riga */
+    justify-content: center; /* Allinea al centro */
+    align-items: center; /* Allinea al centro */
+    gap: 1rem; /* Spazio tra i bottoni */
+    margin: 1rem 0; /* Spazio sopra e sotto */
+}

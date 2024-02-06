@@ -1,25 +1,37 @@
+
 <div class="container">
     <div class="content">
-        <h2>Registrati</h2>
+        <header>        
+            <h1>Aggiungi prodotto</h1>
+            <!--Croce per chiudere la finestra-->
+            <span (click)="onCloseEvent()" class="material-icons close">close</span>
+        </header>
         <form>
             <div class="form-group">
-                <input type="text" class="form-control" id="firstName" placeholder="Nome">
+                <input type="text" class="form-control" id="name" placeholder="Nome">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="lastName" placeholder="Cognome">
+                <input type="text" class="form-control" id="type" placeholder="Categoria">
             </div>
             <div class="form-group">
-                <input type="email" class="form-control" id="email" placeholder="Email">
+                <input type="text" class="form-control" id="location" placeholder="Posizione">
             </div>
-            <div class="form-group position-relative">
-                <input class="form-control" id="password" placeholder="Password" name="password">
-
-                <button type="button" class="btn btn-outline-secondary position-absolute end-0 top-0">
-                    <i class="eye-icon bi bi-eye-slash"></i>
-                    <i class="eye-icon bi bi-eye"></i>
-                </button>
+            <div class="form-group">
+                <!--Metti un textfield-->
+                <textarea class="form-control description" name="myTextArea" placeholder="Descrizione" rows="4" cols="50"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Registrati</button>
+            <div class="form-group">
+                <span class="form-control" *ngIf="images.length==0"> Aggiungi immagine </span>
+                <div class="form-control" *ngFor="let image of images" class="image">
+                    <img [src]="image">
+                    <span class="material-icons">delete</span>
+                </div>
+            </div>
+            <div class="form-group btn-row">
+                <!--Bottone per aggiungere le immagini-->
+                <button (click)="onCloseEvent()" class="btn btn-primary" type="button">Annulla</button>
+                <button class="btn btn-primary" type="button">Salva</button>
+            </div>
         </form>
     </div>
 </div>

@@ -28,7 +28,7 @@
         <h1>Nessun prodotto</h1>
     </div>
     <div *ngIf="addProductWindow" class="add-product">
-        <app-add-product></app-add-product>
+        <app-add-product (onEvent)="onClose($event)"></app-add-product>
     </div>
 </div>
 
