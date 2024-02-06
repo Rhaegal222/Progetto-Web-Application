@@ -111,11 +111,13 @@ public class ItemDaoPostgres implements ItemDao {
         try (
                 PreparedStatement st = this.con.prepareStatement(query)) {
             settingItem(Item, st);
-            st.executeUpdate();
+            int rowsAffected = st.executeUpdate();
+            st.close();
+            return CompletableFuture.completedFuture(rowsAffected > 0);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.fillInStackTrace();
         }
-        return CompletableFuture.completedFuture(true);
+        return CompletableFuture.completedFuture(false);
     }
 
     @Override

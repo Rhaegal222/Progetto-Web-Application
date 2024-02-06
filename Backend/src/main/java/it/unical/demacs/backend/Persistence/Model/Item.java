@@ -1,5 +1,6 @@
 package it.unical.demacs.backend.Persistence.Model;
 
+import it.unical.demacs.backend.Persistence.DatabaseHandler;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,4 +27,14 @@ public class Item {
         this.assignedUser = assignedUser;
     }
 
+    public Item(long requestedItem) {
+        Item i = DatabaseHandler.getInstance().getItemDao().findByPrimaryKey(requestedItem).join();
+        this.idItem = i.getIdItem();
+        this.name = i.getName();
+        this.type = i.getType();
+        this.description = i.getDescription();
+        this.location = i.getLocation();
+        this.image = i.getImage();
+        this.assignedUser = i.getAssignedUser();
+    }
 }
