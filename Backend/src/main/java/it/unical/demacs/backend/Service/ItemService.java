@@ -79,7 +79,10 @@ public class ItemService {
             ArrayList<Item> result = new ArrayList<>();
             if (!Objects.equals(search, "")) {
                 for (Item item : items) {
-                    if (item.getName().contains(search) || item.getDescription().contains(search)) {
+                    String name = item.getName().toLowerCase();
+                    String description = item.getDescription().toLowerCase();
+                    String searchLower = search.toLowerCase();
+                    if (name.contains(searchLower) || description.contains(searchLower)) {
                         result.add(item);
                     }
                 }
