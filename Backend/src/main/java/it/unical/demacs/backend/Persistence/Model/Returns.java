@@ -7,7 +7,7 @@ import java.sql.Date;
 
 @Getter
 @Setter
-public class Return {
+public class Returns {
     private long idReturn;
     private User returningUser;
     private Item returnedItem;

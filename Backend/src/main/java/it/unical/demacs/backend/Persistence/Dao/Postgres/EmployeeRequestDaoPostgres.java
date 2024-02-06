@@ -20,8 +20,8 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
     public CompletableFuture<ArrayList<EmployeeRequest>> findAll() {
         ArrayList<EmployeeRequest> employeeRequests = new ArrayList<>();
         try {
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM employee_request");
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM employee_request");
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 EmployeeRequest employeeRequest = new EmployeeRequest();
                 employeeRequest.setIdEmployeeRequest(rs.getLong("id_employee_request"));
