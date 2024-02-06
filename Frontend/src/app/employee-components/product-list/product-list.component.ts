@@ -9,7 +9,9 @@ import { get } from 'http';
   templateUrl: './product-list.component.html',
   styleUrls: [
     './product-list.component.css',
-    '../../styles/buttons.css',
+    '../../styles/grid.css',
+    '../../styles/list.css',
+    '../../styles/buttons.css'
   ]
 })
 export class ProductListComponent{

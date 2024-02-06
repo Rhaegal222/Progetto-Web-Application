@@ -7,6 +7,8 @@ import { Product } from '../../model/product';
   templateUrl: './product-management.component.html',
   styleUrls: [
     './product-management.component.css',
+    '../../styles/grid.css',
+    '../../styles/list.css',
     '../../styles/buttons.css'
   ]
 })

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-menu-storekeeper',
@@ -6,20 +7,13 @@ import { Component } from '@angular/core';
   styleUrl: '../menus.component.css'
 })
 export class MenuStorekeeperComponent {
-
-  authToken: string = '';
   isAuth: boolean = false;
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   ngDoCheck() {
-    if (typeof localStorage !== 'undefined') {
-      this.authToken = localStorage.getItem('token') || '';
-      if (this.authToken) {
-        this.isAuth = true;
-      } else {
-        this.isAuth = false;
-      }
+    if(this.authService.isAuthenticated() && (this.authService.isStorekeeper() || this.authService.isAdmin())) {
+      this.isAuth = true;
     } else {
       this.isAuth = false;
     }

@@ -2,15 +2,27 @@
 <!---Barra degli strumenti--->
     <div class="tools-bar">
         <!--Se clicco cambia la visualizzazione a griglia con quella a elenco-->
-        <div (click)="changeView()" class="view-button" [ngClass]="{'active': isActive}">
+        <div class="view-button">
             <!--Menu bottone per impostare la vista a elenco-->
-            <button *ngIf="!isActive" class="btn-primary" type="button">
+            <button (click)="changeView()" *ngIf="!isActive" class="btn-primary" type="button">
                 <span class="material-icons">view_list</span>
             </button>
             <!--Bottone per impostare la vista a griglia-->
-            <button *ngIf="isActive" class="btn-primary" type="button">
+            <button (click)="changeView()" *ngIf="isActive" class="btn-primary" type="button">
                 <span class="material-icons">view_module</span>
             </button>
+            
+            <button class="btn-primary" type="button">
+                <span class="material-icons">filter_alt</span>
+            </button>
+            <button *ngIf="isAuthorized" class="btn-primary" type="button">
+                <span class="material-icons">add</span>
+            </button>
+            <div class="more">
+                <button class="btn-primary" type="button">
+                    <span class="material-icons">more_vert</span>
+                </button>
+            </div>
         </div>
     </div>
 </header>

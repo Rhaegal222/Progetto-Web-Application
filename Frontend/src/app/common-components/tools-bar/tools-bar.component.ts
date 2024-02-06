@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 var box : any;
-var boxItem : any;
-var boxItemBody : any;
-var boxItemImg : any;
-var boxItemFooter : any;
-var boxItemButtons : any;
 
 @Component({
   selector: 'app-tools-bar',
@@ -17,10 +13,16 @@ var boxItemButtons : any;
 })
 
 export class ToolsBarComponent {
-  constructor() { }
+  constructor(private authService: AuthService) { }
+
+  ngOnInit(): void {
+    this.isAuthorized = this.authService.isAdmin();
+    console.log(this.isAuthorized);
+  }
+
   
-  // Cambia la vista dei prodotti da lista a griglia e viceversa
   isActive : boolean = true;
+  isAuthorized : boolean = false;
 
   changeView() {
     this.isActive = !this.isActive;
@@ -28,8 +30,6 @@ export class ToolsBarComponent {
     box = document.getElementById('box');
     
     if (box == null) return;
-
-    console.log(box);
 
     if(this.isActive) {
       box.classList.toggle('list', false);

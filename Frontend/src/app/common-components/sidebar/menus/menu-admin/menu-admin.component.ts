@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-menu-admin',
@@ -7,19 +8,14 @@ import { Component } from '@angular/core';
 })
 export class MenuAdminComponent {
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   authToken: string = '';
   isAuth: boolean = false;
   
   ngDoCheck() {
-    if (typeof localStorage !== 'undefined') {
-      this.authToken = localStorage.getItem('token') || '';
-      if (this.authToken) {
-        this.isAuth = true;
-      } else {
-        this.isAuth = false;
-      }
+    if(this.authService.isAuthenticated() && this.authService.isAdmin()) {
+      this.isAuth = true;
     } else {
       this.isAuth = false;
     }

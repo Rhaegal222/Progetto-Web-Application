@@ -2,7 +2,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0.5rem;
     background-color: transparent;
     color: white;
     width: 100%;
@@ -11,5 +10,25 @@
 }
 
 .tools-bar button {
-    margin: 0 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.more {
+    display: none;
+}
+
+@media (max-width: 704px) {
+    .tools-bar {
+        flex-direction: column;
+        position: relative;
+    }
+
+    .more {
+        display: block;
+    }
+
+    .tools-bar button {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+    }
 }

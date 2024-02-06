@@ -11,6 +11,55 @@ export class AuthService {
 
   constructor(private http:HttpClient, private router:Router) { }
 
+  // Verifica il ruolo dell'utente autenticato
+  isAdmin(): boolean {
+    if (typeof localStorage !== 'undefined') {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        console.log(payload.role);
+        return payload.role === 'a';
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  isEmployee(): boolean {
+    if (typeof localStorage !== 'undefined') {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        console.log(payload.role);
+        return payload.role === 'e';
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  isStorekeeper(): boolean {
+    if (typeof localStorage !== 'undefined') {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        console.log(payload.role);
+        return payload.role === 's';
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+
+  
+  // Verifica se l'utente è autenticato
   isAuthenticated(): boolean {
     if (typeof localStorage !== 'undefined') {
       return localStorage.getItem('token') ? true : false;
