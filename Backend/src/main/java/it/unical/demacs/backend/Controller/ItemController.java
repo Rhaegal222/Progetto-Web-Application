@@ -37,4 +37,22 @@ public class ItemController {
         return itemService.searchItem(searchItemRequest);
     }
 
+    // GET con parametri di ricerca
+    @GetMapping("/api/items")
+    public ResponseEntity<?> searchItems(
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) String category) {
+        if (search == null && (category == null || category.equals("Tutte le categorie"))) {
+            return itemService.allItems();
+        } else if (search == null) {
+            return itemService.searchItems("", category);
+        } else if (category == null || category.equals("Tutte le categorie")) {
+            return itemService.searchItems(search, "");
+        } else {
+            return itemService.searchItems(search, category);
+        }
+    }
+
+
+
 }

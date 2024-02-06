@@ -39,15 +39,37 @@ export class ProductListComponent{
     });
   }
 
-
-  onEvent(eventData: MyEventData) {
-    console.log(eventData.firstString, eventData.secondString);
-  }
+  onSearch(eventData: MyEventData) {
+    // Se la barra di ricerca è vuota e la categoria è "Tutte le categorie", chiamare getAllProducts.
+    // Altrimenti, chiamare getProducts con i valori correnti di searchValue e category.
+    console.log(eventData);
+    if (eventData.searchValue === "" && eventData.category === "all") {
+      this.getAllProducts();
+    } else {
+      this.productService.getProducts(eventData.searchValue, eventData.category).subscribe({
+        next: (data) => {
+          this.products = data;
+          console.log(this.products);
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      });
+    }
+  }  
+  
 
   // Get all products
   getAllProducts(){
-    this.products = this.productService.getAllProducts();
-    console.log(this.products);
+    this.productService.getAllProducts().subscribe({
+      next: (data) => {
+        this.products = data;
+        console.log(this.products);
+      },
+      error: (error) => {
+        console.error(error)
+      }
+    });
   }
 
   isAnImage(image : string): boolean {
@@ -59,6 +81,6 @@ export class ProductListComponent{
 }
 
 export interface MyEventData {
-  firstString: string;
-  secondString: string;
+  searchValue: string;
+  category: string;
 }

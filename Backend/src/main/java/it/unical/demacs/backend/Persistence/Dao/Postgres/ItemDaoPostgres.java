@@ -149,7 +149,7 @@ public class ItemDaoPostgres implements ItemDao {
     @Async
     public CompletableFuture<ArrayList<Item>> findByCategory(String category) {
         ArrayList<Item> items = new ArrayList<>();
-        String query = "SELECT * FROM items WHERE type = ?";
+        String query = "SELECT * FROM items WHERE LOWER(type) = LOWER(?)";
         try (
                 PreparedStatement st = this.con.prepareStatement(query)) {
             st.setString(1, category);
@@ -159,6 +159,7 @@ public class ItemDaoPostgres implements ItemDao {
                     item.setIdItem(rs.getInt("id_item"));
                     item.setName(rs.getString("name"));
                     item.setType(rs.getString("type"));
+                    item.setDescription(rs.getString("description"));
                     item.setImage(rs.getString("image_base64"));
                     if(rs.getLong("assigned_user") != 0){
                         item.setAssignedUser(new User(rs.getLong("assigned_user")));

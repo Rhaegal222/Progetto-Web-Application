@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 @Service
@@ -69,6 +70,27 @@ public class ItemService {
             DatabaseHandler.getInstance().closeConnection();
         }
 
+    }
+
+    public ResponseEntity<?> searchItems(String search, String category) {
+        try{
+            DatabaseHandler.getInstance().openConnection();
+            ArrayList<Item> items = DatabaseHandler.getInstance().getItemDao().findByCategory(category).join();
+            ArrayList<Item> result = new ArrayList<>();
+            if (!Objects.equals(search, "")) {
+                for (Item item : items) {
+                    if (item.getName().contains(search) || item.getDescription().contains(search)) {
+                        result.add(item);
+                    }
+                }
+            } else {
+                result.addAll(items);
+            }
+            return ResponseEntity.ok().body(result);
+        }
+        finally {
+            DatabaseHandler.getInstance().closeConnection();
+        }
     }
 
     public ResponseEntity<?> getItemProxy(@RequestBody GetItemRequest getItemRequest) {

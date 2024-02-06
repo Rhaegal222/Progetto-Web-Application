@@ -29,6 +29,13 @@ export class ProductManagementComponent {
   }
 
   getAllProducts(){
-    this.products = this.productService.getAllProducts();
+    this.productService.getAllProducts().subscribe({
+      next: (data) => {
+        this.products = data;
+      },
+      error: (error) => {
+        console.error(error)
+      }
+    });
   }
 }
