@@ -18,10 +18,8 @@
 }
 
   /* Stile delle righe del form */
-.form-group .form-check-input{
+.form-group {
   margin-bottom: 15px; /* Spazio tra le righe del form */
-  
-
 }
 
 .position-relative {

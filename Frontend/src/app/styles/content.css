@@ -1,7 +1,7 @@
 .content {
     width: clamp(300px, calc(100vw - 40px), 450px); /* Limita la larghezza massima del form */
     padding: 20px; /* Spazio intorno al contenitore */
-    background-color: #f8f9fa; /* Sfondo leggero per il form */
+    background-color: #e0e0e0; /* Sfondo leggero per il form */
     border-radius: 8px; /* Bordi arrotondati */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
 }

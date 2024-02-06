@@ -14,7 +14,6 @@ import { ProductManagementComponent } from './storekeeper-components/product-man
 import { ProductRequestComponent } from './employee-components/product-request/product-request.component';
 import { ProductReturnComponent } from './employee-components/product-return/product-return.component';
 import { SettingsComponent } from './common-components/settings/settings.component';
-import { LocationManagementComponent } from './admin-components/location-management/location-management.component';
 import { RequestsForwardedComponent } from './employee-components/requests-forwarded/requests-forwarded.component';
 import { PageNotFoundComponent } from './common-components/page-not-found/page-not-found.component';
 import { AuthGuard } from './guards/auth.guard';
@@ -30,7 +29,6 @@ const routes: Routes = [
 
   // Componenti per l'amministratore
   { path: 'user-management', component: UserManagementComponent, canActivate: [AuthGuard] },
-  { path: 'location-management', component: LocationManagementComponent, canActivate: [AuthGuard] },
 
   // Componenti per l'addetto al magazzino e l'amministratore
   { path: 'location-map', component: LocationMapComponent, canActivate: [AuthGuard] },

@@ -97,6 +97,9 @@ export class AuthService {
       },
       error: (error) => {
         this.loginErrorHandling(error);
+        if (typeof localStorage !== 'undefined') {
+          localStorage.removeItem('token');
+        }
       }
     });
   }
@@ -119,6 +122,7 @@ export class AuthService {
   }
 
   logout(){
-    localStorage.removeItem("token");
+    if (typeof localStorage !== 'undefined')
+      localStorage.removeItem("token");
   }
 }

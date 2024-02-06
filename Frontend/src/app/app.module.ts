@@ -22,7 +22,6 @@ import { ProductManagementComponent } from './storekeeper-components/product-man
 import { ProductRequestComponent } from './employee-components/product-request/product-request.component';
 import { ProductReturnComponent } from './employee-components/product-return/product-return.component';
 import { SettingsComponent } from './common-components/settings/settings.component';
-import { LocationManagementComponent } from './admin-components/location-management/location-management.component';
 import { MenuAdminComponent } from './common-components/sidebar/menus/menu-admin/menu-admin.component';
 import { MenuEmployeeComponent } from './common-components/sidebar/menus/menu-employee/menu-employee.component';
 import { MenuStorekeeperComponent } from './common-components/sidebar/menus/menu-storekeeper/menu-storekeeper.component';
@@ -55,7 +54,6 @@ import { ProfileComponent } from './common-components/profile/profile.component'
     ProductRequestComponent,
     ProductReturnComponent,
     SettingsComponent,
-    LocationManagementComponent,
     MenuAdminComponent,
     MenuEmployeeComponent,
     MenuStorekeeperComponent,
