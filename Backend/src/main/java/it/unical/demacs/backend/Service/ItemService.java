@@ -23,6 +23,11 @@ public class ItemService {
         String location = insertItemRequest.getLocation();
         String image = insertItemRequest.getImage();
 
+        if(name == null || type == null || description == null || location == null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("All fields are required.");
+        }
+
         try {
             DatabaseHandler.getInstance().openConnection();
 
@@ -75,9 +80,17 @@ public class ItemService {
     public ResponseEntity<?> searchItems(String search, String category) {
         try{
             DatabaseHandler.getInstance().openConnection();
-            ArrayList<Item> items = DatabaseHandler.getInstance().getItemDao().findByCategory(category).join();
+            ArrayList<Item> items;
             ArrayList<Item> result = new ArrayList<>();
-            if (!Objects.equals(search, "")) {
+
+            if(category.isEmpty()){
+                items = DatabaseHandler.getInstance().getItemDao().findAll().join();
+            }
+            else{
+                items = DatabaseHandler.getInstance().getItemDao().findByCategory(category).join();
+            }
+
+            if (!search.isEmpty()) {
                 for (Item item : items) {
                     String name = item.getName().toLowerCase();
                     String description = item.getDescription().toLowerCase();
@@ -86,7 +99,8 @@ public class ItemService {
                         result.add(item);
                     }
                 }
-            } else {
+            }
+            else {
                 result.addAll(items);
             }
             return ResponseEntity.ok().body(result);

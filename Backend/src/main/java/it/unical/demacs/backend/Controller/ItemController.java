@@ -42,11 +42,11 @@ public class ItemController {
     public ResponseEntity<?> searchItems(
             @RequestParam(required = false) String search,
             @RequestParam(required = false) String category) {
-        if (search == null && (category == null || category.equals("Tutte le categorie"))) {
+        if (search == null && (category == null || category.equals("all"))) {
             return itemService.allItems();
         } else if (search == null) {
             return itemService.searchItems("", category);
-        } else if (category == null || category.equals("Tutte le categorie")) {
+        } else if (category == null || category.equals("all")) {
             return itemService.searchItems(search, "");
         } else {
             return itemService.searchItems(search, category);
