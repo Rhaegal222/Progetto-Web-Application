@@ -30,7 +30,7 @@ getProducts(searchValue: string = '', category: string = ''): Observable<Product
   }
   
   // Aggiungi la categoria ai parametri, se presente e diversa da "Tutte le categorie"
-  if (category && category !== 'Tutte le categorie') {
+  if (category && category !== 'all') {
     params = params.set('category', category);
   }
   

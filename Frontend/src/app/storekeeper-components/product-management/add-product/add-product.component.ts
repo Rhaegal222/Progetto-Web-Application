@@ -14,6 +14,22 @@ import { Component, Output, EventEmitter } from '@angular/core';
 
 export class AddProductComponent {
 
+  constructor() { }
+
+  // Osserva i click e se non sono all'interno del componente, chiudilo
+  ngOnInit(): void {
+    window.addEventListener('keydown', (event) => {
+      const modal = document.getElementById('addProductWindow');
+      if (modal != null) {
+        if (event.key === 'Escape') {
+          this.onCloseEvent();
+        }
+      }
+    });
+
+
+  }
+
   addProductWindow: boolean = true;
 
   images: string[] = [];

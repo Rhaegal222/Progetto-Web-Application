@@ -30,3 +30,12 @@ header{
     z-index: 100;
 }
 
+@media (max-width: 777.20px) {
+    header {
+        top: 55px;
+    }
+    .container {
+        margin-top: 55px;
+    }
+}
+
