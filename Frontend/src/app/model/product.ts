@@ -1,5 +1,5 @@
 export interface Product{
-    id_item:string;
+    id_item?:string;
     name:string;
     type:string;
     description:string;
