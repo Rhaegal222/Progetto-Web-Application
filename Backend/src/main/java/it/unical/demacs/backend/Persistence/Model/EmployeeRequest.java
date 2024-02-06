@@ -1,5 +1,6 @@
 package it.unical.demacs.backend.Persistence.Model;
 
+import it.unical.demacs.backend.Persistence.DatabaseHandler;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,4 +27,12 @@ public class EmployeeRequest {
     public EmployeeRequest() {
     }
 
+    public EmployeeRequest(long idEmployeeRequest) {
+        EmployeeRequest e = DatabaseHandler.getInstance().getEmployeeRequestDao().findByPrimaryKey(idEmployeeRequest).join();
+        this.idEmployeeRequest = e.getIdEmployeeRequest();
+        this.requestingUser = e.getRequestingUser();
+        this.requestedItem = e.getRequestedItem();
+        this.requestContent = e.getRequestContent();
+        this.requestDate = e.getRequestDate();
+    }
 }

@@ -1,6 +1,7 @@
 package it.unical.demacs.backend.Persistence;
 
 import it.unical.demacs.backend.Persistence.Dao.*;
+import it.unical.demacs.backend.Persistence.Dao.Postgres.EmployeeRequestDaoPostgres;
 import it.unical.demacs.backend.Persistence.Dao.Postgres.ItemDaoPostgres;
 import it.unical.demacs.backend.Persistence.Dao.Postgres.UserDaoPostgres;
 import it.unical.demacs.backend.Persistence.Dao.UserDao;
@@ -55,5 +56,8 @@ public class DatabaseHandler {
     }
     public ItemDao getItemDao(){
         return new ItemDaoPostgres(getConnection());
+    }
+    public EmployeeRequestDao getEmployeeRequestDao(){
+        return new EmployeeRequestDaoPostgres(getConnection());
     }
 }

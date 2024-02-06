@@ -1,4 +1,4 @@
-package it.unical.demacs.backend.Controller;
+package it.unical.demacs.backend.Controller.RestController;
 
 import it.unical.demacs.backend.Service.Request.GetItemRequest;
 import it.unical.demacs.backend.Service.Request.InsertItemRequest;

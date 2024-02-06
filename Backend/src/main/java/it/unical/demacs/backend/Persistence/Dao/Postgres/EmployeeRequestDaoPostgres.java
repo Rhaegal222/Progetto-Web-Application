@@ -10,9 +10,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 
-public class EmployeeRequestPostgres implements EmployeeRequestDao {
+public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
     Connection con;
-    public EmployeeRequestPostgres(Connection con){
+    public EmployeeRequestDaoPostgres(Connection con){
         this.con = con;
     }
     @Override
