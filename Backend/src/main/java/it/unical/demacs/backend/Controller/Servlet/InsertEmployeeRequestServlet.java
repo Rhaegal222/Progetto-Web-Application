@@ -7,15 +7,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
-@WebServlet("/api/employeeRequest/delete")
+@WebServlet("/api/employeeRequest/insert")
 @RequiredArgsConstructor
+public class InsertEmployeeRequestServlet extends HttpServlet {
+    private final EmployeeRequestService employeeRequestService;
 
-public class DeleteEmployeeServlet extends HttpServlet {
-
-        private final EmployeeRequestService employeeRequestService;
-
-        @Override
-        protected void doPost(HttpServletRequest request, HttpServletResponse response){
-            employeeRequestService.deleteEmployeeRequest(request, response);
-        }
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+        employeeRequestService.insertEmployeeRequest(request, response);
+    }
 }

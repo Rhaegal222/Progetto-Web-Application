@@ -53,7 +53,8 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
                 long requestedItem = res.getLong("requested_item");
                 String requestContent = res.getString("request_content");
                 Date requestDate = res.getDate("request_date");
-                employeeRequest = new EmployeeRequest(idEmployeeRequest, new User(requestingUser), new Item(requestedItem), requestContent, requestDate);
+                employeeRequest = new EmployeeRequest(new User(requestingUser), new Item(requestedItem), requestContent, requestDate);
+                employeeRequest.setIdEmployeeRequest(idEmployeeRequest);
             }
             return CompletableFuture.completedFuture(employeeRequest);
         } catch (SQLException e) {
@@ -100,7 +101,8 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
                 long requestedItem = res.getLong("requested_item");
                 String requestContent = res.getString("request_content");
                 Date requestDate = res.getDate("request_date");
-                employeeRequest = new EmployeeRequest(idEmployeeRequest, new User(requestingUser), new Item(requestedItem), requestContent, requestDate);
+                employeeRequest = new EmployeeRequest(new User(requestingUser), new Item(requestedItem), requestContent, requestDate);
+                employeeRequest.setIdEmployeeRequest(idEmployeeRequest);
             }
             return CompletableFuture.completedFuture(employeeRequest);
         } catch (SQLException e) {
