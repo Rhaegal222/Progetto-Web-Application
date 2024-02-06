@@ -19,7 +19,7 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    //this.test();
+    this.test();
   }
   
   email = new FormControl();

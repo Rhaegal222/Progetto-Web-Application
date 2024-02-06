@@ -75,7 +75,7 @@ export class AuthService {
     if (error.status == 401) {
       console.error('Login failed:', error.error.message);
     } else {
-      console.error('Error:', error.error.message);
+      console.error(error);
     }
   }
 
@@ -123,6 +123,6 @@ export class AuthService {
 
   logout(){
     if (typeof localStorage !== 'undefined')
-      localStorage.removeItem("token");
+    localStorage.removeItem("token");
   }
 }
