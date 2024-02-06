@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 
 @Component({
@@ -11,6 +10,8 @@ import { Output, EventEmitter } from '@angular/core';
   ]
 })
 export class SearchBarComponent {
+
+  constructor() {}
 
   searchValue: string = '';
   category: string = 'Tutte le categorie';
@@ -43,12 +44,10 @@ export class SearchBarComponent {
     this.key = this.categories.find(element => element.name === category)?.key || 'all';
   }
 
-  @Output() onEvent = new EventEmitter<MyEventData>();
-
-  constructor() {}
+  @Output() onEvent = new EventEmitter<searchEventData>();
 
   searchEvent() {
-    const eventData: MyEventData = {
+    const eventData: searchEventData = {
       searchValue: this.searchValue,
       category: this.key,
     };
@@ -56,7 +55,7 @@ export class SearchBarComponent {
   }
 }
 
-export interface MyEventData {
+export interface searchEventData {
   searchValue: string;
   category: string;
 }

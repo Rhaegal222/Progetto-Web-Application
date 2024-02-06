@@ -1,6 +1,7 @@
 <header>
-    <app-search-bar></app-search-bar>
-    <app-tools-bar></app-tools-bar>
+    <!--La barra di ricerca passa il valore al metodo search()-->
+    <app-search-bar (onEvent)="onSearch($event)"></app-search-bar>
+    <app-tools-bar (onEvent)="onAddProduct($event)"></app-tools-bar>
 </header>
 <div class="container">
     <div id="box" class="grid">
@@ -26,7 +27,8 @@
     <div *ngIf="products.length == 0" class="no-products">
         <h1>Nessun prodotto</h1>
     </div>
+    <div *ngIf="addProductWindow" class="add-product">
+        <app-add-product></app-add-product>
+    </div>
 </div>
-<div class="add-product">
-    <app-add-product></app-add-product>
-</div>
+

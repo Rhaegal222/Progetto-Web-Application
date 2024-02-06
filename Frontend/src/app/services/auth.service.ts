@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../model/user';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { User } from '../model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,6 @@ export class AuthService {
       const token = localStorage.getItem('token');
       if (token) {
         const payload = JSON.parse(atob(token.split('.')[1]));
-        console.log(payload.role);
         return payload.role === 'a';
       } else {
         return false;
@@ -32,7 +31,6 @@ export class AuthService {
       const token = localStorage.getItem('token');
       if (token) {
         const payload = JSON.parse(atob(token.split('.')[1]));
-        console.log(payload.role);
         return payload.role === 'e';
       } else {
         return false;
@@ -47,7 +45,6 @@ export class AuthService {
       const token = localStorage.getItem('token');
       if (token) {
         const payload = JSON.parse(atob(token.split('.')[1]));
-        console.log(payload.role);
         return payload.role === 's';
       } else {
         return false;
@@ -56,8 +53,6 @@ export class AuthService {
       return false;
     }
   }
-
-
   
   // Verifica se l'utente è autenticato
   isAuthenticated(): boolean {

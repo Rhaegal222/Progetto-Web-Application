@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 var box : any;
@@ -41,4 +41,16 @@ export class ToolsBarComponent {
     }
   }
 
+  @Output() onEvent = new EventEmitter<addProductEventData>();
+
+  addProductEvent() {
+    const eventData: addProductEventData = {
+      addProductWindow: true,
+    };
+    this.onEvent.emit(eventData);
+  }
+}
+
+export interface addProductEventData {
+  addProductWindow: boolean;
 }

@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: sticky;
 }
 
 .sidebar-open{
@@ -11,4 +12,5 @@
   margin-right: 32.4px;
   margin-top: 0px;
   margin-bottom: 0px;
+  position: sticky;
 }

@@ -33,6 +33,7 @@ export class AppComponent {
       arrow.style.zIndex = '-1';
       router.classList.toggle('full-width', false);
       router.classList.toggle('sidebar-open', false);
+      router.style.position = 'sticky';
 
       let pos = 250; 
       router.style.marginLeft = pos + 'px';
@@ -61,6 +62,7 @@ export class AppComponent {
       arrow.style.zIndex = '-1';
       router.classList.toggle('full-width', false);
       router.classList.toggle('sidebar-open', false);
+      router.style.position = 'sticky';
 
       let pos = 0; 
       router.style.marginLeft = pos + 'px';

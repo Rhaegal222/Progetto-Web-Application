@@ -1,8 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../model/product';
-import { Observable } from 'rxjs';
-import { get } from 'http';
 
 @Component({
   selector: 'app-product-list',
@@ -15,6 +14,7 @@ import { get } from 'http';
   ]
 })
 export class ProductListComponent{
+  
   constructor(private productService: ProductService) { }
 
   products: Product[] = [];
