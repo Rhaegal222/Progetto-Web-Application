@@ -38,3 +38,27 @@ header .close:hover {
 .form-group span {
     cursor: pointer;
 }
+
+.image-preview-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    height: fit-content;
+    padding: 0;
+    margin: 0;
+    
+}
+
+.image-container {
+    flex: 0 0 auto;          /* Gli elementi non si restringono o si espandono */
+}
+
+.image {
+    display: block;          /* Rimuove lo spazio extra sotto l'immagine */
+    width: 100px;
+    height: 100px;
+}
+

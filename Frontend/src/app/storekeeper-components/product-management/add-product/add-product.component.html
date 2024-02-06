@@ -7,29 +7,38 @@
         </header>
         <form>
             <div class="form-group">
-                <input type="text" class="form-control" id="name" placeholder="Nome">
+                <input type="text" class="form-control" id="name" name="name" [(ngModel)]="name" placeholder="Nome">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="type" placeholder="Categoria">
+                <input type="text" class="form-control" id="category" name="category" [(ngModel)]="type" placeholder="Categoria">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="location" placeholder="Posizione">
+                <textarea class="form-control" id="description" name="description" [(ngModel)]="description" placeholder="Descrizione" rows="4" cols="50"></textarea>
             </div>
             <div class="form-group">
-                <!--Metti un textfield-->
-                <textarea class="form-control description" name="myTextArea" placeholder="Descrizione" rows="4" cols="50"></textarea>
+                <!--checkbox-->
+                <input class="form-check-input" type="checkbox" id="assigned" name="assigned" [(ngModel)]="assigned">
+                <label class="form-check-input label" for="assigned">Assegnato</label>
+            </div>
+            <div *ngIf="assigned" class="form-group">
+                <input class="form-control" type="text" class="form-control" id="assigned_user" name="assigned_user" [(ngModel)]="assigned_user" placeholder="Email dell'assegnatario">
+            </div>
+            <div *ngIf="assigned" class="form-group">
+                <input type="text" class="form-control" id="location" name="location" [(ngModel)]="location" placeholder="Posizione">
             </div>
             <div class="form-group">
-                <span class="form-control" *ngIf="images.length==0"> Aggiungi immagine </span>
-                <div class="form-control" *ngFor="let image of images" class="image">
-                    <img [src]="image">
-                    <span class="material-icons">delete</span>
+                <input class="form-control" type="file"  (change)="addImage($event)" accept="image/*">
+            </div>
+            <div class="form-group">
+                <div class="image-preview-box">
+                    <div class="image-container">
+                        <img *ngIf="image!=''" [src]="image" alt="Immagine caricata" class="image">
+                    </div>
                 </div>
-            </div>
+            </div>                        
             <div class="form-group btn-row">
-                <!--Bottone per aggiungere le immagini-->
                 <button (click)="onCloseEvent()" class="btn btn-primary" type="button">Annulla</button>
-                <button class="btn btn-primary" type="button">Salva</button>
+                <button (click)="onSave()" class="btn btn-primary" type="button">Salva</button>
             </div>
         </form>
     </div>

@@ -18,8 +18,10 @@
 }
 
   /* Stile delle righe del form */
-.form-group {
+.form-group .form-check-input{
   margin-bottom: 15px; /* Spazio tra le righe del form */
+  
+
 }
 
 .position-relative {
@@ -41,10 +43,49 @@
   color: #000; /* Colore dell'icona normale */
 }
 
-  /* Stile della checkbox */
 .form-check-input {
-  width: 20px; /* Larghezza della checkbox */
-  height: 20px; /* Altezza della checkbox */
-  margin-top: 10px; /* Rimuovi margini aggiuntivi */
-  vertical-align: middle; /* Allinea verticalmente */
+  position: absolute;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.form-check-input + label {
+  position: relative;
+  cursor: pointer;
+}
+
+.form-check-input + label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 2px; /* Posiziona il box leggermente più in alto */
+  transform: translateY(-50%);
+  height: 20px;
+  width: 20px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  margin-right: 5px; /* Aggiungi un piccolo margine a destra del box */
+}
+
+/* Quando la checkbox è selezionata, cambia il colore del box */
+.form-check-input:checked + label:before {
+  background-color: #ff0000;
+  border-color: #ff0000;
+}
+
+/* Opzionale: per aggiungere un'icona di spunta quando la checkbox è selezionata */
+.form-check-input:checked + label:after {
+  content: '✔';
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 14px;
+}
+
+/* Stile del label per la checkbox quando si passa il mouse sopra */
+.form-check-input + label:hover:before {
+  border-color: #ff0000;
 }
