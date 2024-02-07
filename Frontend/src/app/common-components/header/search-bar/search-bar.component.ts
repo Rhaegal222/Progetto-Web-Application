@@ -6,12 +6,24 @@ import { Component, Output, EventEmitter } from '@angular/core';
   templateUrl: './search-bar.component.html',
   styleUrls: [
     './search-bar.component.css',
-    '../../styles/buttons.css',
+    '../../../styles/buttons.css',
   ]
 })
 export class SearchBarComponent {
 
   constructor() {}
+
+  ngOnInit(): void {
+    // Aggiunge un listener per il tasto "Enter" alla barra di ricerca
+    const search = document.getElementById('search');
+    if (search != null) {
+      search.addEventListener('keyup', (event) => {
+        if (event.key === 'Enter') {
+          this.searchEvent();
+        }
+      });
+    }
+  }
 
   searchValue: string = '';
   category: string = 'Tutte le categorie';
@@ -42,6 +54,7 @@ export class SearchBarComponent {
     }
     // setta la chiave della categoria
     this.key = this.categories.find(element => element.name === category)?.key || 'all';
+    this.searchEvent();
   }
 
   @Output() onEvent = new EventEmitter<searchEventData>();

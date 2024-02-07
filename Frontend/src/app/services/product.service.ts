@@ -43,7 +43,7 @@ export class ProductService {
 
   // try to add a product
   tryAddProduct(product: Product): Observable<any> {
-    return this.http.post("http://localhost:8080/api/addItem", product);
+    return this.http.post("http://localhost:8080/api/insertItem", product);
   }
 
   // Add a product

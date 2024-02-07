@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 
 var box : any;
@@ -9,7 +9,7 @@ var box : any;
   templateUrl: './tools-bar.component.html',
   styleUrls: [
     './tools-bar.component.css',
-    '../../styles/buttons.css',
+    '../../../styles/buttons.css',
   ]
 })
 
@@ -17,8 +17,6 @@ export class ToolsBarComponent {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    // isAuthorized diventa true se siamo nella pagina dei prodotti;
-    // altrimenti, diventa false
     if (this.router.url === '/product-management') {
       if (this.authService.isStorekeeper() || this.authService.isAdmin())
         this.isAuthorized = true; 
@@ -26,7 +24,6 @@ export class ToolsBarComponent {
       this.isAuthorized = false;
     }
   }
-
   
   isActive : boolean = true;
   isAuthorized : boolean = false;

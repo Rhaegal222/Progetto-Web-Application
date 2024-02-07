@@ -28,11 +28,12 @@ import { MenuStorekeeperComponent } from './common-components/sidebar/menus/menu
 import { MenuAuthComponent } from './common-components/sidebar/menus/menu-auth/menu-auth.component';
 import { RequestsForwardedComponent } from './employee-components/requests-forwarded/requests-forwarded.component';
 import { AddProductComponent } from './storekeeper-components/product-management/add-product/add-product.component';
-import { SearchBarComponent } from './common-components/search-bar/search-bar.component';
-import { ToolsBarComponent } from './common-components/tools-bar/tools-bar.component';
+import { SearchBarComponent } from './common-components/header/search-bar/search-bar.component';
+import { ToolsBarComponent } from './common-components/header/tools-bar/tools-bar.component';
 import { AuthService } from './services/auth.service';
 import { PageNotFoundComponent } from './common-components/page-not-found/page-not-found.component';
 import { ProfileComponent } from './common-components/profile/profile.component';
+import { HeaderComponent } from './common-components/header/header.component';
 
 
 
@@ -63,7 +64,8 @@ import { ProfileComponent } from './common-components/profile/profile.component'
     SearchBarComponent,
     PageNotFoundComponent,
     ProfileComponent,
-    ToolsBarComponent
+    ToolsBarComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

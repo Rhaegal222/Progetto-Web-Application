@@ -7,7 +7,6 @@
     height: fit-content;
     padding: 0;
     margin: 0;
-    background-color: rgba(0, 0, 0, 0.5);
 }
 
 header {
@@ -54,11 +53,38 @@ header .close:hover {
 
 .image-container {
     flex: 0 0 auto;          /* Gli elementi non si restringono o si espandono */
+    position: relative;      /* Per posizionare il pulsante di rimozione */
+    /* Allinea tutto a partire da alto a destra */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.image-container .remove-image {
+    /* Posizioniamo il pulsante in alto a destra poco fuori dall'immagine*/
+    position: absolute;
+    right: -0.5rem;
+    top: -0.5;
+    cursor: pointer;
+    color: red;
+    background-color: white;
+    border-radius: 50%;
+    padding: 0.1rem;
+    font-size: 1.2rem;
 }
 
 .image {
     display: block;          /* Rimuove lo spazio extra sotto l'immagine */
     width: 100px;
     height: 100px;
+}
+
+.full-width {
+    padding-left: 0;
+}
+
+.sidebar-open {
+    padding-left: 250px;
 }
 

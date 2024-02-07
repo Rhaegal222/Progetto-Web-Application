@@ -19,7 +19,12 @@
 
   /* Stile delle righe del form */
 .form-group {
-  margin-bottom: 15px; /* Spazio tra le righe del form */
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  position: relative;
 }
 
 .position-relative {
@@ -41,49 +46,102 @@
   color: #000; /* Colore dell'icona normale */
 }
 
-.form-check-input {
-  position: absolute;
-  opacity: 1;
-  cursor: pointer;
-}
-
-.form-check-input + label {
+/* Customize the label (the container) */
+.form-check {
+  display: block;
   position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
   cursor: pointer;
+  font-size: 1rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;  
 }
 
-.form-check-input + label:before {
-  content: '';
+/* Hide the browser's default checkbox */
+.form-check input {
   position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
   left: 0;
-  top: 2px; /* Posiziona il box leggermente più in alto */
-  transform: translateY(-50%);
-  height: 20px;
-  width: 20px;
-  background-color: #fff;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  margin-right: 5px; /* Aggiungi un piccolo margine a destra del box */
+  height: 30px;
+  width: 30px;
+  background-color: #ffffff;
+  border-radius: 5px;
 }
 
-/* Quando la checkbox è selezionata, cambia il colore del box */
-.form-check-input:checked + label:before {
+/* On mouse-over, add a grey background color */
+.form-check:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a red background */
+.form-check input:checked ~ .checkmark {
   background-color: #ff0000;
-  border-color: #ff0000;
 }
 
-/* Opzionale: per aggiungere un'icona di spunta quando la checkbox è selezionata */
-.form-check-input:checked + label:after {
-  content: '✔';
+/* Create a custom check inside the checkbox */
+.form-check input:checked ~ .checkmark::before {
+  content: "";
   position: absolute;
-  left: 4px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #fff;
-  font-size: 14px;
+  display: block;
+  width: 7px;
+  height: 14px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  top: 7px;
+  left: 11px;
 }
 
-/* Stile del label per la checkbox quando si passa il mouse sopra */
-.form-check-input + label:hover:before {
-  border-color: #ff0000;
+/* Style the label text */
+.form-check-label {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  appearance: none;
+  background-clip: padding-box;
+  margin-left: 10px;
+}
+
+.suggestions-container {
+  position: absolute;
+  top: 100%; /* Posiziona il menu direttamente sotto l'input */
+  left: 0;
+  right: 0;
+  width: 100%; /* Imposta la larghezza uguale a quella del form-group */
+  background: #fff; /* o qualsiasi colore di sfondo tu voglia */
+  border: 1px solid #ccc; /* Opzionale, per bordi */
+  z-index: 10; /* Assicurati che sia sopra gli altri elementi */
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1); /* Opzionale, per ombra */
+}
+
+.suggestions-list {
+  list-style-type: none; /* Rimuove i puntini degli elementi della lista */
+  margin: 0; /* Rimuove il margine di default */
+  padding: 0; /* Rimuove il padding di default */
+  max-height: 200px; /* Imposta un'altezza massima per il menu */
+  overflow-y: auto; /* Abilita lo scroll verticale se necessario */
+}
+
+.suggestions-list li {
+  padding: 10px;
+  border-bottom: 1px solid #eee; /* Opzionale, per bordi tra gli elementi */
+  cursor: pointer; /* Cambia il cursore quando passi sopra gli elementi */
+}
+
+.suggestions-list li:hover {
+  background-color: #f7f7f7; /* Cambia colore allo hover */
 }
