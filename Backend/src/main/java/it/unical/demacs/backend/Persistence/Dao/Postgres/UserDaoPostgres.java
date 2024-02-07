@@ -121,38 +121,38 @@ public class UserDaoPostgres implements UserDao {
             throw new RuntimeException(e);
         }
     }
+
     @Override
-    public String selectPassword(String username) {
-        try{
-            String output = "";
-            PreparedStatement stmt = con.prepareStatement("SELECT password FROM users WHERE username = ?");
-            stmt.setString(1, username);
+    @Async
+    public CompletableFuture<ArrayList<User>> getAdmins() {
+        ArrayList<User> admins = new ArrayList<>();
+        try {
+
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM users WHERE role = 'a'");
             ResultSet res = stmt.executeQuery();
 
-            if(res.next()) output = res.getString("password");
+            while (res.next()) {
+                long idUser = res.getLong("id_user");
+                String email = res.getString("email");
+                String password = res.getString("password");
+                String name = res.getString("name");
+                String surname = res.getString("surname");
+                String role = res.getString("role");
+                boolean banned = res.getBoolean("banned");
+
+                User u = new User(password, email, name, surname, banned);
+                u.setIdUser(idUser);
+                u.setRole(role);
+                admins.add(u);
+            }
 
             res.close();
             stmt.close();
-            return output;
+            return CompletableFuture.completedFuture(admins);
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-    @Override
-    public String autoIncrement() {
-        String query = "SELECT COUNT(*) FROM users";
-        try {
-            Statement st = this.con.createStatement();
-            ResultSet rs = st.executeQuery(query);
-            rs.next();
-            int count = rs.getInt(1);
-            rs.close();
-            st.close();
-            return "U" + count;
-        } catch (SQLException e) {
-            e.fillInStackTrace();
-        }
-        return "U" + 0;
     }
 
     @Override

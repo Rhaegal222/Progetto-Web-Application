@@ -19,26 +19,33 @@ public class AuthenticationService{
     }
 
     public ResponseEntity<?> loginWithCredentials(LoginRequest loginRequest) {
-        String email = loginRequest.getEmail();
-        String password = loginRequest.getPassword();
+        try{
+            DatabaseHandler.getInstance().openConnection();
+            String email = loginRequest.getEmail();
+            String password = loginRequest.getPassword();
 
-        User user = DatabaseHandler.getInstance().getUserDao().findByEmail(email).join();
-        if (user != null) {
-            if (BCrypt.checkpw(password, user.getPassword())) {
-                if(user.getBanned()){
-                    return ResponseEntity.status(401).body("{\"message\": \"User is banned\"}");
+            User user = DatabaseHandler.getInstance().getUserDao().findByEmail(email).join();
+            if (user != null) {
+                if (BCrypt.checkpw(password, user.getPassword())) {
+                    if(user.getBanned()){
+                        return ResponseEntity.status(401).body("{\"message\": \"User is banned\"}");
+                    }
+                    else{
+                        return ResponseEntity.ok(new JwtAuthResponse(jwtService.generateToken(user)));
+                    }
+                } else {
+                    return ResponseEntity.badRequest().body("{\"message\": \"Wrong username/password\"}");
                 }
-                else{
-                    return ResponseEntity.ok(new JwtAuthResponse(jwtService.generateToken(user)));
-                }
+
             } else {
-                return ResponseEntity.badRequest().body("{\"message\": \"Wrong username/password\"}");
+                return ResponseEntity.status(401).body("{\"message\": \"User not found\"}");
             }
-
-        } else {
-            return ResponseEntity.status(401).body("{\"message\": \"User not found\"}");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-
-
+        finally {
+            DatabaseHandler.getInstance().closeConnection();
+        }
     }
+
 }
