@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './common-components/dashboard/dashboard.component';
 import { LoginComponent } from './common-components/login/login.component';
 import { MenuComponent } from "./common-components/sidebar/menu-mobile/menu.component";
-import { LocationMapComponent } from './storekeeper-components/location-map/location-map.component';
 import { ProductListComponent } from './employee-components/product-list/product-list.component';
 import { UserManagementComponent } from './admin-components/user-management/user-management.component';
 import { RegistrationComponent } from './employee-components/registration/registration.component';
@@ -31,7 +30,6 @@ const routes: Routes = [
   { path: 'user-management', component: UserManagementComponent, canActivate: [AuthGuard] },
 
   // Componenti per l'addetto al magazzino e l'amministratore
-  { path: 'location-map', component: LocationMapComponent, canActivate: [AuthGuard] },
   { path: 'request-management', component: RequestManagementComponent, canActivate: [AuthGuard] },
   { path: 'product-management', component: ProductManagementComponent, canActivate: [AuthGuard] },
   { path: 'report', component: ReportComponent, canActivate: [AuthGuard] },
