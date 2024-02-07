@@ -16,11 +16,12 @@ export class ProductService {
   }
 
   // Get a product by id
-  getProductById(id: string){
-    let params = new HttpParams();
-    params = params.set('idItem', id);
-    return this.http.get<Product>('http://localhost:8080/api/getItem', { params: params });
+  getItem(idItem: number) {
+    let params = new HttpParams().set('idItem', idItem.toString());
+  
+    return this.http.get('http://localhost:8080/api/getItem', { params });
   }
+  
 
   // Get all products with search and filter
   getProducts(searchValue: string = '', category: string = ''): Observable<Product[]> {
@@ -36,9 +37,6 @@ export class ProductService {
     if (category) {
       params = params.set('category', category);
     }
-
-    // stampa la richiesta GET con i parametri
-    console.log('http://localhost:8080/api/items', { params: params });
     
     // Effettua la richiesta GET con i parametri
     return this.http.get<Product[]>('http://localhost:8080/api/items', { params: params });
