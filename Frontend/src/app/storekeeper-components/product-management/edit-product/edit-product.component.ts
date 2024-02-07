@@ -25,7 +25,7 @@ export class EditProductComponent {
   editProductWindow: boolean = true;
 
   @Input() product: Product | undefined;
-
+  
   name: string = '';
   type: string = '';
   description: string = '';
@@ -36,12 +36,10 @@ export class EditProductComponent {
   assigned_user: string = '';
 
   ngOnInit(): void {
-    console.log('misonoo sojdo', this.product);
     if (this.product && this.product.idItem) {
-      this.productService.getProductById(this.product.idItem).subscribe({
+      this.productService.getItem(this.product.idItem).subscribe({
         next: (data) => {
-          this.product = data;
-          console.log('misonoo sojdo', this.product);
+          console.log(data);
         },
         error: (error) => {
           console.error(error);
