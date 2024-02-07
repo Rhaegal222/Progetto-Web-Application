@@ -28,6 +28,27 @@ export class AddProductComponent {
   length: number = 0;
   assigned: boolean = false;
   assigned_user: string = '';
+  
+  categories = [
+    {key: 'laptop', name: 'Laptop', visible: true},
+    {key: 'software', name: 'Software', visible: true},
+    {key: 'hardware', name: 'Hardware', visible: true},
+    {key: 'accessories', name: 'Accessori', visible: true},
+    {key: 'printer', name: 'Stampanti', visible: true},
+    {key: 'other', name: 'Altro', visible: true},
+  ];
+  filteredCategories : data[] = this.categories;
+  showCategoriesBox = false;
+
+  locations = [
+    {key: '22B', name: '22B', visible: true},
+    {key: '25B', name: 'Centro residenziale', visible: true},
+    {key: '7-11B', name: '7-11B', visible: true},
+    {key: 'centro_congressi', name: 'Centro congressi', visible: true},
+    {key: 'welcome_office', name: 'Welcome office', visible: true},
+  ];
+  filteredLocations : data[] = this.locations;
+  showLocationsBox = false;
 
   // Osserva i click e se non sono all'interno del componente, chiudilo
   ngOnInit(): void {
@@ -56,6 +77,57 @@ export class AddProductComponent {
         this.length = anyLength;
       }
     });
+  }
+
+  
+  filterCategories(event: any) {
+    const query = event.target.value.toLowerCase();
+    this.filteredCategories = this.categories.filter(
+      data => data.visible && data.name.toLowerCase().includes(query)
+    );
+    this.showCategoriesBox = true;
+  }
+
+  filterLocations(event: any) {
+    const query = event.target.value.toLowerCase();
+    this.filteredLocations = this.locations.filter(
+      location => location.visible && location.name.toLowerCase().includes(query)
+    );
+    this.showLocationsBox = true;
+  }  
+
+  selectCategory(suggestion: data) {
+    this.type = suggestion.name; // Aggiorna il modello con il valore selezionato
+    this.showCategoriesBox = false; // Nasconde il box dei suggerimenti
+  }
+
+  selectLocation(suggestion: data) {
+    console.log(suggestion);
+    this.location = suggestion.name; // Aggiorna il modello con il valore selezionato
+    this.showLocationsBox = false; // Nasconde il box dei suggerimenti
+  }
+
+  hideSuggestions(event: FocusEvent) {
+    setTimeout(() => {
+      // Cast the related target to an HTMLElement to check its id
+      const relatedTarget = event.relatedTarget as HTMLElement;
+      // Check if the related target is not one of our suggestion boxes or inputs
+      if (relatedTarget && relatedTarget.id !== 'category' && relatedTarget.id !== 'location') {
+        this.showCategoriesBox = false;
+        this.showLocationsBox = false;
+      } else if (!relatedTarget) { // If there is no related target, close both suggestion boxes
+        this.showCategoriesBox = false;
+        this.showLocationsBox = false;
+      }
+    }, 150); // Ritarda la chiusura dei suggerimenti di 150ms
+  }
+  
+  showSuggestions(inputId: string) {
+    if (inputId === 'category' && this.filteredCategories.length > 0) {
+      this.showCategoriesBox = true;
+    } else if (inputId === 'location' && this.filteredLocations.length > 0) {
+      this.showLocationsBox = true;
+    }
   }
 
   addImage(event: Event): void {
@@ -91,6 +163,7 @@ export class AddProductComponent {
     };
 
     this.productService.addProduct(product);
+    this.onCloseEvent();
   }
   
   @Output() onEvent = new EventEmitter<addProductEventData>();
@@ -106,3 +179,9 @@ export class AddProductComponent {
 export interface addProductEventData {
   addProductWindow: boolean;
 }
+
+export interface data {
+    key: string;
+    name: string;
+    visible: boolean;
+  }

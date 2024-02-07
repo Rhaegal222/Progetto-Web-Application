@@ -10,21 +10,55 @@
                 <input type="text" class="form-control" id="name" name="name" [(ngModel)]="name" placeholder="Nome">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="category" name="category" [(ngModel)]="type" placeholder="Categoria">
+                <input 
+                    class="form-control"
+                    id="category" 
+                    name="category"
+                    [(ngModel)]="type"
+                    placeholder="Categoria"
+                    (keyup)="filterCategories($event)" 
+                    (blur)="hideSuggestions($event)" 
+                    (focus)="showSuggestions('category')">
+                <div *ngIf="showCategoriesBox" class="suggestions-container">
+                  <ul class="suggestions-list">
+                    <li *ngFor="let suggestion of filteredCategories" 
+                        (click)="selectCategory(suggestion)">
+                        {{ suggestion.name }}
+                    </li>
+                    </ul>
+                </div>
             </div>
             <div class="form-group">
                 <textarea class="form-control" id="description" name="description" [(ngModel)]="description" placeholder="Descrizione" rows="4" cols="50"></textarea>
             </div>
             <div class="form-group">
-                <!--checkbox-->
-                <input class="form-check-input" type="checkbox" id="assigned" name="assigned" [(ngModel)]="assigned">
-                <label class="form-check-input label" for="assigned">Assegnato</label>
+                <label class="form-check">
+                    <input type="checkbox" checked="checked" name="assigned" [(ngModel)]="assigned">
+                    <span class="checkmark"></span>
+                </label>
+                <span class="form-check-label">Assegnato</span>
+            </div>
+            <div *ngIf="assigned" class="form-group">
+                <input 
+                    class="form-control" 
+                    id="location" 
+                    name="location"
+                    [(ngModel)]="location"
+                    placeholder="Posizione"
+                    (keyup)="filterLocations($event)" 
+                    (blur)="hideSuggestions($event)" 
+                    (focus)="showSuggestions('location')">
+                <div *ngIf="showLocationsBox" class="suggestions-container">
+                    <ul class="suggestions-list">
+                        <li *ngFor="let suggestion of filteredLocations" 
+                            (click)="selectLocation(suggestion)">
+                            {{ suggestion.name }}
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div *ngIf="assigned" class="form-group">
                 <input class="form-control" type="text" class="form-control" id="assigned_user" name="assigned_user" [(ngModel)]="assigned_user" placeholder="Email dell'assegnatario">
-            </div>
-            <div *ngIf="assigned" class="form-group">
-                <input type="text" class="form-control" id="location" name="location" [(ngModel)]="location" placeholder="Posizione">
             </div>
             <div class="form-group">
                 <input class="form-control" type="file"  (change)="addImage($event)" accept="image/*">
