@@ -26,6 +26,16 @@ public class ItemController {
         return itemService.getItemProxy(getItemRequest);
     }
 
+    @PostMapping("/api/modifyItem")
+    public ResponseEntity<?> modifyItem(@RequestBody ModifyRequest modifyRequest){
+        return itemService.modifyRequest(modifyRequest);
+    }
+
+    @PostMapping("/api/deleteItem")
+    public ResponseEntity<?> deleteItem(@RequestBody GetItemRequest getItemRequest){
+        return itemService.deleteItem(getItemRequest);
+    }
+
     // GET
     @GetMapping("/api/allItems")
     public ResponseEntity<?> allItems(){
@@ -53,6 +63,7 @@ public class ItemController {
             return itemService.searchItems(search, category);
         }
     }
+
 
 
 

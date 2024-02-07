@@ -3,12 +3,14 @@ package it.unical.demacs.backend.Service;
 import it.unical.demacs.backend.Persistence.Dao.Postgres.ItemProxy;
 import it.unical.demacs.backend.Persistence.DatabaseHandler;
 import it.unical.demacs.backend.Persistence.Model.Item;
+import it.unical.demacs.backend.Persistence.Model.User;
 import it.unical.demacs.backend.Service.Request.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
@@ -33,7 +35,7 @@ public class ItemService {
 
             Item  existingItem = DatabaseHandler.getInstance().getItemDao().findByName(name).join();
 
-            if (existingItem.getIdItem() != null) {
+            if (existingItem.getIdItem() == 0) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body("Item with name '" + name + "' already exists.");
             }
@@ -157,5 +159,78 @@ public class ItemService {
             DatabaseHandler.getInstance().closeConnection();
         }
 
+    }
+
+    public ResponseEntity<?> modifyRequest(ModifyRequest modifyRequest) {
+        try{
+            DatabaseHandler.getInstance().openConnection();
+            Item itemToModify = new Item(modifyRequest.getIdItem());
+            String name = modifyRequest.getName();
+            String type = modifyRequest.getType();
+            String description = modifyRequest.getDescription();
+            String location = modifyRequest.getLocation();
+            String image = modifyRequest.getImage();
+            if(modifyRequest.getIdAssignedUser() != 0){
+                User assignedUser = new User(modifyRequest.getIdAssignedUser());
+                itemToModify.setAssignedUser(assignedUser);
+            }
+
+
+            if(!name.isEmpty()){
+                itemToModify.setName(name);
+            }
+            if(!type.isEmpty()){
+                itemToModify.setType(type);
+            }
+            if(!description.isEmpty()){
+                itemToModify.setDescription(description);
+            }
+            if(!location.isEmpty()){
+                itemToModify.setLocation(location);
+            }
+            if(!image.isEmpty()){
+                itemToModify.setImage(image);
+            }
+
+
+            CompletableFuture<Boolean> insertResult = DatabaseHandler.getInstance().getItemDao().updateItem(itemToModify);
+
+            if (insertResult.get()) {
+                // Item inserted successfully
+                return ResponseEntity.status(HttpStatus.OK).body("Item modified successfully.");
+            } else {
+                // Failed to insert item
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Failed to modify item.");
+            }
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error processing the request: " + e.getMessage());
+        }
+        finally {
+            DatabaseHandler.getInstance().closeConnection();
+        }
+    }
+
+    public ResponseEntity<?> deleteItem(GetItemRequest getItemRequest) {
+        try{
+            DatabaseHandler.getInstance().openConnection();
+            CompletableFuture<Boolean> deleteResult = DatabaseHandler.getInstance().getItemDao().deleteItem(getItemRequest.getIdItem());
+            if (deleteResult.get()) {
+                // Item inserted successfully
+                return ResponseEntity.status(HttpStatus.OK).body("Item deleted successfully.");
+            } else {
+                // Failed to insert item
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Failed to delete item.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error processing the request: " + e.getMessage());
+        }
+        finally {
+            DatabaseHandler.getInstance().closeConnection();
+        }
     }
 }

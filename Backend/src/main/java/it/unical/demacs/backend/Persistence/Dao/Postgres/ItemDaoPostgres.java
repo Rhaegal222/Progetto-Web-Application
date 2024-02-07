@@ -122,30 +122,49 @@ public class ItemDaoPostgres implements ItemDao {
 
     @Override
     @Async
-    public CompletableFuture<Boolean> updateItem(Item Item) {
+    public CompletableFuture<Boolean> updateItem(Item item) {
         String query = "UPDATE items SET name = ?, type = ?, description = ?, location = ?, image_base64 = ? WHERE id_item = ?";
         try (
                 PreparedStatement st = this.con.prepareStatement(query)) {
-            settingItem(Item, st);
-            st.setInt(6, Item.getIdItem());
-            st.executeUpdate();
+            st.setString(1, item.getName());
+            st.setString(2, item.getType());
+            st.setString(3, item.getDescription());
+            st.setString(4, item.getLocation());
+            st.setString(5, item.getImage());
+            st.setLong(6, item.getIdItem());
+            int rowsAffected = st.executeUpdate();
+            st.close();
+            return CompletableFuture.completedFuture(rowsAffected > 0);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.fillInStackTrace();
         }
-        return CompletableFuture.completedFuture(true);
+        return CompletableFuture.completedFuture(false);
     }
+
     @Override
+    @Async
     public CompletableFuture<Boolean> deleteItem(Long id) {
-        String query = "DELETE FROM items WHERE id_item = ?";
+        String deleteItemQuery = "DELETE FROM items WHERE id_item = ?";
+        String deleteEmployeeRequestQuery = "DELETE FROM employee_request WHERE requested_item = ?";
+
         try (
-                PreparedStatement st = this.con.prepareStatement(query)) {
-            st.setLong(1, id);
-            st.executeUpdate();
+                PreparedStatement deleteItemStatement = this.con.prepareStatement(deleteItemQuery);
+                PreparedStatement deleteEmployeeRequestStatement = this.con.prepareStatement(deleteEmployeeRequestQuery)
+        ) {
+            // Set the item ID parameter for both queries
+            deleteItemStatement.setLong(1, id);
+            deleteEmployeeRequestStatement.setLong(1, id);
+
+            // Execute the queries
+            deleteEmployeeRequestStatement.executeUpdate();
+            int rowsAffected = deleteItemStatement.executeUpdate();
+
+            return CompletableFuture.completedFuture(rowsAffected > 0);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return CompletableFuture.completedFuture(true);
     }
+
 
     @Override
     @Async
@@ -181,11 +200,11 @@ public class ItemDaoPostgres implements ItemDao {
 
 
 
-    private void settingItem(Item Item, PreparedStatement st) throws SQLException {
-        st.setString(1, Item.getName());
-        st.setString(2, Item.getType());
-        st.setString(3, Item.getDescription());
-        st.setString(4, Item.getLocation());
-        st.setString(5, Item.getImage());
+    private void settingItem(Item item, PreparedStatement st) throws SQLException {
+        st.setString(1, item.getName());
+        st.setString(2, item.getType());
+        st.setString(3, item.getDescription());
+        st.setString(4, item.getLocation());
+        st.setString(5, item.getImage());
     }
 }

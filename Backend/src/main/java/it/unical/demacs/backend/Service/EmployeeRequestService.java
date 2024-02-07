@@ -10,14 +10,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import java.io.IOException;
-import java.sql.Array;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Properties;
 
 @Service
 public class EmployeeRequestService {
@@ -84,8 +79,13 @@ public class EmployeeRequestService {
             Date requestDate = sendReqRequest.getRequestDate();
 
             User requestingUser = DatabaseHandler.getInstance().getUserDao().findByEmail(emailRequestingUser).join();
-
-            String requestTitle = "Richiesta di " + requestingUser.getEmail() + " per l'oggetto " + idRequestedItem;
+            String requestTitle = null;
+            if (requestContent.equals("reso")) {
+                requestTitle = "Richiesta di reso da parte di " + requestingUser.getEmail() + " per " + idRequestedItem;
+            } else
+                if(requestContent.equals("richiesta")){
+                requestTitle = "Richiesta prodotto da parte di " + requestingUser.getEmail() + " per " + idRequestedItem;
+                }
 
             ArrayList<User> admins = DatabaseHandler.getInstance().getUserDao().getAdmins().join();
             for (User admin : admins) {
