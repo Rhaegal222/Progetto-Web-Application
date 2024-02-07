@@ -61,12 +61,13 @@
                 <input class="form-control" type="text" class="form-control" id="assigned_user" name="assigned_user" [(ngModel)]="assigned_user" placeholder="Email dell'assegnatario">
             </div>
             <div class="form-group">
-                <input class="form-control" type="file"  (change)="addImage($event)" accept="image/*">
+                <input class="form-control" type="file" id="image" (change)="addImage($event)" accept="image/*">
             </div>
             <div class="form-group">
                 <div class="image-preview-box">
                     <div class="image-container">
-                        <img *ngIf="image!=''" [src]="image" alt="Immagine caricata" class="image">
+                        <span *ngIf="image!=''" (click)="removeImage()" class="material-icons remove-image">close</span>
+                        <img *ngIf="image!=''" class="image" [src]="image" alt="Immagine caricata">
                     </div>
                 </div>
             </div>                        

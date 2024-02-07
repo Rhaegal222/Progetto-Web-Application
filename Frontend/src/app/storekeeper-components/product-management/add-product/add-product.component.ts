@@ -151,6 +151,15 @@ export class AddProductComponent {
     }
   }
 
+  removeImage(): void {
+    this.image = '';
+    // pulire l'input file
+    const input = document.getElementById('image') as HTMLInputElement;
+    if (input) {
+      input.value = '';
+    }
+  }
+
   onSave(){
     // Creare un oggetto con i dati del prodotto
     const product = {
