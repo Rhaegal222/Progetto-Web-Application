@@ -12,7 +12,6 @@ public interface UserDao {
     CompletableFuture<Boolean> deleteUser(String username); //elimina un utente
     void banningUser(String email); //banna un utente
     boolean checkEmail(String email);
-    String selectPassword(String username);
 
-    String autoIncrement();
+    CompletableFuture<ArrayList<User>> getAdmins(); //trova tutti gli admin
 }

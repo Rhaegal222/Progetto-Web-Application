@@ -4,12 +4,20 @@ import it.unical.demacs.backend.Persistence.DatabaseHandler;
 import it.unical.demacs.backend.Persistence.Model.EmployeeRequest;
 import it.unical.demacs.backend.Persistence.Model.Item;
 import it.unical.demacs.backend.Persistence.Model.User;
+import it.unical.demacs.backend.Service.Request.SendReqRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.io.IOException;
+import java.sql.Array;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Properties;
 
 @Service
 public class EmployeeRequestService {
@@ -68,4 +76,30 @@ public class EmployeeRequestService {
         }
     }
 
+    public ResponseEntity<?> sendRequest(SendReqRequest sendReqRequest) {
+        try {
+            String emailRequestingUser = sendReqRequest.getEmailRequestingUser();
+            long idRequestedItem = sendReqRequest.getIdRequestedItem();
+            String requestContent = sendReqRequest.getRequestContent();
+            Date requestDate = sendReqRequest.getRequestDate();
+
+            User requestingUser = DatabaseHandler.getInstance().getUserDao().findByEmail(emailRequestingUser).join();
+
+            String requestTitle = "Richiesta di " + requestingUser.getEmail() + " per l'oggetto " + idRequestedItem;
+
+            ArrayList<User> admins = DatabaseHandler.getInstance().getUserDao().getAdmins().join();
+            for (User admin : admins) {
+                SendMail.getInstance().sendEmail(requestTitle, requestContent, admin.getEmail());
+            }
+
+            EmployeeRequest employeeRequest = new EmployeeRequest(requestingUser, new Item(idRequestedItem), requestContent, requestDate);
+            DatabaseHandler.getInstance().getEmployeeRequestDao().insertEmployeeRequest(employeeRequest).join();
+
+            // Puoi gestire la risposta qui, ad esempio, restituendo un ResponseEntity di successo
+            return ResponseEntity.ok("Email sent successfully to admins");
+        } catch (Exception e) {
+            // Gestione delle eccezioni durante l'invio dell'email
+            return ResponseEntity.status(500).body("Error sending email: " + e.getMessage());
+        }
+    }
 }
