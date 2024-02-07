@@ -61,8 +61,8 @@ public class ItemController {
     }
 
     @GetMapping("/api/getItem")
-    public ResponseEntity<?> getItem(@RequestBody GetItemRequest getItemRequest){
-        return itemService.getItemProxy(getItemRequest);
+    public ResponseEntity<?> getItem(@RequestParam("idItem") long idItem) {
+        return itemService.getItemProxy(idItem);
     }
 
 

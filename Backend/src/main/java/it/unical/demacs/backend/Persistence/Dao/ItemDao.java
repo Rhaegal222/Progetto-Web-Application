@@ -11,7 +11,7 @@ public interface ItemDao {
 
     CompletableFuture<Item> findByPrimaryKey(Long id);
 
-    CompletableFuture<Item> findByName(String name) throws SQLException;
+    CompletableFuture<ArrayList<Item>> findByName(String name);
 
     CompletableFuture<Boolean> insertItem(Item Item);
 

@@ -40,13 +40,6 @@ public class ItemService {
                         .body("All fields are required.");
             }
 
-            Item existingItem = DatabaseHandler.getInstance().getItemDao().findByName(name).join();
-
-            if (existingItem != null) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body("Item with name '" + name + "' already exists.");
-            }
-
             Item newItem = new Item();
             newItem.setName(name);
             newItem.setType(type);
@@ -120,10 +113,9 @@ public class ItemService {
         }
     }
 
-    public ResponseEntity<?> getItemProxy(@RequestBody GetItemRequest getItemRequest) {
+    public ResponseEntity<?> getItemProxy(@RequestBody long idItem) {
         try {
             DatabaseHandler.getInstance().openConnection();
-            long idItem = getItemRequest.getIdItem();
             ItemProxy item = (ItemProxy) DatabaseHandler.getInstance().getItemDao().findByPrimaryKey(idItem).join();
             if (item == null) {
                 return ResponseEntity.badRequest().body("{\"message\": \"No item found\"}");
@@ -224,7 +216,7 @@ public class ItemService {
     public ResponseEntity<?> deleteItem(GetItemRequest getItemRequest) {
         try{
             DatabaseHandler.getInstance().openConnection();
-            CompletableFuture<Boolean> deleteResult = DatabaseHandler.getInstance().getItemDao().deleteItem(getItemRequest.getIdItem());
+            CompletableFuture<Boolean> deleteResult = DatabaseHandler.getInstance().getItemDao().deleteItem(Long.valueOf(getItemRequest.getIdItem()));
             if (deleteResult.get()) {
                 // Item inserted successfully
                 return ResponseEntity.status(HttpStatus.OK).body("Item deleted successfully.");

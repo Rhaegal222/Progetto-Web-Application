@@ -79,18 +79,19 @@ public class ItemDaoPostgres implements ItemDao {
 
     @Override
     @Async
-    public CompletableFuture<Item> findByName(String name) {
-        Item item = null;
-        String query = "SELECT * FROM items WHERE name = ?";
+    public CompletableFuture<ArrayList<Item>> findByName(String name) {
+        ArrayList<Item> items = new ArrayList<>();
+        String query = "SELECT * FROM items WHERE LOWER(name) LIKE LOWER(?)";
         try (
                 PreparedStatement st = this.con.prepareStatement(query)) {
-            st.setString(1, name);
+            st.setString(1, "%" + name + "%");
             try (ResultSet rs = st.executeQuery()) {
-                if (rs.next()) {
-                    item = new ItemProxy(con);
+                while (rs.next()) {
+                    Item item = new Item();
                     item.setIdItem(rs.getInt("id_item"));
                     item.setName(rs.getString("name"));
                     item.setType(rs.getString("type"));
+                    item.setDescription(rs.getString("description"));
                     item.setImage(rs.getString("image_base64"));
                     if(rs.getLong("assigned_user") != 0){
                         item.setAssignedUser(new User(rs.getLong("assigned_user")));
@@ -98,13 +99,13 @@ public class ItemDaoPostgres implements ItemDao {
                     else{
                         item.setAssignedUser(null);
                     }
-
+                    items.add(item);
                 }
-                return CompletableFuture.completedFuture(item);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return CompletableFuture.completedFuture(items);
     }
     @Override
     @Async

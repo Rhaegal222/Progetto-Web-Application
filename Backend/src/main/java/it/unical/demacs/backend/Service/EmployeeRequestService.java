@@ -73,6 +73,7 @@ public class EmployeeRequestService {
 
     public ResponseEntity<?> sendRequest(SendReqRequest sendReqRequest) {
         try {
+            DatabaseHandler.getInstance().openConnection();
             String emailRequestingUser = sendReqRequest.getEmailRequestingUser();
             long idRequestedItem = sendReqRequest.getIdRequestedItem();
             String requestContent = sendReqRequest.getRequestContent();
@@ -83,23 +84,30 @@ public class EmployeeRequestService {
             if (requestContent.equals("reso")) {
                 requestTitle = "Richiesta di reso da parte di " + requestingUser.getEmail() + " per " + idRequestedItem;
             } else
-                if(requestContent.equals("richiesta")){
-                requestTitle = "Richiesta prodotto da parte di " + requestingUser.getEmail() + " per " + idRequestedItem;
+                if(requestContent.equals("richiesta")) {
+                    requestTitle = "Richiesta prodotto da parte di " + requestingUser.getEmail() + " per " + idRequestedItem;
                 }
+
+                Item requestedItem = new Item(idRequestedItem);
+                EmployeeRequest employeeRequest = new EmployeeRequest(requestingUser, requestedItem , requestContent, requestDate);
+                DatabaseHandler.getInstance().getEmployeeRequestDao().insertEmployeeRequest(employeeRequest);
+
 
             ArrayList<User> admins = DatabaseHandler.getInstance().getUserDao().getAdmins().join();
             for (User admin : admins) {
                 SendMail.getInstance().sendEmail(requestTitle, requestContent, admin.getEmail());
             }
 
-            EmployeeRequest employeeRequest = new EmployeeRequest(requestingUser, new Item(idRequestedItem), requestContent, requestDate);
-            DatabaseHandler.getInstance().getEmployeeRequestDao().insertEmployeeRequest(employeeRequest).join();
+
 
             // Puoi gestire la risposta qui, ad esempio, restituendo un ResponseEntity di successo
             return ResponseEntity.ok("Email sent successfully to admins");
         } catch (Exception e) {
             // Gestione delle eccezioni durante l'invio dell'email
             return ResponseEntity.status(500).body("Error sending email: " + e.getMessage());
+        }
+        finally {
+            DatabaseHandler.getInstance().closeConnection();
         }
     }
 }
