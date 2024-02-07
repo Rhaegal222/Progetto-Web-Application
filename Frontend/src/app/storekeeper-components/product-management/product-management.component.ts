@@ -25,12 +25,12 @@ export class ProductManagementComponent {
   addProductWindow: boolean = false;
 
   ngOnInit(): void {
-    this.initObservable();
+    this.observeProductListLenght();
     this.getAllProducts();
   }
 
   // create an observable that emits the length of the products list
-  initObservable(){
+  observeProductListLenght(){
     const observable = new Observable((observer) => {
       observer.next(this.products.length);
     });
@@ -64,18 +64,18 @@ export class ProductManagementComponent {
   }
 
   onAddProduct(eventData: addProductEventData) {
-    console.log(eventData.addProductWindow);
     this.addProductWindow = eventData.addProductWindow;
+    this.getAllProducts();
   }
 
   onClose(eventData: addProductEventData) {
-    console.log(eventData.addProductWindow);
     this.addProductWindow = eventData.addProductWindow;
+    this.getAllProducts();
   }
-
 
   // Get all products
   getAllProducts(){
+    console.log("Getting all products");
     this.productService.getAllProducts().subscribe({
       next: (data) => {
         this.products = data;

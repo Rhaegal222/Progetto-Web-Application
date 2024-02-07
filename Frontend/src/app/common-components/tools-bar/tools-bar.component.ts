@@ -17,8 +17,6 @@ export class ToolsBarComponent {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    // isAuthorized diventa true se siamo nella pagina dei prodotti;
-    // altrimenti, diventa false
     if (this.router.url === '/product-management') {
       if (this.authService.isStorekeeper() || this.authService.isAdmin())
         this.isAuthorized = true; 
@@ -26,7 +24,6 @@ export class ToolsBarComponent {
       this.isAuthorized = false;
     }
   }
-
   
   isActive : boolean = true;
   isAuthorized : boolean = false;

@@ -1,6 +1,10 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductService } from '../../../services/product.service';
+import { AnimationsService } from '../../../services/animations.service';
+
+var arrow : any;
+var addProductWindow : any;
 
 @Component({
   selector: 'app-add-product',
@@ -16,7 +20,7 @@ import { ProductService } from '../../../services/product.service';
 
 export class AddProductComponent {
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private animationsService: AnimationsService) { }
 
   addProductWindow: boolean = true;
 
@@ -53,6 +57,11 @@ export class AddProductComponent {
   // Osserva i click e se non sono all'interno del componente, chiudilo
   ngOnInit(): void {
     this.initObservable();
+    this.initObserveEnterKey();
+    this.animationsService.initResizeObserver('addProductWindow');    
+  }
+
+  initObserveEnterKey() {
     window.addEventListener('keydown', (event) => {
       const modal = document.getElementById('addProductWindow');
       if (modal != null) {
@@ -184,6 +193,8 @@ export class AddProductComponent {
       this.onEvent.emit(eventData);
   }
 }
+
+
 
 export interface addProductEventData {
   addProductWindow: boolean;

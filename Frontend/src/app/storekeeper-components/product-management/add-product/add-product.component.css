@@ -7,7 +7,6 @@
     height: fit-content;
     padding: 0;
     margin: 0;
-    background-color: rgba(0, 0, 0, 0.5);
 }
 
 header {
@@ -79,5 +78,18 @@ header .close:hover {
     display: block;          /* Rimuove lo spazio extra sotto l'immagine */
     width: 100px;
     height: 100px;
+}
+
+.full-width {
+    margin: 0; /* top, right, bottom, left */
+    width: 100%;
+}
+  
+.sidebar-open{
+    margin-left: 282.4px;
+    margin-right: 32.4px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    position: sticky;
 }
 

@@ -10,14 +10,20 @@
             
             <div class="dropdown-content">
                 <ng-container *ngFor="let category of categories">
-                    <a *ngIf="category.visible" 
-                       (click)="setCategory(category.name)">{{ category.name }}</a>
+                    <a *ngIf="category.visible"
+                       (click)="setCategory(category.name)">{{ category.name }}
+                    </a>
                 </ng-container>
             </div>
         </div>
         <!--Barra di ricerca-->
         <!--Prende il valore dalla barra di ricerca quando clicco sul bottone-->
-        <input type="text" placeholder="Cerca..." [(ngModel)]="searchValue">
+        <input 
+        type="text" 
+        id="search" 
+        placeholder="Cerca..." 
+        [(ngModel)]="searchValue" 
+        (blur)="searchEvent()">
         <button class="btn-primary" (click)="searchEvent()">
             <span class="material-icons">search</span>
         </button>
