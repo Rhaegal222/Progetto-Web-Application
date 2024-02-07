@@ -194,8 +194,6 @@ export class AddProductComponent {
   }
 }
 
-
-
 export interface addProductEventData {
   addProductWindow: boolean;
 }

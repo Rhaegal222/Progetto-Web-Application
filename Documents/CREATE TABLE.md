@@ -1,11 +1,10 @@
 ALTER TABLE users
     ADD id_user BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY key,
-    ADD username VARCHAR UNIQUE NOT NULL,
     ADD email VARCHAR UNIQUE NOT NULL,
     ADD password VARCHAR NOT NULL,
     ADD name VARCHAR NOT NULL,
     ADD surname VARCHAR NOT NULL,
-    ADD role char NOT NULL,
+    ADD role VARCHAR,
     ADD banned BOOLEAN NOT NULL;
     
 ALTER TABLE items
@@ -33,3 +32,9 @@ ALTER TABLE returns
     ADD returned_item BIGINT REFERENCES items(id_item) NOT NULL,
     ADD return_date DATE,
     ADD return_reason VARCHAR(255);
+
+CREATE TABLE public.users();
+CREATE TABLE public.items();
+CREATE TABLE public.employee_request();
+CREATE TABLE public.reports();
+CREATE TABLE public.returns();
