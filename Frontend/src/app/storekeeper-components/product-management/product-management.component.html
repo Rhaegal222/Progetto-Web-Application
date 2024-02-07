@@ -1,8 +1,4 @@
-<header>
-    <!--La barra di ricerca passa il valore al metodo search()-->
-    <app-search-bar (onEvent)="onSearch($event)"></app-search-bar>
-    <app-tools-bar (onEvent)="onAddProduct($event)"></app-tools-bar>
-</header>
+<app-header (onEvent)="onOpen($event)"></app-header>
 <div class="container">
     <div id="box" class="grid">
         <div *ngFor="let product of products" class="item">

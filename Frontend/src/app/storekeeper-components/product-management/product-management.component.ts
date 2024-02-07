@@ -11,7 +11,7 @@ import { Product } from '../../model/product';
     './product-management.component.css',
     '../../styles/grid.css',
     '../../styles/list.css',
-    '../../styles/buttons.css'
+    '../../styles/buttons.css',
   ]
 })
 
@@ -71,6 +71,10 @@ export class ProductManagementComponent {
   onClose(eventData: addProductEventData) {
     this.addProductWindow = eventData.addProductWindow;
     this.getAllProducts();
+  }
+
+  onOpen(eventData: addProductEventData) {
+    this.addProductWindow = eventData.addProductWindow;
   }
 
   // Get all products

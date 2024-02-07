@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 
 var box : any;
@@ -9,7 +9,7 @@ var box : any;
   templateUrl: './tools-bar.component.html',
   styleUrls: [
     './tools-bar.component.css',
-    '../../styles/buttons.css',
+    '../../../styles/buttons.css',
   ]
 })
 

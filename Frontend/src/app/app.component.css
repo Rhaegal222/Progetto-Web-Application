@@ -1,16 +1,7 @@
 .full-width {
-  margin: 0; /* top, right, bottom, left */
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: sticky;
+  padding-left: 0;
 }
 
-.sidebar-open{
-  margin-left: 282.4px;
-  margin-right: 32.4px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  position: sticky;
+.sidebar-open {
+  padding-left: 250px;
 }

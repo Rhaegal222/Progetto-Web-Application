@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { AnimationsService } from '../../services/animations.service';
 
 var arrow : any;
 var sidebar : any;
@@ -15,7 +16,7 @@ export class SidebarComponent implements OnInit {
   authToken: string = '';
   isAuth: boolean = false;
   
-  constructor(private router: Router) {}
+  constructor(private router: Router, private animationsService: AnimationsService) {}
 
   ngDoCheck() {
     if (typeof localStorage !== 'undefined') {
@@ -142,13 +143,13 @@ export class SidebarComponent implements OnInit {
     sidebar.style.left = posB + 'px';
 
     function frame() {
-      if (posA > -265){
+      if (posB > -5){
         posA-=10;
         posB-=10;
         sidebar.style.left = posA + 'px';
         arrow.style.left = posB + 'px';
         requestAnimationFrame(frame);
-        if (posA == -250) {
+        if (posA <= -250) {
           sidebar.classList.toggle('menu-open', false);
           sidebar.classList.toggle('menu-close', true);
           sidebar.removeAttribute('style');

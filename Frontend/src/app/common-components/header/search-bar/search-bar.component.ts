@@ -6,7 +6,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
   templateUrl: './search-bar.component.html',
   styleUrls: [
     './search-bar.component.css',
-    '../../styles/buttons.css',
+    '../../../styles/buttons.css',
   ]
 })
 export class SearchBarComponent {

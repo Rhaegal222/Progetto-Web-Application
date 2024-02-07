@@ -50,24 +50,25 @@ export class AnimationsService {
   }
 
   slideOutRouter() {
+    console.log('slideOutRouter');
     if(this.component && this.arrow){
       this.arrow.style.zIndex = '-1';
-      this.component.classList.toggle('full-width', false);
       this.component.classList.toggle('sidebar-open', false);
+      this.component.classList.toggle('full-width', false);
       this.component.style.position = 'sticky';
 
       let pos = 250; 
-      this.component.style.marginLeft = pos + 'px';
+      this.component.style.paddingLeft = pos + 'px';
       
       const frame = () => {
         if (pos <= 0) {
-          this.component.style.marginLeft = '0px';
-          this.component.classList.toggle('full-width', true);
           this.component.classList.toggle('sidebar-open', false);
+          this.component.classList.toggle('full-width', true);
+          this.component.style.paddingLeft = '0px';
           this.component.removeAttribute('style');
         } else {
           pos -= 10; 
-          this.component.style.marginLeft = pos + 'px';
+          this.component.style.paddingLeft = pos + 'px';
           requestAnimationFrame(frame);
         }
       }
@@ -83,23 +84,21 @@ export class AnimationsService {
       this.component.style.position = 'sticky';
 
       let pos = 0; 
-      this.component.style.marginLeft = pos + 'px';
+      this.component.style.paddingLeft = pos + 'px';
       
       const frame = () => {
         if (pos >= 250) {
-          this.component.style.marginLeft = '250px';
+          this.component.style.paddingLeft = '250px';
           this.component.classList.toggle('full-width', false);
           this.component.classList.toggle('sidebar-open', true);
           this.component.removeAttribute('style');
         } else {
           pos += 10; 
-          this.component.style.marginLeft = pos + 'px';
+          this.component.style.paddingLeft = pos + 'px';
           requestAnimationFrame(frame);
         }
       }
       requestAnimationFrame(frame);
     };
   }
-
-
 }
