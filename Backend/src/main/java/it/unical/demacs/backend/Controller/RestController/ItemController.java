@@ -21,10 +21,6 @@ public class ItemController {
         return itemService.insertItem(insertItemRequest);
     }
 
-    @PostMapping("/api/getItem")
-    public ResponseEntity<?> getItem(@RequestBody GetItemRequest getItemRequest){
-        return itemService.getItemProxy(getItemRequest);
-    }
 
     @PostMapping("/api/modifyItem")
     public ResponseEntity<?> modifyItem(@RequestBody ModifyRequest modifyRequest){
@@ -62,6 +58,11 @@ public class ItemController {
         } else {
             return itemService.searchItems(search, category);
         }
+    }
+
+    @GetMapping("/api/getItem")
+    public ResponseEntity<?> getItem(@RequestBody GetItemRequest getItemRequest){
+        return itemService.getItemProxy(getItemRequest);
     }
 
 
