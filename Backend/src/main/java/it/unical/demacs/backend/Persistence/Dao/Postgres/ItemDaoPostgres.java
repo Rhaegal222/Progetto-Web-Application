@@ -80,13 +80,14 @@ public class ItemDaoPostgres implements ItemDao {
     @Override
     @Async
     public CompletableFuture<Item> findByName(String name) {
-        Item item = new ItemProxy(con);
+        Item item = null;
         String query = "SELECT * FROM items WHERE name = ?";
         try (
                 PreparedStatement st = this.con.prepareStatement(query)) {
             st.setString(1, name);
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
+                    item = new ItemProxy(con);
                     item.setIdItem(rs.getInt("id_item"));
                     item.setName(rs.getString("name"));
                     item.setType(rs.getString("type"));
@@ -97,12 +98,13 @@ public class ItemDaoPostgres implements ItemDao {
                     else{
                         item.setAssignedUser(null);
                     }
+
                 }
+                return CompletableFuture.completedFuture(item);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return CompletableFuture.completedFuture(item);
     }
     @Override
     @Async

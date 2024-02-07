@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class ModifyRequest {
     private long idItem;
-    private long idAssignedUser;
+    private String emailUser;
     private String name;
     private String type;
     private String description;

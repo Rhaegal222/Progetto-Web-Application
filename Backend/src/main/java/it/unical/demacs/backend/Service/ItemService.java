@@ -19,23 +19,30 @@ import java.util.concurrent.CompletableFuture;
 public class ItemService {
 
     public ResponseEntity<?> insertItem(@RequestBody InsertItemRequest insertItemRequest) {
+
         String name = insertItemRequest.getName();
         String type = insertItemRequest.getType();
         String description = insertItemRequest.getDescription();
         String location = insertItemRequest.getLocation();
         String image = insertItemRequest.getImage();
-
-        if(name == null || type == null || description == null || location == null){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("All fields are required.");
-        }
+        String emailUser = insertItemRequest.getEmailUser();
 
         try {
             DatabaseHandler.getInstance().openConnection();
+            boolean exisitingUser = DatabaseHandler.getInstance().getUserDao().checkEmail(emailUser);
+            if(!exisitingUser){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("User with email '" + emailUser + "' does not exist.");
+            }
 
-            Item  existingItem = DatabaseHandler.getInstance().getItemDao().findByName(name).join();
+            if(name == null || type == null || description == null || location == null){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("All fields are required.");
+            }
 
-            if (existingItem.getIdItem() == 0) {
+            Item existingItem = DatabaseHandler.getInstance().getItemDao().findByName(name).join();
+
+            if (existingItem != null) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body("Item with name '" + name + "' already exists.");
             }
@@ -46,6 +53,7 @@ public class ItemService {
             newItem.setDescription(description);
             newItem.setLocation(location);
             newItem.setImage(image);
+            newItem.setAssignedUser(DatabaseHandler.getInstance().getUserDao().findByEmail(emailUser).join());
 
             CompletableFuture<Boolean> insertResult = DatabaseHandler.getInstance().getItemDao().insertItem(newItem);
 
@@ -170,8 +178,8 @@ public class ItemService {
             String description = modifyRequest.getDescription();
             String location = modifyRequest.getLocation();
             String image = modifyRequest.getImage();
-            if(modifyRequest.getIdAssignedUser() != 0){
-                User assignedUser = new User(modifyRequest.getIdAssignedUser());
+            if(modifyRequest.getEmailUser() != null){
+                User assignedUser = DatabaseHandler.getInstance().getUserDao().findByEmail(modifyRequest.getEmailUser()).join();
                 itemToModify.setAssignedUser(assignedUser);
             }
 
