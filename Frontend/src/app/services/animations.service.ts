@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 
-var arrow : any;
-var component: any;
-
 @Injectable({
   providedIn: 'root'
 })
@@ -11,18 +8,14 @@ export class AnimationsService {
   constructor() {}
 
   component: any;
+  arrow : any;
 
   initResizeObserver(htmlElement: string) {
-    if(typeof document !== 'undefined')
+    if(typeof window !== 'undefined'){
       this.component = document.getElementById(htmlElement);
-    else
-      console.log('document is undefined');
-    
-
-    
-    if (typeof window !== 'undefined') {
-      arrow = document.getElementById('arrow');
-      arrow.addEventListener('click', this.handleButtonClick.bind(this));
+      this.arrow = document.getElementById('arrow');
+      
+      this.arrow.addEventListener('click', this.handleButtonClick.bind(this));
 
       this.handleInitialBehavior();
 
@@ -34,13 +27,10 @@ export class AnimationsService {
   }
 
   handleButtonClick() {
-    if (typeof document !== 'undefined') {
-      arrow = document.getElementById('arrow');
-      if ((arrow.classList.contains('arrow-right'))) {
-        this.slideInRouter();        
-      } else if ((arrow?.classList.contains('arrow-left'))){
-        this.slideOutRouter();
-      }
+    if ((this.arrow.classList.contains('arrow-right'))) {
+      this.slideInRouter();        
+    } else if ((this.arrow.classList.contains('arrow-left'))){
+      this.slideOutRouter();
     }
   }
 
@@ -60,11 +50,8 @@ export class AnimationsService {
   }
 
   slideOutRouter() {
-    if (typeof document != 'undefined')
-      arrow = document.getElementById('arrow');
-
-    if(this.component && arrow){
-      arrow.style.zIndex = '-1';
+    if(this.component && this.arrow){
+      this.arrow.style.zIndex = '-1';
       this.component.classList.toggle('full-width', false);
       this.component.classList.toggle('sidebar-open', false);
       this.component.style.position = 'sticky';
@@ -89,11 +76,8 @@ export class AnimationsService {
   }
 
   slideInRouter() {
-    if (typeof document != 'undefined')
-      arrow = document.getElementById('arrow');
-
-    if(this.component && arrow){
-      arrow.style.zIndex = '-1';
+    if(this.component && this.arrow){
+      this.arrow.style.zIndex = '-1';
       this.component.classList.toggle('full-width', false);
       this.component.classList.toggle('sidebar-open', false);
       this.component.style.position = 'sticky';

@@ -12,6 +12,6 @@ export class AppComponent {
   constructor(private animationsService: AnimationsService) { }
 
   ngOnInit() {
-    this.animationsService.initResizeObserver('router-outlet'); 
+    this.animationsService.initResizeObserver('router-outlet');
   }
 }
