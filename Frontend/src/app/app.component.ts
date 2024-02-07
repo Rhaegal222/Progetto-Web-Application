@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AnimationsService } from './services/animations.service';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,17 @@ import { AnimationsService } from './services/animations.service';
 
 export class AppComponent {
 
-  constructor(private animationsService: AnimationsService) { }
+  constructor(private animationsService: AnimationsService, private router: Router) { }
 
   ngOnInit() {
-    this.animationsService.initResizeObserver('router-outlet');
+    setTimeout(() => {
+      this.animationsService.initResizeObserver('router-outlet');
+    }, 0);
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.animationsService.initResizeObserver('router-outlet');
+      }
+    });
   }
 }

@@ -11,7 +11,6 @@ import { SidebarComponent } from './common-components/sidebar/sidebar.component'
 import { LoginComponent } from './common-components/login/login.component';
 import { DashboardComponent } from './common-components/dashboard/dashboard.component';
 import { MenuComponent } from './common-components/sidebar/menu-mobile/menu.component';
-import { LocationMapComponent } from './storekeeper-components/location-map/location-map.component';
 import { RegistrationComponent } from './employee-components/registration/registration.component';
 import { ProductDetailComponent } from './employee-components/product-detail/product-detail.component';
 import { UserManagementComponent } from './admin-components/user-management/user-management.component';
@@ -49,7 +48,6 @@ import { HeaderComponent } from './common-components/header/header.component';
     UserManagementComponent,
     RequestManagementComponent,
     ProductListComponent,
-    LocationMapComponent,
     ReportComponent,
     ProductManagementComponent,
     ProductRequestComponent,
