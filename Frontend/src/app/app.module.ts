@@ -33,6 +33,7 @@ import { AuthService } from './services/auth.service';
 import { PageNotFoundComponent } from './common-components/page-not-found/page-not-found.component';
 import { ProfileComponent } from './common-components/profile/profile.component';
 import { HeaderComponent } from './common-components/header/header.component';
+import { EditProductComponent } from './storekeeper-components/product-management/edit-product/edit-product.component';
 
 
 
@@ -63,7 +64,8 @@ import { HeaderComponent } from './common-components/header/header.component';
     PageNotFoundComponent,
     ProfileComponent,
     ToolsBarComponent,
-    HeaderComponent
+    HeaderComponent,
+    EditProductComponent
   ],
   imports: [
     BrowserModule,

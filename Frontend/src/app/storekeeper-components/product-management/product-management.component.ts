@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../model/product';
@@ -20,9 +20,11 @@ export class ProductManagementComponent {
   constructor(private productService: ProductService) { }
 
   products: Product[] = [];
+  selectedProduct: Product | undefined;
   length: number = 0;
 
   addProductWindow: boolean = false;
+  editProductWindow: boolean = false;
 
   ngOnInit(): void {
     this.observeProductListLenght();
@@ -45,13 +47,18 @@ export class ProductManagementComponent {
     });
   }
 
+  searchValue: string = '';
+  category: string = 'all';
+
   onSearch(eventData: onSearchEventData) {
     // Se la barra di ricerca è vuota e la categoria è "Tutte le categorie", chiamare getAllProducts.
     // Altrimenti, chiamare getProducts con i valori correnti di searchValue e category.
-    if (eventData.searchValue === "" && eventData.category === "all") {
+    this.searchValue = eventData.searchValue;
+    this.category = eventData.category;
+    if (this.searchValue === "" && this.category === "all") {
       this.getAllProducts();
     } else {
-      this.productService.getProducts(eventData.searchValue, eventData.category).subscribe({
+      this.productService.getProducts(this.searchValue, this.category).subscribe({
         next: (data) => {
           this.products = data;
           console.log(this.products);
@@ -62,19 +69,29 @@ export class ProductManagementComponent {
       });
     }
   }
+  
+  // Open the add product window
+  onOpen(evenData: addProductEventData) {
+    this.addProductWindow = evenData.addProductWindow;
+  }
 
-  onAddProduct(eventData: addProductEventData) {
-    this.addProductWindow = eventData.addProductWindow;
+  // Close the add product window or the edit product window
+  onClose(eventData: addProductEventData | editProductEventData) {
+    if ('addProductWindow' in eventData) {
+      this.addProductWindow = eventData.addProductWindow;
+    } else {
+      this.editProductWindow = eventData.editProductWindow;
+    }
     this.getAllProducts();
   }
 
-  onClose(eventData: addProductEventData) {
-    this.addProductWindow = eventData.addProductWindow;
-    this.getAllProducts();
-  }
+  @Output() editEvent = new EventEmitter<Product>();
 
-  onOpen(eventData: addProductEventData) {
-    this.addProductWindow = eventData.addProductWindow;
+  // Apre la finestra di modifica del prodotto e invia il prodotto selezionato
+  onEdit(product: Product) {
+    this.editProductWindow = true;
+    this.editEvent.emit(product);
+    this.selectedProduct = product;
   }
 
   // Get all products
@@ -112,4 +129,8 @@ export interface onSearchEventData {
 
 export interface addProductEventData {
   addProductWindow: boolean;
+}
+
+export interface editProductEventData {
+  editProductWindow: boolean;
 }

@@ -1,28 +1,30 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductService } from '../../../services/product.service';
 import { AnimationsService } from '../../../services/animations.service';
+import { Product } from '../../../model/product';
 
 var arrow : any;
-var addProductWindow : any;
+var editProductWindow : any;
 
 @Component({
-  selector: 'app-add-product',
-  templateUrl: './add-product.component.html',
+  selector: 'app-edit-product',
+  templateUrl: './edit-product.component.html',
   styleUrls: [
-    './add-product.component.css',
+    './edit-product.component.css',
     '../../../styles/container.css',
     '../../../styles/content.css',
     '../../../styles/buttons.css',
     '../../../styles/form.css'
   ]
 })
-
-export class AddProductComponent {
+export class EditProductComponent {
 
   constructor(private productService: ProductService, private animationsService: AnimationsService) { }
 
-  addProductWindow: boolean = true;
+  editProductWindow: boolean = true;
+
+  @Input() product: Product | undefined;
 
   name: string = '';
   type: string = '';
@@ -32,6 +34,35 @@ export class AddProductComponent {
   length: number = 0;
   assigned: boolean = false;
   assigned_user: string = '';
+
+  ngOnInit(): void {
+    console.log('misonoo sojdo', this.product);
+    if (this.product && this.product.idItem) {
+      this.productService.getProductById(this.product.idItem).subscribe({
+        next: (data) => {
+          this.product = data;
+          console.log('misonoo sojdo', this.product);
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      });
+    }
+  }
+
+  // Assegna i valori del prodotto ai campi di input
+  ngAfterView() {
+    if (this.product) {
+      this.name = this.product.name || '';
+      this.type = this.product.type || '';
+      this.description = this.product.description || '';
+      this.location = this.product.location || '';
+      this.image = this.product.image || '';
+      this.length = this.image ? this.image.length : 0;
+      this.assigned_user = this.product.assignedUser || '';
+      this.assigned = this.product.assignedUser.length > 0 || false;
+    }
+  }
   
   categories = [
     {key: 'laptop', name: 'Laptop', visible: true},
@@ -54,24 +85,6 @@ export class AddProductComponent {
   filteredLocations : data[] = this.locations;
   showLocationsBox = false;
 
-  // Osserva i click e se non sono all'interno del componente, chiudilo
-  ngOnInit(): void {
-    this.initObservable();
-    this.initObserveEnterKey();
-    this.animationsService.initResizeObserver('addProductWindow');    
-  }
-
-  initObserveEnterKey() {
-    window.addEventListener('keydown', (event) => {
-      const modal = document.getElementById('addProductWindow');
-      if (modal != null) {
-        if (event.key === 'Escape') {
-          this.onCloseEvent();
-        }
-      }
-    });
-  }
-
   // create an observable that emits the length of the products list
   initObservable(){
     const observable = new Observable((observer) => {
@@ -87,7 +100,6 @@ export class AddProductComponent {
       }
     });
   }
-
   
   filterCategories(event: any) {
     const query = event.target.value.toLowerCase();
@@ -183,23 +195,26 @@ export class AddProductComponent {
     this.productService.addProduct(product);
     this.onCloseEvent();
   }
+
+
+  // Invia l'evento a product-management.component.ts
   
-  @Output() onEvent = new EventEmitter<addProductEventData>();
+  @Output() onEvent = new EventEmitter<editProductEventData>();
 
   onCloseEvent() {
-    const eventData: addProductEventData = {
-      addProductWindow: false,
+    const eventData: editProductEventData = {
+      editProductWindow: false,
     };
       this.onEvent.emit(eventData);
   }
 }
 
-export interface addProductEventData {
-  addProductWindow: boolean;
+export interface editProductEventData {
+  editProductWindow: boolean;
 }
 
 export interface data {
-    key: string;
-    name: string;
-    visible: boolean;
-  }
+  key: string;
+  name: string;
+  visible: boolean;
+}

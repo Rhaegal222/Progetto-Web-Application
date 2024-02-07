@@ -45,13 +45,13 @@ export class ToolsBarComponent {
     }
   }
 
-  @Output() onEvent = new EventEmitter<addProductEventData>();
+  @Output() addProductEvent = new EventEmitter<addProductEventData>();
 
-  addProductEvent() {
+  addProduct() {
     const eventData: addProductEventData = {
       addProductWindow: true,
     };
-    this.onEvent.emit(eventData);
+    this.addProductEvent.emit(eventData);
   }
 }
 

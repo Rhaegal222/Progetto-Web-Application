@@ -1,0 +1,90 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    /* disponiamo gli elementi in riga */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.8rem;
+}
+
+header h1 {
+    margin: 0;
+    cursor: default;
+}
+
+header .close {
+    cursor: pointer;
+}
+
+header .close:hover {
+    color: red;
+}
+
+.form-control.description {
+    height: clamp(50px, 100px, 200px);
+}
+
+.form-group span {
+    cursor: pointer;
+}
+
+.image-preview-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    height: fit-content;
+    padding: 0;
+    margin: 0;
+    
+}
+
+.image-container {
+    flex: 0 0 auto;          /* Gli elementi non si restringono o si espandono */
+    position: relative;      /* Per posizionare il pulsante di rimozione */
+    /* Allinea tutto a partire da alto a destra */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.image-container .remove-image {
+    /* Posizioniamo il pulsante in alto a destra poco fuori dall'immagine*/
+    position: absolute;
+    right: -0.5rem;
+    top: -0.5;
+    cursor: pointer;
+    color: red;
+    background-color: white;
+    border-radius: 50%;
+    padding: 0.1rem;
+    font-size: 1.2rem;
+}
+
+.image {
+    display: block;          /* Rimuove lo spazio extra sotto l'immagine */
+    width: 100px;
+    height: 100px;
+}
+
+.full-width {
+    padding-left: 0;
+}
+
+.sidebar-open {
+    padding-left: 250px;
+}
+

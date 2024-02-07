@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs'
 import { Product } from '../model/product';
+import { get } from 'http';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,9 @@ export class ProductService {
 
   // Get a product by id
   getProductById(id: string){
-    return this.http.get<any>("http://localhost:8080/api/item/"+id);
+    let params = new HttpParams();
+    params = params.set('idItem', id);
+    return this.http.get<Product>('http://localhost:8080/api/getItem', { params: params });
   }
 
   // Get all products with search and filter
@@ -34,8 +37,8 @@ export class ProductService {
       params = params.set('category', category);
     }
 
-
-    console.log('Parametri', params.get('search'), params.get('category'));
+    // stampa la richiesta GET con i parametri
+    console.log('http://localhost:8080/api/items', { params: params });
     
     // Effettua la richiesta GET con i parametri
     return this.http.get<Product[]>('http://localhost:8080/api/items', { params: params });

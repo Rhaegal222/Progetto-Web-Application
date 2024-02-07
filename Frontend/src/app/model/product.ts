@@ -1,9 +1,9 @@
 export interface Product{
-    id_item?:string;
+    idItem?:string;
     name:string;
     type:string;
     description:string;
     location:string;
     image:string;
-    assigned_user:string;
+    assignedUser:string;
 }

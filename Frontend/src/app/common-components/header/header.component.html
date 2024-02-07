@@ -1,4 +1,4 @@
 <header id="header">
-    <app-search-bar></app-search-bar>
-    <app-tools-bar (onEvent)="onOpen()"></app-tools-bar>
+    <app-search-bar (searchEvent)="onSearch($event)"></app-search-bar>
+    <app-tools-bar (addProductEvent)="onOpen($event)"></app-tools-bar>
 </header>

@@ -1,4 +1,4 @@
-<app-header (onEvent)="onOpen($event)"></app-header>
+<app-header (searchEvent)="onSearch($event)" (addProductEvent)="onOpen($event)"></app-header>
 <div class="container">
     <div id="box" class="grid">
         <div *ngFor="let product of products" class="item">
@@ -14,7 +14,7 @@
                     <h5 class="item-title">{{ product.name }}</h5>
                 </div>
                 <div class="item-buttons">
-                    <button class="btn btn-primary">Modifica</button>
+                    <button class="btn btn-primary" (click)="onEdit(product)">Modifica</button>
                     <button class="btn btn-primary">Elimina</button>
                 </div>
             </div>
@@ -26,5 +26,7 @@
     <div *ngIf="addProductWindow" class="add-product">
         <app-add-product (onEvent)="onClose($event)"></app-add-product>
     </div>
+    <div *ngIf="editProductWindow" class="add-product">
+        <app-edit-product *ngIf="selectedProduct" [product]="selectedProduct" (onEvent)="onClose($event)"></app-edit-product>
+    </div>
 </div>
-
