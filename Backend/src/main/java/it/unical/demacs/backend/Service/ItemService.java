@@ -27,13 +27,20 @@ public class ItemService {
         String image = insertItemRequest.getImage();
         String emailUser = insertItemRequest.getEmailUser();
 
+        User existingUser = null;
         try {
             DatabaseHandler.getInstance().openConnection();
-            boolean exisitingUser = DatabaseHandler.getInstance().getUserDao().checkEmail(emailUser);
-            if(!exisitingUser){
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body("User with email '" + emailUser + "' does not exist.");
+            if(!emailUser.isEmpty()){
+                boolean exist = DatabaseHandler.getInstance().getUserDao().checkEmail(emailUser);
+                if(!exist){
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                            .body("User with email '" + emailUser + "' does not exist.");
+                }
+                else{
+                    existingUser = DatabaseHandler.getInstance().getUserDao().findByEmail(emailUser).join();
+                }
             }
+
 
             if(name == null || type == null || description == null || location == null){
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -46,7 +53,7 @@ public class ItemService {
             newItem.setDescription(description);
             newItem.setLocation(location);
             newItem.setImage(image);
-            newItem.setAssignedUser(DatabaseHandler.getInstance().getUserDao().findByEmail(emailUser).join());
+            newItem.setAssignedUser(existingUser);
 
             CompletableFuture<Boolean> insertResult = DatabaseHandler.getInstance().getItemDao().insertItem(newItem);
 
