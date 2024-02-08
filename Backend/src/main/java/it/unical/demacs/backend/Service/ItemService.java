@@ -186,6 +186,7 @@ public class ItemService {
             String description = modifyRequest.getDescription();
             String location = modifyRequest.getLocation();
             String image = modifyRequest.getImage();
+
             if(!modifyRequest.getEmailUser().isEmpty()){
                 User assignedUser = DatabaseHandler.getInstance().getUserDao().findByEmail(modifyRequest.getEmailUser()).join();
                 itemToModify.setAssignedUser(assignedUser);
