@@ -16,4 +16,5 @@ public interface EmployeeRequestDao {
     CompletableFuture<Boolean> updateEmployeeRequest(EmployeeRequest employeeRequest);
     CompletableFuture<Boolean> deleteEmployeeRequest(Long id);
 
+    CompletableFuture<ArrayList<EmployeeRequest>> getRequestsByType(String type);
 }

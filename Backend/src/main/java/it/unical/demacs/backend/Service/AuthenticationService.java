@@ -1,6 +1,7 @@
 package it.unical.demacs.backend.Service;
 
 import it.unical.demacs.backend.Persistence.DatabaseHandler;
+import it.unical.demacs.backend.Persistence.Model.EmployeeRequest;
 import it.unical.demacs.backend.Persistence.Model.Item;
 import it.unical.demacs.backend.Persistence.Model.User;
 import it.unical.demacs.backend.Service.Request.LoginRequest;
@@ -37,7 +38,8 @@ public class AuthenticationService{
                         //Contenuto della response entity
                         String jwt = jwtService.generateToken(user);
                         ArrayList<Item> items = user.getItems();
-                        return ResponseEntity.ok(new JwtAuthResponse(jwt, items));
+                        ArrayList<EmployeeRequest> requests = user.getEmployeeRequests();
+                        return ResponseEntity.ok(new JwtAuthResponse(jwt, items, requests));
                     }
                 } else {
                     return ResponseEntity.badRequest().body("{\"message\": \"Wrong username/password\"}");
