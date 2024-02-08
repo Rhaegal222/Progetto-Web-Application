@@ -40,6 +40,9 @@ public class ItemService {
                     existingUser = DatabaseHandler.getInstance().getUserDao().findByEmail(emailUser).join();
                 }
             }
+            if(description == null || description.isEmpty()){
+                description = "NO DESCRIPTION";
+            }
 
 
             if(name == null || name.isEmpty() || type == null || type.isEmpty() || location == null || location.isEmpty()){
