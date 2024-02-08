@@ -35,6 +35,14 @@ export class SearchBarComponent {
     {key: 'employee', name: 'Dipendente', visible: true},
   ];
   role: string = 'Tutti i ruoli';
+
+  requestStatus = [
+    {key: 'all', name: 'Tutti gli stati', visible: false},
+    {key: 'pending', name: 'In attesa', visible: true},
+    {key: 'approved', name: 'Approvata', visible: true},
+    {key: 'rejected', name: 'Rifiutata', visible: true},
+  ];
+  status: string = 'Tutti gli stati';
   
   key: string = 'all';
 
@@ -48,6 +56,9 @@ export class SearchBarComponent {
     } else if (this.router.url === '/user-management') {
       this.elements = this.roles;
       this.element = 'Tutti i ruoli';
+    } else if (this.router.url === '/request-management') {
+      this.elements = this.requestStatus;
+      this.element = 'Tutti gli stati';
     }
   }
 

@@ -16,7 +16,9 @@ export class HeaderComponent {
   addProductWindow: boolean = false;
 
   ngOnInit() {
-    this.animationsService.initResizeObserver('header');
+    setTimeout(() => {
+      this.animationsService.initResizeObserver('header');
+    }, 0);
   }
 
   @Output() searchEvent = new EventEmitter<searchEventData>();

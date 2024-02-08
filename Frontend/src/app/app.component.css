@@ -1,7 +1,18 @@
+.router-outlet {
+  width: clamp(600px, 75%, 90%);
+  max-width: 1000px;
+}
+
+.main {
+  /* allinea orizzontalmente al centro */
+  display: flex;
+  justify-content: center;
+}
+
 .full-width {
   padding-left: 0;
 }
 
 .sidebar-open {
-  padding-left: 250px;
+  padding-left: 260px;
 }

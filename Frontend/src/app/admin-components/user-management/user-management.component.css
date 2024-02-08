@@ -74,6 +74,16 @@
     padding: 10px;
 }
 
+.no-products {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50%;
+}
+
 @media (max-width: 777.20px) {
     header {
         top: 55px;
