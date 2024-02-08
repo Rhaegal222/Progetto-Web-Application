@@ -42,7 +42,7 @@ public class ItemService {
             }
 
 
-            if(name == null || type == null || description == null || location == null){
+            if(name == null || name.isEmpty() || type == null || type.isEmpty() || location == null || location.isEmpty()){
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body("All fields are required.");
             }
