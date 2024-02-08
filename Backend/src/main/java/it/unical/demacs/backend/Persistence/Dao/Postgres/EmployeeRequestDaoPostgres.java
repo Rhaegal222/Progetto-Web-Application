@@ -154,8 +154,23 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
     }
 
     @Override
+    @Async
     public CompletableFuture<Boolean> updateEmployeeRequest(EmployeeRequest employeeRequest) {
-        return null;
+        String query = "UPDATE employee_request SET requesting_user = ?, requested_item = ?, request_content = ?, request_date = ? WHERE id_employee_request = ?";
+        try (
+                PreparedStatement st = this.con.prepareStatement(query)) {
+            st.setLong(1, employeeRequest.getRequestingUser().getIdUser());
+            st.setLong(2, employeeRequest.getRequestedItem().getIdItem());
+            st.setString(3, employeeRequest.getRequestContent());
+            st.setDate(4, employeeRequest.getRequestDate());
+            st.setLong(5, employeeRequest.getIdEmployeeRequest());
+            int rowsAffected = st.executeUpdate();
+            st.close();
+            return CompletableFuture.completedFuture(rowsAffected > 0);
+        } catch (SQLException e) {
+            e.fillInStackTrace();
+        }
+        return CompletableFuture.completedFuture(false);
     }
 
     @Override

@@ -20,5 +20,4 @@ public class RegistrationController {
     public ResponseEntity<?> doRegistration(@RequestBody RegistrationRequest registrationRequest){
         return registrationService.doRegistration(registrationRequest);
     }
-
 }

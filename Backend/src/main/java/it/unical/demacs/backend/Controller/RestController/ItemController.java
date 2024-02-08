@@ -17,38 +17,23 @@ public class ItemController {
 
     // POST
     @PostMapping("/api/insertItem")
-    public ResponseEntity<?> insertItem(@RequestBody InsertItemRequest insertItemRequest) {
-        return itemService.insertItem(insertItemRequest);
-    }
-
-
+    public ResponseEntity<?> insertItem(@RequestBody InsertItemRequest insertItemRequest) {return itemService.insertItem(insertItemRequest);}
     @PostMapping("/api/modifyItem")
-    public ResponseEntity<?> modifyItem(@RequestBody ModifyRequest modifyRequest){
-        return itemService.modifyRequest(modifyRequest);
-    }
-
+    public ResponseEntity<?> modifyItem(@RequestBody ModifyRequest modifyRequest){return itemService.modifyRequest(modifyRequest);}
     @PostMapping("/api/deleteItem")
-    public ResponseEntity<?> deleteItem(@RequestBody GetItemRequest getItemRequest){
-        return itemService.deleteItem(getItemRequest);
-    }
+    public ResponseEntity<?> deleteItem(@RequestBody GetItemRequest getItemRequest){return itemService.deleteItem(getItemRequest);}
 
     // GET
     @GetMapping("/api/allItems")
     public ResponseEntity<?> allItems(){
         return itemService.allItems();
     }
-
     @GetMapping("/api/searchItem")
-    public ResponseEntity<?> searchItem(@RequestBody SearchItemRequest searchItemRequest){
-        return itemService.searchItem(searchItemRequest);
-    }
+    public ResponseEntity<?> searchItem(@RequestBody SearchItemRequest searchItemRequest){return itemService.searchItem(searchItemRequest);}
 
     // GET con parametri di ricerca
     @GetMapping("/api/items")
-    public ResponseEntity<?> searchItems(
-            @RequestParam(required = false) String search,
-            @RequestParam(required = false) String category) {
-        System.out.println("search: afgshrjttdhgfsdgherjetrhsgefsdghj");
+    public ResponseEntity<?> searchItems(@RequestParam(required = false) String search, @RequestParam(required = false) String category) {
         if (search == null && (category == null || category.equals("all"))) {
             return itemService.allItems();
         } else if (search == null) {
@@ -59,13 +44,9 @@ public class ItemController {
             return itemService.searchItems(search, category);
         }
     }
-
     @GetMapping("/api/getItem")
     public ResponseEntity<?> getItem(@RequestParam("idItem") long idItem) {
         return itemService.getItemProxy(idItem);
     }
-
-
-
 
 }

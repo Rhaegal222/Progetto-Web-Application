@@ -18,9 +18,4 @@ public class AuthenticationController {
     public ResponseEntity<?> loginWithCredentials(@RequestBody LoginRequest loginRequest) {
         return authenticationService.loginWithCredentials(loginRequest);
     }
-
-
-
-
-
 }
