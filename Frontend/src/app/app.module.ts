@@ -18,8 +18,8 @@ import { RequestManagementComponent } from './storekeeper-components/request-man
 import { ProductListComponent } from './employee-components/product-list/product-list.component';
 import { ReportComponent } from './storekeeper-components/report/report.component';
 import { ProductManagementComponent } from './storekeeper-components/product-management/product-management.component';
-import { ProductRequestComponent } from './employee-components/product-request/product-request.component';
-import { ProductReturnComponent } from './employee-components/product-return/product-return.component';
+import { ProductRequestComponent } from './employee-components/product-detail/product-request/product-request.component';
+import { ProductReturnComponent } from './employee-components/product-detail/product-return/product-return.component';
 import { SettingsComponent } from './common-components/settings/settings.component';
 import { MenuAdminComponent } from './common-components/sidebar/menus/menu-admin/menu-admin.component';
 import { MenuEmployeeComponent } from './common-components/sidebar/menus/menu-employee/menu-employee.component';
@@ -34,6 +34,7 @@ import { PageNotFoundComponent } from './common-components/page-not-found/page-n
 import { ProfileComponent } from './common-components/profile/profile.component';
 import { HeaderComponent } from './common-components/header/header.component';
 import { EditProductComponent } from './storekeeper-components/product-management/edit-product/edit-product.component';
+import { UserProductComponent } from './employee-components/user-product/user-product.component';
 
 
 
@@ -65,7 +66,8 @@ import { EditProductComponent } from './storekeeper-components/product-managemen
     ProfileComponent,
     ToolsBarComponent,
     HeaderComponent,
-    EditProductComponent
+    EditProductComponent,
+    UserProductComponent
 ],
   imports: [
     BrowserModule,

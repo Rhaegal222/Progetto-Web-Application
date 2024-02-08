@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RequestService } from '../../services/request.service';
 import { Request } from '../../model/request';
-import { request } from 'http';
 
 @Component({
   selector: 'app-request-management',

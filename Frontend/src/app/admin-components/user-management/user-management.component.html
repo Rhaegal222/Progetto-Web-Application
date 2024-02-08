@@ -49,9 +49,11 @@
                     </div>
                 </div>
                 <div class="item-buttons">
-                    <button *ngIf="!user.banned" class="btn btn-primary" (click)="onPromote(user)">Promuovi</button>
-                    <button *ngIf="!user.banned" class="btn btn-primary" (click)="onLock(user)">Blocca</button>
+                    <button *ngIf="!user.banned && (user.role == 'a' || user.role == 'e' || user.role == 's')" class="btn btn-primary" (click)="onPromote(user)">Promuovi</button>
+                    <button *ngIf="!user.banned && (user.role == 'a' || user.role == 'e' || user.role == 's')" class="btn btn-primary" (click)="onLock(user)">Blocca</button>
                     <button *ngIf="user.banned" class="btn btn-primary" (click)="onUnlock(user)">Sblocca</button>
+                    <button *ngIf="user.role != 'a' && user.role != 'e' && user.role != 's'" class="btn btn-primary" (click)="onAccept(user)">Accetta</button>
+                    <button *ngIf="user.role != 'a' && user.role != 'e' && user.role != 's'" class="btn btn-primary" (click)="onReject(user)">Rifiuta</button>
                 </div>
             </div>
         </div>

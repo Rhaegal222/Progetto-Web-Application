@@ -56,7 +56,7 @@ export class SearchBarComponent {
     } else if (this.router.url === '/user-management') {
       this.elements = this.roles;
       this.element = 'Tutti i ruoli';
-    } else if (this.router.url === '/request-management') {
+    } else if (this.router.url === '/request-management' || this.router.url === '/requests-forwarded') {
       this.elements = this.requestStatus;
       this.element = 'Tutti gli stati';
     }

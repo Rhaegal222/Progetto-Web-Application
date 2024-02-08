@@ -10,13 +10,14 @@ import { ProductDetailComponent } from './employee-components/product-detail/pro
 import { RequestManagementComponent } from './storekeeper-components/request-management/request-management.component';
 import { ReportComponent } from './storekeeper-components/report/report.component';
 import { ProductManagementComponent } from './storekeeper-components/product-management/product-management.component';
-import { ProductRequestComponent } from './employee-components/product-request/product-request.component';
-import { ProductReturnComponent } from './employee-components/product-return/product-return.component';
+import { ProductRequestComponent } from './employee-components/product-detail/product-request/product-request.component';
+import { ProductReturnComponent } from './employee-components/product-detail/product-return/product-return.component';
 import { SettingsComponent } from './common-components/settings/settings.component';
 import { RequestsForwardedComponent } from './employee-components/requests-forwarded/requests-forwarded.component';
 import { PageNotFoundComponent } from './common-components/page-not-found/page-not-found.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ProfileComponent } from './common-components/profile/profile.component';
+import { UserProductComponent } from './employee-components/user-product/user-product.component';
 
 const routes: Routes = [
   // Componenti comuni a tutti gli utenti
@@ -37,6 +38,7 @@ const routes: Routes = [
   // Componenti per il dipendente dell'università
   { path: 'registration', component: RegistrationComponent, canActivate: [AuthGuard] },
   { path: 'product-list', component: ProductListComponent, canActivate: [AuthGuard] },
+  { path: 'user-product', component: UserProductComponent, canActivate: [AuthGuard] },
   { path: 'product-detail', component: ProductDetailComponent, canActivate: [AuthGuard] },
   { path: 'product-request', component: ProductRequestComponent, canActivate: [AuthGuard] },
   { path: 'product-return', component: ProductReturnComponent, canActivate: [AuthGuard] },

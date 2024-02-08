@@ -85,10 +85,16 @@ export class UserManagementComponent {
   }
 
   onLock(user: User) {
-    console.log('Utente bannato:', user); 
+    console.log('Utente bloccato:', user); 
   }
   onUnlock(user: User) {
-    console.log('Utente bannato:', user); 
+    console.log('Utente sbloccato:', user); 
+  }
+  onAccept(user: User) {
+    console.log('Utente accettato:', user); 
+  }
+  onReject(user: User) {
+    console.log('Utente rifiutato:', user); 
   }
 }
 

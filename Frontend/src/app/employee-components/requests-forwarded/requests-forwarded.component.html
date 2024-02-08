@@ -1,1 +1,22 @@
-<p>requests-forwarded works!</p>
+<app-header></app-header>
+<div class="container">
+    <div id="box" class="grid">
+        <div *ngFor="let request of requests" class="grid item">
+            <div class="item-body">
+                <div class="item-row">
+                    <h5 class="item-title">Nome:</h5>
+                    <span>{{ request.title }}</span>
+                    <span *ngIf="request.status == 'p'" class="material-icons">pending</span>
+                    <span *ngIf="request.status == 'a'" class="material-icons">check_circle</span>
+                    <span *ngIf="request.status == 'r'" class="material-icons">highlight_off</span>
+                    <div class="item-colunm">
+                        <button *ngIf="request.status == 'p'" class="btn btn-primary" (click)="OnOpenRequestDetails(request)">Accetta</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="requests.length == 0" class="no-products">
+        <h1>Nessuna richiesta</h1>
+    </div>
+</div>

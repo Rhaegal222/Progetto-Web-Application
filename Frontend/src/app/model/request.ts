@@ -3,13 +3,11 @@ import { User } from './user';
 
 export interface Request{
     idRequest:number;
-    idUser:number;
-    idProduct:number;
     title:string;
-    quantity:number;
+    description:string;
     status:string;
     type:string;
-    date:Date;
+    date:string;
     product?:Product;
     user?:User;
 }

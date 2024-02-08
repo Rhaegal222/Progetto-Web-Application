@@ -7,6 +7,8 @@
   /* allinea orizzontalmente al centro */
   display: flex;
   justify-content: center;
+  height: 100%;
+  width: 100%;
 }
 
 .full-width {

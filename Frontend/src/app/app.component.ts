@@ -21,7 +21,7 @@ export class AppComponent {
       if (event instanceof NavigationEnd) {
         setTimeout(() => {
           this.animationsService.initResizeObserver('router-outlet');
-        }, 0);
+        }, 100);
       }
     });
   }
