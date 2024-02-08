@@ -84,7 +84,7 @@ public class UserDaoPostgres implements UserDao {
             stmt.setString(1, email);
             ResultSet res = stmt.executeQuery();
 
-            User u = null;
+            User u = new UserProxy(con);
             if (res.next()) {
                 long idUser = res.getLong("id_user");
                 String password = res.getString("password");
@@ -93,9 +93,14 @@ public class UserDaoPostgres implements UserDao {
                 String role = res.getString("role");
                 boolean banned = res.getBoolean("banned");
 
-                u = new User(password, email, name, surname, banned);
                 u.setIdUser(idUser);
+                u.setEmail(email);
+                u.setPassword(password);
+                u.setName(name);
+                u.setSurname(surname);
                 u.setRole(role);
+                u.setBanned(banned);
+
             }
 
             res.close();
