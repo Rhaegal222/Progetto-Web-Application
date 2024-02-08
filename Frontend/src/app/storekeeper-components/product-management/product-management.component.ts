@@ -54,7 +54,7 @@ export class ProductManagementComponent {
     // Se la barra di ricerca è vuota e la categoria è "Tutte le categorie", chiamare getAllProducts.
     // Altrimenti, chiamare getProducts con i valori correnti di searchValue e category.
     this.searchValue = eventData.searchValue;
-    this.category = eventData.category;
+    this.category = eventData.element;
     if (this.searchValue === "" && this.category === "all") {
       this.getAllProducts();
     } else {
@@ -134,7 +134,7 @@ export class ProductManagementComponent {
 
 export interface onSearchEventData {
   searchValue: string;
-  category: string;
+  element: string;
 }
 
 export interface addProductEventData {

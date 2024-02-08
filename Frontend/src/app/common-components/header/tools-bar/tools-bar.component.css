@@ -9,16 +9,8 @@
     margin-right: 0.5rem;
 }
 
-.more {
-    display: none;
-}
-
 /* Se la larghezza della finestra è minore di 600px, nascondi i bottoni */
-@media (max-width: 992px) {
-    .more {
-        position: relative;
-        display: inline-block;
-    }
+@media (max-width: 768px) {
     .tools btn-primary {
         /* mettili uno sotto l'altro */
         display: block;
@@ -43,9 +35,6 @@
     }
     .tools button:hover {
         background-color: #f1f1f1;
-    }
-    .more:hover .tools btn-primary {
-        display: block;
     }
 
 
