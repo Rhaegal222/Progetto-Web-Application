@@ -59,16 +59,18 @@ public class ItemService {
 
             if (insertResult.get()) {
                 // Item inserted successfully
-                return ResponseEntity.status(HttpStatus.OK).body("Item inserted successfully.");
+                return ResponseEntity.status(HttpStatus.OK).body(
+                        "{\"message\": \"Item inserted successfully.\"}");
             } else {
                 // Failed to insert item
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .body("Failed to insert item.");
+                        .body(
+                                "{\"message\": \"Failed to insert item.\"}");
             }
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error processing the request: " + e.getMessage());
+                    .body("{\"message\": \"Error processing the request: " + e.getMessage());
         }
         finally {
             DatabaseHandler.getInstance().closeConnection();
