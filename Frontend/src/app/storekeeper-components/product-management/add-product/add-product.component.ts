@@ -2,7 +2,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductService } from '../../../services/product.service';
 import { AnimationsService } from '../../../services/animations.service';
-
+import { ImgbbService } from '../../../services/imgbb.service';
 var arrow : any;
 var addProductWindow : any;
 
@@ -20,7 +20,7 @@ var addProductWindow : any;
 
 export class AddProductComponent {
 
-  constructor(private productService: ProductService, private animationsService: AnimationsService) { }
+  constructor(private productService: ProductService, private animationsService: AnimationsService, private imgbbService: ImgbbService) { }
 
   addProductWindow: boolean = true;
 
@@ -111,7 +111,6 @@ export class AddProductComponent {
   }
 
   selectLocation(suggestion: data) {
-    console.log(suggestion);
     this.location = suggestion.name; // Aggiorna il modello con il valore selezionato
     this.showLocationsBox = false; // Nasconde il box dei suggerimenti
   }
@@ -139,11 +138,21 @@ export class AddProductComponent {
     }
   }
 
-  addImage(event: Event): void {
+addImage(event: Event): void {
     const input = event.target as HTMLInputElement;
   
     if (input.files && input.files.length) {
       const file = input.files[0];
+      this.imgbbService.upload(file).subscribe({
+        next: (response: any) => {
+          this.image=response.data.url
+          //alert(response.data.url)
+        }
+      })
+    }
+  }
+
+      /*
       const reader = new FileReader();
   
       reader.onload = () => {
@@ -157,9 +166,9 @@ export class AddProductComponent {
       };
   
       reader.readAsDataURL(file);
-    }
-  }
-
+      */
+    
+    
   removeImage(): void {
     this.image = '';
     // pulire l'input file
@@ -170,20 +179,16 @@ export class AddProductComponent {
   }
 
   onSave(){
-    if(!this.assigned){
-      this.assigned_user = '';
-      this.location = '';
-    }
+    // Creare un oggetto con i dati del prodotto
     const product = {
       name: this.name,
       type: this.type,
-      description: this.description,
       location: this.location,
-      image: this.image,
-      assignedUser: this.assigned_user
+      description: this.description,
+      assignedUser: this.assigned_user,
+      image: this.image
     };
     
-    console.log(product);
     this.productService.addProduct(product);
     this.onCloseEvent();
   }
