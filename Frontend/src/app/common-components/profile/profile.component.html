@@ -1,1 +1,38 @@
-<p>profile works!</p>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+
+<div class="container">
+<div class="row">
+		<div class="col-12">
+
+					<!-- Contact detail -->
+					<div class="col-xxl-8 mb-5 mb-xxl-0">
+						<div class="bg-secondary-soft px-4 py-5 rounded">
+							<div class="row g-3">
+								<h3 class="mb-4 mt-0">Profilo</h3>
+								<!-- First Name -->
+								<div class="col-md-6">
+									<label class="form-label">First Name *</label>
+									<input type="text" class="form-control" placeholder="" aria-label="First name" value="Scaralet">
+								</div>
+								<!-- Last name -->
+								<div class="col-md-6">
+									<label class="form-label">Last Name *</label>
+									<input type="text" class="form-control" placeholder="" aria-label="Last name" value="Doe">
+								</div>
+
+								<!-- Email -->
+								<div class="col-md-6">
+									<label for="inputEmail4" class="form-label">Email *</label>
+								</div>
+							</div> <!-- Row END -->
+						</div>
+					</div>
+
+
+
+
+				<!-- button -->
+				<td>
+					<button class="btn btn-primary" (click)="salva">Salva</button> <!-- Aggiunto un bottone per modificare l'utente -->
+					<button class="btn btn-danger" (click)="annulla">Annulla</button> <!-- Aggiunto un bottone per eliminare l'utente -->
+				  </td>

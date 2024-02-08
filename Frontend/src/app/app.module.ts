@@ -66,7 +66,7 @@ import { EditProductComponent } from './storekeeper-components/product-managemen
     ToolsBarComponent,
     HeaderComponent,
     EditProductComponent
-  ],
+],
   imports: [
     BrowserModule,
     AppRoutingModule,
