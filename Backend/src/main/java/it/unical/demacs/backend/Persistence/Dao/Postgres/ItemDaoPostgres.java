@@ -126,7 +126,7 @@ public class ItemDaoPostgres implements ItemDao {
     @Override
     @Async
     public CompletableFuture<Boolean> updateItem(Item item) {
-        String query = "UPDATE items SET name = ?, type = ?, description = ?, location = ?, image_base64 = ? WHERE id_item = ?";
+        String query = "UPDATE items SET name = ?, type = ?, description = ?, location = ?, image_base64 = ?, assigned_user = ? WHERE id_item = ?";
         try (
                 PreparedStatement st = this.con.prepareStatement(query)) {
             st.setString(1, item.getName());
@@ -134,7 +134,14 @@ public class ItemDaoPostgres implements ItemDao {
             st.setString(3, item.getDescription());
             st.setString(4, item.getLocation());
             st.setString(5, item.getImage());
-            st.setLong(6, item.getIdItem());
+            if(item.getAssignedUser() != null){
+                st.setLong(6, item.getAssignedUser().getIdUser());
+            }
+            else{
+                st.setLong(6, 0);
+            }
+            st.setLong(7, item.getIdItem());
+
             int rowsAffected = st.executeUpdate();
             st.close();
             return CompletableFuture.completedFuture(rowsAffected > 0);

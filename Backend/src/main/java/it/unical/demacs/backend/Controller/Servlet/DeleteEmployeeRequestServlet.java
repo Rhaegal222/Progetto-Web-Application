@@ -7,9 +7,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
-@WebServlet("/api/employeeRequestDelete")
+@WebServlet("/api/employeerequest/delete")
 @RequiredArgsConstructor
 public class DeleteEmployeeRequestServlet extends HttpServlet {
+
     private final EmployeeRequestService employeeRequestService;
 
     @Override
@@ -17,3 +18,5 @@ public class DeleteEmployeeRequestServlet extends HttpServlet {
         employeeRequestService.deleteEmployeeRequest(request, response);
     }
 }
+
+
