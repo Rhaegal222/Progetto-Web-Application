@@ -8,8 +8,11 @@ import java.sql.Date;
 @Getter
 @Setter
 public class SendReqRequest {
-    String emailRequestingUser;
-    long idRequestedItem;
-    String requestContent;
-    String requestDate;
+    long product;
+    long user;
+    String title;
+    String description;
+    String status;
+    String type;
+    String date;
 }

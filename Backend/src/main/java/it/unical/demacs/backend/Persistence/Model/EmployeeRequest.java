@@ -13,14 +13,20 @@ public class EmployeeRequest {
     private long idEmployeeRequest;
     private User requestingUser;
     private Item requestedItem;
-    private String requestContent;
-    private String requestDate;
+    private String title;
+    private String description;
+    private String status;
+    private String type;
+    private String date;
 
-    public EmployeeRequest(User requestingUser, Item requestedItem, String requestContent, String requestDate) {
+    public EmployeeRequest(User requestingUser, Item requestedItem, String title, String description, String status, String type, String date) {
         this.requestingUser = requestingUser;
         this.requestedItem = requestedItem;
-        this.requestContent = requestContent;
-        this.requestDate = requestDate;
+        this.title = title;
+        this.description = description;
+        this.status = status;
+        this.type = type;
+        this.date = date;
     }
 
     public EmployeeRequest() {
@@ -31,7 +37,10 @@ public class EmployeeRequest {
         this.idEmployeeRequest = e.getIdEmployeeRequest();
         this.requestingUser = e.getRequestingUser();
         this.requestedItem = e.getRequestedItem();
-        this.requestContent = e.getRequestContent();
-        this.requestDate = e.getRequestDate();
+        this.title = e.getTitle();
+        this.description = e.getDescription();
+        this.status = e.getStatus();
+        this.type = e.getType();
+        this.date = e.getDate();
     }
 }

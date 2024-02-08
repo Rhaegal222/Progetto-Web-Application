@@ -27,85 +27,61 @@ public class EmployeeRequestService {
     public void deleteEmployeeRequest(HttpServletRequest request, HttpServletResponse response) {
         try {
             DatabaseHandler.getInstance().openConnection();
-            EmployeeRequest employeeRequest = new EmployeeRequest(Long.parseLong(request.getParameter("idEmployeeRequest")));
+            EmployeeRequest employeeRequest = null;
+            String idEmployeeRequestString = request.getParameter("idEmployeeRequest");
+            if (idEmployeeRequestString != null && !idEmployeeRequestString.isEmpty()) {
+                employeeRequest = new EmployeeRequest(Long.parseLong(idEmployeeRequestString));
+            }
             String email = request.getParameter("email");
-            if (employeeRequest.getRequestingUser().getEmail().equals(email)) {
-                if (DatabaseHandler.getInstance().getEmployeeRequestDao().deleteEmployeeRequest(employeeRequest.getIdEmployeeRequest()).join()) {
-                    outputJSON(response, "Request deleted", "0");
-                } else {
-                    outputJSON(response, "Error deleting request", "1");
-                }
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void insertEmployeeRequest(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            DatabaseHandler.getInstance().openConnection();
-
-            // Extract parameters from the request
-            String requestDescription = request.getParameter("requestDescription");
-            User user = new User(Long.parseLong(request.getParameter("idUser")));
-            Item item = new Item(Long.parseLong(request.getParameter("idItem")));
-            String requestDate = request.getParameter("requestDate");
-
-            // Create an instance of EmployeeRequest using the extracted parameters
-            EmployeeRequest employeeRequest = new EmployeeRequest(user, item, requestDescription, requestDate);
-
-            // Insert the employee request into the database
-            boolean result = DatabaseHandler.getInstance().getEmployeeRequestDao().insertEmployeeRequest(employeeRequest).join();
-
-            // Check the result of the insertion and send appropriate response
-            if (result) {
-                outputJSON(response, "Request inserted successfully", "0");
+            assert employeeRequest != null;
+            if (DatabaseHandler.getInstance().getEmployeeRequestDao().deleteEmployeeRequest(employeeRequest.getIdEmployeeRequest()).join()) {
+                outputJSON(response, "Request deleted", "0");
             } else {
-                outputJSON(response, "Error inserting request", "1");
+                outputJSON(response, "Error deleting request", "1");
             }
-
         } catch (IOException e) {
             throw new RuntimeException(e);
-        } finally {
-            DatabaseHandler.getInstance().closeConnection();
         }
     }
 
     public ResponseEntity<?> sendRequest(SendReqRequest sendReqRequest) {
         try {
             DatabaseHandler.getInstance().openConnection();
-            String emailRequestingUser = sendReqRequest.getEmailRequestingUser();
-            long idRequestedItem = sendReqRequest.getIdRequestedItem();
-            String requestContent = sendReqRequest.getRequestContent();
-            String requestDate = sendReqRequest.getRequestDate();
 
-            if(emailRequestingUser.isEmpty()| idRequestedItem == 0 || requestContent.isEmpty() || requestDate.isEmpty()){
+            String title = sendReqRequest.getTitle();
+            String description = sendReqRequest.getDescription();
+            String status = sendReqRequest.getStatus();
+            String type = sendReqRequest.getType();
+            String date = sendReqRequest.getDate();
+            long product = sendReqRequest.getProduct();
+            long user = sendReqRequest.getUser();
+            if(title.isEmpty() || description.isEmpty() || status.isEmpty() || type.isEmpty() || date.isEmpty() || product == 0 || user == 0) {
                 return ResponseEntity.status(400).body("Invalid request");
             }
 
-            User requestingUser = DatabaseHandler.getInstance().getUserDao().findByEmail(emailRequestingUser).join();
+
+            User requestingUser = DatabaseHandler.getInstance().getUserDao().findByPrimaryKey(user).join();
+            Item requestedItem = DatabaseHandler.getInstance().getItemDao().findByPrimaryKey(product).join();
+
             String requestTitle = null;
-            if (requestContent.equals("Reso")) {
-                requestTitle = "Richiesta di reso";
-            } else
-                if(requestContent.equals("Richiesta")) {
-                    requestTitle = "Richiesta di un prodotto";
-                }
-                else {
+            if (type.equals("Reso")) {
+                requestTitle = "Richiesta di reso - " + title;
+            } else {
+                if (type.equals("Richiesta")) {
+                    requestTitle = "Richiesta di un prodotto - " + title;
+                } else {
                     return ResponseEntity.status(400).body("Invalid request");
                 }
+            }
 
-                Item requestedItem = new Item(idRequestedItem);
-                EmployeeRequest employeeRequest = new EmployeeRequest(requestingUser, requestedItem , requestContent, requestDate);
-                DatabaseHandler.getInstance().getEmployeeRequestDao().insertEmployeeRequest(employeeRequest);
+            EmployeeRequest employeeRequest = new EmployeeRequest(requestingUser, requestedItem, title, description, status, type, date);
+            DatabaseHandler.getInstance().getEmployeeRequestDao().insertEmployeeRequest(employeeRequest);
 
-            String emailContent = "Richiesta di " + requestContent + " da parte di " + requestingUser.getEmail() + " per " + idRequestedItem;
+            String emailContent = requestTitle + " da parte di " + requestingUser.getEmail() + "\n\n" + description;
             ArrayList<User> admins = DatabaseHandler.getInstance().getUserDao().getAdmins().join();
             for (User admin : admins) {
                 SendMail.getInstance().sendEmail(requestTitle, emailContent, admin.getEmail());
             }
-
-
 
             // Puoi gestire la risposta qui, ad esempio, restituendo un ResponseEntity di successo
             return ResponseEntity.ok("Email sent successfully to admins");
