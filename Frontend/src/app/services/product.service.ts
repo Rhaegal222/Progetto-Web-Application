@@ -74,4 +74,24 @@ export class ProductService {
       }
     });
   }
+
+  tryDeleteProduct(idItem: string): Observable<any> {
+    let params = new HttpParams().set('idItem', idItem);
+
+    return this.http.post("http://localhost:8080/api/deleteItem", { idItem });
+  }
+
+  // Delete a product
+  deleteProduct(product: Product) {
+    if(product.idItem != undefined && product.idItem != null){
+      this.tryDeleteProduct(String(product.idItem)).subscribe({
+        next: (response) => {
+          console.log(response);
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      });
+    }
+  }
 }

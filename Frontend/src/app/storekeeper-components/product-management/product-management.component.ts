@@ -94,18 +94,28 @@ export class ProductManagementComponent {
     this.selectedProduct = product;
   }
 
+  onDelete(product: Product) {
+    this.selectedProduct = product;
+    if(this.selectedProduct != undefined){
+      this.productService.deleteProduct(this.selectedProduct)
+      this.getAllProducts();
+    }
+  }
+
   // Get all products
   getAllProducts(){
     console.log("Getting all products");
-    this.productService.getAllProducts().subscribe({
-      next: (data) => {
-        this.products = data;
-        console.log(this.products);
-      },
-      error: (error) => {
-        console.error(error)
-      }
-    });
+    setTimeout(() => {
+      this.productService.getAllProducts().subscribe({
+        next: (data) => {
+          this.products = data;
+          console.log(this.products);
+        },
+        error: (error) => {
+          console.error(error)
+        }
+      });
+    }, 500);
   }
 
   isAnImage(image : string): boolean {
