@@ -11,5 +11,5 @@ public class SendReqRequest {
     String emailRequestingUser;
     long idRequestedItem;
     String requestContent;
-    Date requestDate;
+    String requestDate;
 }

@@ -14,8 +14,22 @@ import java.util.concurrent.CompletableFuture;
 
 public class ItemDaoPostgres implements ItemDao {
     Connection con;
-    public ItemDaoPostgres(Connection con){
-        this.con = con;
+    public ItemDaoPostgres(Connection con){ this.con = con; }
+
+    @Override
+    @Async
+    public CompletableFuture<Boolean> insertItem(Item Item) {
+        String query = "INSERT INTO items (name, type, description, location, image_base64, assigned_user) VALUES (?, ?, ?, ?, ?, ?)";
+        try (
+                PreparedStatement st = this.con.prepareStatement(query)) {
+            settingItem(Item, st);
+            int rowsAffected = st.executeUpdate();
+            st.close();
+            return CompletableFuture.completedFuture(rowsAffected > 0);
+        } catch (SQLException e) {
+            e.fillInStackTrace();
+        }
+        return CompletableFuture.completedFuture(false);
     }
 
     @Override
@@ -107,21 +121,7 @@ public class ItemDaoPostgres implements ItemDao {
         }
         return CompletableFuture.completedFuture(items);
     }
-    @Override
-    @Async
-    public CompletableFuture<Boolean> insertItem(Item Item) {
-        String query = "INSERT INTO items (name, type, description, location, image_base64, assigned_user) VALUES (?, ?, ?, ?, ?, ?)";
-        try (
-                PreparedStatement st = this.con.prepareStatement(query)) {
-            settingItem(Item, st);
-            int rowsAffected = st.executeUpdate();
-            st.close();
-            return CompletableFuture.completedFuture(rowsAffected > 0);
-        } catch (SQLException e) {
-            e.fillInStackTrace();
-        }
-        return CompletableFuture.completedFuture(false);
-    }
+
 
     @Override
     @Async
@@ -207,7 +207,37 @@ public class ItemDaoPostgres implements ItemDao {
         return CompletableFuture.completedFuture(items);
     }
 
+    @Override
+    @Async
+    public CompletableFuture<ArrayList<Item>> findItemsByUser(long idUser) {
+        ArrayList<Item> items = new ArrayList<>();
+        String query = "SELECT * FROM items WHERE assigned_user = ?";
+        try (
+                PreparedStatement st = this.con.prepareStatement(query)) {
+            st.setLong(1, idUser);
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    Item item = new ItemProxy(con);
+                    item.setIdItem(rs.getInt("id_item"));
+                    item.setName(rs.getString("name"));
+                    item.setType(rs.getString("type"));
+                    item.setDescription(rs.getString("description"));
+                    item.setImage(rs.getString("image_base64"));
+                    if(rs.getLong("assigned_user") != 0){
+                        item.setAssignedUser(new User(rs.getLong("assigned_user")));
+                    }
+                    else{
+                        item.setAssignedUser(null);
+                    }
+                    items.add(item);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return CompletableFuture.completedFuture(items);
 
+    }
 
 
     private void settingItem(Item item, PreparedStatement st) throws SQLException {

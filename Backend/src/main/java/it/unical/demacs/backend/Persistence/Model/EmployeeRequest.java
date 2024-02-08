@@ -14,9 +14,9 @@ public class EmployeeRequest {
     private User requestingUser;
     private Item requestedItem;
     private String requestContent;
-    private Date requestDate;
+    private String requestDate;
 
-    public EmployeeRequest(User requestingUser, Item requestedItem, String requestContent, Date requestDate) {
+    public EmployeeRequest(User requestingUser, Item requestedItem, String requestContent, String requestDate) {
         this.requestingUser = requestingUser;
         this.requestedItem = requestedItem;
         this.requestContent = requestContent;

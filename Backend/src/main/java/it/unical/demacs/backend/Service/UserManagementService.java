@@ -25,6 +25,7 @@ public class UserManagementService {
 
     public ResponseEntity<?> banUser(@RequestBody BanRequest banRequest) {
         try{
+            DatabaseHandler.getInstance().openConnection();
             String email = banRequest.getEmail();
             User user = DatabaseHandler.getInstance().getUserDao().findByEmail(email).join();
             if(user.getBanned()){

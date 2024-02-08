@@ -19,7 +19,6 @@ import java.util.concurrent.CompletableFuture;
 public class ItemService {
 
     public ResponseEntity<?> insertItem(@RequestBody InsertItemRequest insertItemRequest) {
-
         String name = insertItemRequest.getName();
         String type = insertItemRequest.getType();
         String description = insertItemRequest.getDescription();
@@ -27,30 +26,38 @@ public class ItemService {
         String image = insertItemRequest.getImage();
         String emailUser = insertItemRequest.getAssignedUser();
 
+
+        if(emailUser == null || emailUser.isEmpty()){
+            User userMaga = DatabaseHandler.getInstance().getUserDao().findByEmail("magazzino.unical@gmail.com").join();
+            if(userMaga == null) {
+                userMaga = new User();
+                userMaga.setEmail("magazzino.unical@gmail.com");
+                userMaga.setPassword("M@gazzino1");
+                userMaga.setName("Magazzino");
+                userMaga.setSurname("Unical");
+                userMaga.setRole("magazzino");
+                userMaga.setBanned(false);
+                DatabaseHandler.getInstance().getUserDao().insertUser(userMaga);
+            }
+            emailUser = "magazzino.unical@gmail.com";
+        }
+        if(description == null || description.isEmpty()){ description = "Nessuna descrizione"; }
+        if(location == null || location.isEmpty()){ location = "Magazzino"; }
+        if(name == null || name.isEmpty() || type == null || type.isEmpty()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("All fields are required.");}
+
         User existingUser = null;
         try {
             DatabaseHandler.getInstance().openConnection();
-            if(!emailUser.isEmpty()){
+
+            if(!emailUser.isEmpty()){ //Se "assignedUser" non è vuoto, controllo se esiste un utente con quell'email
                 boolean exist = DatabaseHandler.getInstance().getUserDao().checkEmail(emailUser);
+
                 if(!exist){
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                            .body("User with email '" + emailUser + "' does not exist.");
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"message\": \"User with email '" + emailUser + "' does not exist.\"}");
                 }
-                else{
-                    existingUser = DatabaseHandler.getInstance().getUserDao().findByEmail(emailUser).join();
-                }
-            }
-            if(description == null || description.isEmpty()){
-                description = "NO DESCRIPTION";
-            }
-            if(location == null || location.isEmpty()){
-                location = "Magazzino";
-            }
+                else{ existingUser = DatabaseHandler.getInstance().getUserDao().findByEmail(emailUser).join(); }
 
-
-            if(name == null || name.isEmpty() || type == null || type.isEmpty()){
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body("All fields are required.");
             }
 
             Item newItem = new Item();
@@ -64,19 +71,13 @@ public class ItemService {
             CompletableFuture<Boolean> insertResult = DatabaseHandler.getInstance().getItemDao().insertItem(newItem);
 
             if (insertResult.get()) {
-                // Item inserted successfully
-                return ResponseEntity.status(HttpStatus.OK).body(
-                        "{\"message\": \"Item inserted successfully.\"}");
+                return ResponseEntity.status(HttpStatus.OK).body("{\"message\": \"Item inserted successfully.\"}");
             } else {
-                // Failed to insert item
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .body(
-                                "{\"message\": \"Failed to insert item.\"}");
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"message\": \"Failed to insert item.\"}");
             }
 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("{\"message\": \"Error processing the request: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"message\": \"Error processing the request: " + e.getMessage());
         }
         finally {
             DatabaseHandler.getInstance().closeConnection();
