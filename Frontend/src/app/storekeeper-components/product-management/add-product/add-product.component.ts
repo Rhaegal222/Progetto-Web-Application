@@ -180,8 +180,7 @@ export class AddProductComponent {
       description: this.description,
       location: this.location,
       image: this.image,
-      assignedUser: this.assigned_user,
-      isAssigned: this.assigned
+      assignedUser: this.assigned_user
     };
     
     console.log(product);
