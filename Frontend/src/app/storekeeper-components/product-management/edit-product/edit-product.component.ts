@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { ProductService } from '../../../services/product.service';
 import { AnimationsService } from '../../../services/animations.service';
 import { Product } from '../../../model/product';
+import { User } from '../../../model/user';
 
 var arrow : any;
 var editProductWindow : any;
@@ -25,7 +26,8 @@ export class EditProductComponent {
   editProductWindow: boolean = true;
 
   @Input() product: Product | undefined;
-  
+
+  idItem: number = 0;  
   name: string = '';
   type: string = '';
   description: string = '';
@@ -45,14 +47,24 @@ export class EditProductComponent {
           console.error(error);
         }
       });
+      
+      this.idItem = this.product.idItem;
       this.name = this.product.name || '';
       this.type = this.product.type || '';
       this.description = this.product.description || '';
-      this.location = this.product.location || '';
+      if (this.product.location) {
+        this.location = this.product.location;
+      }
       this.image = this.product.image || '';
       this.length = this.image ? this.image.length : 0;
-      this.assigned_user = this.product.assignedUser || '';
-      this.assigned = this.product.assignedUser.length > 0 || false;
+
+      if (this.product.assignedUser && typeof this.product.assignedUser === 'object')
+        this.assigned_user = this.product.assignedUser.email;
+      else 
+        this.assigned_user = '';
+      
+      if (this.assigned_user && this.assigned_user.length > 0)
+        this.assigned = true;
     }
   }
 
@@ -62,11 +74,19 @@ export class EditProductComponent {
       this.name = this.product.name || '';
       this.type = this.product.type || '';
       this.description = this.product.description || '';
-      this.location = this.product.location || '';
+      if (this.product.location) {
+        this.location = this.product.location;
+      }
       this.image = this.product.image || '';
       this.length = this.image ? this.image.length : 0;
-      this.assigned_user = this.product.assignedUser || '';
-      this.assigned = this.product.assignedUser.length > 0 || false;
+      
+      if (this.product.assignedUser && typeof this.product.assignedUser === 'object')
+        this.assigned_user = this.product.assignedUser.email;
+      else 
+        this.assigned_user = '';
+
+      if (this.assigned_user && this.assigned_user.length > 0)
+        this.assigned = true;
     }
   }
   
@@ -188,17 +208,24 @@ export class EditProductComponent {
   }
 
   onSave(){
-    // Creare un oggetto con i dati del prodotto
+    if(!this.assigned){
+      this.assigned_user = '';
+      this.location = '';
+    }
+
     const product = {
+      idItem: this.idItem,
       name: this.name,
       type: this.type,
-      location: this.location,
       description: this.description,
-      assignedUser: this.assigned_user,
-      image: this.image
+      location: this.location,
+      image: this.image,
+      assignedUser: this.assigned_user
     };
 
-    this.productService.addProduct(product);
+    console.log(product);
+
+    this.productService.editProduct(product);
     this.onCloseEvent();
   }
 
