@@ -170,16 +170,21 @@ export class AddProductComponent {
   }
 
   onSave(){
-    // Creare un oggetto con i dati del prodotto
+    if(!this.assigned){
+      this.assigned_user = '';
+      this.location = '';
+    }
     const product = {
       name: this.name,
       type: this.type,
-      location: this.location,
       description: this.description,
+      location: this.location,
+      image: this.image,
       assignedUser: this.assigned_user,
-      image: this.image
+      isAssigned: this.assigned
     };
-
+    
+    console.log(product);
     this.productService.addProduct(product);
     this.onCloseEvent();
   }

@@ -42,6 +42,22 @@ export class ProductService {
     return this.http.get<Product[]>('http://localhost:8080/api/items', { params: params });
   }
 
+  tryEditProduct(product: Product): Observable<any> {
+    return this.http.post("http://localhost:8080/api/modifyItem", product);
+  }
+
+  // Edit a product
+  editProduct(product: Product) {
+    this.tryEditProduct(product).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+  }
+
   // try to add a product
   tryAddProduct(product: Product): Observable<any> {
     return this.http.post("http://localhost:8080/api/insertItem", product);
