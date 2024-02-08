@@ -4,28 +4,49 @@
         <div *ngFor="let user of users" class="item">
             <div class="item-body">
                 <div class="item-footer">
-                    <h5 class="item-title">Nome: {{ user.name }}</h5>
-                    <h5 class="item-title">Cognome: {{ user.surname }}</h5>
-                    <h5 *ngIf="user.role == 'a'" class="item-title">
-                        <span class="material-icons">manage_accounts</span>
-                        <p>Amministratore</p>
-                    </h5>
-                    <h5 *ngIf="user.role == 's'" class="item-title">
-                        <span class="material-icons">support_agent</span>
-                        <p>Gestore magazzino</p>
-                    </h5>
-                    <h5 *ngIf="user.role == 'e'" class="item-title">
-                        <span class="material-icons">person</span>
-                        <p>Dipendente</p>
-                    </h5>
-                    <h5 *ngIf="user.role != 'a' && user.role != 'e' && user.role != 's'" class="item-title">
-                        <span class="material-icons">pending</span>
-                        <p>In attesa</p>
-                    </h5>
-                    <h5 *ngIf="user.banned" class="item-title">
-                        <span>block</span>
-                        <p>Bloccato</p>
-                    </h5>
+                    <div class="item-row">
+                        <h5 class="item-title">Nome:</h5>
+                        <span>{{ user.name }}</span>
+                    </div>
+                    <div class="item-row">
+                        <h5 class="item-title">Cognome:</h5>
+                        <span>{{ user.surname }}</span>
+                    </div>
+                    <div *ngIf="user.role == 'a'" class="item-row">
+                        <h5 class="item-title">Ruolo:</h5>
+                        <div class="item-role">
+                            <span class="material-icons">manage_accounts</span>
+                            <p>Amministratore</p>
+                        </div>
+                    </div>
+                    <div *ngIf="user.role == 's'" class="item-row">
+                        <h5 class="item-title">Ruolo:</h5>
+                        <div class="item-role">
+                            <span class="material-icons">support_agent</span>
+                            <p>Magazziniere</p>
+                        </div>
+                    </div>
+                    <div *ngIf="user.role == 'e'" class="item-row">
+                        <h5 class="item-title">Ruolo:</h5>
+                        <div class="item-role">
+                            <span class="material-icons">person</span>
+                            <p>Dipendente</p>
+                        </div>
+                    </div>
+                    <div *ngIf="user.role != 'a' && user.role != 'e' && user.role != 's'" class="item-row">
+                        <h5 class="item-title">Ruolo:</h5>
+                        <div class="item-role">
+                            <span class="material-icons">pending</span>
+                            <p>In attesa</p>
+                        </div>
+                    </div>
+                    <div *ngIf="user.banned" class="item-row">
+                        <h5 class="item-title">Stato:</h5>
+                        <div class="item-role">
+                            <span>block</span>
+                            <p>Bloccato</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="item-buttons">
                     <button *ngIf="!user.banned" class="btn btn-primary" (click)="onPromote(user)">Promuovi</button>
