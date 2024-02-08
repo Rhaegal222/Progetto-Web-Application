@@ -1,25 +1,22 @@
+<app-header></app-header>
 <div class="container">
-  <table>
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">posizione</th>
-        <th scope="col">Actions</th> <!-- Aggiunta una nuova colonna per le azioni -->
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of userList">
-        <th scope="row">{{ user.idUser }}</th>
-        <td>{{ user.name }}</td>
-        <td>{{ user.surname }}</td>
-        <td>{{ user.role }}</td>
-        <td>
-          <button class="btn btn-primary" (click)="promoteUser(user.idUser)">Promuovi</button> <!-- Aggiunto un bottone per modificare l'utente -->
-          <button class="btn btn-danger" (click)="banUser(user.idUser)">Banna</button> <!-- Aggiunto un bottone per eliminare l'utente -->
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <div id="box" class="grid">
+        <div *ngFor="let user of users" class="item">
+            <div class="item-body">
+                <div class="item-footer">
+                    <h5 class="item-title">{{ user.name }}</h5>
+                </div>
+                <div class="item-buttons">
+                    <button class="btn btn-primary" (click)="onPromote(user)">Promuovi</button>
+                    <button class="btn btn-primary" (click)="onBan(user)">Banna</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="users.length == 0" class="no-products">
+        <h1>Nessun utente registrato</h1>
+    </div>
+    <div *ngIf="userDetailsWindow" class="add-product">
+        <app-add-product (onEvent)="OnCloseUserDetails()"></app-add-product>
+    </div>
 </div>
