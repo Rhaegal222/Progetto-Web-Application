@@ -20,7 +20,6 @@ import { ReportComponent } from './storekeeper-components/report/report.componen
 import { ProductManagementComponent } from './storekeeper-components/product-management/product-management.component';
 import { ProductRequestComponent } from './employee-components/product-detail/product-request/product-request.component';
 import { ProductReturnComponent } from './employee-components/product-detail/product-return/product-return.component';
-import { SettingsComponent } from './common-components/settings/settings.component';
 import { MenuAdminComponent } from './common-components/sidebar/menus/menu-admin/menu-admin.component';
 import { MenuEmployeeComponent } from './common-components/sidebar/menus/menu-employee/menu-employee.component';
 import { MenuStorekeeperComponent } from './common-components/sidebar/menus/menu-storekeeper/menu-storekeeper.component';
@@ -54,7 +53,6 @@ import { UserProductComponent } from './employee-components/user-product/user-pr
     ProductManagementComponent,
     ProductRequestComponent,
     ProductReturnComponent,
-    SettingsComponent,
     MenuAdminComponent,
     MenuEmployeeComponent,
     MenuStorekeeperComponent,

@@ -49,14 +49,18 @@ export class SearchBarComponent {
   elements: any[] = [];
   element: string = '';
 
+  productRelatedComponents = ['/product-management', '/product-list', '/product-details', '/user-product'];
+  requestRelatedComponents = ['/request-management', '/requests-forwarded'];
+
   ngOnInit(){
-    if (this.router.url === '/product-management' || this.router.url === '/product-list' || this.router.url === '/product-details') {
+
+    if (this.productRelatedComponents.includes(this.router.url)) {
       this.elements = this.categories;
       this.element = 'Tutte le categorie';
     } else if (this.router.url === '/user-management') {
       this.elements = this.roles;
       this.element = 'Tutti i ruoli';
-    } else if (this.router.url === '/request-management' || this.router.url === '/requests-forwarded') {
+    } else if (this.requestRelatedComponents.includes(this.router.url)) {
       this.elements = this.requestStatus;
       this.element = 'Tutti gli stati';
     }
