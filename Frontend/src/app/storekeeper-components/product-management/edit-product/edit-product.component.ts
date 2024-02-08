@@ -45,6 +45,14 @@ export class EditProductComponent {
           console.error(error);
         }
       });
+      this.name = this.product.name || '';
+      this.type = this.product.type || '';
+      this.description = this.product.description || '';
+      this.location = this.product.location || '';
+      this.image = this.product.image || '';
+      this.length = this.image ? this.image.length : 0;
+      this.assigned_user = this.product.assignedUser || '';
+      this.assigned = this.product.assignedUser.length > 0 || false;
     }
   }
 
