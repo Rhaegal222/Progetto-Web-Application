@@ -43,9 +43,12 @@ public class ItemService {
             if(description == null || description.isEmpty()){
                 description = "NO DESCRIPTION";
             }
+            if(location == null || location.isEmpty()){
+                location = "Magazzino";
+            }
 
 
-            if(name == null || name.isEmpty() || type == null || type.isEmpty() || location == null || location.isEmpty()){
+            if(name == null || name.isEmpty() || type == null || type.isEmpty()){
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body("All fields are required.");
             }
