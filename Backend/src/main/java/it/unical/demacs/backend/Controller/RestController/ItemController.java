@@ -28,8 +28,6 @@ public class ItemController {
     public ResponseEntity<?> allItems(){
         return itemService.allItems();
     }
-    @GetMapping("/api/searchItem")
-    public ResponseEntity<?> searchItem(@RequestBody SearchItemRequest searchItemRequest){return itemService.searchItem(searchItemRequest);}
 
     // GET con parametri di ricerca
     @GetMapping("/api/items")

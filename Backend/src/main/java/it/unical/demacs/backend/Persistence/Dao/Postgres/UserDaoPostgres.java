@@ -30,12 +30,15 @@ public class UserDaoPostgres implements UserDao {
         ArrayList<User> users = new ArrayList<>();
         String query = "SELECT * FROM users";
         try (
-                Statement st = this.con.createStatement();
-                ResultSet rs = st.executeQuery(query)) {
+                PreparedStatement st = this.con.prepareStatement(query);
+                ResultSet rs = st.executeQuery())
+        {
             while (rs.next()) {
-                User user = new User();
+                User user = new UserProxy(con);
                 setting(rs, user);
-                users.add(user);
+                if(!user.getEmail().equals("magazzino.unical@gmail.com")){
+                    users.add(user);
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

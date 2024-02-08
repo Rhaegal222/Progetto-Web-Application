@@ -49,7 +49,7 @@ public class EmployeeRequestService {
             String requestDescription = request.getParameter("requestDescription");
             User user = new User(Long.parseLong(request.getParameter("idUser")));
             Item item = new Item(Long.parseLong(request.getParameter("idItem")));
-            Date requestDate = Date.valueOf(request.getParameter("requestDate"));
+            String requestDate = request.getParameter("requestDate");
 
             // Create an instance of EmployeeRequest using the extracted parameters
             EmployeeRequest employeeRequest = new EmployeeRequest(user, item, requestDescription, requestDate);
@@ -77,25 +77,32 @@ public class EmployeeRequestService {
             String emailRequestingUser = sendReqRequest.getEmailRequestingUser();
             long idRequestedItem = sendReqRequest.getIdRequestedItem();
             String requestContent = sendReqRequest.getRequestContent();
-            Date requestDate = sendReqRequest.getRequestDate();
+            String requestDate = sendReqRequest.getRequestDate();
+
+            if(emailRequestingUser.isEmpty()| idRequestedItem == 0 || requestContent.isEmpty() || requestDate.isEmpty()){
+                return ResponseEntity.status(400).body("Invalid request");
+            }
 
             User requestingUser = DatabaseHandler.getInstance().getUserDao().findByEmail(emailRequestingUser).join();
             String requestTitle = null;
-            if (requestContent.equals("reso")) {
-                requestTitle = "Richiesta di reso da parte di " + requestingUser.getEmail() + " per " + idRequestedItem;
+            if (requestContent.equals("Reso")) {
+                requestTitle = "Richiesta di reso";
             } else
-                if(requestContent.equals("richiesta")) {
-                    requestTitle = "Richiesta prodotto da parte di " + requestingUser.getEmail() + " per " + idRequestedItem;
+                if(requestContent.equals("Richiesta")) {
+                    requestTitle = "Richiesta di un prodotto";
+                }
+                else {
+                    return ResponseEntity.status(400).body("Invalid request");
                 }
 
                 Item requestedItem = new Item(idRequestedItem);
                 EmployeeRequest employeeRequest = new EmployeeRequest(requestingUser, requestedItem , requestContent, requestDate);
                 DatabaseHandler.getInstance().getEmployeeRequestDao().insertEmployeeRequest(employeeRequest);
 
-
+            String emailContent = "Richiesta di " + requestContent + " da parte di " + requestingUser.getEmail() + " per " + idRequestedItem;
             ArrayList<User> admins = DatabaseHandler.getInstance().getUserDao().getAdmins().join();
             for (User admin : admins) {
-                SendMail.getInstance().sendEmail(requestTitle, requestContent, admin.getEmail());
+                SendMail.getInstance().sendEmail(requestTitle, emailContent, admin.getEmail());
             }
 
 

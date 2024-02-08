@@ -21,4 +21,5 @@ public interface ItemDao {
 
     CompletableFuture<ArrayList<Item>> findByCategory(String category);
 
+    CompletableFuture<ArrayList<Item>> findItemsByUser(long idUser);
 }

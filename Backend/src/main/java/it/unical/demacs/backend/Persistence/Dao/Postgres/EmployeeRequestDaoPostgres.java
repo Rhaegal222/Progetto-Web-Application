@@ -27,7 +27,7 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
                 employeeRequest.setIdEmployeeRequest(rs.getLong("id_employee_request"));
                 employeeRequest.setRequestingUser(new User(rs.getLong("requesting_user")));
                 employeeRequest.setRequestedItem(new Item(rs.getLong("requested_item")));
-                employeeRequest.setRequestDate(rs.getDate("request_date"));
+                employeeRequest.setRequestDate(rs.getString("request_date"));
                 employeeRequests.add(employeeRequest);
             }
         }
@@ -52,7 +52,7 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
                 long requestingUser = res.getLong("requesting_user");
                 long requestedItem = res.getLong("requested_item");
                 String requestContent = res.getString("request_content");
-                Date requestDate = res.getDate("request_date");
+                String requestDate = res.getString("request_date");
                 employeeRequest = new EmployeeRequest(new User(requestingUser), new Item(requestedItem), requestContent, requestDate);
                 employeeRequest.setIdEmployeeRequest(idEmployeeRequest);
             }
@@ -76,7 +76,7 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
                 employeeRequest.setRequestingUser(new User(rs.getLong("requesting_user")));
                 employeeRequest.setRequestedItem(new Item(rs.getLong("requested_item")));
                 employeeRequest.setRequestContent(rs.getString("request_content"));
-                employeeRequest.setRequestDate(rs.getDate("request_date"));
+                employeeRequest.setRequestDate(rs.getString("request_date"));
                 employeeRequests.add(employeeRequest);
             }
         }
@@ -100,7 +100,7 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
                 long requestingUser = res.getLong("requesting_user");
                 long requestedItem = res.getLong("requested_item");
                 String requestContent = res.getString("request_content");
-                Date requestDate = res.getDate("request_date");
+                String requestDate = res.getString("request_date");
                 employeeRequest = new EmployeeRequest(new User(requestingUser), new Item(requestedItem), requestContent, requestDate);
                 employeeRequest.setIdEmployeeRequest(idEmployeeRequest);
             }
@@ -124,7 +124,7 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
                 employeeRequest.setRequestingUser(new User(rs.getLong("requesting_user")));
                 employeeRequest.setRequestedItem(new Item(rs.getLong("requested_item")));
                 employeeRequest.setRequestContent(rs.getString("request_content"));
-                employeeRequest.setRequestDate(rs.getDate("request_date"));
+                employeeRequest.setRequestDate(rs.getString("request_date"));
                 employeeRequests.add(employeeRequest);
             }
         }
@@ -143,7 +143,7 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
             st.setLong(1, employeeRequest.getRequestingUser().getIdUser());
             st.setLong(2, employeeRequest.getRequestedItem().getIdItem());
             st.setString(3, employeeRequest.getRequestContent());
-            st.setDate(4, employeeRequest.getRequestDate());
+            st.setString(4, employeeRequest.getRequestDate());
             int rowsAffected = st.executeUpdate();
             st.close();
             return CompletableFuture.completedFuture(rowsAffected > 0);
@@ -162,7 +162,7 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
             st.setLong(1, employeeRequest.getRequestingUser().getIdUser());
             st.setLong(2, employeeRequest.getRequestedItem().getIdItem());
             st.setString(3, employeeRequest.getRequestContent());
-            st.setDate(4, employeeRequest.getRequestDate());
+            st.setString(4, employeeRequest.getRequestDate());
             st.setLong(5, employeeRequest.getIdEmployeeRequest());
             int rowsAffected = st.executeUpdate();
             st.close();
