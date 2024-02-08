@@ -21,3 +21,9 @@ header {
 .sidebar-open {
     padding-left: 250px;
 }
+@media (max-width: 768px) {
+    header {
+        top: 55px;
+        position: relative;
+    }
+}

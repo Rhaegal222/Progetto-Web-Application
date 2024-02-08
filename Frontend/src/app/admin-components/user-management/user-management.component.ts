@@ -25,7 +25,7 @@ export class UserManagementComponent {
 
   ngOnInit(): void {
      this.observeUserListLenght();
-      this.getUsers();
+      this.getAllUsers();
   }
 
   observeUserListLenght(){
@@ -44,12 +44,11 @@ export class UserManagementComponent {
   searchValue: string = '';
   role: string = 'all';
 
-  /*
   onSearch(eventData: onSearchEventData) {
     this.searchValue = eventData.searchValue;
-    this.role = eventData.role;
+    this.role = eventData.element;
     if (this.searchValue === "" && this.role === "all") {
-      this.getUsers();
+      this.getAllUsers();
     } else {
       this.userService.getUsers(this.searchValue, this.role).subscribe({
         next: (data) => {
@@ -61,7 +60,6 @@ export class UserManagementComponent {
       });
     }
   }
-  */
 
   OnOpenUserDetails(user: User) {
     this.selectedUser = user;
@@ -72,8 +70,8 @@ export class UserManagementComponent {
     this.userDetailsWindow = false;
   }
 
-  getUsers(){
-    this.userService.getUsers().subscribe({
+  getAllUsers(){
+    this.userService.getAllUsers().subscribe({
       next: (data) => {
         this.users = data;
       },
@@ -92,4 +90,9 @@ export class UserManagementComponent {
   onUnlock(user: User) {
     console.log('Utente bannato:', user); 
   }
+}
+
+export interface onSearchEventData {
+  searchValue: string;
+  element: string;
 }

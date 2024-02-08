@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header (searchEvent)="onSearch($event)"></app-header>
 <div class="container">
     <div id="box" class="grid">
         <div *ngFor="let user of users" class="item">
