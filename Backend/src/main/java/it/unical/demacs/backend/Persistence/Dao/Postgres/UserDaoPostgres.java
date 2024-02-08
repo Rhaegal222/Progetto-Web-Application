@@ -165,6 +165,23 @@ public class UserDaoPostgres implements UserDao {
 
     @Override
     @Async
+    public CompletableFuture<Boolean> updateRole(User user) {
+        try {
+            PreparedStatement stmt = con.prepareStatement("UPDATE users SET role = ? WHERE id_user = ?");
+            stmt.setString(1, user.getRole());
+            stmt.setLong(2, user.getIdUser());
+
+            int rowsAffected = stmt.executeUpdate();
+            stmt.close();
+            return CompletableFuture.completedFuture(rowsAffected > 0);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    @Async
     public CompletableFuture<Boolean> insertUser(User user) {
         String query = "INSERT INTO users (email, password, name, surname, banned) VALUES (?, ?, ?, ?, ?)";
         try {
@@ -185,19 +202,14 @@ public class UserDaoPostgres implements UserDao {
     }
 
 
-    @Override
-    @Async
-    public CompletableFuture<Boolean> deleteUser(String username) {
-        return null;
-    }
 
     @Override
     @Async
-    public void banningUser(String email) {
+    public void banningUser(String email, boolean status) {
         String query = "UPDATE users SET banned = ? WHERE email = ?";
         try {
             PreparedStatement st = this.con.prepareStatement(query);
-            st.setBoolean(1, true);
+            st.setBoolean(1, status);
             st.setString(2, email);
 
             int rowsAffected = st.executeUpdate();

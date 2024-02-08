@@ -17,4 +17,7 @@ public class EmployeeRequestController {
     public ResponseEntity<?> sendRequest(@RequestBody SendReqRequest sendReqRequest) {
         return employeeRequestService.sendRequest(sendReqRequest);
     }
+
+    //get delle richieste in base al tipo
+    //find delle richieste di un utente
 }
