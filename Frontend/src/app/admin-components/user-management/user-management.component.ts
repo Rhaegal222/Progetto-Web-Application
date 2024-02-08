@@ -20,6 +20,7 @@ export class UserManagementComponent {
   users: User[] = [];
   selectedUser: User | undefined;
   length: number = 0;
+  
   userDetailsWindow: boolean = false;
 
   ngOnInit(): void {
@@ -44,7 +45,6 @@ export class UserManagementComponent {
   role: string = 'all';
 
   /*
-
   onSearch(eventData: onSearchEventData) {
     this.searchValue = eventData.searchValue;
     this.role = eventData.role;
@@ -86,7 +86,10 @@ export class UserManagementComponent {
     console.log('Utente promosso:', user);
   }
 
-  onBan(user: User) {
+  onLock(user: User) {
+    console.log('Utente bannato:', user); 
+  }
+  onUnlock(user: User) {
     console.log('Utente bannato:', user); 
   }
 }

@@ -4,11 +4,18 @@
         <div *ngFor="let user of users" class="item">
             <div class="item-body">
                 <div class="item-footer">
-                    <h5 class="item-title">{{ user.name }}</h5>
+                    <h5 class="item-title">Nome: {{ user.name }}</h5>
+                    <h5 class="item-title">Cognome: {{ user.surname }}</h5>
+                    <h5 *ngIf="user.role == 'a'" class="item-title">ROLE: {{ 'ADMIN' }}</h5>
+                    <h5 *ngIf="user.role == 's'" class="item-title">ROLE: {{ 'MAGAZZINIERE' }}</h5>
+                    <h5 *ngIf="user.role == 'e'" class="item-title">ROLE: {{ 'DIPENDENTE' }}</h5>
+                    <h5 *ngIf="user.role != 'a' && user.role != 'e' && user.role != 's'" class="item-title">ROLE: {{ 'DIPENDENTE' }}</h5>
+                    <span *ngIf="user.banned" class="material-icons">block</span>
                 </div>
                 <div class="item-buttons">
-                    <button class="btn btn-primary" (click)="onPromote(user)">Promuovi</button>
-                    <button class="btn btn-primary" (click)="onBan(user)">Banna</button>
+                    <button *ngIf="!user.banned" class="btn btn-primary" (click)="onPromote(user)">Promuovi</button>
+                    <button *ngIf="!user.banned" class="btn btn-primary" (click)="onLock(user)">Blocca</button>
+                    <button *ngIf="user.banned" class="btn btn-primary" (click)="onUnlock(user)">Sblocca</button>
                 </div>
             </div>
         </div>

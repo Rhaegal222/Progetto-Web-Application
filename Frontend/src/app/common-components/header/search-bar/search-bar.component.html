@@ -5,11 +5,11 @@
         <div class="dropdown">
             <button class="btn-primary" type="button">
                 <!-- Prende il valore dalla categoria selezionata -->
-                <span>{{category}}</span>
+                <span>{{element}}</span>
             </button>
             <div class="dropdown-content">
-                <ng-container *ngFor="let category of categories">
-                    <a *ngIf="category.visible" (click)="setCategory(category.name)">{{ category.name }}</a>
+                <ng-container *ngFor="let element of elements">
+                    <a *ngIf="element.visible" (click)="setElement(element.name)">{{ element.name }}</a>
                 </ng-container>
             </div>
         </div>
