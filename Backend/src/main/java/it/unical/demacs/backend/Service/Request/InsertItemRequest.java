@@ -11,6 +11,6 @@ public class InsertItemRequest {
     private String description;
     private String location;
     private String image;
-    private String emailUser;
+    private String assignedUser;
 
 }

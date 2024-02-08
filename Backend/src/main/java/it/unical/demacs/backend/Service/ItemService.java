@@ -25,7 +25,7 @@ public class ItemService {
         String description = insertItemRequest.getDescription();
         String location = insertItemRequest.getLocation();
         String image = insertItemRequest.getImage();
-        String emailUser = insertItemRequest.getEmailUser();
+        String emailUser = insertItemRequest.getAssignedUser();
 
         User existingUser = null;
         try {
