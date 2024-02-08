@@ -24,7 +24,6 @@ export class UserManagementComponent {
     this.userService.getUsers().subscribe({
       next: (data) => {
         this.userList = data;
-        console.log(data);
       },
       error: (error: any) => {
         console.log('There was an error!', error);
