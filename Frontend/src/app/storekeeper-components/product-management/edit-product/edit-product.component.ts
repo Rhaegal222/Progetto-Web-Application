@@ -226,7 +226,7 @@ export class EditProductComponent {
     console.log(product);
 
     this.productService.editProduct(product);
-    this.onCloseEvent();
+    //this.onCloseEvent();
   }
 
 
