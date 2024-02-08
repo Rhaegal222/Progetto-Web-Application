@@ -1,1 +1,22 @@
-<p>request-management works!</p>
+<app-header></app-header>
+<div class="container">
+    <div id="box" class="grid">
+        <div *ngFor="let request of requests" class="item">
+            <div class="card">
+                <div class="card-header">
+                    <h2>{{request.title}}</h2>
+                </div>
+                <div class="card-body">
+                    <p>Quantità: {{request.quantity}}</p>
+                    <p>Stato: {{request.status}}</p>
+                    <p>Data: {{request.date}}</p>
+                    <button (click)="acceptRequest(request)" class="btn btn-success">Accetta</button>
+                    <button (click)="rejectRequest(request)" class="btn btn-danger">Rifiuta</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="requests.length == 0" class="no-products">
+        <h1>Nessun prodotto</h1>
+    </div>
+</div>
