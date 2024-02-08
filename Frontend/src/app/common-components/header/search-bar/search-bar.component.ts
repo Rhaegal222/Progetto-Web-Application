@@ -42,7 +42,7 @@ export class SearchBarComponent {
   element: string = '';
 
   ngOnInit(){
-    if (this.router.url === '/product-management') {
+    if (this.router.url === '/product-management' || this.router.url === '/product-list' || this.router.url === '/product-details') {
       this.elements = this.categories;
       this.element = 'Tutte le categorie';
     } else if (this.router.url === '/user-management') {

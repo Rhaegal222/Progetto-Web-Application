@@ -11,6 +11,21 @@ export class AuthService {
 
   constructor(private http:HttpClient, private router:Router) { }
 
+  // Prendi l'email dell'utente autenticato
+  getUserEmail(): string {
+    if (typeof localStorage !== 'undefined') {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        return payload.email;
+      } else {
+        return '';
+      }
+    } else {
+      return '';
+    }
+  }
+
   // Verifica il ruolo dell'utente autenticato
   isAdmin(): boolean {
     if (typeof localStorage !== 'undefined') {
