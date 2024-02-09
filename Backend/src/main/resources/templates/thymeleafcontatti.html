@@ -5,6 +5,30 @@
     <title>ITC - Macro Area Servizi Informatici e Tecnologici</title>
 
     <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .admin-table th, .admin-table td {
+            border: 1px solid #dddddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .admin-table th {
+            background-color: #f2f2f2;
+        }
+
+        .admin-table tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+
         .contact-card {
             width: 600px;
             margin: 0 auto;
@@ -65,12 +89,14 @@
 <body>
 
 <div class="contact-card">
-    <h1 th:text="${title}">Contatti Parrucchiere</h1>
+    <h1 th:text="${title}"> Informazioni </h1>
     <div>
         <p id="phone" class="contact-details"><strong>Telefono: </strong><span th:text="${number}"></span></p>
         <p id="email" class="contact-details"><strong>Email: </strong><span th:text="${email}"></span></p>
         <p id="address" class="contact-details"><strong>Indirizzo: </strong><span th:text="${address}"></span></p>
-        <table>
+        <p id="site" class="contact-details"><strong>Sito: </strong><span th:text="${site}"></span></p>
+
+        <table class="admin-table">
             <thead>
             <tr>
                 <th>Nome</th>
@@ -85,34 +111,40 @@
             </tr>
             </tbody>
         </table>
+
+
     </div>
-    <div class="btn" style="display: block" onclick="revealContacts()">Mostra Contatti</div>
-    <div class="btn" style="display: none;" onclick="hideContacts()">Nascondi Contatti</div>
+
+    <div class="btn" style="display: block" onclick="revealAdmins()">Mostra Admins </div>
+    <div class="btn" style="display: none;" onclick="hideAdmins()">Nascondi Admins </div>
 
 </div>
 <script>
-    function revealContacts() {
+    function revealAdmins() {
+        var adminsTable = document.querySelector('.admin-table');
+        adminsTable.style.display = 'table'; // Show the admins table
+
         var contactDetails = document.querySelectorAll('.contact-details');
         contactDetails.forEach(function (element) {
-            element.style.display = 'block'; // Display the previously hidden contact details
+            element.style.display = 'block'; // Ensure contact details are visible
         });
 
-        document.querySelector('.btn').style.display = 'none'; // Hide the "Mostra Contatti" button
-        document.querySelectorAll('.btn')[1].style.display = 'block'; // Show the "Nascondi Contatti" button
-        document.getElementById('map-container').style.display = 'block'; // Show the map container
+        document.querySelectorAll('.btn')[0].style.display = 'none'; // Hide the "Mostra Admins" button
+        document.querySelectorAll('.btn')[1].style.display = 'block'; // Show the "Nascondi Admins" button
     }
 
-    function hideContacts() {
-        var contactDetails = document.querySelectorAll('.contact-details');
-        contactDetails.forEach(function (element) {
-            element.style.display = 'none'; // Hide the contact details
-        });
+    function hideAdmins() {
+        var adminsTable = document.querySelector('.admin-table');
+        adminsTable.style.display = 'none'; // Hide the admins table
 
-        document.querySelector('.btn').style.display = 'block'; // Show the "Mostra Contatti" button
-        document.querySelectorAll('.btn')[1].style.display = 'none'; // Hide the "Nascondi Contatti" button
-        document.getElementById('map-container').style.display = 'none'; // Hide the map container
+        document.querySelectorAll('.btn')[0].style.display = 'block'; // Show the "Mostra Admins" button
+        document.querySelectorAll('.btn')[1].style.display = 'none'; // Hide the "Nascondi Admins" button
     }
 
+    revealAdmins();
+    hideAdmins();
 </script>
+
+
 </body>
 </html>

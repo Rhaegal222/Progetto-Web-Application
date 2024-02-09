@@ -1,5 +1,4 @@
 package it.unical.demacs.backend.Controller;
-
 import it.unical.demacs.backend.Persistence.DatabaseHandler;
 import it.unical.demacs.backend.Persistence.Model.User;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,13 +23,16 @@ public class ThymeleafController {
     @Value("${contacts.address}")
     private String address;
 
+    @Value("${contacts.site}")
+    private String site;
 
-    @GetMapping("/thymeleaf")
+    @GetMapping("/api/thymeleaf")
     public String getContatti(Model model) {
-        model.addAttribute("title", "Contatti");
+        model.addAttribute("title", "Informazioni");
         model.addAttribute("number", number);
         model.addAttribute("email", email);
         model.addAttribute("address", address);
+        model.addAttribute("site", site);
 
         ArrayList<User> admins = DatabaseHandler.getInstance().getUserDao().getAdmins().join();
         model.addAttribute("admins", admins);
