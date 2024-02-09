@@ -176,7 +176,6 @@ public class UserDaoPostgres implements UserDao {
     public CompletableFuture<ArrayList<User>> getAdmins() {
         ArrayList<User> admins = new ArrayList<>();
         try {
-
             PreparedStatement stmt = con.prepareStatement("SELECT * FROM users WHERE role = 'a'");
             ResultSet res = stmt.executeQuery();
 

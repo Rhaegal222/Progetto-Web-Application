@@ -74,7 +74,7 @@ public class EmployeeRequestService {
                 }
             }
 
-            EmployeeRequest employeeRequest = new EmployeeRequest(requestingUser, requestedItem, title, description, "waiting", type, date, "1970-01-01");
+            EmployeeRequest employeeRequest = new EmployeeRequest(requestingUser, requestedItem, title, description, "waiting", type, date);
             DatabaseHandler.getInstance().getEmployeeRequestDao().insertEmployeeRequest(employeeRequest);
 
             String emailContent = requestTitle + " da parte di " + requestingUser.getEmail() + "\n\n" + description;

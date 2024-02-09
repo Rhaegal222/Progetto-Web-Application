@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class ContactsComponent {
 
+  thymeleaf : Boolean = false
+
+  constructor() { }
+
+  ngOnInit() {
+    setTimeout(() => {
+      this.thymeleaf = true;
+    }, 102102000);
+  }
+
 }

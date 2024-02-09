@@ -33,6 +33,7 @@ export class ProductManagementComponent {
 
   ngOnInit(): void {
     this.observeProductListLenght();
+    this.productService.checkIfStoreWorks();
     this.getAllProducts();
   }
 
