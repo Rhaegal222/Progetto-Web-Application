@@ -2,7 +2,7 @@
 <div class="container">
     <div id="box" class="grid">
         <div *ngFor="let product of products" class="item">
-            <div class="item-body">
+            <div (click)="openDetail(product)" class="item-body">
                 <div *ngIf="!isAnImage(product.image)" class="item-no-img">
                     <span class="material-icons">image</span>
                     <p>Immagine non disponibile</p>
