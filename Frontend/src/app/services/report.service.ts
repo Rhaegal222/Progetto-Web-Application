@@ -9,7 +9,7 @@ export class ReportManagementservices {
   constructor(private http:HttpClient) { }
 
   // Get all products
-  getReports(): Observable<any[]>{
-     return this.http.get<any[]>("http://localhost:8080/api/allReports");
+  getReports(range: string): Observable<any[]>{
+     return this.http.get<any[]>("http://localhost:8080/api/report");
   }
 }

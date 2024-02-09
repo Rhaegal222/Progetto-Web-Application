@@ -18,13 +18,14 @@ export class ReportComponent {
     private errorService: ErrorService) {}
   
   reportList: Report[] = [];
+  range : string = "week";
 
   ngOnInit(): void {
-     this.getReports();
+     
   }
   
   getReports(){
-    this.reportService.getReports().subscribe({
+    this.reportService.getReports(this.range).subscribe({
       next: (data) => {
         this.reportList = data;
       },

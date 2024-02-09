@@ -16,11 +16,7 @@ import { AuthToken } from '../../model/user';
 })
 export class LoginComponent {
 
-  constructor(private authService: AuthService, private router: Router) { }
-
-  ngOnInit() {
-    //this.test();
-  }
+  constructor(private authService: AuthService) { }
   
   email = new FormControl();
   password = new FormControl();
@@ -33,13 +29,6 @@ export class LoginComponent {
   togglePasswordVisibility(): void {
     this.passwordVisible = !this.passwordVisible;
     this.passwordInputType = this.passwordVisible ? 'text' : 'password';    
-  }
-  
-  test(){
-    var email = 'john_doe@gmail.com';
-    var password = 'P@ssw0rd1';
-
-    this.authService.login(email, password);
   }
 
   login(){

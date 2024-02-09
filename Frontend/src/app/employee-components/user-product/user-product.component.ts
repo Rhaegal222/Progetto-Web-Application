@@ -2,7 +2,6 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../model/product';
-import { AuthService } from '../../services/auth.service';
 import { ErrorService } from '../../services/error.service';
 
 @Component({

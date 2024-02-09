@@ -16,7 +16,7 @@ export class ProductService {
   }
 
   // Get a product by id
-  getItem(idItem: number) {
+  getProduct(idItem: number) {
     let params = new HttpParams().set('idItem', idItem.toString());
   
     return this.http.get('http://localhost:8080/api/getItem', { params });
@@ -42,13 +42,10 @@ export class ProductService {
     return this.http.get<Product[]>('http://localhost:8080/api/items', { params: params });
   }
 
-  tryEditProduct(product: Product): Observable<any> {
-    return this.http.post("http://localhost:8080/api/modifyItem", product);
-  }
-
+  // POST
   // Edit a product
   editProduct(product: Product) {
-    this.tryEditProduct(product).subscribe({
+    this.http.post("http://localhost:8080/api/modifyItem", product).subscribe({
       next: () => {
         return;
       },
@@ -56,16 +53,11 @@ export class ProductService {
         this.errorService.handleError(error);
       }
     });
-  }
-
-  // try to add a product
-  tryAddProduct(product: Product): Observable<any> {
-    return this.http.post("http://localhost:8080/api/insertItem", product);
   }
 
   // Add a product
   addProduct(product: Product) {
-    this.tryAddProduct(product).subscribe({
+    this.http.post("http://localhost:8080/api/insertItem", product).subscribe({
       next: () => {
         return;
       },
@@ -73,18 +65,13 @@ export class ProductService {
         this.errorService.handleError(error);
       }
     });
-  }
-
-  tryDeleteProduct(idItem: string): Observable<any> {
-    let params = new HttpParams().set('idItem', idItem);
-
-    return this.http.post("http://localhost:8080/api/deleteItem", { idItem });
   }
 
   // Delete a product
   deleteProduct(product: Product) {
     if(product.idItem != undefined && product.idItem != null){
-      this.tryDeleteProduct(String(product.idItem)).subscribe({
+      const params = { params: new HttpParams().set('idItem', product.idItem.toString()) };
+      this.http.post('http://localhost:8080/api/deleteItem', null, params).subscribe({
         next: () => {
           return;
         },

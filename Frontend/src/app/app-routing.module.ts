@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from './common-components/dashboard/dashboard.component';
 import { LoginComponent } from './common-components/login/login.component';
 import { MenuComponent } from "./common-components/sidebar/menu-mobile/menu.component";
 import { ProductListComponent } from './employee-components/product-list/product-list.component';
@@ -17,11 +16,12 @@ import { PageNotFoundComponent } from './common-components/page-not-found/page-n
 import { AuthGuard } from './guards/auth.guard';
 import { ProfileComponent } from './common-components/profile/profile.component';
 import { UserProductComponent } from './employee-components/user-product/user-product.component';
+import { ContactsComponent } from './common-components/contacts/contacts.component';
 
 const routes: Routes = [
   // Componenti comuni a tutti gli utenti
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'contacts', component: ContactsComponent, canActivate: [AuthGuard]},
   { path: 'menu', component: MenuComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
 
