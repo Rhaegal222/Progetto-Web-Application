@@ -1,9 +1,30 @@
-<div class="product-details-container">
-    <img [src]="image" alt="{{ name }}" class="product-image">
-    <h2>{{ name }}</h2>
-    <p>{{ description }}</p>
-    <p><strong>Posizione:</strong> {{ location }}</p>
-    <p><strong>Disponibilità:</strong> {{ assigned }}</p>
-    <button (click)="requestProduct()">Richiedi Direttamente</button>
+<div class="container">
+  <div id="box" class="grid">
+    <div class="item">
+      <div class="item-body">
+        <img [src]="image" alt="{{ name }}" class="product-image">
+        <div class="item-footer">
+          <div class="item-row">
+            <h5 class="item-title">Nome:</h5>
+            <span>{{ name }}</span>
+          </div>
+          <div class="item-row">
+            <h5 class="item-title">Descrizione:</h5>
+            <p>{{ description }}</p>
+          </div>
+          <div class="item-row">
+            <h5 class="item-title">Posizione:</h5>
+            <span>{{ location }}</span>
+          </div>
+          <div class="item-row">
+            <h5 class="item-title">Disponibilità:</h5>
+            <span>{{ assigned ? 'Assegnato' : 'Non assegnato' }}</span>
+          </div>
+        </div>
+        <div class="item-buttons">
+          <button class="btn btn-primary" (click)="requestProduct()">Richiedi Direttamente</button>
+        </div>
+      </div>
+    </div>
   </div>
-  
+</div>

@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../model/product';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,7 @@ import { Product } from '../../model/product';
 
 export class ProductManagementComponent {
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private router: Router) { }
 
   products: Product[] = [];
   selectedProduct: Product | undefined;
@@ -100,6 +101,12 @@ export class ProductManagementComponent {
       this.productService.deleteProduct(this.selectedProduct)
       this.getAllProducts();
     }
+  }
+
+  onOpenDetails(product: Product){
+    this.selectedProduct = product;
+    localStorage.setItem('selectedProduct', JSON.stringify(this.selectedProduct));
+    this.router.navigate(['/product-detail']);    
   }
 
   // Get all products

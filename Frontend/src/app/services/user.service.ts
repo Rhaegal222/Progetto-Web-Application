@@ -11,11 +11,12 @@ export class UserManagementService {
 
   // Get all products
   getAllUsers(): Observable<any[]>{
-     return this.http.get<any[]>("http://localhost:8080/api/user-management");
+     return this.http.get<any[]>("http://localhost:8080/api/allUsers");
   }
 
   // Get users by search value and role
   getUsers(searchValue: string = '', role: string = ''): Observable<any[]>{
+    console.log(searchValue, role);
     let params = new HttpParams();
     if (searchValue) {
       params = params.set('searchValue', searchValue);
@@ -23,6 +24,8 @@ export class UserManagementService {
     if (role) {
       params = params.set('role', role);
     }
-    return this.http.get<User[]>('http://localhost:8080/api/user-management', { params: params });
+    return this.http.get<User[]>('http://localhost:8080/api/users', { params: params });
   }
+
+
 }

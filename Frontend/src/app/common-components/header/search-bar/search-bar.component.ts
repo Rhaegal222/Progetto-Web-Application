@@ -29,9 +29,9 @@ export class SearchBarComponent {
 
   roles = [
     {key: 'all', name: 'Tutti i ruoli', visible: false},
-    {key: 'admin', name: 'Amministratore', visible: true},
-    {key: 'storekeeper', name: 'Magazziniere', visible: true},
-    {key: 'employee', name: 'Dipendente', visible: true},
+    {key: 'a', name: 'Amministratore', visible: true},
+    {key: 's', name: 'Magazziniere', visible: true},
+    {key: 'e', name: 'Dipendente', visible: true},
   ];
   role: string = 'Tutti i ruoli';
 
@@ -74,7 +74,7 @@ export class SearchBarComponent {
     if (elementItem) {
       elementItem.visible = false;
     }
-    this.key = this.elements.find(element => element.name === element)?.key || 'all';
+    this.key = this.elements.find(element => element.name === this.element)?.key || '';
     this.onSearch();
   }
 
@@ -85,6 +85,7 @@ export class SearchBarComponent {
       searchValue: this.searchValue,
       element: this.key,
     };
+    console.log(eventData);
     this.searchEvent.emit(eventData);
   }
 }

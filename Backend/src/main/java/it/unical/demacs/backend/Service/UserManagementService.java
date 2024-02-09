@@ -23,6 +23,37 @@ public class UserManagementService {
         }
     }
 
+    public ResponseEntity<?> searchUsers(String search, String role) {
+        try{
+            DatabaseHandler.getInstance().openConnection();
+            ArrayList<User> users;
+            ArrayList<User> result = new ArrayList<>();
+
+            if (role.isEmpty()){
+                users = DatabaseHandler.getInstance().getUserDao().findAll().join();
+            }
+            else{
+                users = DatabaseHandler.getInstance().getUserDao().findByRole(role).join();
+            }
+
+            if(!search.isEmpty()){
+                for(User user : users){
+                    if(user.getEmail().contains(search) || user.getName().contains(search) || user.getSurname().contains(search)){
+                        result.add(user);
+                    }
+                }
+                return ResponseEntity.ok().body(result);
+            }
+            else{
+                result.addAll(users);
+            }
+            return ResponseEntity.ok().body(result);
+        }
+        finally {
+            DatabaseHandler.getInstance().closeConnection();
+        }
+    }
+
     public ResponseEntity<?> banUser(@RequestBody UserRequest userRequest, boolean status) {
         try{
             DatabaseHandler.getInstance().openConnection();

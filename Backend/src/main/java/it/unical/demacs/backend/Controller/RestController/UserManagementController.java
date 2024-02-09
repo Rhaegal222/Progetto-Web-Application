@@ -35,8 +35,22 @@ public class UserManagementController {
 
 
     // GET
-    @GetMapping("/api/user-management")
+    @GetMapping("/api/allUsers")
     public ResponseEntity<?> findAllUser(){
         return userManagementService.findAllUser();
     }
+
+    @GetMapping("/api/users")
+    public ResponseEntity<?> searchUsers(@RequestParam(required = false) String search, @RequestParam(required = false) String role) {
+        if (search == null && (role == null || role.equals("all"))) {
+            return userManagementService.findAllUser();
+        } else if (search == null) {
+            return userManagementService.searchUsers("", role);
+        } else if (role == null || role.equals("all")) {
+            return userManagementService.searchUsers(search, "");
+        } else {
+            return userManagementService.searchUsers(search, role);
+        }
+    }
+
 }

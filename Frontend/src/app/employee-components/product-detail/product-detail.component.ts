@@ -4,7 +4,12 @@ import { Product } from '../../model/product';
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
-  styleUrl: './product-detail.component.css'
+  styleUrls: [
+    './product-detail.component.css',
+    '../../styles/grid.css',
+    '../../styles/list.css',
+    '../../styles/buttons.css',
+  ]
 })
 export class ProductDetailComponent {
 

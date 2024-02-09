@@ -42,7 +42,6 @@ export class ProductListComponent{
   }
 
   onSearch(eventData: onSearchEventData) {
-    console.log(eventData);
     // Se la barra di ricerca è vuota e la categoria è "Tutte le categorie", chiamare getAllProducts.
     // Altrimenti, chiamare getProducts con i valori correnti di searchValue e category.
     if (eventData.searchValue === "" && eventData.element === "all") {
@@ -50,7 +49,7 @@ export class ProductListComponent{
     } else {
       this.productService.getProducts(eventData.searchValue, eventData.element).subscribe({
         next: (data) => {
-          this.products = data;
+          this.products = this.removeAssignedProducts(data);
           console.log(this.products);
         },
         error: (error) => {

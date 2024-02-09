@@ -39,14 +39,13 @@ export class RequestManagementComponent {
     });
   }
 
-  onSearch(eventData: MyEventData) {
+  onSearch(eventData: onSearchEventData) {
     // Se la barra di ricerca è vuota e la categoria è "Tutte le categorie", chiamare getAllProducts.
     // Altrimenti, chiamare getProducts con i valori correnti di searchValue e category.
-    console.log(eventData);
-    if (eventData.searchValue === "" && eventData.category === "all") {
+    if (eventData.searchValue === "" && eventData.element === "all") {
       this.getAllRequests();
     } else {
-      this.requestService.getRequests(eventData.searchValue, eventData.category).subscribe({
+      this.requestService.getRequests(eventData.searchValue, eventData.element).subscribe({
         next: (data) => {
           this.requests = data;
           console.log(this.requests);
@@ -98,7 +97,7 @@ export class RequestManagementComponent {
   }
 }
 
-export interface MyEventData {
+export interface onSearchEventData {
   searchValue: string;
-  category: string;
+  element: string;
 }

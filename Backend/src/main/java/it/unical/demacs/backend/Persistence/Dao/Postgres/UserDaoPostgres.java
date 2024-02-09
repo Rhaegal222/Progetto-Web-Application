@@ -45,6 +45,29 @@ public class UserDaoPostgres implements UserDao {
         }
         return CompletableFuture.completedFuture(users);
     }
+
+    @Override
+    @Async
+    public CompletableFuture<ArrayList<User>> findByRole(String role) {
+        ArrayList<User> users = new ArrayList<>();
+        String query = "SELECT * FROM users WHERE role = ?";
+        try (
+                PreparedStatement st = this.con.prepareStatement(query))
+        {
+            st.setString(1, role);
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    User user = new UserProxy(con);
+                    setting(rs, user);
+                    users.add(user);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return CompletableFuture.completedFuture(users);
+    }
+
     @Override
     @Async
     public CompletableFuture<User> findByPrimaryKey(long idUser) {

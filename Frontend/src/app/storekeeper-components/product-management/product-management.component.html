@@ -13,9 +13,22 @@
                 <div class="item-footer">
                     <h5 class="item-title">{{ product.name }}</h5>
                 </div>
-                <div class="item-buttons">
+                <div class="item-assign">
+                    <div *ngIf="product.assignedUser" class="item-assign-green">
+                        <span class="material-icons">radio_button_checked
+                        </span>
+                    </div>
+                    <div *ngIf="!product.assignedUser" class="item-assign-red">
+                        <span class="material-icons">radio_button_checked
+                        </span>
+                    </div>
+                </div>
+                <div *ngIf="!product.assignedUser" class="item-buttons">
                     <button class="btn btn-primary" (click)="onEdit(product)">Modifica</button>
                     <button class="btn btn-primary" (click)="onDelete(product)">Elimina</button>
+                </div>
+                <div *ngIf="product.assignedUser" class="item-buttons">
+                    <button class="btn btn-primary" (click)="onOpenDetails(product)">Visualizza</button>
                 </div>
             </div>
         </div>

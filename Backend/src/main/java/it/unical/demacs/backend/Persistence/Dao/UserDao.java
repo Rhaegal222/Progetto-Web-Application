@@ -14,4 +14,6 @@ public interface UserDao {
     CompletableFuture<ArrayList<User>> getAdmins(); //trova tutti gli admin
 
     CompletableFuture<Boolean> updateRole(User user);
+
+    CompletableFuture<ArrayList<User>> findByRole(String role);
 }

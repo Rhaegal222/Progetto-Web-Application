@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component} from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserManagementService } from '../../services/user.service'; // Importa il servizio per ottenere i dati degli utenti
 import { User } from '../../model/user';
@@ -24,7 +24,7 @@ export class UserManagementComponent {
   userDetailsWindow: boolean = false;
 
   ngOnInit(): void {
-     this.observeUserListLenght();
+      this.observeUserListLenght();
       this.getAllUsers();
   }
 

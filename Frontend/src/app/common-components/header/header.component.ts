@@ -1,6 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { AnimationsService } from '../../services/animations.service';
-import { searchEventData } from './search-bar/search-bar.component';
 import { addProductEventData } from './tools-bar/tools-bar.component';
 
 @Component({
@@ -12,7 +11,7 @@ export class HeaderComponent {
   constructor(private animationsService: AnimationsService) {}
 
   searchValue: string = '';
-  category: string = '';
+  element: string = '';
   addProductWindow: boolean = false;
 
   ngOnInit() {
@@ -32,4 +31,9 @@ export class HeaderComponent {
   onOpen(eventData: addProductEventData) {
     this.addProductEvent.emit(eventData);
   }
+}
+
+export interface searchEventData {
+  searchValue: string;
+  element: string;
 }
