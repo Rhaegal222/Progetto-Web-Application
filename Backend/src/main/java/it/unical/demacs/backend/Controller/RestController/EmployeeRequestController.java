@@ -18,6 +18,13 @@ public class EmployeeRequestController {
         return employeeRequestService.sendRequest(sendReqRequest);
     }
 
-    //get delle richieste in base al tipo
-    //find delle richieste di un utente
+    @GetMapping("/api/getRequests")
+    public ResponseEntity<?> getRequests(@RequestParam String type) {
+        return employeeRequestService.getRequests(type);
+    }
+
+    @GetMapping("/api/getUserRequests")
+    public ResponseEntity<?> getUserRequests(@RequestParam Long user) {
+        return employeeRequestService.getUserRequests(user);
+    }
 }

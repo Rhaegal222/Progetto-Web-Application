@@ -93,4 +93,18 @@ public class EmployeeRequestService {
             DatabaseHandler.getInstance().closeConnection();
         }
     }
+
+    public ResponseEntity<?> getRequests(String type) {
+        try {
+            DatabaseHandler.getInstance().openConnection();
+            ArrayList<EmployeeRequest> requests = DatabaseHandler.getInstance().getEmployeeRequestDao().getRequestsByType(type).join();
+            return ResponseEntity.ok(requests);
+        } finally {
+            DatabaseHandler.getInstance().closeConnection();
+        }
+    }
+
+    public ResponseEntity<?> getUserRequests(Long user) {
+        return null;
+    }
 }

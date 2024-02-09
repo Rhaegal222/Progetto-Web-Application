@@ -24,6 +24,7 @@ public class User implements UserDetails {
     private String role;
     private Boolean banned;
     private ArrayList<Item> items;
+    private ArrayList<EmployeeRequest> employeeRequests;
 
 
     public User(String password, String email, String name, String surname, boolean b) {

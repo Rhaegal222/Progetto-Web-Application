@@ -209,4 +209,31 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
     }
         return CompletableFuture.completedFuture(false);
     }
+
+    @Override
+    @Async
+    public CompletableFuture<ArrayList<EmployeeRequest>> getRequestsByType(String type) {
+        ArrayList<EmployeeRequest> employeeRequests = new ArrayList<>();
+        try {
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM employee_request WHERE type = ?");
+            stmt.setString(1, type);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                EmployeeRequest employeeRequest = new EmployeeRequest();
+                employeeRequest.setIdEmployeeRequest(rs.getLong("id_employee_request"));
+                employeeRequest.setRequestingUser(new User(rs.getLong("requesting_user")));
+                employeeRequest.setRequestedItem(new Item(rs.getLong("requested_item")));
+                employeeRequest.setTitle(rs.getString("title"));
+                employeeRequest.setDescription(rs.getString("description"));
+                employeeRequest.setStatus(rs.getString("status"));
+                employeeRequest.setType(rs.getString("type"));
+                employeeRequest.setDate(rs.getString("request_date"));
+                employeeRequests.add(employeeRequest);
+            }
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return CompletableFuture.completedFuture(employeeRequests);
+    }
 }
