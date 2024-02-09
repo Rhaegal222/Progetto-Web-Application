@@ -17,8 +17,14 @@
           <h5>Posizione: <span>{{ location }}</span></h5>
           <h5>Disponibilità: <span>{{ assigned ? 'Disponibile' : 'Non disponibile' }}</span></h5>
       </div>
-      <button *ngIf="!assigned" class="btn-primary" (click)="requestProduct()">Richiedi</button>
-      <button *ngIf="assigned" class="btn-primary" (click)="requestProduct()">Restituisci</button>
+      <button class="btn-primary" (click)="requestProduct()">Richiedi</button>
+      <button class="btn-primary" (click)="returnProduct()">Restituisci</button>
     </div>
   </div>
+</div>
+<div *ngIf="requestProductWindow" class="add-product">
+  <app-product-request *ngIf="selectedProduct" [product]="selectedProduct" (OnCloseEvent)="onClose()"></app-product-request>
+</div>
+<div *ngIf="returnProductWindow" class="add-product">
+  <app-product-return *ngIf="selectedProduct" [product]="selectedProduct" (onEvent)="onClose()"></app-product-return>
 </div>
