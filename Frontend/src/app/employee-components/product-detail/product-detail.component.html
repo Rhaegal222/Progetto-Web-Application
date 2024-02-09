@@ -1,30 +1,17 @@
 <div class="container">
-  <div id="box" class="grid">
-    <div class="item">
-      <div class="item-body">
-        <img [src]="image" alt="{{ name }}" class="product-image">
-        <div class="item-footer">
-          <div class="item-row">
-            <h5 class="item-title">Nome:</h5>
-            <span>{{ name }}</span>
-          </div>
-          <div class="item-row">
-            <h5 class="item-title">Descrizione:</h5>
-            <p>{{ description }}</p>
-          </div>
-          <div class="item-row">
-            <h5 class="item-title">Posizione:</h5>
-            <span>{{ location }}</span>
-          </div>
-          <div class="item-row">
-            <h5 class="item-title">Disponibilità:</h5>
-            <span>{{ assigned ? 'Assegnato' : 'Non assegnato' }}</span>
-          </div>
-        </div>
-        <div class="item-buttons">
-          <button class="btn btn-primary" (click)="requestProduct()">Richiedi Direttamente</button>
-        </div>
+  <!-- Inizia la card del prodotto -->
+  <div class="product-card">
+      <div *ngIf="!isAnImage(image)" class="item-no-img">
+        <span class="material-icons">image</span>
       </div>
-    </div>
+      <div *ngIf="isAnImage(image)" class="item-img">
+          <img [src]="image">
+      </div>
+      <h2>{{ name }}</h2>
+      <p>{{ description }}</p>
+      <div class="product-details">
+          <h5>Posizione: <span>{{ location }}</span></h5>
+          <h5>Disponibilità: <span>{{ assigned ? 'Disponibile' : 'Non disponibile' }}</span></h5>
+      </div>
+      <button class="btn" (click)="requestProduct()">Richiedi Prodotto</button>
   </div>
-</div>

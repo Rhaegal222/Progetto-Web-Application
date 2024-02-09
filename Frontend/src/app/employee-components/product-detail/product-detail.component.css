@@ -1,0 +1,79 @@
+/* Container principale */
+.container {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+/* Card del prodotto */
+.product-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    height: 50%;
+    width: 100%;
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+/* Intestazioni e paragrafi all'interno della card */
+.product-card h2, 
+.product-card p, 
+.product-card h5 {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+/* Pulsante nella card del prodotto */
+.btn {
+    padding: 10px 15px;
+    background-color: #a00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #900;
+}
+
+/* Responsive design per schermi più piccoli */
+@media (max-width: 1024px) {
+    .product-card {
+        width: calc(50% - 20px); /* Due card per riga */
+    }
+}
+
+@media (max-width: 768px) {
+    .product-card {
+        width: 100%; /* Una card per riga */
+    }
+}
+
+/* Messaggio di assenza prodotti */
+.no-products {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    font-size: 1.5rem;
+}
