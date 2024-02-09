@@ -58,7 +58,6 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
                 String status = res.getString("status");
                 String type = res.getString("type");
                 String date = String.valueOf(res.getDate("request_date"));
-                String appointment = String.valueOf(res.getDate("appointment"));
                 employeeRequest = new EmployeeRequest(new User(requestingUser), new Item(requestedItem), title, description, status, type, date);
                 employeeRequest.setIdEmployeeRequest(idEmployeeRequest);
 
@@ -114,7 +113,6 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
                 String status = res.getString("status");
                 String type = res.getString("type");
                 String date = String.valueOf(res.getDate("request_date"));
-                String appointment = String.valueOf(res.getDate("appointment"));
                 employeeRequest = new EmployeeRequest(new User(requestingUser), new Item(requestedItem), title, description, status, type, date);
                 employeeRequest.setIdEmployeeRequest(idEmployeeRequest);
             }
