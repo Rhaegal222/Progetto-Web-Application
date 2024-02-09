@@ -36,7 +36,7 @@ public class UserDaoPostgres implements UserDao {
             while (rs.next()) {
                 User user = new UserProxy(con);
                 setting(rs, user);
-                if(!user.getEmail().equals("magazzino.unical@gmail.com")){
+                if(!user.getEmail().equals("magazzino.unical@libero.it")){
                     users.add(user);
                 }
             }
