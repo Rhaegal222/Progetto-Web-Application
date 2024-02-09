@@ -27,4 +27,9 @@ public class EmployeeRequestController {
     public ResponseEntity<?> getUserRequests(@RequestParam Long user) {
         return employeeRequestService.getUserRequests(user);
     }
+
+    @GetMapping("/api/searchRequest")
+    public ResponseEntity<?> searchRequest(@RequestParam String status, @RequestParam String fieldContent) {
+        return employeeRequestService.searchRequest(status, fieldContent);
+    }
 }

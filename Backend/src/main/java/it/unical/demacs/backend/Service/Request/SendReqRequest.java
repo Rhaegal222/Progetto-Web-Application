@@ -12,7 +12,6 @@ public class SendReqRequest {
     long user;
     String title;
     String description;
-    String status;
     String type;
     String date;
 }

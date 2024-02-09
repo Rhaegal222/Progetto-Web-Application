@@ -1,5 +1,6 @@
 package it.unical.demacs.backend.Service;
 
+import it.unical.demacs.backend.Persistence.Dao.EmployeeRequestDao;
 import it.unical.demacs.backend.Persistence.DatabaseHandler;
 import it.unical.demacs.backend.Persistence.Model.EmployeeRequest;
 import it.unical.demacs.backend.Persistence.Model.Item;
@@ -50,12 +51,11 @@ public class EmployeeRequestService {
 
             String title = sendReqRequest.getTitle();
             String description = sendReqRequest.getDescription();
-            String status = sendReqRequest.getStatus();
             String type = sendReqRequest.getType();
             String date = sendReqRequest.getDate();
             long product = sendReqRequest.getProduct();
             long user = sendReqRequest.getUser();
-            if(title.isEmpty() || description.isEmpty() || status.isEmpty() || type.isEmpty() || date.isEmpty() || product == 0 || user == 0) {
+            if(title.isEmpty() || description.isEmpty() || type.isEmpty() || date.isEmpty() || product == 0 || user == 0) {
                 return ResponseEntity.status(400).body("Invalid request");
             }
 
@@ -74,7 +74,7 @@ public class EmployeeRequestService {
                 }
             }
 
-            EmployeeRequest employeeRequest = new EmployeeRequest(requestingUser, requestedItem, title, description, status, type, date);
+            EmployeeRequest employeeRequest = new EmployeeRequest(requestingUser, requestedItem, title, description, "waiting", type, date);
             DatabaseHandler.getInstance().getEmployeeRequestDao().insertEmployeeRequest(employeeRequest);
 
             String emailContent = requestTitle + " da parte di " + requestingUser.getEmail() + "\n\n" + description;
@@ -106,5 +106,35 @@ public class EmployeeRequestService {
 
     public ResponseEntity<?> getUserRequests(Long user) {
         return null;
+    }
+
+    public ResponseEntity<?> searchRequest(String status, String fieldContent) {
+        try{
+            DatabaseHandler.getInstance().openConnection();
+            ArrayList<EmployeeRequest> requestsByStatus;
+            if(status.equals("all")){
+                requestsByStatus = DatabaseHandler.getInstance().getEmployeeRequestDao().findAll().join();
+            }
+            else{
+                requestsByStatus = DatabaseHandler.getInstance().getEmployeeRequestDao().getRequestsByStatus(status).join();
+            }
+            ArrayList<EmployeeRequest> requests = new ArrayList<>();
+            if(!fieldContent.isEmpty()){
+                for(EmployeeRequest request : requestsByStatus) {
+                    String title = request.getTitle().toLowerCase();
+                    String description = request.getDescription().toLowerCase();
+                    String content = fieldContent.toLowerCase();
+                    if(title.contains(content) || description.contains(content)){
+                        requests.add(request);
+                    }
+                }
+            }
+            else{
+                requests = requestsByStatus;
+            }
+            return ResponseEntity.ok(requests);
+        } finally {
+            DatabaseHandler.getInstance().closeConnection();
+        }
     }
 }

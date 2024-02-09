@@ -18,4 +18,6 @@ public interface EmployeeRequestDao {
     CompletableFuture<Boolean> deleteEmployeeRequest(Long id);
     CompletableFuture<ArrayList<EmployeeRequest>> getRequestsByType(String type);
     CompletableFuture<ArrayList<EmployeeRequest>> getEmployeeRequestInRange(String start, String end);
+
+    CompletableFuture<ArrayList<EmployeeRequest>> getRequestsByStatus(String status);
 }
