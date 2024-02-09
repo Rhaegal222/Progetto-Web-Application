@@ -3,8 +3,6 @@ import { Observable } from 'rxjs';
 import { ProductService } from '../../../services/product.service';
 import { AnimationsService } from '../../../services/animations.service';
 import { ImgbbService } from '../../../services/imgbb.service';
-var arrow : any;
-var addProductWindow : any;
 
 @Component({
   selector: 'app-add-product',
@@ -88,7 +86,6 @@ export class AddProductComponent {
     });
   }
 
-  
   filterCategories(event: any) {
     const query = event.target.value.toLowerCase();
     this.filteredCategories = this.categories.filter(
@@ -138,9 +135,9 @@ export class AddProductComponent {
     }
   }
 
-addImage(event: Event): void {
+  addImage(event: Event): void {
     const input = event.target as HTMLInputElement;
-  
+
     if (input.files && input.files.length) {
       const file = input.files[0];
       this.imgbbService.upload(file).subscribe({
@@ -152,13 +149,17 @@ addImage(event: Event): void {
     }
   }
 
-      /*
+  /* 
+    addImage(event: Event): void {
+    const input = event.target as HTMLInputElement;
+  
+    if (input.files && input.files.length) {
+      const file = input.files[0];
       const reader = new FileReader();
   
       reader.onload = () => {
         const base64String = reader.result as string;
         this.image = base64String;
-        // Qui puoi fare ulteriori operazioni con la stringa base64
       };
   
       reader.onerror = (error) => {
@@ -166,7 +167,9 @@ addImage(event: Event): void {
       };
   
       reader.readAsDataURL(file);
-      */
+    }
+  }
+  */
     
     
   removeImage(): void {

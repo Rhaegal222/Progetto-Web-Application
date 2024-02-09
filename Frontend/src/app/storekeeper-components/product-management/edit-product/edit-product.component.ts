@@ -3,10 +3,7 @@ import { Observable } from 'rxjs';
 import { ProductService } from '../../../services/product.service';
 import { AnimationsService } from '../../../services/animations.service';
 import { Product } from '../../../model/product';
-import { User } from '../../../model/user';
-
-var arrow : any;
-var editProductWindow : any;
+import { ImgbbService } from '../../../services/imgbb.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -21,7 +18,7 @@ var editProductWindow : any;
 })
 export class EditProductComponent {
 
-  constructor(private productService: ProductService, private animationsService: AnimationsService) { }
+  constructor(private productService: ProductService, private animationsService: AnimationsService, private imgbbService: ImgbbService) { }
 
   editProductWindow: boolean = true;
 
@@ -175,6 +172,21 @@ export class EditProductComponent {
 
   addImage(event: Event): void {
     const input = event.target as HTMLInputElement;
+
+    if (input.files && input.files.length) {
+      const file = input.files[0];
+      this.imgbbService.upload(file).subscribe({
+        next: (response: any) => {
+          this.image=response.data.url
+          //alert(response.data.url)
+        }
+      })
+    }
+  }
+
+  /* 
+    addImage(event: Event): void {
+    const input = event.target as HTMLInputElement;
   
     if (input.files && input.files.length) {
       const file = input.files[0];
@@ -183,7 +195,6 @@ export class EditProductComponent {
       reader.onload = () => {
         const base64String = reader.result as string;
         this.image = base64String;
-        // Qui puoi fare ulteriori operazioni con la stringa base64
       };
   
       reader.onerror = (error) => {
@@ -193,6 +204,7 @@ export class EditProductComponent {
       reader.readAsDataURL(file);
     }
   }
+  */
 
   removeImage(): void {
     this.image = '';
