@@ -7,16 +7,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
-@WebServlet("/api/deleteRequest")
+@WebServlet("/api/refuseRequest")
 @RequiredArgsConstructor
-public class DeleteEmployeeRequestServlet extends HttpServlet {
-
+public class RefuseEmployeeRequestServlet extends HttpServlet {
     private final EmployeeRequestService employeeRequestService;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-        employeeRequestService.deleteEmployeeRequest(request, response);
+        employeeRequestService.refuseEmployeeRequest(request, response);
     }
 }
-
-

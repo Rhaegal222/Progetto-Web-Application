@@ -74,7 +74,7 @@ public class EmployeeRequestService {
                 }
             }
 
-            EmployeeRequest employeeRequest = new EmployeeRequest(requestingUser, requestedItem, title, description, "waiting", type, date);
+            EmployeeRequest employeeRequest = new EmployeeRequest(requestingUser, requestedItem, title, description, "waiting", type, date, "1970-01-01");
             DatabaseHandler.getInstance().getEmployeeRequestDao().insertEmployeeRequest(employeeRequest);
 
             String emailContent = requestTitle + " da parte di " + requestingUser.getEmail() + "\n\n" + description;
@@ -135,6 +135,29 @@ public class EmployeeRequestService {
             return ResponseEntity.ok(requests);
         } finally {
             DatabaseHandler.getInstance().closeConnection();
+        }
+    }
+
+    public void refuseEmployeeRequest(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            DatabaseHandler.getInstance().openConnection();
+            EmployeeRequest employeeRequest = null;
+            String idEmployeeRequestString = request.getParameter("idEmployeeRequest");
+            if (idEmployeeRequestString != null && !idEmployeeRequestString.isEmpty()) {
+                employeeRequest = new EmployeeRequest(Long.parseLong(idEmployeeRequestString));
+            }
+
+            assert employeeRequest != null;
+            if (employeeRequest.getStatus().equals("waiting")) {
+                employeeRequest.setStatus("refused");
+                DatabaseHandler.getInstance().getEmployeeRequestDao().updateEmployeeRequest(employeeRequest).join();
+                outputJSON(response, "Request refused", "0");
+            } else {
+                outputJSON(response, "Error refusing request", "1");
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

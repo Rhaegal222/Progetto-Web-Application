@@ -18,8 +18,9 @@ public class EmployeeRequest {
     private String status;
     private String type;
     private String date;
+    private String appointment;
 
-    public EmployeeRequest(User requestingUser, Item requestedItem, String title, String description, String status, String type, String date) {
+    public EmployeeRequest(User requestingUser, Item requestedItem, String title, String description, String status, String type, String date, String appointment) {
         this.requestingUser = requestingUser;
         this.requestedItem = requestedItem;
         this.title = title;
@@ -27,6 +28,7 @@ public class EmployeeRequest {
         this.status = status;
         this.type = type;
         this.date = date;
+        this.appointment = appointment;
     }
 
     public EmployeeRequest() {
@@ -42,5 +44,6 @@ public class EmployeeRequest {
         this.status = e.getStatus();
         this.type = e.getType();
         this.date = e.getDate();
+        this.appointment = e.getAppointment();
     }
 }
