@@ -48,7 +48,6 @@ export class RequestManagementComponent {
       this.requestService.getRequests(eventData.searchValue, eventData.element).subscribe({
         next: (data) => {
           this.requests = data;
-          console.log(this.requests);
         },
         error: (error) => {
           console.error(error);
@@ -61,7 +60,6 @@ export class RequestManagementComponent {
     this.requestService.getAllRequests().subscribe({
       next: (data) => {
         this.requests = data;
-        console.log(this.requests);
       },
       error: (error) => {
         console.error(error);

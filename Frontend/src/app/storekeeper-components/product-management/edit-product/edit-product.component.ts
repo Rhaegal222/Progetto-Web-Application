@@ -40,9 +40,6 @@ export class EditProductComponent {
   ngOnInit(): void {
     if (this.product && this.product.idItem) {
       this.productService.getItem(this.product.idItem).subscribe({
-        next: (data) => {
-          console.log(data);
-        },
         error: (error) => {
           console.error(error);
         }
@@ -149,7 +146,6 @@ export class EditProductComponent {
   }
 
   selectLocation(suggestion: data) {
-    console.log(suggestion);
     this.location = suggestion.name; // Aggiorna il modello con il valore selezionato
     this.showLocationsBox = false; // Nasconde il box dei suggerimenti
   }
@@ -223,12 +219,9 @@ export class EditProductComponent {
       assignedUser: this.assigned_user
     };
 
-    console.log(product);
-
     this.productService.editProduct(product);
-    //this.onCloseEvent();
+    this.onCloseEvent();
   }
-
 
   // Invia l'evento a product-management.component.ts
   

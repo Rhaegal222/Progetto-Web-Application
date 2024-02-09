@@ -24,7 +24,6 @@ export class ReportComponent {
     this.reportService.getReports().subscribe({
       next: (data) => {
         this.reportList = data;
-        console.log(data);
       },
       error: (error: any) => {
         console.log('There was an error!', error);

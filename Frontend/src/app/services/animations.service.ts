@@ -50,7 +50,6 @@ export class AnimationsService {
   }
 
   slideOutRouter() {
-    console.log('slideOutRouter');
     if(this.component && this.arrow){
       this.arrow.style.zIndex = '-1';
       this.component.classList.toggle('sidebar-open', false);

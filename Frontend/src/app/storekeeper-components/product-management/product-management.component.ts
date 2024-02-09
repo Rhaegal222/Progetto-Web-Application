@@ -62,7 +62,6 @@ export class ProductManagementComponent {
       this.productService.getProducts(this.searchValue, this.category).subscribe({
         next: (data) => {
           this.products = data;
-          console.log(this.products);
         },
         error: (error) => {
           console.error(error);

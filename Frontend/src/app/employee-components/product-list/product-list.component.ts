@@ -50,7 +50,6 @@ export class ProductListComponent{
       this.productService.getProducts(eventData.searchValue, eventData.element).subscribe({
         next: (data) => {
           this.products = this.removeAssignedProducts(data);
-          console.log(this.products);
         },
         error: (error) => {
           console.error(error);
@@ -64,7 +63,6 @@ export class ProductListComponent{
     this.productService.getAllProducts().subscribe({
       next: (data) => {
         this.products = this.removeAssignedProducts(data);
-        console.log(this.products);
       },
       error: (error) => {
         console.error(error)

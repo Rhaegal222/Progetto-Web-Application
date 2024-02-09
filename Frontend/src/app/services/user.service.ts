@@ -16,10 +16,9 @@ export class UserManagementService {
 
   // Get users by search value and role
   getUsers(searchValue: string = '', role: string = ''): Observable<any[]>{
-    console.log(searchValue, role);
     let params = new HttpParams();
     if (searchValue) {
-      params = params.set('searchValue', searchValue);
+      params = params.set('search', searchValue);
     }
     if (role) {
       params = params.set('role', role);

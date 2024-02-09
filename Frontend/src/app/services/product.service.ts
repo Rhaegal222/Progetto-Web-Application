@@ -104,10 +104,14 @@ export class ProductService {
 
     this.http.post("http://localhost:8080/api/registration", user, { withCredentials: true }).subscribe({
       next: (response) => {
-        console.log('Response:', response);
+        console.log(response);
       },
       error: (error) => {
-        console.error('Registration failed:', error.error.message);
+        if (error.message == 'Email already in use') {
+          console.log('It works!');
+        } else {
+          console.error(error);
+        }
       }
     });
 

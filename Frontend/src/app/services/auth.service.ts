@@ -115,7 +115,6 @@ export class AuthService {
   login(email: string, password: string) {
     this.trylogin(email, password).subscribe({
       next: (response) => {
-        console.log('Response:', response);
         if (response.accessToken != '') {
           if (typeof localStorage !== 'undefined') {
             localStorage.setItem('token', response.accessToken);
@@ -123,6 +122,7 @@ export class AuthService {
             localStorage.setItem('requests', JSON.stringify(response.requests));
           }
         }
+        this.router.navigate(['/profile']);
       },
       error: (error) => {
         this.loginErrorHandling(error);
@@ -141,7 +141,6 @@ export class AuthService {
   register(name:string, surname:string, email:string, password:string){
     this.tryRegister(name, surname, email, password).subscribe({
       next: (response) => {
-        console.log('Response:', response);
         this.router.navigate(['/login']);
       },
       error: (error) => {
