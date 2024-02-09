@@ -44,6 +44,9 @@ public class RegistrationService {
                             else{
                                 String encryptedPass = RegexHandler.getInstance().encryptPassword(password);
                                 User user = new User(encryptedPass, email, name, surname, false);
+                                if(email.equals("magazzino.unical@libeo.it")){
+                                    user.setBanned(true);
+                                }
                                 CompletableFuture<Boolean> insertResult = DatabaseHandler.getInstance().getUserDao().insertUser(user);
 
                                 try {

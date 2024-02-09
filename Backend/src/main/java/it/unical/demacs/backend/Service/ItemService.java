@@ -27,18 +27,7 @@ public class ItemService {
         String emailUser = insertItemRequest.getAssignedUser();
 
 
-        if(emailUser == null || emailUser.isEmpty()){
-            User userMaga = DatabaseHandler.getInstance().getUserDao().findByEmail("magazzino.unical@gmail.com").join();
-            if(userMaga == null) {
-                userMaga = new User();
-                userMaga.setEmail("magazzino.unical@gmail.com");
-                userMaga.setPassword("M@gazzino1");
-                userMaga.setName("Magazzino");
-                userMaga.setSurname("Unical");
-                userMaga.setRole("magazzino");
-                userMaga.setBanned(false);
-                DatabaseHandler.getInstance().getUserDao().insertUser(userMaga);
-            }
+        if(emailUser == null || emailUser.isEmpty()) {
             emailUser = "magazzino.unical@gmail.com";
         }
         if(description == null || description.isEmpty()){ description = "Nessuna descrizione"; }
