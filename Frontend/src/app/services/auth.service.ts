@@ -11,6 +11,18 @@ export class AuthService {
 
   constructor(private http:HttpClient, private router:Router) { }
 
+  // Stampa tutti i payload del token
+  printToken() {
+    if (typeof localStorage !== 'undefined') {
+      if(localStorage.getItem('token'))
+        console.log('token:', localStorage.getItem('token'));
+      if(localStorage.getItem('items'))
+        console.log('items:', localStorage.getItem('items'));
+      if(localStorage.getItem('requests'))
+        console.log('requests:', localStorage.getItem('requests'));
+      }
+    }
+
   // Prendi l'email dell'utente autenticato
   getUserEmail(): string {
     if (typeof localStorage !== 'undefined') {
@@ -103,10 +115,12 @@ export class AuthService {
   login(email: string, password: string) {
     this.trylogin(email, password).subscribe({
       next: (response) => {
+        console.log('Response:', response);
         if (response.accessToken != '') {
           if (typeof localStorage !== 'undefined') {
             localStorage.setItem('token', response.accessToken);
-            this.router.navigate(['/profile']);
+            localStorage.setItem('items', JSON.stringify(response.items));
+            localStorage.setItem('requests', JSON.stringify(response.requests));
           }
         }
       },

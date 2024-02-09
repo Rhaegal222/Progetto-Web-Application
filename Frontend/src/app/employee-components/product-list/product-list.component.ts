@@ -41,14 +41,14 @@ export class ProductListComponent{
     });
   }
 
-  onSearch(eventData: MyEventData) {
+  onSearch(eventData: onSearchEventData) {
+    console.log(eventData);
     // Se la barra di ricerca è vuota e la categoria è "Tutte le categorie", chiamare getAllProducts.
     // Altrimenti, chiamare getProducts con i valori correnti di searchValue e category.
-    console.log(eventData);
-    if (eventData.searchValue === "" && eventData.category === "all") {
+    if (eventData.searchValue === "" && eventData.element === "all") {
       this.getAllProducts();
     } else {
-      this.productService.getProducts(eventData.searchValue, eventData.category).subscribe({
+      this.productService.getProducts(eventData.searchValue, eventData.element).subscribe({
         next: (data) => {
           this.products = data;
           console.log(this.products);
@@ -60,12 +60,11 @@ export class ProductListComponent{
     }
   }  
   
-
   // Get all products
   getAllProducts(){
     this.productService.getAllProducts().subscribe({
       next: (data) => {
-        this.products = data;
+        this.products = this.removeAssignedProducts(data);
         console.log(this.products);
       },
       error: (error) => {
@@ -74,15 +73,23 @@ export class ProductListComponent{
     });
   }
 
+  // Rimuove dalla lista dei prodotti quelli che hanno l'attributo assignedUser di tipo utente e la restituisce
+  removeAssignedProducts(products: Product[]): Product[] {
+    return products.filter(product => product.assignedUser == null);
+  }
+
   isAnImage(image : string): boolean {
     if(image == null || image == "" || !image.startsWith('data:image/')){
       return false;
     }
     return true;
   }
+
+  openDetail(product: Product) {
+  }
 }
 
-export interface MyEventData {
+export interface onSearchEventData {
   searchValue: string;
-  category: string;
+  element: string;
 }
