@@ -26,7 +26,6 @@ export class ProductDetailComponent {
   assigned: boolean = false;  
   
   ngOnInit() {
-
     const selectedProduct = localStorage.getItem('selectedProduct');
     if (selectedProduct !== null && selectedProduct !== undefined) {
       this.selectedProduct = JSON.parse(selectedProduct);
