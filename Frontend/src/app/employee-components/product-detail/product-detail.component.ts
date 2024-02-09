@@ -23,7 +23,10 @@ export class ProductDetailComponent {
   location: string = '';
   image: string = '';
   assignedUser: User | undefined | string;
-  assigned: boolean = false;  
+  assigned: boolean = false;
+
+  requestProductWindow: boolean = false;
+  returnProductWindow: boolean = false;
   
   ngOnInit() {
     const selectedProduct = localStorage.getItem('selectedProduct');
@@ -47,11 +50,19 @@ export class ProductDetailComponent {
         }
       }
     }
-    
   }
 
   requestProduct(){
-    
+    this.requestProductWindow = true;
+  }
+
+  returnProduct(){
+    this.returnProductWindow = true;
+  }
+
+  onClose(){
+    this.requestProductWindow = false;
+    this.returnProductWindow = false;    
   }
 
   isAnImage(image : string): boolean {
@@ -60,5 +71,4 @@ export class ProductDetailComponent {
     }
     return true;
   }
-
 }
