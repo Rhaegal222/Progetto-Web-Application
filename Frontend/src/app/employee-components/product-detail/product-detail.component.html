@@ -1,3 +1,9 @@
-<div>
-    Vista dettagliata del prodotto
-</div>
+<div class="product-details-container">
+    <img [src]="image" alt="{{ name }}" class="product-image">
+    <h2>{{ name }}</h2>
+    <p>{{ description }}</p>
+    <p><strong>Posizione:</strong> {{ location }}</p>
+    <p><strong>Disponibilità:</strong> {{ assigned }}</p>
+    <button (click)="requestProduct()">Richiedi Direttamente</button>
+  </div>
+  

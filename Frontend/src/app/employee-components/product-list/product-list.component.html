@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header (searchEvent)="onSearch($event)"></app-header>
 <div class="container">
     <div id="box" class="grid">
         <div *ngFor="let product of products" class="item">
@@ -11,6 +11,9 @@
                 </div>
                 <div class="item-footer">
                     <h5 class="item-title">{{ product.name }}</h5>
+                </div>
+                <div class="item-buttons">
+                    <button class="btn btn-primary" (click)="openDetail(product)">Richiedi</button>
                 </div>
             </div>
         </div>
