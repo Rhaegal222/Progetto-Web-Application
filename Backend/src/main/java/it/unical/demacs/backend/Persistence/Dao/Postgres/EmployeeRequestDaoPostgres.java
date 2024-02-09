@@ -31,7 +31,7 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
                 employeeRequest.setDescription(rs.getString("description"));
                 employeeRequest.setStatus(rs.getString("status"));
                 employeeRequest.setType(rs.getString("type"));
-                employeeRequest.setDate(rs.getString("date"));
+                employeeRequest.setDate(String.valueOf(rs.getDate("date")));
                 employeeRequests.add(employeeRequest);
             }
         } catch (SQLException e) {
@@ -57,7 +57,7 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
                 String description = res.getString("description");
                 String status = res.getString("status");
                 String type = res.getString("type");
-                String date = res.getString("request_date");
+                String date = String.valueOf(res.getDate("request_date"));
                 employeeRequest = new EmployeeRequest(new User(requestingUser), new Item(requestedItem), title, description, status, type, date);
                 employeeRequest.setIdEmployeeRequest(idEmployeeRequest);
 
@@ -85,7 +85,7 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
                 employeeRequest.setDescription(rs.getString("description"));
                 employeeRequest.setStatus(rs.getString("status"));
                 employeeRequest.setType(rs.getString("type"));
-                employeeRequest.setDate(rs.getString("request_date"));
+                employeeRequest.setDate(String.valueOf(rs.getDate("request_date")));
                 employeeRequests.add(employeeRequest);
             }
         }
@@ -112,7 +112,7 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
                 String description = res.getString("description");
                 String status = res.getString("status");
                 String type = res.getString("type");
-                String date = res.getString("request_date");
+                String date = String.valueOf(res.getDate("request_date"));
                 employeeRequest = new EmployeeRequest(new User(requestingUser), new Item(requestedItem), title, description, status, type, date);
                 employeeRequest.setIdEmployeeRequest(idEmployeeRequest);
             }
@@ -139,7 +139,7 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
                 employeeRequest.setDescription(rs.getString("description"));
                 employeeRequest.setStatus(rs.getString("status"));
                 employeeRequest.setType(rs.getString("type"));
-                employeeRequest.setDate(rs.getString("request_date"));
+                employeeRequest.setDate(String.valueOf(rs.getDate("request_date")));
                 employeeRequests.add(employeeRequest);
             }
         }
@@ -161,7 +161,7 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
             st.setString(4, employeeRequest.getDescription());
             st.setString(5, employeeRequest.getStatus());
             st.setString(6, employeeRequest.getType());
-            st.setString(7, employeeRequest.getDate());
+            st.setDate(7, Date.valueOf(employeeRequest.getDate()));
             int rowsAffected = st.executeUpdate();
             st.close();
             return CompletableFuture.completedFuture(rowsAffected > 0);
@@ -183,7 +183,7 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
             st.setString(4, employeeRequest.getDescription());
             st.setString(5, employeeRequest.getStatus());
             st.setString(6, employeeRequest.getType());
-            st.setString(7, employeeRequest.getDate());
+            st.setDate(7, Date.valueOf(employeeRequest.getDate()));
             st.setLong(8, employeeRequest.getIdEmployeeRequest());
             int rowsAffected = st.executeUpdate();
             st.close();
@@ -227,7 +227,7 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
                 employeeRequest.setDescription(rs.getString("description"));
                 employeeRequest.setStatus(rs.getString("status"));
                 employeeRequest.setType(rs.getString("type"));
-                employeeRequest.setDate(rs.getString("request_date"));
+                employeeRequest.setDate(String.valueOf(rs.getDate("request_date")));
                 employeeRequests.add(employeeRequest);
             }
         }
@@ -236,4 +236,32 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
         }
         return CompletableFuture.completedFuture(employeeRequests);
     }
+
+    @Override
+    @Async
+    public CompletableFuture<ArrayList<EmployeeRequest>> getEmployeeRequestInRange(String start, String end) {
+        ArrayList<EmployeeRequest> employeeRequests = new ArrayList<>();
+        try {
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM employee_request WHERE request_date BETWEEN ?::date AND ?::date");
+            stmt.setString(1, start);
+            stmt.setString(2, end);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                EmployeeRequest employeeRequest = new EmployeeRequest();
+                employeeRequest.setIdEmployeeRequest(rs.getLong("id_employee_request"));
+                employeeRequest.setRequestingUser(new User(rs.getLong("requesting_user")));
+                employeeRequest.setRequestedItem(new Item(rs.getLong("requested_item")));
+                employeeRequest.setTitle(rs.getString("title"));
+                employeeRequest.setDescription(rs.getString("description"));
+                employeeRequest.setStatus(rs.getString("status"));
+                employeeRequest.setType(rs.getString("type"));
+                employeeRequest.setDate(String.valueOf(rs.getDate("request_date")));
+                employeeRequests.add(employeeRequest);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return CompletableFuture.completedFuture(employeeRequests);
+    }
+
 }

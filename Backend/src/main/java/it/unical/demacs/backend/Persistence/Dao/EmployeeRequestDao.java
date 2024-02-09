@@ -1,6 +1,7 @@
 package it.unical.demacs.backend.Persistence.Dao;
 
 import it.unical.demacs.backend.Persistence.Model.EmployeeRequest;
+import org.springframework.scheduling.annotation.Async;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -15,6 +16,6 @@ public interface EmployeeRequestDao {
     CompletableFuture<Boolean> insertEmployeeRequest(EmployeeRequest employeeRequest);
     CompletableFuture<Boolean> updateEmployeeRequest(EmployeeRequest employeeRequest);
     CompletableFuture<Boolean> deleteEmployeeRequest(Long id);
-
     CompletableFuture<ArrayList<EmployeeRequest>> getRequestsByType(String type);
+    CompletableFuture<ArrayList<EmployeeRequest>> getEmployeeRequestInRange(String start, String end);
 }
