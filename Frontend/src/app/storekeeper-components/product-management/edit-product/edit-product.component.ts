@@ -42,6 +42,7 @@ export class EditProductComponent {
   ngOnInit(): void {
 
     this.animationsService.initResizeObserver('edit-product');
+    
     if (this.product && this.product.idItem) {
       this.productService.getProduct(this.product.idItem).subscribe({
         error: (error) => {

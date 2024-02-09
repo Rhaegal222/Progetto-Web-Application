@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 
 import { SidebarComponent } from './common-components/sidebar/sidebar.component';
 import { LoginComponent } from './common-components/login/login.component';
-import { DashboardComponent } from './common-components/dashboard/dashboard.component';
 import { MenuComponent } from './common-components/sidebar/menu-mobile/menu.component';
 import { RegistrationComponent } from './employee-components/registration/registration.component';
 import { ProductDetailComponent } from './employee-components/product-detail/product-detail.component';
@@ -34,6 +33,7 @@ import { ProfileComponent } from './common-components/profile/profile.component'
 import { HeaderComponent } from './common-components/header/header.component';
 import { EditProductComponent } from './storekeeper-components/product-management/edit-product/edit-product.component';
 import { UserProductComponent } from './employee-components/user-product/user-product.component';
+import { ContactsComponent } from './common-components/contacts/contacts.component';
 
 
 
@@ -41,7 +41,6 @@ import { UserProductComponent } from './employee-components/user-product/user-pr
   declarations: [
     AppComponent,
     SidebarComponent,
-    DashboardComponent,
     LoginComponent,
     MenuComponent,
     RegistrationComponent,
@@ -65,7 +64,8 @@ import { UserProductComponent } from './employee-components/user-product/user-pr
     ToolsBarComponent,
     HeaderComponent,
     EditProductComponent,
-    UserProductComponent
+    UserProductComponent,
+    ContactsComponent
 ],
   imports: [
     BrowserModule,

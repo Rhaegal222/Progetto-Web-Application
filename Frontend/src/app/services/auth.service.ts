@@ -42,6 +42,36 @@ export class AuthService {
     }
   }
 
+  // Prendi il nome dell'utente autenticato
+  getUserFirstName(): string {
+    if (typeof localStorage !== 'undefined') {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        return payload.name;
+      } else {
+        return '';
+      }
+    } else {
+      return '';
+    }
+  }
+
+  // Prendi il cognome dell'utente autenticato
+  getUserLastName(): string {
+    if (typeof localStorage !== 'undefined') {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        return payload.surname;
+      } else {
+        return '';
+      }
+    } else {
+      return '';
+    }
+  }
+
   // Verifica il ruolo dell'utente autenticato
   isAdmin(): boolean {
     if (typeof localStorage !== 'undefined') {
