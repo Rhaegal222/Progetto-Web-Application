@@ -1,17 +1,24 @@
 <div class="container">
   <!-- Inizia la card del prodotto -->
   <div class="product-card">
-      <div *ngIf="!isAnImage(image)" class="item-no-img">
-        <span class="material-icons">image</span>
+    <div class="row">
+      <div class="column">
+        <div *ngIf="!isAnImage(image)" class="item-no-img">
+          <span class="material-icons">image</span>
+        </div>
+        <div *ngIf="isAnImage(image)" class="item-img">
+            <img [src]="image">
+        </div>
       </div>
-      <div *ngIf="isAnImage(image)" class="item-img">
-          <img [src]="image">
-      </div>
-      <h2>{{ name }}</h2>
-      <p>{{ description }}</p>
-      <div class="product-details">
+      <div class="column">
+        <h2>{{ name }}</h2>
+        <p>{{ description }}</p>
+        <div class="product-details">
           <h5>Posizione: <span>{{ location }}</span></h5>
           <h5>Disponibilità: <span>{{ assigned ? 'Disponibile' : 'Non disponibile' }}</span></h5>
       </div>
-      <button class="btn" (click)="requestProduct()">Richiedi Prodotto</button>
+      <button *ngIf="!assigned" class="btn-primary" (click)="requestProduct()">Richiedi</button>
+      <button *ngIf="assigned" class="btn-primary" (click)="requestProduct()">Restituisci</button>
+    </div>
   </div>
+</div>

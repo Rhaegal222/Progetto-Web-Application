@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AnimationsService } from './services/animations.service';
 import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
+import { ProductService } from './services/product.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationErr
 
 export class AppComponent {
 
-  constructor(private animationsService: AnimationsService, private router: Router) { }
+  constructor(private animationsService: AnimationsService, private router: Router, private productService : ProductService) { }
 
   loading = false;
 
@@ -36,5 +37,7 @@ export class AppComponent {
         this.loading = false;
       }
     });
+
+    this.productService.checkIfStoreWorks()
   }
 }

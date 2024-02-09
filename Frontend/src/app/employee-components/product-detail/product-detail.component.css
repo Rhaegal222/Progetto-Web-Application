@@ -1,13 +1,14 @@
 /* Container principale */
 .container {
-    padding: 20px;
+    /* posiziona al centro della pagina */
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: flex-start;
-    gap: 20px;
-    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     height: 100%;
+    width: 100%;
+    padding: 20px;
+
 }
 
 /* Card del prodotto */
@@ -17,57 +18,28 @@
     border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding: 20px;
     height: 50%;
     width: 100%;
 }
 
-.product-image {
+.row {
+    /* Posiziona gli elementi all'interno della card in riga */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
     width: 100%;
-    height: auto;
-    max-height: 200px;
-    object-fit: cover;
-    margin-bottom: 20px;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
 }
-
-/* Intestazioni e paragrafi all'interno della card */
-.product-card h2, 
-.product-card p, 
-.product-card h5 {
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-    text-align: left;
-    margin-bottom: 10px;
-}
-
-/* Pulsante nella card del prodotto */
-.btn {
-    padding: 10px 15px;
-    background-color: #a00;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.btn:hover {
-    background-color: #900;
-}
-
-/* Responsive design per schermi più piccoli */
-@media (max-width: 1024px) {
-    .product-card {
-        width: calc(50% - 20px); /* Due card per riga */
-    }
-}
-
-@media (max-width: 768px) {
-    .product-card {
-        width: 100%; /* Una card per riga */
-    }
 }
 
 /* Messaggio di assenza prodotti */
@@ -76,4 +48,20 @@
     text-align: center;
     padding: 20px;
     font-size: 1.5rem;
+}
+
+.item-img img, .item-no-img span {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-no-img span{
+    /* Aumenta le dimesioni del material icon */
+    font-size: 200px;
+}
+
+.item-img, .item-no-img {
+    width: clamp(200px, 100%, 300px);
+    height: clamp(200px, 100%, 300px);
 }
