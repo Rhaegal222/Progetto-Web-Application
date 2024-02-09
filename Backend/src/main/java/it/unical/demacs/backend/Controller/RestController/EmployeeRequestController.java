@@ -28,9 +28,32 @@ public class EmployeeRequestController {
         return employeeRequestService.getUserRequests(user);
     }
 
-    @GetMapping("/api/searchRequest")
-    public ResponseEntity<?> searchRequest(@RequestParam String status, @RequestParam String fieldContent) {
-        return employeeRequestService.searchRequest(status, fieldContent);
+    /*
+     @GetMapping("/api/users")
+    public ResponseEntity<?> searchUsers(@RequestParam(required = false) String search, @RequestParam(required = false) String role) {
+        if (search == null && (role == null || role.equals("all"))) {
+            return userManagementService.findAllUser();
+        } else if (search == null) {
+            return userManagementService.searchUsers("", role);
+        } else if (role == null || role.equals("all")) {
+            return userManagementService.searchUsers(search, "");
+        } else {
+            return userManagementService.searchUsers(search, role);
+        }
+    }
+     */
+    @GetMapping("/api/requests")
+    public ResponseEntity<?> searchRequest(@RequestParam String status, @RequestParam String search) {
+        if (search == null && (status == null || status.equals("all"))) {
+            return employeeRequestService.findAll();
+        } else if (search == null) {
+            return employeeRequestService.searchRequest(status, "");
+
+        } else if (status == null || status.equals("all")) {
+            return employeeRequestService.searchRequest("", search);
+        } else {
+            return employeeRequestService.searchRequest(status, search);
+        }
     }
 
 }

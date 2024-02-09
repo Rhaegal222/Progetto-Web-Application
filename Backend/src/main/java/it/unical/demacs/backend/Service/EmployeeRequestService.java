@@ -160,4 +160,14 @@ public class EmployeeRequestService {
             throw new RuntimeException(e);
         }
     }
+
+    public ResponseEntity<?> findAll() {
+        try {
+            DatabaseHandler.getInstance().openConnection();
+            ArrayList<EmployeeRequest> requests = DatabaseHandler.getInstance().getEmployeeRequestDao().findAll().join();
+            return ResponseEntity.ok(requests);
+        } finally {
+            DatabaseHandler.getInstance().closeConnection();
+        }
+    }
 }
