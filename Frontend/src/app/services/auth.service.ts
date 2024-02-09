@@ -3,13 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from '../model/user';
+import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http:HttpClient, private router:Router) { }
+  constructor(
+    private http:HttpClient, 
+    private router:Router,
+    private errorService: ErrorService) { }
 
   // Stampa tutti i payload del token
   printToken() {
@@ -140,11 +144,11 @@ export class AuthService {
 
   register(name:string, surname:string, email:string, password:string){
     this.tryRegister(name, surname, email, password).subscribe({
-      next: (response) => {
+      next: () => {
         this.router.navigate(['/login']);
       },
       error: (error) => {
-        console.error('Registration failed:', error.error.message);
+        this.errorService.handleError(error);
       }
     });
   }

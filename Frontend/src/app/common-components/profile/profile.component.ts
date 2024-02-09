@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ProfileService } from '../../services/profile.service'; 
-import { User } from '../../model/user';
+import { ErrorService } from '../../services/error.service';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -11,7 +12,10 @@ import { User } from '../../model/user';
 })
 export class ProfileComponent {
 
-  constructor(private profileService : ProfileService) {}
+  constructor(
+    private profileService : ProfileService,
+    private errorService: ErrorService
+    ) {}
   
 
   ngOnInit(): void {
@@ -19,14 +23,7 @@ export class ProfileComponent {
   }
   
   getUsers(){
-    this.profileService.getProfile().subscribe({
-      next: (data) => {
-        console.log(data);
-      },
-      error: (error: any) => {
-        console.log('There was an error!', error);
-      }
-    });
+    this.profileService.getProfile();
   }
   salva(user: any) {
     console.log('modifiche salvate:', user);

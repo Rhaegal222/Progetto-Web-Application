@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RequestService } from '../../services/request.service';
 import { Request } from '../../model/request';
+import { ErrorService } from '../../services/error.service';
 
 @Component({
   selector: 'app-requests-forwarded',
@@ -10,7 +11,7 @@ import { Request } from '../../model/request';
 })
 export class RequestsForwardedComponent {
 
-  constructor(private requestService: RequestService) { }
+  constructor(private requestService: RequestService, private errorService: ErrorService) { }
 
   requests: Request[] = [];
   selectedRequest: Request | undefined;
@@ -48,7 +49,7 @@ export class RequestsForwardedComponent {
           this.requests = data;
         },
         error: (error: any) => {
-          console.log('There was an error!', error);
+          this.errorService.handleError(error);
         }
       });
     }
@@ -60,7 +61,7 @@ export class RequestsForwardedComponent {
         this.requests = data;
       },
       error: (error: any) => {
-        console.log('There was an error!', error);
+        this.errorService.handleError(error);
       }
     });
   }

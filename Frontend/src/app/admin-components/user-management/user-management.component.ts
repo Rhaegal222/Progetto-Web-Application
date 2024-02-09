@@ -1,7 +1,9 @@
 import { Component} from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserManagementService } from '../../services/user.service'; // Importa il servizio per ottenere i dati degli utenti
+import { ErrorService } from '../../services/error.service'; // Importa il servizio per gestire gli errori
 import { User } from '../../model/user';
+import e from 'express';
 
 @Component({
   selector: 'app-user-management',
@@ -15,7 +17,10 @@ import { User } from '../../model/user';
 })
 export class UserManagementComponent {
 
-  constructor(private userService: UserManagementService) {}
+  constructor(
+    private userService: UserManagementService,
+    private errorService: ErrorService
+    ) {}
   
   users: User[] = [];
   selectedUser: User | undefined;
@@ -55,7 +60,7 @@ export class UserManagementComponent {
           this.users = data;
         },
         error: (error: any) => {
-          console.log('There was an error!', error);
+          this.errorService.handleError(error);
         }
       });
     }
@@ -76,14 +81,13 @@ export class UserManagementComponent {
         this.users = data;
       },
       error: (error: any) => {
-        console.log('There was an error!', error);
+        this.errorService.handleError(error);
       }
     });
   }
   onPromote(user: User) {
     console.log('Utente promosso:', user);
   }
-
   onLock(user: User) {
     console.log('Utente bloccato:', user); 
   }

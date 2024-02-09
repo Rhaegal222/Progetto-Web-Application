@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { ProductService } from '../../../services/product.service';
 import { AnimationsService } from '../../../services/animations.service';
 import { ImgbbService } from '../../../services/imgbb.service';
+import { ErrorService } from '../../../services/error.service';
 
 @Component({
   selector: 'app-add-product',
@@ -18,7 +19,12 @@ import { ImgbbService } from '../../../services/imgbb.service';
 
 export class AddProductComponent {
 
-  constructor(private productService: ProductService, private animationsService: AnimationsService, private imgbbService: ImgbbService) { }
+  constructor(
+    private productService: ProductService, 
+    private animationsService: AnimationsService, 
+    private imgbbService: ImgbbService,
+    private errorService: ErrorService
+    ) { }
 
   addProductWindow: boolean = true;
 
@@ -143,9 +149,11 @@ export class AddProductComponent {
       this.imgbbService.upload(file).subscribe({
         next: (response: any) => {
           this.image=response.data.url
-          //alert(response.data.url)
+        },
+        error: (error: any) => {
+          this.errorService.handleError(error);
         }
-      })
+      });
     }
   }
 

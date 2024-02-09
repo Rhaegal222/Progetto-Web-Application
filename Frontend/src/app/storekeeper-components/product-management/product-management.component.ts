@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../model/product';
 import { Router } from '@angular/router';
+import { ErrorService } from '../../services/error.service';
 
 
 @Component({
@@ -18,7 +19,10 @@ import { Router } from '@angular/router';
 
 export class ProductManagementComponent {
 
-  constructor(private productService: ProductService, private router: Router) { }
+  constructor(
+    private productService: ProductService, 
+    private router: Router, 
+    private errorService: ErrorService) { }
 
   products: Product[] = [];
   selectedProduct: Product | undefined;
@@ -64,7 +68,7 @@ export class ProductManagementComponent {
           this.products = data;
         },
         error: (error) => {
-          console.error(error);
+          this.errorService.handleError(error);
         }
       });
     }
@@ -115,10 +119,9 @@ export class ProductManagementComponent {
       this.productService.getAllProducts().subscribe({
         next: (data) => {
           this.products = data;
-          console.log(this.products);
         },
         error: (error) => {
-          console.error(error)
+          this.errorService.handleError(error);
         }
       });
     }, 500);

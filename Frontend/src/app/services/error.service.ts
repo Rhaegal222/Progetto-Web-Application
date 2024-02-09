@@ -23,8 +23,9 @@ export class ErrorService {
 
   // Gestione degli errori
   handleError(error: any) {
-    console.error(error);
-    if (error.status === 401) {
+    if (error.message === 'Email already in use'){
+      return
+    } else if (error.status === 401) {
       console.error('Non autorizzato');
     } else if (error.status === 402) {
       console.error('Pagamento richiesto');
@@ -48,6 +49,8 @@ export class ErrorService {
       console.error('Errore di connessione');
     } else if (error.status === 0) {
       console.error('Errore di rete');
+    } else {
+      console.error('Errore sconosciuto');
     }
   }
 }

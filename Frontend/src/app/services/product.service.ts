@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs'
 import { Product } from '../model/product';
+import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private errorService:ErrorService) { }
 
   // Get all products
   getAllProducts(): Observable<Product[]> {
@@ -48,11 +49,11 @@ export class ProductService {
   // Edit a product
   editProduct(product: Product) {
     this.tryEditProduct(product).subscribe({
-      next: (response) => {
-        console.log(response);
+      next: () => {
+        return;
       },
       error: (error) => {
-        console.error(error);
+        this.errorService.handleError(error);
       }
     });
   }
@@ -65,11 +66,11 @@ export class ProductService {
   // Add a product
   addProduct(product: Product) {
     this.tryAddProduct(product).subscribe({
-      next: (response) => {
-        console.log(response);
+      next: () => {
+        return;
       },
       error: (error) => {
-        console.error(error);
+        this.errorService.handleError(error);
       }
     });
   }
@@ -84,11 +85,11 @@ export class ProductService {
   deleteProduct(product: Product) {
     if(product.idItem != undefined && product.idItem != null){
       this.tryDeleteProduct(String(product.idItem)).subscribe({
-        next: (response) => {
-          console.log(response);
+        next: () => {
+          return;
         },
         error: (error) => {
-          console.error(error);
+          this.errorService.handleError(error);
         }
       });
     }
@@ -103,15 +104,11 @@ export class ProductService {
     let user = { name, surname, email, password };
 
     this.http.post("http://localhost:8080/api/registration", user, { withCredentials: true }).subscribe({
-      next: (response) => {
-        console.log(response);
+      next: () => {
+        return;
       },
       error: (error) => {
-        if (error.message == 'Email already in use') {
-          console.log('It works!');
-        } else {
-          console.error(error);
-        }
+        this.errorService.handleError(error);
       }
     });
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RequestService } from '../../services/request.service';
 import { Request } from '../../model/request';
+import { ErrorService } from '../../services/error.service';
 
 @Component({
   selector: 'app-request-management',
@@ -14,7 +15,9 @@ import { Request } from '../../model/request';
 })
 export class RequestManagementComponent {
 
-  constructor(private requestService: RequestService) { }
+  constructor(
+    private requestService: RequestService,
+    private errorService: ErrorService) { }
 
   requests: Request[] = [];
   length: number = 0;
@@ -50,7 +53,7 @@ export class RequestManagementComponent {
           this.requests = data;
         },
         error: (error) => {
-          console.error(error);
+          this.errorService.handleError(error);
         }
       });
     }
@@ -62,7 +65,7 @@ export class RequestManagementComponent {
         this.requests = data;
       },
       error: (error) => {
-        console.error(error);
+        this.errorService.handleError(error);
       }
     });
   }
@@ -72,11 +75,11 @@ export class RequestManagementComponent {
   acceptRequest(request: Request) {
     request.status = "accepted";
     this.requestService.editRequest(request.idRequest, request.status).subscribe({
-      next: (response) => {
-        console.log(response);
+      next: () => {
+        return
       },
       error: (error) => {
-        console.error(error);
+        this.errorService.handleError(error);
       }
     });
   }
@@ -85,11 +88,11 @@ export class RequestManagementComponent {
   rejectRequest(request: Request) {
     request.status = "rejected";
     this.requestService.editRequest(request.idRequest, request.status).subscribe({
-      next: (response) => {
-        console.log(response);
+      next: () => {
+        return
       },
       error: (error) => {
-        console.error(error);
+        this.errorService.handleError(error);
       }
     });
   }

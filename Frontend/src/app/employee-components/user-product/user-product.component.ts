@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../model/product';
 import { AuthService } from '../../services/auth.service';
+import { ErrorService } from '../../services/error.service';
 
 @Component({
   selector: 'app-user-product',
@@ -16,7 +17,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class UserProductComponent {
 
-  constructor(private productService: ProductService, private authService: AuthService) { }
+  constructor(
+    private productService: ProductService, private errorService: ErrorService) { }
 
   products: Product[] = [];
   selectedProduct: Product | undefined;
@@ -59,7 +61,7 @@ export class UserProductComponent {
           this.products = data;
         },
         error: (error) => {
-          console.error(error);
+          this.errorService.handleError(error);
         }
       });
     }

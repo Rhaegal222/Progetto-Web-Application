@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../model/product';
+import { ErrorService } from '../../services/error.service';
 
 @Component({
   selector: 'app-product-list',
@@ -15,7 +16,9 @@ import { Product } from '../../model/product';
 })
 export class ProductListComponent{
   
-  constructor(private productService: ProductService) { }
+  constructor(
+    private productService: ProductService,
+    private errorService: ErrorService) { }
 
   products: Product[] = [];
   length: number = 0;
