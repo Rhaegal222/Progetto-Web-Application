@@ -4,6 +4,7 @@ import { ProductService } from '../../../services/product.service';
 import { AnimationsService } from '../../../services/animations.service';
 import { Product } from '../../../model/product';
 import { ImgbbService } from '../../../services/imgbb.service';
+import { ErrorService } from '../../../services/error.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -18,7 +19,11 @@ import { ImgbbService } from '../../../services/imgbb.service';
 })
 export class EditProductComponent {
 
-  constructor(private productService: ProductService, private animationsService: AnimationsService, private imgbbService: ImgbbService) { }
+  constructor(
+    private productService: ProductService, 
+    private animationsService: AnimationsService, 
+    private imgbbService: ImgbbService,
+    private errorService: ErrorService) { }
 
   editProductWindow: boolean = true;
 
@@ -35,10 +40,12 @@ export class EditProductComponent {
   assigned_user: string = '';
 
   ngOnInit(): void {
+
+    this.animationsService.initResizeObserver('edit-product');
     if (this.product && this.product.idItem) {
-      this.productService.getItem(this.product.idItem).subscribe({
+      this.productService.getProduct(this.product.idItem).subscribe({
         error: (error) => {
-          console.error(error);
+          this.errorService.handleError(error);
         }
       });
       
