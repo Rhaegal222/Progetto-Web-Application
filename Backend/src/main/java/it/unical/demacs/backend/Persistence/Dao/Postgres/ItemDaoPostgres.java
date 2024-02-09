@@ -154,25 +154,17 @@ public class ItemDaoPostgres implements ItemDao {
     @Override
     @Async
     public CompletableFuture<Boolean> deleteItem(Long id) {
-        String deleteItemQuery = "DELETE FROM items WHERE id_item = ?";
-        String deleteEmployeeRequestQuery = "DELETE FROM employee_request WHERE requested_item = ?";
-
+        String query = "DELETE FROM items WHERE id_item = ?";
         try (
-                PreparedStatement deleteItemStatement = this.con.prepareStatement(deleteItemQuery);
-                PreparedStatement deleteEmployeeRequestStatement = this.con.prepareStatement(deleteEmployeeRequestQuery)
-        ) {
-            // Set the item ID parameter for both queries
-            deleteItemStatement.setLong(1, id);
-            deleteEmployeeRequestStatement.setLong(1, id);
-
-            // Execute the queries
-            deleteEmployeeRequestStatement.executeUpdate();
-            int rowsAffected = deleteItemStatement.executeUpdate();
-
+                PreparedStatement st = this.con.prepareStatement(query)) {
+            st.setLong(1, id);
+            int rowsAffected = st.executeUpdate();
+            st.close();
             return CompletableFuture.completedFuture(rowsAffected > 0);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.fillInStackTrace();
         }
+        return CompletableFuture.completedFuture(false);
     }
 
 
