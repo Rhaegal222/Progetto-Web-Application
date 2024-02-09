@@ -32,4 +32,6 @@ public class EmployeeRequestController {
 
         return employeeRequestService.searchRequest(status, search);
     }
+    @GetMapping("/api/allRequests")
+    public ResponseEntity<?> allRequests() {return employeeRequestService.allRequests();}
 }
