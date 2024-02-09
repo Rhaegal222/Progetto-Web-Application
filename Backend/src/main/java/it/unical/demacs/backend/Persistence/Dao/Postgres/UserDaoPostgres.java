@@ -70,6 +70,24 @@ public class UserDaoPostgres implements UserDao {
 
     @Override
     @Async
+    public CompletableFuture<Boolean> updatePassword(User user) {
+        String query = "UPDATE users SET password = ? WHERE id_user = ?";
+        try {
+            PreparedStatement st = this.con.prepareStatement(query);
+            st.setString(1, user.getPassword());
+            st.setLong(2, user.getIdUser());
+
+            int rowsAffected = st.executeUpdate();
+            st.close();
+            return CompletableFuture.completedFuture(rowsAffected > 0);
+        } catch (SQLException e) {
+            e.fillInStackTrace();
+        }
+        return CompletableFuture.completedFuture(false);
+    }
+
+    @Override
+    @Async
     public CompletableFuture<User> findByPrimaryKey(long idUser) {
         try {
             PreparedStatement stmt = con.prepareStatement("SELECT * FROM users WHERE id_user = ?");
