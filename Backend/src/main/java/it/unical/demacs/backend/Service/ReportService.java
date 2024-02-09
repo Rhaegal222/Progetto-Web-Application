@@ -1,44 +1,39 @@
 package it.unical.demacs.backend.Service;
 
 import it.unical.demacs.backend.Persistence.DatabaseHandler;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import it.unical.demacs.backend.Persistence.Model.EmployeeRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+
 
 @Service
 public class ReportService {
 
-    public void getRequestInRange(HttpServletRequest request, HttpServletResponse response) {
-        try {
+
+    public ResponseEntity<?> getRequestInRange(String range) {
+        try{
             DatabaseHandler.getInstance().openConnection();
-            //Range può essere: settimana, mese, anno
-            String range = request.getParameter("range");
             String start = null, end = null;
-            if (range != null && !range.isEmpty()) {
-                if (range.equals("week")) {
-                    //Start data di 7 giorni fa
-                    //End data di oggi
-                    start = LocalDate.now().minusDays(7).toString();
-                    end = LocalDate.now().toString();
-                } else if (range.equals("month")) {
-                    //Start data di 30 giorni fa
-                    //End data di oggi
-                    start = LocalDate.now().minusDays(30).toString();
-                    end = LocalDate.now().toString();
-                } else if (range.equals("year")) {
-                    //Start data di 365 giorni fa
-                    //End data di oggi
-                    start = LocalDate.now().minusDays(365).toString();
-                    end = LocalDate.now().toString();
-                }
-                DatabaseHandler.getInstance().getEmployeeRequestDao().getEmployeeRequestInRange(start, end);
-            } else {
-                response.getWriter().write("Invalid range");
+            if(range.equals("week")){
+                start = LocalDate.now().minusDays(7).toString();
+                end = LocalDate.now().toString();
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            if (range.equals("month")){
+                start = LocalDate.now().minusMonths(1).toString();
+                end = LocalDate.now().toString();
+            }
+            if (range.equals("year")){
+                start = LocalDate.now().minusYears(1).toString();
+                end = LocalDate.now().toString();
+            }
+            ArrayList<EmployeeRequest> requests = DatabaseHandler.getInstance().getEmployeeRequestDao().getEmployeeRequestInRange(start, end).get();
+            return ResponseEntity.ok().body(requests);
+        }
+        catch (Exception e){
+            return ResponseEntity.status(500).body("{\"message\": \"Internal Server Error\"}");
         }
     }
 }
