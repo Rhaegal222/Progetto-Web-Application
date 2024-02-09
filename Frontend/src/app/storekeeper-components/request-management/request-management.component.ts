@@ -24,6 +24,7 @@ export class RequestManagementComponent {
 
   ngOnInit(): void {
     this.initObservable();
+    this.getAllRequests();
   }
 
   // create an observable that emits the length of the products list

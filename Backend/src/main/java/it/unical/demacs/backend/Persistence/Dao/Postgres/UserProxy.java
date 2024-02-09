@@ -40,7 +40,7 @@ public class UserProxy extends User {
     public ArrayList<EmployeeRequest> getEmployeeRequests() {
             if(super.getEmployeeRequests() == null){
                 super.setEmployeeRequests(new ArrayList<>());
-                String query = "SELECT id_employee_request FROM employee_requests WHERE user = ?";
+                String query = "SELECT id_employee_request FROM employee_request WHERE user = ?";
                 try {
                     var st = this.con.prepareStatement(query);
                     st.setLong(1, getIdUser());
