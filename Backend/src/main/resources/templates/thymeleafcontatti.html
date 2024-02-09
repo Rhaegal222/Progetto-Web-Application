@@ -7,16 +7,82 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* align to the top */
+            padding-top: 50px; /* add some padding at the top */
         }
 
+        /* Style adjustments for the contact card to match the modal design */
+        .contact-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 450px; /* Adjust width to match the modal */
+            margin: 20px auto; /* Center the card on page */
+            background: #fff;
+            padding: 30px; /* Increase padding */
+            text-align: left; /* Align text to left */
+            border-radius: 8px; /* Round the corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add some shadow */
+            position: relative; /* For absolute positioning of elements inside */
+            border: none; /* Remove border */
+        }
+
+        .contact-card h1 {
+            color: #333; /* Darker font color for the title */
+            margin-bottom: 20px;
+            font-size: 24px; /* Smaller font size */
+            font-weight: 500; /* Less boldness */
+        }
+
+        .contact-card p {
+            font-size: 18px; /* Larger font size for content */
+            line-height: 1.6; /* More line height for better readability */
+            color: #666; /* Lighter font color for content */
+            margin-bottom: 15px; /* More space between lines */
+        }
+
+        .contact-card .btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #d9534f; /* Red color to match the buttons in the image */
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 16px; /* Larger font size */
+            margin-top: 20px; /* Add margin at the top */
+            cursor: pointer;
+            border: none; /* Remove border */
+            outline: none; /* Remove outline */
+            width: clamp(100px, 150px, 200px); /* Limit the width */
+            text-align: center;
+        }
+
+        .contact-card .btn:hover {
+            background: #c9302c; /* Darker shade on hover */
+        }
+
+        /* Hide the "Nascondi Admins" button initially */
+        .contact-card .btn:nth-child(3) {
+            display: none;
+        }
+
+        /* Additional styles for admin table to match the design */
         .admin-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            display: none; /* Hide initially */
         }
 
         .admin-table th, .admin-table td {
-            border: 1px solid #dddddd;
+            border: 1px solid #ddd;
             padding: 10px;
             text-align: left;
         }
@@ -29,58 +95,43 @@
             background-color: #f5f5f5;
         }
 
-        .contact-card {
-            width: 600px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 20px;
-            text-align: center;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+        div p strong {
+            font-weight: bold;
+            color: #333333;
+        }
+        div p span {
+            color: #666666;
         }
 
-        .contact-card h1 {
-            color: #1c87c9;
-            margin: 0 0 20px;
-            font-size: 30px;
-            font-weight: 400;
+        /* Style for the modal overlay when the modal is active */
+        .modal-overlay {
+            display: none; /* Hide initially */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000; /* Ensure it's above other items */
         }
 
-        .contact-card p {
-            font-size: 23px;
-            line-height: 26px;
-            margin: 0 0 10px;
-            color: #555;
-            display: none; /* Initially hide the contact details */
+        /* Show the overlay when the modal is active */
+        .modal-active .modal-overlay {
+            display: block;
         }
 
-        .contact-card p span {
-            color: #888;
-        }
-        .contact-card .btn {
-            display: inline-block;
-            background: #1c87c9;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 14px;
-            margin: 20px 0 0;
-            cursor: pointer;
+        /* Ensure the modal is above the overlay */
+        .modal-active .contact-card {
+            z-index: 1001;
         }
 
-        .contact-card .btn:hover {
-            background: #2371a0;
-        }
         @media only screen and (max-width: 600px) {
             .contact-card {
-                width: 100%;
+                width: 90%;
                 box-sizing: border-box;
             }
-            #map-container iframe {
-                width: 100%;
-            }
         }
+
 
     </style>
 </head>
