@@ -19,6 +19,14 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+.item-assign-red{
+    color: red;
+}
+
+.item-assign-green{
+    color: green;
+}
+
 @media (max-width: 777.20px) {
     header {
         top: 55px;
