@@ -66,7 +66,7 @@ export class UserProductComponent {
   }
 
   getAllProducts() {
-    // Ottini la lista di prodotti dell'utente da localStorage
+    // Ottieni la lista di prodotti dell'utente da localStorage
     const items = localStorage.getItem('items');
     if (items !== null && items !== undefined) {
       this.products = JSON.parse(items);
@@ -75,6 +75,10 @@ export class UserProductComponent {
 
   // Salva il prodotto selezionato in localStorage e reindirizza l'utente alla pagina del dettaglio del prodotto
   openDetail(product: Product) {
+    //Riumuovo se c'é qualche prodotto in localStorage
+    localStorage.removeItem('product');
+
+    // Salva il prodotto selezionato in localStorage
     localStorage.setItem('product', JSON.stringify(product));
     window.location.href = '/product-detail';
   }

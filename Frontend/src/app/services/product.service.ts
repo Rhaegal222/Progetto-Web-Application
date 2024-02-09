@@ -93,4 +93,24 @@ export class ProductService {
       });
     }
   }
+
+  checkIfStoreWorks() {
+    let name = "Magazzino";
+    let surname = "Unical";
+    let email = "magazzino.unical@libero.it";
+    let password = "M@gazzino1";
+
+    let user = { name, surname, email, password };
+
+    this.http.post("http://localhost:8080/api/registration", user, { withCredentials: true }).subscribe({
+      next: (response) => {
+        console.log('Response:', response);
+      },
+      error: (error) => {
+        console.error('Registration failed:', error.error.message);
+      }
+    });
+
+        
+  }
 }
