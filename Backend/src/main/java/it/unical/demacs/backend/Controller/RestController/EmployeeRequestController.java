@@ -13,47 +13,23 @@ public class EmployeeRequestController {
 
     private final EmployeeRequestService employeeRequestService;
 
+    //POST
     @PostMapping("/api/sendRequest")
-    public ResponseEntity<?> sendRequest(@RequestBody SendReqRequest sendReqRequest) {
-        return employeeRequestService.sendRequest(sendReqRequest);
-    }
+    public ResponseEntity<?> sendRequest(@RequestBody SendReqRequest sendReqRequest) {return employeeRequestService.sendRequest(sendReqRequest);}
 
+    //GET
     @GetMapping("/api/getRequests")
     public ResponseEntity<?> getRequests(@RequestParam String type) {
         return employeeRequestService.getRequests(type);
     }
-
     @GetMapping("/api/getUserRequests")
-    public ResponseEntity<?> getUserRequests(@RequestParam Long user) {
-        return employeeRequestService.getUserRequests(user);
-    }
-
-    /*
-     @GetMapping("/api/users")
-    public ResponseEntity<?> searchUsers(@RequestParam(required = false) String search, @RequestParam(required = false) String role) {
-        if (search == null && (role == null || role.equals("all"))) {
-            return userManagementService.findAllUser();
-        } else if (search == null) {
-            return userManagementService.searchUsers("", role);
-        } else if (role == null || role.equals("all")) {
-            return userManagementService.searchUsers(search, "");
-        } else {
-            return userManagementService.searchUsers(search, role);
-        }
-    }
-     */
+    public ResponseEntity<?> getUserRequests(@RequestParam long user) {return employeeRequestService.getUserRequests(user);}
     @GetMapping("/api/requests")
-    public ResponseEntity<?> searchRequest(@RequestParam String status, @RequestParam String search) {
-        if (search == null && (status == null || status.equals("all"))) {
-            return employeeRequestService.findAll();
-        } else if (search == null) {
-            return employeeRequestService.searchRequest(status, "");
+    public ResponseEntity<?> searchRequest(@RequestParam(required = false) String status, @RequestParam(required = false) String search) {
+        if (search == null && (status == null || status.equals("all"))) {return employeeRequestService.findAll();}
+        else if (search == null) {search = "";}
+        else if (status == null) {status = "";}
 
-        } else if (status == null || status.equals("all")) {
-            return employeeRequestService.searchRequest("", search);
-        } else {
-            return employeeRequestService.searchRequest(status, search);
-        }
+        return employeeRequestService.searchRequest(status, search);
     }
-
 }

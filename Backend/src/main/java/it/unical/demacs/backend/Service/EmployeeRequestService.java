@@ -104,8 +104,14 @@ public class EmployeeRequestService {
         }
     }
 
-    public ResponseEntity<?> getUserRequests(Long user) {
-        return null;
+    public ResponseEntity<?> getUserRequests(long user) {
+        try {
+            DatabaseHandler.getInstance().openConnection();
+            ArrayList<EmployeeRequest> requests = DatabaseHandler.getInstance().getEmployeeRequestDao().getRequestsByUser(user).join();
+            return ResponseEntity.ok(requests);
+        } finally {
+            DatabaseHandler.getInstance().closeConnection();
+        }
     }
 
     public ResponseEntity<?> searchRequest(String status, String fieldContent) {

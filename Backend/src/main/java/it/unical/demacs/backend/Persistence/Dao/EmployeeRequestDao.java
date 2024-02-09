@@ -20,4 +20,6 @@ public interface EmployeeRequestDao {
     CompletableFuture<ArrayList<EmployeeRequest>> getEmployeeRequestInRange(String start, String end);
 
     CompletableFuture<ArrayList<EmployeeRequest>> getRequestsByStatus(String status);
+
+    CompletableFuture<ArrayList<EmployeeRequest>> getRequestsByUser(long user);
 }

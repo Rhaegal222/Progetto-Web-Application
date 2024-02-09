@@ -177,8 +177,14 @@ public class ItemService {
             String image = modifyRequest.getImage();
 
             if(!modifyRequest.getEmailUser().isEmpty()){
-                User assignedUser = DatabaseHandler.getInstance().getUserDao().findByEmail(modifyRequest.getEmailUser()).join();
-                itemToModify.setAssignedUser(assignedUser);
+                boolean exist = DatabaseHandler.getInstance().getUserDao().checkEmail(modifyRequest.getEmailUser());
+                if(exist){
+                    User assignedUser = DatabaseHandler.getInstance().getUserDao().findByEmail(modifyRequest.getEmailUser()).join();
+                    itemToModify.setAssignedUser(assignedUser);
+                }
+                else{
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User with email '" + modifyRequest.getEmailUser() + "' does not exist.");
+                }
             }
 
 
@@ -219,10 +225,10 @@ public class ItemService {
         }
     }
 
-    public ResponseEntity<?> deleteItem(GetItemRequest getItemRequest) {
+    public ResponseEntity<?> deleteItem(long idItem) {
         try{
             DatabaseHandler.getInstance().openConnection();
-            CompletableFuture<Boolean> deleteResult = DatabaseHandler.getInstance().getItemDao().deleteItem(Long.valueOf(getItemRequest.getIdItem()));
+            CompletableFuture<Boolean> deleteResult = DatabaseHandler.getInstance().getItemDao().deleteItem(idItem);
             if (deleteResult.get()) {
                 // Item inserted successfully
                 return ResponseEntity.status(HttpStatus.OK).body("Item deleted successfully.");

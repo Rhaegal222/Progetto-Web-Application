@@ -4,7 +4,6 @@ import it.unical.demacs.backend.Persistence.DatabaseHandler;
 import it.unical.demacs.backend.Persistence.Model.User;
 import it.unical.demacs.backend.Persistence.RegexHandler;
 import it.unical.demacs.backend.Service.Request.NewPasswordRequest;
-import it.unical.demacs.backend.Service.Request.UserRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
@@ -57,24 +56,24 @@ public class UserManagementService {
         }
     }
 
-    public ResponseEntity<?> banUser(@RequestBody UserRequest userRequest, boolean status) {
+    public ResponseEntity<?> banUser(String email, boolean status) {
         try{
             DatabaseHandler.getInstance().openConnection();
-            User user = DatabaseHandler.getInstance().getUserDao().findByEmail(userRequest.getEmail()).join();
+            User user = DatabaseHandler.getInstance().getUserDao().findByEmail(email).join();
             if(user.getBanned()){
                 if(status){
                     return ResponseEntity.status(401).body("User is already banned");
                 }
                 else{
                     user.setBanned(false);
-                    DatabaseHandler.getInstance().getUserDao().banningUser(userRequest.getEmail(), status);
+                    DatabaseHandler.getInstance().getUserDao().banningUser(email, false);
                     return ResponseEntity.ok().body("User unbanned");
                 }
             }
             else{
                 if(status){
                     user.setBanned(true);
-                    DatabaseHandler.getInstance().getUserDao().banningUser(userRequest.getEmail(), status);
+                    DatabaseHandler.getInstance().getUserDao().banningUser(email, true);
                     return ResponseEntity.ok().body("User banned/refused");
                 }
                 else{
@@ -89,10 +88,10 @@ public class UserManagementService {
     }
 
 
-    public ResponseEntity<?> changeRole(UserRequest userRequest) {
+    public ResponseEntity<?> changeRole(String email) {
         try{
             DatabaseHandler.getInstance().openConnection();
-            User user = DatabaseHandler.getInstance().getUserDao().findByEmail(userRequest.getEmail()).join();
+            User user = DatabaseHandler.getInstance().getUserDao().findByEmail(email).join();
             if(user.getRole() == null){
                 user.setRole("n");
             }
@@ -128,11 +127,13 @@ public class UserManagementService {
             DatabaseHandler.getInstance().openConnection();
             User user = DatabaseHandler.getInstance().getUserDao().findByEmail(email).join();
             if (user != null) {
-                if (BCrypt.checkpw(oldPassword, user.getPassword())) {
+                String encryptedOld = RegexHandler.getInstance().encryptPassword(oldPassword);
+                if (BCrypt.checkpw(encryptedOld, user.getPassword())) {
                     if (!RegexHandler.getInstance().checkPassword(newPassword)) {
                         return ResponseEntity.badRequest().body("{\"message\": \"Password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character\"}");
                     } else {
-                        user.setPassword(BCrypt.hashpw(newPassword, BCrypt.gensalt()));
+                        String encryptedNew = RegexHandler.getInstance().encryptPassword(newPassword);
+                        user.setPassword(BCrypt.hashpw(encryptedNew, BCrypt.gensalt()));
                         DatabaseHandler.getInstance().getUserDao().updatePassword(user);
                         return ResponseEntity.ok().body("{\"message\": \"Password updated\"}");
                     }

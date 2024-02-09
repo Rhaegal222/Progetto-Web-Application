@@ -20,7 +20,5 @@ public class ReportController {
     private final ReportService reportService;
 
     @GetMapping("/api/report")
-    public ResponseEntity<?> report(@RequestParam("range") String range){
-        return reportService.getRequestInRange(range);
-    }
+    public ResponseEntity<?> report(@RequestParam("range") String range){return reportService.getRequestInRange(range);}
 }
