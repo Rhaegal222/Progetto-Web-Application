@@ -16,4 +16,6 @@ public interface UserDao {
     CompletableFuture<Boolean> updateRole(User user);
 
     CompletableFuture<ArrayList<User>> findByRole(String role);
+
+    CompletableFuture<Boolean> updatePassword(User user);
 }

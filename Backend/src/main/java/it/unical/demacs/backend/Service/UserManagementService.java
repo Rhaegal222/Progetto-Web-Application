@@ -2,8 +2,11 @@ package it.unical.demacs.backend.Service;
 
 import it.unical.demacs.backend.Persistence.DatabaseHandler;
 import it.unical.demacs.backend.Persistence.Model.User;
+import it.unical.demacs.backend.Persistence.RegexHandler;
+import it.unical.demacs.backend.Service.Request.NewPasswordRequest;
 import it.unical.demacs.backend.Service.Request.UserRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -110,6 +113,34 @@ public class UserManagementService {
                 user.setRole("e");
                 DatabaseHandler.getInstance().getUserDao().updateRole(user);
                 return ResponseEntity.ok().body("User accepted");
+            }
+        }
+        finally {
+            DatabaseHandler.getInstance().closeConnection();
+        }
+    }
+
+    public ResponseEntity<?> newPassword(@RequestBody NewPasswordRequest newPasswordRequest) {
+        String email = newPasswordRequest.getEmail();
+        String oldPassword = newPasswordRequest.getOldPassword();
+        String newPassword = newPasswordRequest.getNewPassword();
+        try {
+            DatabaseHandler.getInstance().openConnection();
+            User user = DatabaseHandler.getInstance().getUserDao().findByEmail(email).join();
+            if (user != null) {
+                if (BCrypt.checkpw(oldPassword, user.getPassword())) {
+                    if (!RegexHandler.getInstance().checkPassword(newPassword)) {
+                        return ResponseEntity.badRequest().body("{\"message\": \"Password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character\"}");
+                    } else {
+                        user.setPassword(BCrypt.hashpw(newPassword, BCrypt.gensalt()));
+                        DatabaseHandler.getInstance().getUserDao().updatePassword(user);
+                        return ResponseEntity.ok().body("{\"message\": \"Password updated\"}");
+                    }
+                } else {
+                    return ResponseEntity.badRequest().body("{\"message\": \"Current password is wrong\"}");
+                }
+            } else {
+                return ResponseEntity.status(401).body("{\"message\": \"Invalid\"}");
             }
         }
         finally {

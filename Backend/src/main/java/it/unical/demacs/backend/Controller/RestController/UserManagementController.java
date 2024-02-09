@@ -1,5 +1,6 @@
 package it.unical.demacs.backend.Controller.RestController;
 
+import it.unical.demacs.backend.Service.Request.NewPasswordRequest;
 import it.unical.demacs.backend.Service.Request.UserRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -51,6 +52,11 @@ public class UserManagementController {
         } else {
             return userManagementService.searchUsers(search, role);
         }
+    }
+
+    @PostMapping("/api/newPassword")
+    public ResponseEntity<?> newPassword(@RequestBody NewPasswordRequest newPasswordRequest){
+        return userManagementService.newPassword(newPasswordRequest);
     }
 
 }
