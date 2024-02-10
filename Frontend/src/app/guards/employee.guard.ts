@@ -17,7 +17,7 @@ export class EmployeeGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    const isUserEmployee = this.authService.isEmployee(); // Verifica se l'utente è un dipendente
+    const isUserEmployee = this.authService.isEmployee() || this.authService.isStorekeeper() || this.authService.isAdmin(); // Verifica se l'utente è un dipendente
 
     if (!isUserEmployee) {
       // Se l'utente non è un dipendente, reindirizziamo alla pagina "Not Found"

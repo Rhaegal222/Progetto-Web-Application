@@ -17,7 +17,7 @@ export class StorekeeperGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    const isUserStorekeeper = this.authService.isStorekeeper(); // Verifica se l'utente è un addetto al magazzino
+    const isUserStorekeeper = this.authService.isStorekeeper() || this.authService.isAdmin(); // Verifica se l'utente è un addetto al magazzino
 
     if (!isUserStorekeeper) {
       // Se l'utente non è un addetto al magazzino, reindirizziamo alla pagina "Not Found"
