@@ -109,11 +109,7 @@ export class AuthService {
       return false;
     }
   }
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> d4af4d7d499cbdf7d6c84b876808b7dd465d4009
   isAuthenticated(): boolean {
     if (typeof localStorage !== 'undefined') {
       return localStorage.getItem('token') ? true : false;
@@ -143,7 +139,6 @@ export class AuthService {
     return this.http.post("http://localhost:8080/api/login", user, {withCredentials: true});  
   }
   
-
   login(email: string, password: string) {
     this.trylogin(email, password).subscribe({
       next: (response) => {
