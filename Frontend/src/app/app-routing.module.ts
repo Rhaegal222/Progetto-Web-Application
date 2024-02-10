@@ -20,9 +20,9 @@ import { ContactsComponent } from './common-components/contacts/contacts.compone
 
 const routes: Routes = [
   // Componenti comuni a tutti gli utenti
+  { path: 'menu', component: MenuComponent },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
   { path: 'contacts', component: ContactsComponent, canActivate: [AuthGuard]},
-  { path: 'menu', component: MenuComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
 
   // Componenti per l'amministratore

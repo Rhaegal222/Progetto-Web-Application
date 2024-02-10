@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnimationsService {
 
-  constructor() {}
+  constructor(private router:Router) {}
 
   component: any;
   arrow : any;
@@ -42,6 +43,9 @@ export class AnimationsService {
       } else if ((window.innerWidth >= 768) && (window.innerWidth < 992)) {
         this.component.classList.toggle('full-width', true);
         this.component.classList.toggle('sidebar-open', false);
+        if(this.router.url === '/menu'){
+          this.router.navigate(['/profile']);
+        }
       } else if (window.innerWidth < 768) {
         this.component.classList.toggle('full-width', false);
         this.component.classList.toggle('sidebar-open', false);
