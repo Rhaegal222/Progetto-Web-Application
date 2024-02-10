@@ -176,6 +176,9 @@ public class UserDaoPostgres implements UserDao {
     public CompletableFuture<ArrayList<User>> getAdmins() {
         ArrayList<User> admins = new ArrayList<>();
         try {
+            if(con == null || con.isClosed()) {
+                con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/InventoryITC_DB", "postgres", "postgres");
+            }
             PreparedStatement stmt = con.prepareStatement("SELECT * FROM users WHERE role = 'a'");
             ResultSet res = stmt.executeQuery();
 
