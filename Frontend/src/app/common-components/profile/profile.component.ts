@@ -8,10 +8,11 @@ import { UserManagementService } from '../../services/user.service';
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: [
+    './profile.component.css',
+    '../../styles/form.css',
     '../../styles/container.css',
     '../../styles/content.css',
-    '../../styles/buttons.css',
-    '../../styles/form.css'
+    '../../styles/buttons.css'
   ]
 })
 export class ProfileComponent {
