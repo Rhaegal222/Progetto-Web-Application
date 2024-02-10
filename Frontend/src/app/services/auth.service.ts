@@ -109,7 +109,11 @@ export class AuthService {
       return false;
     }
   }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> d4af4d7d499cbdf7d6c84b876808b7dd465d4009
   isAuthenticated(): boolean {
     if (typeof localStorage !== 'undefined') {
       return localStorage.getItem('token') ? true : false;

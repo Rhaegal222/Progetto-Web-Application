@@ -20,8 +20,8 @@ import { ContactsComponent } from './common-components/contacts/contacts.compone
 
 const routes: Routes = [
   // Componenti comuni a tutti gli utenti
-  { path: 'menu', component: MenuComponent },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
+  { path: 'menu', component: MenuComponent },
   { path: 'contacts', component: ContactsComponent, canActivate: [AuthGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
 
@@ -37,8 +37,6 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent, canActivate: [AuthGuard] },
   { path: 'product-list', component: ProductListComponent, canActivate: [AuthGuard] },
   { path: 'user-product', component: UserProductComponent, canActivate: [AuthGuard] },
-  { path: 'product-detail', component: ProductDetailComponent, canActivate: [AuthGuard] },
-  { path: 'product-request', component: ProductRequestComponent, canActivate: [AuthGuard] },
   { path: 'product-return', component: ProductReturnComponent, canActivate: [AuthGuard] },
   { path: 'requests-forwarded', component: RequestsForwardedComponent, canActivate: [AuthGuard] },
 
