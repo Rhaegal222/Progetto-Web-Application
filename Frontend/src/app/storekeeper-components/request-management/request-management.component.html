@@ -12,6 +12,10 @@
                 </div>
                 <div class="card-body">
                     <div class="card-row">
+                        <h5>Da: </h5>
+                        <span>{{request.requestingUser?.email}}</span>
+                    </div>
+                    <div class="card-row">
                         <h5>Stato: </h5>
                         <span class="material-icons">{{request.status}}</span>
                         <p *ngIf="request.status == 'pending'">In attesa</p>

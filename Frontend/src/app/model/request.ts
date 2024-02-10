@@ -8,6 +8,6 @@ export interface Request{
     status:string;
     type:string;
     date:string;
-    product?:Product;
-    user?:User;
+    requestedIte?:Product;
+    requestingUser?:User;
 }

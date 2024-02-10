@@ -1,7 +1,7 @@
 /* Stile del bottone di login */
 .btn-primary {
-    background-color: #ff0000; /* Colore di sfondo */
-    border-color: #ff0000; /* Colore del bordo */
+    background-color: #b71918; /* Colore di sfondo */
+    border-color: #b71918; /* Colore del bordo */
     border-radius: 8px;
     color: white; /* Colore del testo */
     font-size: 16px; /* Dimensione del testo */
@@ -11,7 +11,7 @@
 
 .btn-primary:active {
     background-color: #000000; /* Colore di sfondo al click */
-    border-color: #ff0000; /* Colore del bordo al click */
+    border-color: #b71918; /* Colore del bordo al click */
     color: white; /* Colore del testo al click */
 }
   

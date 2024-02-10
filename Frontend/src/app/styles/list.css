@@ -10,7 +10,7 @@
 }
 
 .list .item {
-    border: 1px dotted #ff0000;
+    border: 1px dotted #b71918;
     background-color: #f8f9fa;
     border-radius: 10px;
     height: clamp(50px, 100px, 150px);

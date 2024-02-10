@@ -5,7 +5,7 @@
   width: 0;
   display: none;
   height: 100%;
-  background: #ff0000; /* il colore rosso mostrato */
+  background: #b71918; /* il colore rosso mostrato */
   color: white;
   z-index: 1000;
 }
@@ -101,7 +101,7 @@
   width: 250px;
   display: none;
   height: 100%;
-  background: #ff0000; /* il colore rosso mostrato */
+  background: #b71918; /* il colore rosso mostrato */
   color: white;
   /* Aggiungi transizione per un effetto di scorrimento */
 }
