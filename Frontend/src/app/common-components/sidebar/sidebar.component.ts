@@ -35,20 +35,7 @@ export class SidebarComponent implements OnInit {
     this.toggleMenuClose();
     this.handleInitialBehavior();
 
-    if ( typeof window !== 'undefined' ) {
-      resizeObserver = new ResizeObserver(entries => {
-        this.handleInitialBehavior();
-      });
-      resizeObserver.observe(document.body);
-    }
 
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        if (event.url != '/menu') {
-          this.toggleMenuClose();
-        }
-      }
-    });
   }
 
 

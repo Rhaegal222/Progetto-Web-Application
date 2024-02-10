@@ -23,4 +23,30 @@ export class UserManagementService {
     }
     return this.http.get<User[]>('http://localhost:8080/api/users', { params: params });
   }
+
+  banUser(email: String): Observable<any> {
+    return this.http.post('http://localhost:8080/api/banUser', email);
+  }
+
+  unbanUser(email: String): Observable<any> {
+    return this.http.post('http://localhost:8080/api/unbanUser', email);
+  }
+
+  promoteUser(email: String): Observable<any> {
+    return this.http.post('http://localhost:8080/api/promoteUser', email);
+  }
+
+  demoteUser(email: String): Observable<any> {
+    return this.http.post('http://localhost:8080/api/demoteUser', email);
+  }
+
+  refuseUser(email: String): Observable<any> {
+    return this.http.post('http://localhost:8080/api/refuseUser', email);
+  }
+
+  acceptUser(email: String): Observable<any> {
+    return this.http.post('http://localhost:8080/api/acceptUser', email);
+  }
+
+
 }

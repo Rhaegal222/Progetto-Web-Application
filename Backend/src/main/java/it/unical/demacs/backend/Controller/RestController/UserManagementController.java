@@ -13,14 +13,16 @@ public class UserManagementController {
     private final UserManagementService userManagementService;
 
     //POST
-    @PostMapping("/api/ban-user")
+    @PostMapping("/api/banUser")
     public ResponseEntity<?> banUser(@RequestParam String email){return userManagementService.banUser(email, true);}
-    @PostMapping("/api/unban-user")
+    @PostMapping("/api/unbanUser")
     public ResponseEntity<?> unbanUser(@RequestParam String email){return userManagementService.banUser(email, false);}
-    @PostMapping("/api/changeRole-user")  //PROMUOVI: se s diventa a, se e diventa s, se è già a niente
+    @PostMapping("/api/promoteUser")  //PROMUOVI: se s diventa a, se e diventa s, se è già a niente
     public ResponseEntity<?> changeRole(@RequestParam String email){return userManagementService.changeRole(email);}
-    @PostMapping("/api/refuse-user") //RIFIUTA: utente viene direttamente bannato
-    public ResponseEntity<?> refuseUser(@RequestParam String email){return banUser(email);}
+    @PostMapping("/api/refuseUser") //RIFIUTA: utente viene direttamente bannato
+    public ResponseEntity<?> refuseUser(@RequestParam String email){return userManagementService.banUser(email, true);}
+    @PostMapping("/api/acceptUser") //ACCETTA: utente diventa employee
+    public ResponseEntity<?> acceptUser(@RequestParam String email){return userManagementService.changeRole(email);}
     @PostMapping("/api/newPassword")
     public ResponseEntity<?> newPassword(@RequestBody NewPasswordRequest newPasswordRequest){return userManagementService.newPassword(newPasswordRequest);}
 

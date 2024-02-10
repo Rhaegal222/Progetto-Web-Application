@@ -89,32 +89,23 @@ public class UserManagementService {
 
 
     public ResponseEntity<?> changeRole(String email) {
-        try{
+        try {
             DatabaseHandler.getInstance().openConnection();
             User user = DatabaseHandler.getInstance().getUserDao().findByEmail(email).join();
-            if(user.getRole() == null){
-                user.setRole("n");
-            }
-            if(user.getRole().equals("a")){
-                return ResponseEntity.status(401).body("User is already admin");
-            }
-            else if(user.getRole().equals("s")){
+            if (user.getRole() == null || user.getRole().equals("np")) {
+                user.setRole("e");
+            } else if (user.getRole().equals("e")) {
+                user.setRole("s");
+                return ResponseEntity.ok().body("User promoted to storekeeper");
+            } else if (user.getRole().equals("s")) {
                 user.setRole("a");
                 DatabaseHandler.getInstance().getUserDao().updateRole(user);
                 return ResponseEntity.ok().body("User promoted to admin");
+            } else if (user.getRole().equals("a")) {
+                return ResponseEntity.status(401).body("User is already admin");
             }
-            else if(user.getRole().equals("e")){
-                user.setRole("s");
-                DatabaseHandler.getInstance().getUserDao().updateRole(user);
-                return ResponseEntity.ok().body("User promoted to store manager");
-            }
-            else{
-                user.setRole("e");
-                DatabaseHandler.getInstance().getUserDao().updateRole(user);
-                return ResponseEntity.ok().body("User accepted");
-            }
-        }
-        finally {
+            return ResponseEntity.status(401).body("Unknown error");
+        } finally {
             DatabaseHandler.getInstance().closeConnection();
         }
     }

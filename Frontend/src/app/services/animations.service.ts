@@ -21,7 +21,11 @@ export class AnimationsService {
       this.handleInitialBehavior();
 
       let resizeObserver = new ResizeObserver(entries => {
-        this.handleInitialBehavior();      
+        for (let entry of entries) {
+          if (entry.contentBoxSize) {
+            this.handleInitialBehavior();
+          }
+        }
       });
       resizeObserver.observe(document.body);
     }

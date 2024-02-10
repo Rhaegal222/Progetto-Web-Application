@@ -110,10 +110,6 @@
   display: block;
 }
 
-.menu-close {
-  display: none;
-}
-
 .menu-content {
   /* Allinea al centro verticalmente */
   display: flex;

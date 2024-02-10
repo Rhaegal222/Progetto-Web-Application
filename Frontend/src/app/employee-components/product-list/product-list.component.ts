@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../model/product';
 import { ErrorService } from '../../services/error.service';
+import { AnimationsService } from '../../services/animations.service';
 
 @Component({
   selector: 'app-product-list',
@@ -18,6 +19,7 @@ export class ProductListComponent{
   
   constructor(
     private productService: ProductService,
+    private animationService: AnimationsService,
     private errorService: ErrorService) { }
 
   products: Product[] = [];

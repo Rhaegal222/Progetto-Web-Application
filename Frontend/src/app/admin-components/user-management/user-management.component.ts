@@ -85,20 +85,60 @@ export class UserManagementComponent {
       }
     });
   }
+
   onPromote(user: User) {
-    console.log('Utente promosso:', user);
+    this.userService.promoteUser(user.email).subscribe({
+      next: (data) => {
+        this.getAllUsers();
+      },
+      error: (error: any) => {
+        this.errorService.handleError(error);
+      }
+    });
   }
+
   onLock(user: User) {
-    console.log('Utente bloccato:', user); 
+    this.userService.banUser(user.email).subscribe({
+      next: (data) => {
+        this.getAllUsers();
+      },
+      error: (error: any) => {
+        this.errorService.handleError(error);
+      }
+    });
   }
+
   onUnlock(user: User) {
-    console.log('Utente sbloccato:', user); 
+    this.userService.unbanUser(user.email).subscribe({
+      next: (data) => {
+        this.getAllUsers();
+      },
+      error: (error: any) => {
+        this.errorService.handleError(error);
+      }
+    });
   }
+
   onAccept(user: User) {
-    console.log('Utente accettato:', user); 
+    this.userService.acceptUser(user.email).subscribe({
+      next: (data) => {
+        this.getAllUsers();
+      },
+      error: (error: any) => {
+        this.errorService.handleError(error);
+      }
+    });
   }
+  
   onReject(user: User) {
-    console.log('Utente rifiutato:', user); 
+    this.userService.refuseUser(user.email).subscribe({
+      next: (data) => {
+        this.getAllUsers();
+      },
+      error: (error: any) => {
+        this.errorService.handleError(error);
+      }
+    });
   }
 }
 
