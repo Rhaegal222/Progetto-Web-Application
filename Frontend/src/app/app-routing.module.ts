@@ -43,7 +43,7 @@ const routes: Routes = [
   { path: 'requests-forwarded', component: RequestsForwardedComponent, canActivate: [AuthGuard] },
 
   // Default route
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/profile', pathMatch: 'full' },
 
   // Route per pagina non trovata
   { path: '**', component: PageNotFoundComponent }
