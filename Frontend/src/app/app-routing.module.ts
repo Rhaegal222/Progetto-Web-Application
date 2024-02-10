@@ -9,7 +9,6 @@ import { ProductDetailComponent } from './employee-components/product-detail/pro
 import { RequestManagementComponent } from './storekeeper-components/request-management/request-management.component';
 import { ReportComponent } from './storekeeper-components/report/report.component';
 import { ProductManagementComponent } from './storekeeper-components/product-management/product-management.component';
-import { ProductRequestComponent } from './employee-components/product-detail/product-request/product-request.component';
 import { ProductReturnComponent } from './employee-components/product-detail/product-return/product-return.component';
 import { RequestsForwardedComponent } from './employee-components/requests-forwarded/requests-forwarded.component';
 import { PageNotFoundComponent } from './common-components/page-not-found/page-not-found.component';
@@ -27,6 +26,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
   { path: 'contacts', component: ContactsComponent, canActivate: [AuthGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  { path: 'product-detail', component: ProductDetailComponent, canActivate: [AuthGuard] },
 
   // Componenti per l'amministratore
   { path: 'user-management', component: UserManagementComponent, canActivate: [AuthGuard, AdminGuard]  },
