@@ -20,6 +20,9 @@ export class RequestManagementComponent {
     private errorService: ErrorService) { }
 
   requests: Request[] = [];
+  returnedRequests: Request[] = [];
+  requestProduct: Request[] = [];
+
   length: number = 0;
 
   ngOnInit(): void {
@@ -64,6 +67,7 @@ export class RequestManagementComponent {
     this.requestService.getAllRequests().subscribe({
       next: (data) => {
         this.requests = data;
+        this.filterRequests();
       },
       error: (error) => {
         this.errorService.handleError(error);
@@ -71,6 +75,13 @@ export class RequestManagementComponent {
     });
   }
 
+  filterRequests(){
+    // filtra le richieste in base allo stato e le aggiunge alle liste corrispondenti
+    this.requestProduct = this.requests.filter(request => request.type === "requestProduct");
+    console.log(this.requestProduct);
+    this.returnedRequests = this.requests.filter(request => request.type === "returnRequest");
+    console.log(this.returnedRequests);
+  }
 
   // accetta la richista
   acceptRequest(request: Request) {

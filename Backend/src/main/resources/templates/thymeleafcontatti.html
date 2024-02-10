@@ -11,74 +11,73 @@
             background: transparent;
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* align to the top */
-            padding-top: 50px; /* add some padding at the top */
+            align-items: flex-start;
+            padding-top: 50px;
         }
 
-        /* Style adjustments for the contact card to match the modal design */
+
         .contact-card {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            width: 450px; /* Adjust width to match the modal */
-            margin: 20px auto; /* Center the card on page */
+            width: 450px;
+            margin: 20px auto;
             background: #fff;
-            padding: 30px; /* Increase padding */
-            text-align: left; /* Align text to left */
-            border-radius: 8px; /* Round the corners */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add some shadow */
-            position: relative; /* For absolute positioning of elements inside */
-            border: none; /* Remove border */
+            padding: 30px;
+            text-align: left;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            border: none;
         }
 
         .contact-card h1 {
-            color: #333; /* Darker font color for the title */
+            color: #333;
             margin-bottom: 20px;
-            font-size: 24px; /* Smaller font size */
-            font-weight: 500; /* Less boldness */
+            font-size: 24px;
+            font-weight: 500;
         }
 
         .contact-card p {
-            font-size: 18px; /* Larger font size for content */
-            line-height: 1.6; /* More line height for better readability */
-            color: #666; /* Lighter font color for content */
-            margin-bottom: 15px; /* More space between lines */
+            font-size: 18px;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 15px;
         }
 
         .contact-card .btn {
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #d9534f; /* Red color to match the buttons in the image */
+            background: #d9534f;
             color: #fff;
             text-decoration: none;
             border-radius: 4px;
             padding: 10px 20px;
-            font-size: 16px; /* Larger font size */
-            margin-top: 20px; /* Add margin at the top */
+            font-size: 16px;
+            margin-top: 20px;
             cursor: pointer;
-            border: none; /* Remove border */
-            outline: none; /* Remove outline */
-            width: clamp(100px, 150px, 200px); /* Limit the width */
+            border: none;
+            outline: none;
+            width: clamp(100px, 150px, 200px);
             text-align: center;
         }
 
         .contact-card .btn:hover {
-            background: #c9302c; /* Darker shade on hover */
+            background: #c9302c;
         }
 
-        /* Hide the "Nascondi Admins" button initially */
+
         .contact-card .btn:nth-child(3) {
             display: none;
         }
 
-        /* Additional styles for admin table to match the design */
         .admin-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
-            display: none; /* Hide initially */
+            display: none;
         }
 
         .admin-table th, .admin-table td {
@@ -103,7 +102,6 @@
             color: #666666;
         }
 
-        /* Style for the modal overlay when the modal is active */
         .modal-overlay {
             display: none; /* Hide initially */
             position: fixed;
@@ -112,15 +110,13 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000; /* Ensure it's above other items */
+            z-index: 1000;
         }
 
-        /* Show the overlay when the modal is active */
         .modal-active .modal-overlay {
             display: block;
         }
 
-        /* Ensure the modal is above the overlay */
         .modal-active .contact-card {
             z-index: 1001;
         }
@@ -155,7 +151,7 @@
             </tr>
             </thead>
             <tbody>
-            <!-- Loop attraverso gli admin e crea le righe della tabella -->
+
             <tr th:each="admin : ${admins}">
                 <td th:text="${admin.getName()}"></td>
                 <td th:text="${admin.getEmail()}"></td>
@@ -173,23 +169,23 @@
 <script>
     function revealAdmins() {
         var adminsTable = document.querySelector('.admin-table');
-        adminsTable.style.display = 'table'; // Show the admins table
+        adminsTable.style.display = 'table';
 
         var contactDetails = document.querySelectorAll('.contact-details');
         contactDetails.forEach(function (element) {
-            element.style.display = 'block'; // Ensure contact details are visible
+            element.style.display = 'block';
         });
 
-        document.querySelectorAll('.btn')[0].style.display = 'none'; // Hide the "Mostra Admins" button
-        document.querySelectorAll('.btn')[1].style.display = 'block'; // Show the "Nascondi Admins" button
+        document.querySelectorAll('.btn')[0].style.display = 'none';
+        document.querySelectorAll('.btn')[1].style.display = 'block';
     }
 
     function hideAdmins() {
         var adminsTable = document.querySelector('.admin-table');
         adminsTable.style.display = 'none'; // Hide the admins table
 
-        document.querySelectorAll('.btn')[0].style.display = 'block'; // Show the "Mostra Admins" button
-        document.querySelectorAll('.btn')[1].style.display = 'none'; // Hide the "Nascondi Admins" button
+        document.querySelectorAll('.btn')[0].style.display = 'block';
+        document.querySelectorAll('.btn')[1].style.display = 'none';
     }
 
     revealAdmins();

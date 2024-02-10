@@ -1,28 +1,33 @@
 <app-header></app-header>
 <div class="container">
-    <div id="box" class="grid">
-        <div *ngFor="let request of requests" class="item">
-            <div class="card">
-                <div class="card-header">
-                    <h2>{{request.title}}</h2>
-                </div>
-                <div class="card-body">
-                    <p>Stato: {{request.status}}</p>
-                    <p>Data: {{request.date}}</p>
-                    <button (click)="acceptRequest(request)" class="btn btn-success">Accetta</button>
-                    <button (click)="rejectRequest(request)" class="btn btn-danger">Rifiuta</button>
-                </div>
-            </div>
-            <div *ngFor="let request of requests" class="item">
+    <div class="">
+        <div class="">
+            <div *ngFor="let request of returnedRequests">
                 <div class="card">
                     <div class="card-header">
                         <h2>{{request.title}}</h2>
+                        <h2>{{request.type}}</h2>
                     </div>
                     <div class="card-body">
                         <p>Stato: {{request.status}}</p>
                         <p>Data: {{request.date}}</p>
                         <button (click)="acceptRequest(request)" class="btn btn-success">Accetta</button>
                         <button (click)="rejectRequest(request)" class="btn btn-danger">Rifiuta</button>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div *ngFor="let request of requestProduct">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>{{request.title}}</h2>
+                        </div>
+                        <div class="card-body">
+                            <p>Stato: {{request.status}}</p>
+                            <p>Data: {{request.date}}</p>
+                            <button (click)="acceptRequest(request)" class="btn btn-success">Accetta</button>
+                            <button (click)="rejectRequest(request)" class="btn btn-danger">Rifiuta</button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -64,10 +64,10 @@ public class EmployeeRequestService {
             Item requestedItem = DatabaseHandler.getInstance().getItemDao().findByPrimaryKey(product).join();
 
             String requestTitle = null;
-            if (type.equals("Reso")) {
+            if (type.equals("returnRequest")) {
                 requestTitle = "Richiesta di reso - " + title;
             } else {
-                if (type.equals("Richiesta")) {
+                if (type.equals("requestProduct")) {
                     requestTitle = "Richiesta di un prodotto - " + title;
                 } else {
                     return ResponseEntity.status(400).body("Invalid request");

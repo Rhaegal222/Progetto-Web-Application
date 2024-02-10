@@ -31,7 +31,7 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
                 employeeRequest.setDescription(rs.getString("description"));
                 employeeRequest.setStatus(rs.getString("status"));
                 employeeRequest.setType(rs.getString("type"));
-                employeeRequest.setDate(String.valueOf(rs.getDate("date")));
+                employeeRequest.setDate(String.valueOf(rs.getDate("request_date")));
                 employeeRequests.add(employeeRequest);
             }
         } catch (SQLException e) {
