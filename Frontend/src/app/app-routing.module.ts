@@ -32,16 +32,16 @@ const routes: Routes = [
   { path: 'user-management', component: UserManagementComponent, canActivate: [AuthGuard, AdminGuard]  },
 
   // Componenti per l'addetto al magazzino e l'amministratore
-  { path: 'request-management', component: RequestManagementComponent, canActivate: [AuthGuard, AdminGuard, StorekeeperGuard] },
-  { path: 'product-management', component: ProductManagementComponent, canActivate: [AuthGuard, AdminGuard, StorekeeperGuard] },
+  { path: 'request-management', component: RequestManagementComponent, canActivate: [AuthGuard, StorekeeperGuard] },
+  { path: 'product-management', component: ProductManagementComponent, canActivate: [AuthGuard, StorekeeperGuard] },
   { path: 'report', component: ReportComponent, canActivate: [AuthGuard] },
 
   // Componenti per il dipendente dell'università
   { path: 'registration', component: RegistrationComponent, canActivate: [AuthGuard] },
-  { path: 'product-list', component: ProductListComponent, canActivate: [AuthGuard, AdminGuard, StorekeeperGuard, EmployeeGuard] },
-  { path: 'user-product', component: UserProductComponent, canActivate: [AuthGuard, AdminGuard, StorekeeperGuard, EmployeeGuard] },
-  { path: 'product-return', component: ProductReturnComponent, canActivate: [AuthGuard, AdminGuard, StorekeeperGuard, EmployeeGuard] },
-  { path: 'requests-forwarded', component: RequestsForwardedComponent, canActivate: [AuthGuard, AdminGuard, StorekeeperGuard, EmployeeGuard] },
+  { path: 'product-list', component: ProductListComponent, canActivate: [AuthGuard, EmployeeGuard] },
+  { path: 'user-product', component: UserProductComponent, canActivate: [AuthGuard, EmployeeGuard] },
+  { path: 'product-return', component: ProductReturnComponent, canActivate: [AuthGuard, EmployeeGuard] },
+  { path: 'requests-forwarded', component: RequestsForwardedComponent, canActivate: [AuthGuard, EmployeeGuard] },
 
   // Default route
   { path: '', redirectTo: '/profile', pathMatch: 'full' },
