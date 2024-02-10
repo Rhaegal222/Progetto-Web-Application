@@ -62,7 +62,6 @@ Il dipendente può:
 **Componenti Comuni a Tutti:**
 
 1. **Sidebar**: Componente per l'intestazione dell'applicazione.
-2. **Dashboard**: Componente per la visualizzazione dei prodotti in magazzino.
-3. **Settings**: Componente per la gestione delle impostazioni.
-4. **Menu**: Componente per il menu a tendina su dispositivi mobili.
-5. **Login**: Componente per la gestione dell'autenticazione e dell'accesso degli utenti.
+2. **Settings**: Componente per la gestione delle impostazioni.
+3. **Menu**: Componente per il menu a tendina su dispositivi mobili.
+4. **Login**: Componente per la gestione dell'autenticazione e dell'accesso degli utenti.
