@@ -1,6 +1,6 @@
 <ul class="items">
     <li *ngIf="!isAuth" routererLinkActive="active" routerLink="/login">Accedi</li>
     <li *ngIf="!isAuth" routererLinkActive="active" routerLink="/registration">Registrati</li>
-    <li *ngIf="!isAuth" routerLinkActive="active" routerLink="/contacts">Contatti</li>
+    <li routerLinkActive="active" routerLink="/contacts">Contatti</li>
     <li *ngIf="isAuth" routerLinkActive="active" routerLink="/login" (click)="logout()">Esci</li>
 </ul>

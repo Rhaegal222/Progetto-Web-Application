@@ -43,7 +43,7 @@ public class DatabaseHandler {
     public Connection getConnection(){
         if (con == null){
             try {
-                con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/InventoryDB", "postgres", "postgres");
+                con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/InventoryITC_DB", "postgres", "postgres");
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
