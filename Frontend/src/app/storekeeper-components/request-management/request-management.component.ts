@@ -47,12 +47,14 @@ export class RequestManagementComponent {
   status: string = 'all';
 
   onSearch(eventData: onSearchEventData) {
+    console.log(eventData);
     if (eventData.searchValue === "" && eventData.element === "all") {
       this.getAllRequests();
     } else {
       this.requestService.getRequests(eventData.searchValue, eventData.element).subscribe({
         next: (data) => {
           this.requests = data;
+          this.filterRequests();
         },
         error: (error) => {
           this.errorService.handleError(error);

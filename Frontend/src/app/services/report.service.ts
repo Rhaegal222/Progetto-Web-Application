@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ReportManagementservices {
+export class ReportService {
   constructor(private http:HttpClient) { }
 
   getReports(range: string): Observable<any[]>{

@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { NgChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,7 +16,6 @@ import { ProductDetailComponent } from './employee-components/product-detail/pro
 import { UserManagementComponent } from './admin-components/user-management/user-management.component';
 import { RequestManagementComponent } from './storekeeper-components/request-management/request-management.component';
 import { ProductListComponent } from './employee-components/product-list/product-list.component';
-import { ReportComponent } from './storekeeper-components/report/report.component';
 import { ProductManagementComponent } from './storekeeper-components/product-management/product-management.component';
 import { ProductRequestComponent } from './employee-components/product-detail/product-request/product-request.component';
 import { ProductReturnComponent } from './employee-components/product-detail/product-return/product-return.component';
@@ -34,8 +34,9 @@ import { HeaderComponent } from './common-components/header/header.component';
 import { EditProductComponent } from './storekeeper-components/product-management/edit-product/edit-product.component';
 import { UserProductComponent } from './employee-components/user-product/user-product.component';
 import { ContactsComponent } from './common-components/contacts/contacts.component';
-
-
+import { ReportComponent } from './storekeeper-components/report/report.component';
+import { BarChartComponent } from './storekeeper-components/report/bar-chart/bar-chart.component';
+import { PieChartComponent } from './storekeeper-components/report/pie-chart/pie-chart.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,6 @@ import { ContactsComponent } from './common-components/contacts/contacts.compone
     UserManagementComponent,
     RequestManagementComponent,
     ProductListComponent,
-    ReportComponent,
     ProductManagementComponent,
     ProductRequestComponent,
     ProductReturnComponent,
@@ -65,7 +65,10 @@ import { ContactsComponent } from './common-components/contacts/contacts.compone
     HeaderComponent,
     EditProductComponent,
     UserProductComponent,
-    ContactsComponent
+    ContactsComponent,
+    ReportComponent,
+    BarChartComponent,
+    PieChartComponent
 ],
   imports: [
     BrowserModule,
@@ -75,7 +78,8 @@ import { ContactsComponent } from './common-components/contacts/contacts.compone
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HttpClientJsonpModule
+    HttpClientJsonpModule,
+    NgChartsModule,
   ],
   providers: [
     AuthService,

@@ -1,30 +1,6 @@
-<div class="container">
-    <table>
-      <thead>
-        <tr>
-          <th scope="col">coidce segnalazione</th>
-          <th scope="col">Email</th>
-          <th scope="col">Codice Prodotto</th>
-          <th scope="col">Nome Prodotto</th>
-          <th scope="col">tipo di segnalazione</th>
-          <th scope="col">Descrizione</th>
-          <th scope="col">Risultato</th> <!-- Aggiunta una nuova colonna per le azioni -->
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let report of reportList">
-          <th scope="row">{{ report.id_report }}</th>
-          <td>{{ report.email }}</td>
-          <td>{{ report.id_Product }}</td>
-          <td>{{ report.name }}</td>
-          <td>{{ report.type }}</td>
-          <td>{{ report.info }}</td>
-            <td [class.text-success]="report.solved" [class.text-danger]="!report.solved">
-              {{ report.solved ? 'Risolto' : 'DA RISOLVERE' }}
-          </td>
-        </tr>
-      </tbody>
-      
-    </table>
-  </div>
-  
+<div class = "container">
+    <div class="content">
+        <app-bar-chart></app-bar-chart>
+        <app-pie-chart></app-pie-chart>
+    </div>
+</div>

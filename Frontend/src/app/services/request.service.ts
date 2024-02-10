@@ -16,12 +16,10 @@ export class RequestService {
 
   getRequest(idRequest: number) {
     let params = new HttpParams().set('idRequest', idRequest.toString());
-  
     return this.http.get('http://localhost:8080/api/getRequest', { params });
   }
 
   getRequests(searchValue: string = '', status: string = ''): Observable<Request[]> {
-
     let params = new HttpParams();
     if (searchValue) {
       params = params.set('search', searchValue);

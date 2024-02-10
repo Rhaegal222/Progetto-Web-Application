@@ -19,18 +19,21 @@ public class EmployeeRequestController {
 
     //GET
     @GetMapping("/api/getRequests")
-    public ResponseEntity<?> getRequests(@RequestParam String type) {
-        return employeeRequestService.getRequests(type);
-    }
-    @GetMapping("/api/getUserRequests")
-    public ResponseEntity<?> getUserRequests(@RequestParam long user) {return employeeRequestService.getUserRequests(user);}
-    @GetMapping("/api/requests")
-    public ResponseEntity<?> searchRequest(@RequestParam(required = false) String status, @RequestParam(required = false) String search) {
+    public ResponseEntity<?> getRequests(@RequestParam(required = false) String status, @RequestParam(required = false) String search) {
         if (search == null && (status == null || status.equals("all"))) {return employeeRequestService.findAll();}
         else if (search == null) {search = "";}
         else if (status == null) {status = "";}
 
         return employeeRequestService.searchRequest(status, search);
+    }
+    @GetMapping("/api/getUserRequests")
+    public ResponseEntity<?> getUserRequests(@RequestParam long user) {return employeeRequestService.getUserRequests(user);}
+    @GetMapping("/api/requests")
+    public ResponseEntity<?> searchRequest(@RequestParam(required = false) String status, @RequestParam(required = false) String search) {
+        if (search == null && (status == null || status.equals("all"))) {return employeeRequestService.allRequests();}
+        else if (search == null) {return employeeRequestService.searchRequest(status, "");}
+        else if (status == null || status.equals("all")) {return employeeRequestService.searchRequest("", search);}
+        else {return employeeRequestService.searchRequest(status, search);}
     }
     @GetMapping("/api/allRequests")
     public ResponseEntity<?> allRequests() {return employeeRequestService.allRequests();}

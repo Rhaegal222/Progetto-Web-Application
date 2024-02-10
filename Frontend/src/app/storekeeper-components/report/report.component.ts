@@ -1,40 +1,18 @@
-import { Component } from '@angular/core';
-import { ReportManagementservices } from '../../services/report.service'; 
-import { Report } from '../../model/report';
-import { ErrorService } from '../../services/error.service';
+import { Component, OnInit } from '@angular/core';
+
 @Component({
-  selector: 'app-report-management',
+  selector: 'app-report',
   templateUrl: './report.component.html',
   styleUrls: [
-    './report.component.css', 
+    './report.component.css',
     '../../styles/container.css',
-    '../../styles/buttons.css'
+    '../../styles/content.css',
   ]
 })
 export class ReportComponent {
 
-  constructor(
-    private reportService: ReportManagementservices,
-    private errorService: ErrorService) {}
-  
-  reportList: Report[] = [];
-  range : string = "week";
-
-  ngOnInit(): void {
-     
+  ngOnInit() {
+    
   }
-  
-  getReports(){
-    this.reportService.getReports(this.range).subscribe({
-      next: (data) => {
-        this.reportList = data;
-      },
-      error: (error: any) => {
-        this.errorService.handleError(error);
-      }
-    });
-  }
-
-
 
 }
