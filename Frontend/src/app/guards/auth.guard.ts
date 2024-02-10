@@ -24,9 +24,9 @@ export class AuthGuard implements CanActivate {
       }
       return false;
     } else {
+      // Se l'utente è autenticato, lo reindirizziamo alla pagina di profilo se chiede la pagina di login o registrazione
       if (state.url === '/login' || state.url === '/registration') {
         this.router.navigate(['/profile']);
-        return false;
       }
       return true;
     }

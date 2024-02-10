@@ -115,7 +115,6 @@ export class AuthService {
     }
   }
   
-  // Verifica se l'utente è autenticato
   isAuthenticated(): boolean {
     if (typeof localStorage !== 'undefined') {
       return localStorage.getItem('token') ? true : false;
