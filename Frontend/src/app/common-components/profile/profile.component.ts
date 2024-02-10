@@ -37,11 +37,17 @@ export class ProfileComponent {
         this.users = data;
         this.firstName = this.users[0].name || '';
         this.lastName = this.users[0].surname || '';
-        this.role = this.users[0].role || '';
+        
         if (this.users[0].banned === true) {
-          this.role = 'Utente bannato';
-        } else if (this.role === '' || this.role === null) {
+          this.users[0].role = 'Utente bannato';
+        } else if ( this.users[0].role === '' ||  this.users[0].role === null) {
           this.role = 'In attesa di approvazione';
+        } else if (this.users[0].role === 'a') {
+          this.role = 'Amministratore';
+        } else if (this.users[0].role === 'e') {
+          this.role = 'Dipendente';
+        } else if (this.users[0].role === 's') {
+          this.role = 'Magazziniere';
         }
       },
       error: (error) => {

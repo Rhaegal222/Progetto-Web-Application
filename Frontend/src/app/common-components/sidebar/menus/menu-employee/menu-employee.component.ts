@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-menu-employee',
@@ -7,19 +8,20 @@ import { Component } from '@angular/core';
 })
 export class MenuEmployeeComponent {
 
-  authToken: string = '';
+  constructor(private authService: AuthService) {}
+
+  authToken: string = this.authService.getToken();
   isAuth: boolean = false;
 
   ngDoCheck() {
-    if (typeof localStorage !== 'undefined') {
-      this.authToken = localStorage.getItem('token') || '';
-      if (localStorage.getItem('role') === 'employee' ||
-        localStorage.getItem('role') === 'admin' ||
-        localStorage.getItem('role') === 'storekeeper') {
+    if(this.authService.isAuthenticated()) {
+      if(this.authService.isEmployee() || this.authService.isAdmin() || this.authService.isStorekeeper()) {
         this.isAuth = true;
       } else {
       this.isAuth = false;
       }
+    } else {
+      this.isAuth = false;
     }
   }
 
