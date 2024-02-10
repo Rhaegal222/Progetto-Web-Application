@@ -13,13 +13,13 @@ export class MenuEmployeeComponent {
   ngDoCheck() {
     if (typeof localStorage !== 'undefined') {
       this.authToken = localStorage.getItem('token') || '';
-      if (this.authToken) {
+      if (localStorage.getItem('role') === 'employee' ||
+        localStorage.getItem('role') === 'admin' ||
+        localStorage.getItem('role') === 'storekeeper') {
         this.isAuth = true;
       } else {
-        this.isAuth = false;
-      }
-    } else {
       this.isAuth = false;
+      }
     }
   }
 

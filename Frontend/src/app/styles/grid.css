@@ -49,6 +49,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    max-height: 133.65px;
 }
 .grid .item-no-img span{
     font-size: 8rem;

@@ -74,7 +74,7 @@ public class EmployeeRequestService {
                 }
             }
 
-            EmployeeRequest employeeRequest = new EmployeeRequest(requestingUser, requestedItem, title, description, "waiting", type, date);
+            EmployeeRequest employeeRequest = new EmployeeRequest(requestingUser, requestedItem, title, description, "pending", type, date);
             DatabaseHandler.getInstance().getEmployeeRequestDao().insertEmployeeRequest(employeeRequest);
 
             String emailContent = requestTitle + " da parte di " + requestingUser.getEmail() + "\n\n" + description;
@@ -154,7 +154,7 @@ public class EmployeeRequestService {
             }
 
             assert employeeRequest != null;
-            if (employeeRequest.getStatus().equals("waiting")) {
+            if (employeeRequest.getStatus().equals("pending")) {
                 employeeRequest.setStatus("refused");
                 DatabaseHandler.getInstance().getEmployeeRequestDao().updateEmployeeRequest(employeeRequest).join();
                 outputJSON(response, "Request refused", "0");

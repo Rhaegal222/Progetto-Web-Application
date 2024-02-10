@@ -1,39 +1,53 @@
 <app-header></app-header>
 <div class="container">
-    <div class="">
-        <div class="">
-            <div *ngFor="let request of returnedRequests">
-                <div class="card">
-                    <div class="card-header">
-                        <h2>{{request.title}}</h2>
-                        <h2>{{request.type}}</h2>
+    <div class="column">
+        <h1>Richieste di reso</h1>
+        <div *ngIf="returnedRequests.length == 0" class="no-products">
+            <h1>Nessuna richiesta</h1>
+        </div>
+        <div *ngFor="let request of returnedRequests">
+            <div class="card">
+                <div class="card-header">
+                    <h2>{{request.title}}</h2>
+                </div>
+                <div class="card-body">
+                    <div class="card-row">
+                        <h5>Stato: </h5>
+                        <span class="material-icons">{{request.status}}</span>
+                        <p *ngIf="request.status == 'pending'">In attesa</p>
+                        <p *ngIf="request.status == 'accepted'">Accettata</p>
+                        <p *ngIf="request.status == 'rejected'">Rifiutata</p>
                     </div>
-                    <div class="card-body">
-                        <p>Stato: {{request.status}}</p>
-                        <p>Data: {{request.date}}</p>
+                    <div class="card-row">
+                        <h5>Data: </h5>
+                        <span>{{request.date}}</span>
+                    </div>
+                    <div class="card-row btn">
                         <button (click)="acceptRequest(request)" class="btn btn-success">Accetta</button>
                         <button (click)="rejectRequest(request)" class="btn btn-danger">Rifiuta</button>
                     </div>
                 </div>
             </div>
-            <div class="column">
-                <div *ngFor="let request of requestProduct">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2>{{request.title}}</h2>
-                        </div>
-                        <div class="card-body">
-                            <p>Stato: {{request.status}}</p>
-                            <p>Data: {{request.date}}</p>
-                            <button (click)="acceptRequest(request)" class="btn btn-success">Accetta</button>
-                            <button (click)="rejectRequest(request)" class="btn btn-danger">Rifiuta</button>
-                        </div>
-                    </div>
+        </div>
+    </div>
+    <div class="column">
+        <h1>Richieste di prodotto</h1>
+        <div *ngIf="requestProduct.length == 0" class="no-products">
+            <h1>Nessuna richiesta</h1>
+        </div>
+        <div *ngFor="let request of requestProduct">
+            <div class="card">
+                <div class="card-header">
+                    <h2>{{request.title}}</h2>
+                </div>
+                <div class="card-body">
+                    <p>Stato: {{request.status}}</p>
+                    <p>Data: {{request.date}}</p>
+                    <button (click)="acceptRequest(request)" class="btn btn-success">Accetta</button>
+                    <button (click)="rejectRequest(request)" class="btn btn-danger">Rifiuta</button>
                 </div>
             </div>
         </div>
     </div>
-    <div *ngIf="requests.length == 0" class="no-products">
-        <h1>Nessuna richiesta</h1>
-    </div>
 </div>
+

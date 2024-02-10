@@ -25,6 +25,7 @@ export class ProfileComponent {
   firstName : string = '';
   lastName : string = '';
   email : string = '';
+  role : string = '';
   users: User[] = [];
 
   ngAfterViewInit() {
@@ -35,6 +36,12 @@ export class ProfileComponent {
         this.users = data;
         this.firstName = this.users[0].name || '';
         this.lastName = this.users[0].surname || '';
+        this.role = this.users[0].role || '';
+        if (this.users[0].banned === true) {
+          this.role = 'Utente bannato';
+        } else if (this.role === '' || this.role === null) {
+          this.role = 'In attesa di approvazione';
+        }
       },
       error: (error) => {
         this.errorService.handleError(error);
