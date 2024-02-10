@@ -7,17 +7,17 @@ import { ErrorService } from '../../services/error.service';
 @Component({
   selector: 'app-request-management',
   templateUrl: './request-management.component.html',
-  styleUrls: [ './request-management.component.css',
+  styleUrls: [ 
+    './request-management.component.css',
     '../../styles/grid.css',
     '../../styles/list.css',
     '../../styles/buttons.css'
   ]
 })
+
 export class RequestManagementComponent {
 
-  constructor(
-    private requestService: RequestService,
-    private errorService: ErrorService) { }
+  constructor(private requestService: RequestService, private errorService: ErrorService) { }
 
   requests: Request[] = [];
   returnedRequests: Request[] = [];
@@ -30,21 +30,21 @@ export class RequestManagementComponent {
     this.getAllRequests();
   }
 
-  // create an observable that emits the length of the products list
   initObservable(){
     const observable = new Observable((observer) => {
       observer.next(this.requests.length);
     });
 
-    // Iscriversi all'observable
     observable.subscribe((length: unknown) => {
       if (typeof length === 'number') {
         const anyLength: any = length;
-        // Ora è possibile utilizzare anyLength come valore di tipo any
         this.length = anyLength;
       }
     });
   }
+
+  searchValue: string = '';
+  status: string = 'all';
 
   onSearch(eventData: onSearchEventData) {
     // Se la barra di ricerca è vuota e la categoria è "Tutte le categorie", chiamare getAllProducts.

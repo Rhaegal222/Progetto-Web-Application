@@ -41,10 +41,21 @@
                     <h2>{{request.title}}</h2>
                 </div>
                 <div class="card-body">
-                    <p>Stato: {{request.status}}</p>
-                    <p>Data: {{request.date}}</p>
-                    <button (click)="acceptRequest(request)" class="btn btn-success">Accetta</button>
-                    <button (click)="rejectRequest(request)" class="btn btn-danger">Rifiuta</button>
+                    <div class="card-row">
+                        <h5>Stato: </h5>
+                        <span class="material-icons">{{request.status}}</span>
+                        <p *ngIf="request.status == 'pending'">In attesa</p>
+                        <p *ngIf="request.status == 'accepted'">Accettata</p>
+                        <p *ngIf="request.status == 'rejected'">Rifiutata</p>
+                    </div>
+                    <div class="card-row">
+                        <h5>Data: </h5>
+                        <span>{{request.date}}</span>
+                    </div>
+                    <div class="card-row btn">
+                        <button (click)="acceptRequest(request)" class="btn btn-success">Accetta</button>
+                        <button (click)="rejectRequest(request)" class="btn btn-danger">Rifiuta</button>
+                    </div>
                 </div>
             </div>
         </div>
