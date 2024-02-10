@@ -41,14 +41,14 @@ Il dipendente può:
 **Componenti per l'Amministratore:**
 
 1. **UserManagement**: Componente per la gestione degli utenti, inclusa l'aggiunta, la modifica e la cancellazione degli utenti, nonché la gestione dei ruoli.
-2. **LocationManagement**: Componente per la gestione delle posizioni, inclusa l'aggiunta, la modifica e la cancellazione delle posizioni.
 
 **Componenti per l'Addetto al Magazzino:**
 
-1. **RequestManagement**: Componente per la gestione delle richieste dei dipendenti dell'università.
-2. **ProductManagement**: Componente per la gestione dei prodotti, inclusa l'aggiunta, la modifica e la cancellazione dei prodotti, nonché la gestione delle note.
-3. **LocationMap**: Componente per la visualizzazione della mappa con la posizione dei prodotti.
-4. **Report**: Componente per le statistiche sui prodotti.
+1. **ProductManagement**: Componente per la gestione dei prodotti, inclusa l'aggiunta, la modifica e la cancellazione dei prodotti, nonché la gestione delle note.
+2. **AddProduct**: Componente per l'aggiunta di un nuovo prodotto.
+3. **EditProduct**: Componente per la modifica di un prodotto.
+4. **RequestManagement**: Componente per la gestione delle richieste dei dipendenti dell'università.
+5. **Report**: Componente per le statistiche sui prodotti.
 
 **Componenti per il Dipendente dell'Università:**
 
@@ -62,6 +62,10 @@ Il dipendente può:
 **Componenti Comuni a Tutti:**
 
 1. **Sidebar**: Componente per l'intestazione dell'applicazione.
-2. **Settings**: Componente per la gestione delle impostazioni.
-3. **Menu**: Componente per il menu a tendina su dispositivi mobili.
-4. **Login**: Componente per la gestione dell'autenticazione e dell'accesso degli utenti.
+2. **Profile**: Componente per la visualizzazione del profilo utente.
+3. **Header**: Componente per gli strumenti e la barra di ricerca.
+4. **SearchBar**: Componente per la ricerca dei prodotti, degli utenti e delle richieste.
+5. **ToolsBar**: Componente per la gestione della visualizzazione dei prodotti, degli utenti, apertura degli strumenti di aggiunta e modifica e filtri.
+6. **Login**: Componente per l'accesso all'applicazione.
+7. **PageNotFound**: Componente per la visualizzazione della pagina non trovata.
+8. **Contacs**: Componente per la visualizzazione dei contatti e la lista degli amministratori da contattare.
