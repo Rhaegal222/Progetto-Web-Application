@@ -43,8 +43,11 @@
     cursor: pointer;
 }
 .dropdown-content a:hover {
+    scale: 1.05;
     background-color: #f1f1f1;
+    
 }
 .dropdown:hover .dropdown-content {
+    overflow: hidden;
     display: block;
 }

@@ -28,6 +28,7 @@ header .close {
 
 header .close:hover {
     color: red;
+    scale: 1.05;
 }
 
 .form-control.description {

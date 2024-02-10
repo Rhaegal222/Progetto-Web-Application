@@ -6,5 +6,4 @@ export interface Report{
     type:string;
     info:string;
     solved:boolean;
-
 }

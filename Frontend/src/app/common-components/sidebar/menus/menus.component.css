@@ -18,8 +18,9 @@
   
 .items li:hover {
   scale: 1.05;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: rgba(255, 255, 255, 0.5);
+  background-color: #8c0000;
+  border-color: #020202;
+  color: #020202;
 }
 
 /* Responsive adjustments */

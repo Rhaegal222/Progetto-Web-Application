@@ -5,37 +5,13 @@
     margin: 0.5rem;
 }
 
-.tools-bar button {
+.tools-bar .btn-primary {
     margin-right: 0.5rem;
 }
 
-/* Se la larghezza della finestra è minore di 600px, nascondi i bottoni */
-@media (max-width: 768px) {
-    .tools btn-primary {
-        /* mettili uno sotto l'altro */
-        display: block;
-        padding: 12px 16px;
-        text-decoration: none;
-        color: black;
-        text-align: center;
-        border-radius: 0.5rem;
-        font-size: 0.8rem;
-    }
-    .tools btn-primary {
-        display: none;
-        position: absolute;
-        background-color: #f9f9f9;
-        width: clamp(50px, 150px, 200px);
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-        border-radius: 0.5rem;
-        /* Altezza massima del dropdown */
-        max-height: 300px;
-        overflow-y: auto;
-    }
-    .tools button:hover {
-        background-color: #f1f1f1;
-    }
-
-
+.tools-bar .btn-primary:hover {
+    background-color: #e63939;
+    border-color: #e63939;
+    color: black;
+    scale: 1.05;
 }

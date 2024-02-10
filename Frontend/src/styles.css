@@ -19,6 +19,7 @@ a {
 }
 
 a:hover {
+    scale: 1.05;
     text-decoration: underline;
 }
 

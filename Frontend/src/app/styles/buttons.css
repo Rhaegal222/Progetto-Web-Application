@@ -9,6 +9,12 @@
     height: 40px; /* Altezza massima */
   }
 
+.btn-primary:hover {
+    background-color: #e63939 ; /* Colore di sfondo al hover */
+    border-color: #e63939 ; /* Colore del bordo al hover */
+    color: black; /* Colore del testo al hover */
+}
+
 .btn-primary:active {
     background-color: #000000; /* Colore di sfondo al click */
     border-color: #b71918; /* Colore del bordo al click */
@@ -16,8 +22,8 @@
 }
   
 .btn-primary:focus {
-    background-color: #ff000022; /* Colore di sfondo al hover */
-    border-color: #ff000022; /* Colore del bordo al hover */
+    background-color: #e63939 ; /* Colore di sfondo al hover */
+    border-color: #e63939 ; /* Colore del bordo al hover */
     color: black; /* Colore del testo al hover */
 }
 

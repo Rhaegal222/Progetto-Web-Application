@@ -23,10 +23,18 @@ export class ToolsBarComponent {
       else
       this.isAuthorized = false;
     }
+
+    if (this.pages.includes(this.router.url)) {
+      if (this.authService.isStorekeeper() || this.authService.isAdmin())
+        this.isShowing = false;
+    }
   }
+
+  pages : string[] = ['/request-management', '/requests-forwarded'];
   
   isActive : boolean = true;
   isAuthorized : boolean = false;
+  isShowing : boolean = true;
 
   changeView() {
     this.isActive = !this.isActive;
