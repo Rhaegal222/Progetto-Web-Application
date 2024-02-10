@@ -1,7 +1,7 @@
 import { Component} from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserManagementService } from '../../services/user.service'; // Importa il servizio per ottenere i dati degli utenti
-import { ErrorService } from '../../services/error.service'; // Importa il servizio per gestire gli errori
+import { UserManagementService } from '../../services/user.service'; // Servizio per ottenere i dati degli utenti
+import { ErrorService } from '../../services/error.service'; // Servizio per gestire gli errori
 import { User } from '../../model/user';
 import e from 'express';
 

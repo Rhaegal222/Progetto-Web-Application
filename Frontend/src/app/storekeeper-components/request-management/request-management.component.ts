@@ -47,8 +47,6 @@ export class RequestManagementComponent {
   status: string = 'all';
 
   onSearch(eventData: onSearchEventData) {
-    // Se la barra di ricerca è vuota e la categoria è "Tutte le categorie", chiamare getAllProducts.
-    // Altrimenti, chiamare getProducts con i valori correnti di searchValue e category.
     if (eventData.searchValue === "" && eventData.element === "all") {
       this.getAllRequests();
     } else {

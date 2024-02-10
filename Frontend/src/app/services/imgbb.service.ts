@@ -14,9 +14,9 @@ export class ImgbbService {
 
     formData.append('image', b64Image)
 
-    return this.http.post("https://api.imgbb.com/1/upload", formData, { params: {key: this.IMGBB_KEY}})    // This call is going to use the proxy detailed in /proxy.conf.json to bypass CORS
+    return this.http.post("https://api.imgbb.com/1/upload", formData, { params: {key: this.IMGBB_KEY}}) 
     .pipe(
-      timeout(10000)      // After 10 seconds return timeout
+      timeout(10000)  
     )
   }
 }

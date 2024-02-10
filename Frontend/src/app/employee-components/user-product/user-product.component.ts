@@ -28,17 +28,14 @@ export class UserProductComponent {
     this.getAllProducts();
   }
 
-  // create an observable that emits the length of the products list
   observeProductListLenght(){
     const observable = new Observable((observer) => {
       observer.next(this.products.length);
     });
 
-    // Iscriversi all'observable
     observable.subscribe((length: unknown) => {
       if (typeof length === 'number') {
         const anyLength: any = length;
-        // Ora è possibile utilizzare anyLength come valore di tipo any
         this.length = anyLength;
       }
     });

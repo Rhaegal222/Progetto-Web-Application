@@ -70,7 +70,6 @@ export class EditProductComponent {
     }
   }
 
-  // Assegna i valori del prodotto ai campi di input
   ngAfterView() {
     if (this.product) {
       this.name = this.product.name || '';
@@ -113,17 +112,14 @@ export class EditProductComponent {
   filteredLocations : data[] = this.locations;
   showLocationsBox = false;
 
-  // create an observable that emits the length of the products list
   initObservable(){
     const observable = new Observable((observer) => {
       observer.next(this.image === undefined ? 0 : this.image.length);
     });
 
-    // Iscriversi all'observable
     observable.subscribe((length: unknown) => {
       if (typeof length === 'number') {
         const anyLength: any = length;
-        // Ora è possibile utilizzare anyLength come valore di tipo any
         this.length = anyLength;
       }
     });
@@ -146,28 +142,26 @@ export class EditProductComponent {
   }  
 
   selectCategory(suggestion: data) {
-    this.type = suggestion.name; // Aggiorna il modello con il valore selezionato
-    this.showCategoriesBox = false; // Nasconde il box dei suggerimenti
+    this.type = suggestion.name;
+    this.showCategoriesBox = false;
   }
 
   selectLocation(suggestion: data) {
-    this.location = suggestion.name; // Aggiorna il modello con il valore selezionato
-    this.showLocationsBox = false; // Nasconde il box dei suggerimenti
+    this.location = suggestion.name;
+    this.showLocationsBox = false;
   }
 
   hideSuggestions(event: FocusEvent) {
     setTimeout(() => {
-      // Cast the related target to an HTMLElement to check its id
       const relatedTarget = event.relatedTarget as HTMLElement;
-      // Check if the related target is not one of our suggestion boxes or inputs
       if (relatedTarget && relatedTarget.id !== 'category' && relatedTarget.id !== 'location') {
         this.showCategoriesBox = false;
         this.showLocationsBox = false;
-      } else if (!relatedTarget) { // If there is no related target, close both suggestion boxes
+      } else if (!relatedTarget) {
         this.showCategoriesBox = false;
         this.showLocationsBox = false;
       }
-    }, 150); // Ritarda la chiusura dei suggerimenti di 150ms
+    }, 150);
   }
   
   showSuggestions(inputId: string) {
@@ -216,7 +210,6 @@ export class EditProductComponent {
 
   removeImage(): void {
     this.image = '';
-    // pulire l'input file
     const input = document.getElementById('image') as HTMLInputElement;
     if (input) {
       input.value = '';
@@ -244,7 +237,6 @@ export class EditProductComponent {
   }
 
   // Invia l'evento a product-management.component.ts
-  
   @Output() onEvent = new EventEmitter<editProductEventData>();
 
   onCloseEvent() {

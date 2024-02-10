@@ -10,12 +10,10 @@ import { ErrorService } from './error.service';
 export class ProductService {
   constructor(private http:HttpClient, private errorService:ErrorService) { }
 
-  // Get all products
   getAllProducts(): Observable<Product[]> {
     return this.http.get<Product[]>("http://localhost:8080/api/allItems");
   }
 
-  // Get a product by id
   getProduct(idItem: number) {
     let params = new HttpParams().set('idItem', idItem.toString());
   
@@ -23,27 +21,20 @@ export class ProductService {
   }
   
 
-  // Get all products with search and filter
   getProducts(searchValue: string = '', category: string = ''): Observable<Product[]> {
-    // Inizializza i parametri di query
     let params = new HttpParams();
-    
-    // Aggiungi il termine di ricerca ai parametri, se presente
+   
     if (searchValue) {
       params = params.set('search', searchValue);
     }
-    
-    // Aggiungi la categoria ai parametri, se presente e diversa da "Tutte le categorie"
+
     if (category) {
       params = params.set('category', category);
     }
-    
-    // Effettua la richiesta GET con i parametri
+
     return this.http.get<Product[]>('http://localhost:8080/api/items', { params: params });
   }
 
-  // POST
-  // Edit a product
   editProduct(product: Product) {
     this.http.post("http://localhost:8080/api/modifyItem", product).subscribe({
       next: () => {
@@ -55,7 +46,6 @@ export class ProductService {
     });
   }
 
-  // Add a product
   addProduct(product: Product) {
     this.http.post("http://localhost:8080/api/insertItem", product).subscribe({
       next: () => {
@@ -67,7 +57,6 @@ export class ProductService {
     });
   }
 
-  // Delete a product
   deleteProduct(product: Product) {
     if(product.idItem != undefined && product.idItem != null){
       const params = { params: new HttpParams().set('idItem', product.idItem.toString()) };

@@ -7,7 +7,6 @@ export interface User{
     role?:string;
     banned?:boolean;
 
-    // Optional fields
     phone?:string;
     address?:string;
     city?:string;

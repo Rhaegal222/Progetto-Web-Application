@@ -15,7 +15,6 @@ export class AuthService {
     private router:Router,
     private errorService: ErrorService) { }
 
-  // Stampa tutti i payload del token
   printToken() {
     if (typeof localStorage !== 'undefined') {
       if(localStorage.getItem('token'))
@@ -27,7 +26,6 @@ export class AuthService {
       }
     }
 
-  // Prendi l'email dell'utente autenticato
   getUserEmail(): string {
     if (typeof localStorage !== 'undefined') {
       const token = localStorage.getItem('token');
@@ -42,7 +40,6 @@ export class AuthService {
     }
   }
 
-  // Prendi il nome dell'utente autenticato
   getUserFirstName(): string {
     if (typeof localStorage !== 'undefined') {
       const token = localStorage.getItem('token');
@@ -57,7 +54,6 @@ export class AuthService {
     }
   }
 
-  // Prendi il cognome dell'utente autenticato
   getUserLastName(): string {
     if (typeof localStorage !== 'undefined') {
       const token = localStorage.getItem('token');
@@ -72,7 +68,6 @@ export class AuthService {
     }
   }
 
-  // Verifica il ruolo dell'utente autenticato
   isAdmin(): boolean {
     if (typeof localStorage !== 'undefined') {
       const token = localStorage.getItem('token');
@@ -114,8 +109,7 @@ export class AuthService {
       return false;
     }
   }
-  
-  // Verifica se l'utente è autenticato
+
   isAuthenticated(): boolean {
     if (typeof localStorage !== 'undefined') {
       return localStorage.getItem('token') ? true : false;

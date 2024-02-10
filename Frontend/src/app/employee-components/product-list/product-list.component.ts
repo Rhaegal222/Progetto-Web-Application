@@ -28,25 +28,22 @@ export class ProductListComponent{
     this.getAllProducts();
   }
 
-  // create an observable that emits the length of the products list
   initObservable(){
     const observable = new Observable((observer) => {
       observer.next(this.products.length);
     });
 
-    // Iscriversi all'observable
     observable.subscribe((length: unknown) => {
       if (typeof length === 'number') {
         const anyLength: any = length;
-        // Ora è possibile utilizzare anyLength come valore di tipo any
         this.length = anyLength;
       }
     });
   }
 
   onSearch(eventData: onSearchEventData) {
-    // Se la barra di ricerca è vuota e la categoria è "Tutte le categorie", chiamare getAllProducts.
-    // Altrimenti, chiamare getProducts con i valori correnti di searchValue e category.
+    // Se la barra di ricerca è vuota e la categoria è "Tutte le categorie", chiamare getAllProducts
+    // Altrimenti, chiamare getProducts con i valori correnti di searchValue e category
     if (eventData.searchValue === "" && eventData.element === "all") {
       this.getAllProducts();
     } else {
@@ -61,7 +58,6 @@ export class ProductListComponent{
     }
   }  
   
-  // Get all products
   getAllProducts(){
     this.productService.getAllProducts().subscribe({
       next: (data) => {

@@ -67,7 +67,6 @@ export class ProductReturnComponent {
     }
   }
 
-  // Assegna i valori del prodotto ai campi di input
   ngAfterView() {
     if (this.product) {
       this.name = this.product.name || '';
