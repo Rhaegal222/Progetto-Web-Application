@@ -8,18 +8,15 @@ import { AuthService } from '../services/auth.service';
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): boolean {
+  canActivate( route: ActivatedRouteSnapshot, state: RouterStateSnapshot ): boolean {
     const isAuthenticated = this.authService.isAuthenticated(); // Il metodo `isAuthenticated` dovrebbe verificare la presenza del token JWT e la sua validità
 
     // Se l'utente non è autenticato, se chiede una pagina che non sia login o registrazione, lo reindirizziamo alla pagina di login
     if (!isAuthenticated) {
       // Se l'utente non è autenticato, lo reindirizziamo alla pagina di login se chiede una pagina che non sia login o registrazione
-      if (state.url !== '/login' && state.url !== '/registration') {
+      if (state.url !== '/login' && state.url !== '/registration'  &&  state.url !== '/contacts') {
         this.router.navigate(['/login']);
-      } else if (state.url === '/login' || state.url === '/registration') {
+      } else if (state.url === '/login' || state.url === '/registration' || state.url === '/contacts') {
         return true;
       }
       return false;
