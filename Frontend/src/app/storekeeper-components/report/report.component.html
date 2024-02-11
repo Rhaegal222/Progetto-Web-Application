@@ -1,6 +1,7 @@
 <div class = "container">
     <div class="content">
-        <app-bar-chart></app-bar-chart>
-        <app-pie-chart></app-pie-chart>
+        <app-chart-tools (chartChangedEvent)="changeChart($event)"></app-chart-tools>
+        <app-bar-chart *ngIf="!isShowing"></app-bar-chart>
+        <app-pie-chart *ngIf="isShowing"></app-pie-chart>
     </div>
 </div>

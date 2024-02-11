@@ -1,0 +1,28 @@
+<header>
+    <div class="tools-bar">
+        <div>
+            <div class="tools">
+                <div class="dropdown">
+                    <button class="btn-primary" type="button">
+                        <!-- Prende il valore dalla categoria selezionata -->
+                        <span>{{element}}</span>
+                    </button>
+                    <div class="dropdown-content">
+                        <ng-container *ngFor="let element of elements">
+                            <a *ngIf="element.visible" (click)="setElement(element.name)">{{ element.name }}</a>
+                        </ng-container>
+                    </div>
+                </div>
+                <!--Menu bottone per impostare la vista a elenco-->
+                <button (click)="changeChart()" *ngIf="!isActive" class="btn-primary" type="button">
+                    <span class="material-icons">bar_chart</span>
+                </button>
+                <!--Bottone per impostare la vista a griglia-->
+                <button (click)="changeChart()" *ngIf="isActive" class="btn-primary" type="button">
+                    <span class="material-icons">pie_chart</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+    

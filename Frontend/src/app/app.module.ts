@@ -37,6 +37,7 @@ import { ContactsComponent } from './common-components/contacts/contacts.compone
 import { ReportComponent } from './storekeeper-components/report/report.component';
 import { BarChartComponent } from './storekeeper-components/report/bar-chart/bar-chart.component';
 import { PieChartComponent } from './storekeeper-components/report/pie-chart/pie-chart.component';
+import { ChartToolsComponent } from './storekeeper-components/report/chart-tools/chart-tools.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { PieChartComponent } from './storekeeper-components/report/pie-chart/pie
     ContactsComponent,
     ReportComponent,
     BarChartComponent,
-    PieChartComponent
+    PieChartComponent,
+    ChartToolsComponent
 ],
   imports: [
     BrowserModule,

@@ -11,8 +11,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportComponent {
 
-  ngOnInit() {
-    
+  isShowing : boolean = true;
+
+  changeChart(eventData: chartChangedEventData) {
+    this.isShowing = eventData.chartChanged;
   }
 
+}
+
+export interface chartChangedEventData {
+  chartChanged: boolean;
 }
