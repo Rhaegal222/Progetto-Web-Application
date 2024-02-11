@@ -11,10 +11,10 @@
     <h2 *ngIf="description.length == 0 || description == null">Nessuna descrizione</h2>
     <div class="row">
       <div class="column">
-        <div *ngIf="!isAnImage" class="item-img" >
+        <div *ngIf="image.length>0" class="item-img" >
             <img [src]="image">
         </div>
-        <div *ngIf="isAnImage" class="item-no-img">
+        <div *ngIf="image.length==0" class="item-no-img">
           <span class="material-icons">image_not_supported</span>
         </div>
       </div>

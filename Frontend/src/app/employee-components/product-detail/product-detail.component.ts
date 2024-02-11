@@ -93,12 +93,4 @@ export class ProductDetailComponent {
     this.requestProductWindow = false;
     this.returnProductWindow = false;    
   }
-
-  isAnImage(image : string): boolean {
-    console.log(image);
-    if(image == null || image == ""){
-      return false;
-    }
-    return true;
-  }
 }
