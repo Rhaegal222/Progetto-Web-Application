@@ -13,6 +13,7 @@
     background-color: #e63939 ; /* Colore di sfondo al hover */
     border-color: #e63939 ; /* Colore del bordo al hover */
     color: black; /* Colore del testo al hover */
+    scale: 1.05; /* Effetto di zoom al passaggio del mouse */
 }
 
 .btn-primary:active {
