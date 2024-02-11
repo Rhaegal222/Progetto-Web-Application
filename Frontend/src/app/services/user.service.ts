@@ -95,9 +95,9 @@ export class UserManagementService {
     }
   }
 
-  acceptUser(user: User) {
-    if(user.email != undefined && user.email != null){
-      this.http.post('http://localhost:8080/api/acceptUser?email='+user.email, null).subscribe({
+  acceptUser(us: User) {
+    if(us.email != undefined && us.email != null){
+      this.http.post('http://localhost:8080/api/acceptUser?email='+us.email, null).subscribe({
         next: () => {
           return;
         },

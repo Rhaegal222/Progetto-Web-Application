@@ -78,7 +78,7 @@ public class UserDaoPostgres implements UserDao {
             st.setLong(2, user.getIdUser());
 
             int rowsAffected = st.executeUpdate();
-            st.close();
+            
             return CompletableFuture.completedFuture(rowsAffected > 0);
         } catch (SQLException e) {
             e.fillInStackTrace();
@@ -236,7 +236,7 @@ public class UserDaoPostgres implements UserDao {
             st.setBoolean(5, user.getBanned());
 
             int rowsAffected = st.executeUpdate();
-            st.close();
+            
             return CompletableFuture.completedFuture(rowsAffected > 0);
         } catch (SQLException e) {
             e.fillInStackTrace();
@@ -256,7 +256,7 @@ public class UserDaoPostgres implements UserDao {
             st.setString(2, email);
 
             int rowsAffected = st.executeUpdate();
-            st.close();
+            
 
             CompletableFuture.completedFuture(rowsAffected > 0);
             return;

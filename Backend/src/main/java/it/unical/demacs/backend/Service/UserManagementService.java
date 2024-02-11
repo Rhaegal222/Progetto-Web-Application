@@ -94,7 +94,7 @@ public class UserManagementService {
         try {
             DatabaseHandler.getInstance().openConnection();
             User user = DatabaseHandler.getInstance().getUserDao().findByEmail(email).join();
-            if (user.getRole() == null || user.getRole().equals("np")) {
+            if (user.getRole() == null || user.getRole().equals("np") || user.getRole().isEmpty()) {
                 user.setRole("e");
                 // Salva nel db
                 DatabaseHandler.getInstance().getUserDao().updateRole(user);
@@ -111,7 +111,8 @@ public class UserManagementService {
                 return ResponseEntity.status(401).body("{\"message\": \"User already admin\"}");
             }
             return ResponseEntity.status(401).body("{\"message\": \"Unknown error\"}");
-        } finally {
+        }
+        finally {
             DatabaseHandler.getInstance().closeConnection();
         }
     }

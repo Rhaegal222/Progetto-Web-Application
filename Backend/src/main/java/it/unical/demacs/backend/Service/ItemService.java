@@ -173,23 +173,15 @@ public class ItemService {
         try{
             DatabaseHandler.getInstance().openConnection();
             Item itemToModify = new Item(modifyRequest.getIdItem());
+            long idItem = modifyRequest.getIdItem();
             String name = modifyRequest.getName();
             String type = modifyRequest.getType();
             String description = modifyRequest.getDescription();
             String location = modifyRequest.getLocation();
             String image = modifyRequest.getImage();
 
-            if(!modifyRequest.getEmailUser().isEmpty()){
-                boolean exist = DatabaseHandler.getInstance().getUserDao().checkEmail(modifyRequest.getEmailUser());
-                if(exist){
-                    User assignedUser = DatabaseHandler.getInstance().getUserDao().findByEmail(modifyRequest.getEmailUser()).join();
-                    itemToModify.setAssignedUser(assignedUser);
-                }
-                else{
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User with email '" + modifyRequest.getEmailUser() + "' does not exist.");
-                }
-            }
-
+            String emailUser = modifyRequest.getAssignedUser();
+            boolean exist = true;
 
             if(!name.isEmpty()){
                 itemToModify.setName(name);
@@ -207,6 +199,16 @@ public class ItemService {
                 itemToModify.setImage(image);
             }
 
+            if(!emailUser.isEmpty()){
+                exist = DatabaseHandler.getInstance().getUserDao().checkEmail(emailUser);
+                if(!exist) {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User with email '" + emailUser + "' does not exist.");
+                }
+                else{
+                    User assignedUser = DatabaseHandler.getInstance().getUserDao().findByEmail(modifyRequest.getAssignedUser()).join();
+                    itemToModify.setAssignedUser(assignedUser);
+                }
+            }
 
             CompletableFuture<Boolean> insertResult = DatabaseHandler.getInstance().getItemDao().updateItem(itemToModify);
 

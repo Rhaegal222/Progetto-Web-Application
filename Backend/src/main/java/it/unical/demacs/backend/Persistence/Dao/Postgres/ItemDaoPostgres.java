@@ -5,10 +5,7 @@ import it.unical.demacs.backend.Persistence.Model.Item;
 import it.unical.demacs.backend.Persistence.Model.User;
 import org.springframework.scheduling.annotation.Async;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
@@ -25,7 +22,7 @@ public class ItemDaoPostgres implements ItemDao {
                 PreparedStatement st = this.con.prepareStatement(query)) {
             settingItem(Item, st);
             int rowsAffected = st.executeUpdate();
-            st.close();
+            
             return CompletableFuture.completedFuture(rowsAffected > 0);
         } catch (SQLException e) {
             e.fillInStackTrace();
@@ -134,8 +131,8 @@ public class ItemDaoPostgres implements ItemDao {
     @Async
     public CompletableFuture<Boolean> updateItem(Item item) {
         String query = "UPDATE items SET name = ?, type = ?, description = ?, location = ?, image_base64 = ?, assigned_user = ? WHERE id_item = ?";
-        try (
-                PreparedStatement st = this.con.prepareStatement(query)) {
+        try {
+            PreparedStatement st = con.prepareStatement(query);
             st.setString(1, item.getName());
             st.setString(2, item.getType());
             st.setString(3, item.getDescription());
@@ -145,13 +142,18 @@ public class ItemDaoPostgres implements ItemDao {
                 st.setLong(6, item.getAssignedUser().getIdUser());
             }
             else{
-                st.setLong(6, 0);
+                st.setLong(6, 11);
             }
             st.setLong(7, item.getIdItem());
 
             int rowsAffected = st.executeUpdate();
-            st.close();
+            if(con == null || con.isClosed()) {
+                con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/InventoryITC_DB", "postgres", "postgres");
+            }
+
+            
             return CompletableFuture.completedFuture(rowsAffected > 0);
+
         } catch (SQLException e) {
             e.fillInStackTrace();
         }
@@ -166,7 +168,7 @@ public class ItemDaoPostgres implements ItemDao {
                 PreparedStatement st = this.con.prepareStatement(query)) {
             st.setLong(1, id);
             int rowsAffected = st.executeUpdate();
-            st.close();
+            
             return CompletableFuture.completedFuture(rowsAffected > 0);
         } catch (SQLException e) {
             e.fillInStackTrace();
