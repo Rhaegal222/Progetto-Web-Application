@@ -19,8 +19,6 @@ export class AuthService {
     if (typeof localStorage !== 'undefined') {
       if(localStorage.getItem('token'))
         console.log('token:', localStorage.getItem('token'));
-      if(localStorage.getItem('items'))
-        console.log('items:', localStorage.getItem('items'));
       if(localStorage.getItem('requests'))
         console.log('requests:', localStorage.getItem('requests'));
       }
@@ -145,7 +143,6 @@ export class AuthService {
         if (response.accessToken != '') {
           if (typeof localStorage !== 'undefined') {
             localStorage.setItem('token', response.accessToken);
-            localStorage.setItem('items', JSON.stringify(response.items));
             localStorage.setItem('requests', JSON.stringify(response.requests));
           }
         }

@@ -2,7 +2,10 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../model/product';
+import { UserProxy } from '../../model/user';
 import { ErrorService } from '../../services/error.service';
+import { UserManagementService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-user-product',
@@ -17,7 +20,10 @@ import { ErrorService } from '../../services/error.service';
 export class UserProductComponent {
 
   constructor(
-    private productService: ProductService, private errorService: ErrorService) { }
+    private productService: ProductService, 
+    private errorService: ErrorService,
+    private userService: UserManagementService,
+    private authService: AuthService) { }
 
   products: Product[] = [];
   selectedProduct: Product | undefined;
@@ -64,11 +70,14 @@ export class UserProductComponent {
   }
 
   getAllProducts() {
-    // Ottieni la lista di prodotti dell'utente da localStorage
-    const items = localStorage.getItem('items');
-    if (items !== null && items !== undefined) {
-      this.products = JSON.parse(items);
-    }
+    this.userService.getUser(this.authService.getUserEmail() || '').subscribe({
+      next: (any) => {
+        this.products = any;
+      },
+      error: (error) => {
+        this.errorService.handleError(error);
+      }
+    });   
   }
 
   // Salva il prodotto selezionato in localStorage e reindirizza l'utente alla pagina del dettaglio del prodotto

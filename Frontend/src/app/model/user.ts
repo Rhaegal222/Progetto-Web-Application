@@ -1,3 +1,5 @@
+import { Product } from "./product";
+
 export interface User{
     idUser?:number;
     email:string;
@@ -6,16 +8,10 @@ export interface User{
     surname?:string;
     role?:string;
     banned?:boolean;
+}
 
-    phone?:string;
-    address?:string;
-    city?:string;
-    cap?:string;
-    province?:string;
-    country?:string;
-    birthDate?:Date;
-    registrationDate?:Date;
-    lastAccessDate?:Date;
+export interface UserProxy{
+    items:Product[];
 }
 
 export interface AuthToken{

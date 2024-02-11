@@ -44,6 +44,7 @@ export class RequestService {
   }
 
   acceptRequest(id : number){
+    console.log('sto accettando la richiesta con id: ' + id);
     if(id != undefined && id != null) {
       this.http.post('http://localhost:8080/api/changeStatusRequest?idEmployeeRequest='+id+'&newStatus=a', null).subscribe({
         next: () => {

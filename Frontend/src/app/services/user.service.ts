@@ -25,6 +25,11 @@ export class UserManagementService {
     return this.http.get<User[]>('http://localhost:8080/api/users', { params: params });
   }
 
+  getUser(email: string): Observable<any> {
+    let params = new HttpParams().set('email', email);
+    return this.http.get('http://localhost:8080/api/getUser', { params });
+  }
+
   banUser(user: User) {
     if(user.email != undefined && user.email != null && user.email != "") {
       this.http.post('http://localhost:8080/api/banUser?email='+user.email, null).subscribe({

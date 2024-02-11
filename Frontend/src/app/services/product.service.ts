@@ -3,7 +3,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs'
 import { Product } from '../model/product';
 import { ErrorService } from './error.service';
-import { ProductProxy } from '../model/productProxy';
 
 @Injectable({
   providedIn: 'root'

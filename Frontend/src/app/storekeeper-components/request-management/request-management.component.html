@@ -15,11 +15,19 @@
                         <h5>Da: </h5>
                         <span>{{request.requestingUser?.email}}</span>
                     </div>
-                    <div class="card-row">
+                    <div *ngIf="request.status == 'pending'" class="card-row">
                         <h5>Stato: </h5>
-                        <span class="material-icons">{{request.status}}</span>
-                        <p *ngIf="request.status == 'pending'">In attesa</p>
+                        <span class="material-icons">pending</span>
+                        <p>In attesa</p>
+                    </div>
+                    <div *ngIf="request.status == 'accepted'" class="card-row">
+                        <h5>Stato: </h5>
+                        <span class="material-icons">done</span>
                         <p *ngIf="request.status == 'accepted'">Accettata</p>
+                    </div>
+                    <div *ngIf="request.status == 'rejected'" class="card-row">
+                        <h5>Stato: </h5>
+                        <span class="material-icons">clear</span>
                         <p *ngIf="request.status == 'rejected'">Rifiutata</p>
                     </div>
                     <div class="card-row">
@@ -27,8 +35,9 @@
                         <span>{{request.date}}</span>
                     </div>
                     <div class="card-row btn">
-                        <button (click)="acceptRequest(request)" class="btn btn-success">Accetta</button>
-                        <button (click)="rejectRequest(request)" class="btn btn-danger">Rifiuta</button>
+                        <button *ngIf="request.status == 'pending'" (click)="acceptRequest(request)" class="btn btn-success">Accetta</button>
+                        <button *ngIf="request.status == 'pending'" (click)="rejectRequest(request)" class="btn btn-danger">Rifiuta</button>
+                        <button *ngIf="request.status != 'pending'" (click)="rejectRequest(request)" class="btn btn-danger">Visualizza</button>
                     </div>
                 </div>
             </div>
@@ -45,11 +54,19 @@
                     <h2>{{request.title}}</h2>
                 </div>
                 <div class="card-body">
-                    <div class="card-row">
+                    <div *ngIf="request.status == 'pending'" class="card-row">
                         <h5>Stato: </h5>
-                        <span class="material-icons">{{request.status}}</span>
-                        <p *ngIf="request.status == 'pending'">In attesa</p>
+                        <span class="material-icons">pending</span>
+                        <p>In attesa</p>
+                    </div>
+                    <div *ngIf="request.status == 'accepted'" class="card-row">
+                        <h5>Stato: </h5>
+                        <span class="material-icons">done</span>
                         <p *ngIf="request.status == 'accepted'">Accettata</p>
+                    </div>
+                    <div *ngIf="request.status == 'rejected'" class="card-row">
+                        <h5>Stato: </h5>
+                        <span class="material-icons">clear</span>
                         <p *ngIf="request.status == 'rejected'">Rifiutata</p>
                     </div>
                     <div class="card-row">
@@ -57,8 +74,9 @@
                         <span>{{request.date}}</span>
                     </div>
                     <div class="card-row btn">
-                        <button (click)="acceptRequest(request)" class="btn btn-success">Accetta</button>
-                        <button (click)="rejectRequest(request)" class="btn btn-danger">Rifiuta</button>
+                        <button *ngIf="request.status == 'pending'" (click)="acceptRequest(request)" class="btn btn-success">Accetta</button>
+                        <button *ngIf="request.status == 'pending'" (click)="rejectRequest(request)" class="btn btn-danger">Rifiuta</button>
+                        <button *ngIf="request.status != 'pending'" (click)="rejectRequest(request)" class="btn btn-danger">Visualizza</button>
                     </div>
                 </div>
             </div>

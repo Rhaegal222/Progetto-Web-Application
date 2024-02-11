@@ -86,13 +86,13 @@ export class RequestManagementComponent {
   // accetta la richista
   acceptRequest(request: Request) {
     request.status = "accepted";
-    this.requestService.acceptRequest(request.idRequest);
+    this.requestService.acceptRequest(request.idEmployeeRequest);
   }
 
   // rifiuta la richiesta
   rejectRequest(request: Request) {
     request.status = "rejected";
-    this.requestService.rejectRequest(request.idRequest);
+    this.requestService.rejectRequest(request.idEmployeeRequest);
   }
 }
 
