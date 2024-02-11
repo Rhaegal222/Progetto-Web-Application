@@ -1,24 +1,32 @@
 <div class="container">
   <!-- Inizia la card del prodotto -->
   <div class="product-card">
+    <div class="product-header">
+        <button class="btn-back">
+            <span class="material-icons" [routerLink]="[previusPage]">arrow_back</span>
+        </button>
+        <h1>{{ name }}</h1>
+    </div>
+    <h2 *ngIf="!(description.length == 0 || description == null)">{{ description }}</h2>
+    <h2 *ngIf="description.length == 0 || description == null">Nessuna descrizione</h2>
     <div class="row">
       <div class="column">
-        <div *ngIf="!isAnImage(image)" class="item-no-img">
-          <span class="material-icons">image</span>
-        </div>
-        <div *ngIf="isAnImage(image)" class="item-img">
+        <div *ngIf="!isAnImage" class="item-img" >
             <img [src]="image">
+        </div>
+        <div *ngIf="isAnImage" class="item-no-img">
+          <span class="material-icons">image_not_supported</span>
         </div>
       </div>
       <div class="column">
-        <h2>{{ name }}</h2>
-        <p>{{ description }}</p>
         <div class="product-details">
           <h5>Posizione: <span>{{ location }}</span></h5>
-          <h5>Disponibilità: <span>{{ assigned ? 'Disponibile' : 'Non disponibile' }}</span></h5>
+          <h5>Disponibilità: <span>{{ assigned ? 'Non disponibile' : 'Disponibile' }}</span></h5>
       </div>
-      <button class="btn-primary" (click)="requestProduct()">Richiedi</button>
-      <button class="btn-primary" (click)="returnProduct()">Restituisci</button>
+      <div class="product-buttons">
+        <button *ngIf="!assigned" class="btn-primary" (click)="requestProduct()">Richiedi</button>
+        <button *ngIf="assigned" class="btn-primary" (click)="returnProduct()">Restituisci</button>
+      </div>
     </div>
   </div>
 </div>

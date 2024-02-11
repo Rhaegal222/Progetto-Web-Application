@@ -104,7 +104,8 @@ export class ProductManagementComponent {
   onOpenDetails(product: Product){
     this.selectedProduct = product;
     localStorage.setItem('selectedProduct', JSON.stringify(this.selectedProduct));
-    this.router.navigate(['/product-detail']);    
+    localStorage.setItem('previousPage', '/product-management')
+    this.router.navigate(['/product-detail']);
   }
 
   getAllProducts(){

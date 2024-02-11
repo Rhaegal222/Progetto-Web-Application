@@ -8,7 +8,21 @@
     height: 100%;
     width: 100%;
     padding: 20px;
+}
 
+.product-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.product-header h1 {
+    margin: 0;
+    margin-left: 20px;
+    font-size: 2rem;
+    font-weight: 500;
 }
 
 /* Card del prodotto */
@@ -19,8 +33,17 @@
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     padding: 20px;
-    height: 50%;
+    height: fit-content;
+    max-height: 1000px;
     width: 100%;
+}
+
+.product-buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
 }
 
 .row {
@@ -29,7 +52,8 @@
     grid-template-columns: 1fr 1fr;
     gap: 20px;
     width: 100%;
-    height: 100%;
+    height: fit-content;
+    max-height: 800px;
     align-items: center;
     justify-content: center;
     margin: 20px 0;
@@ -40,6 +64,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    height: fit-content;
 }
 
 /* Messaggio di assenza prodotti */
@@ -64,4 +89,24 @@
 .item-img, .item-no-img {
     width: clamp(200px, 100%, 300px);
     height: clamp(200px, 100%, 300px);
+}
+
+.btn-back {
+    background-color: #b71918; /* Colore di sfondo */
+    border-color: #b71918; /* Colore del bordo */
+    border-radius: 8px;
+    width: clamp(30px, 100%, 50px);
+    color: white; /* Colore del testo */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.btn-back:hover {
+    background-color: #e63939 ; /* Colore di sfondo al hover */
+    border-color: #e63939 ; /* Colore del bordo al hover */
+    color: black; /* Colore del testo al hover */
+    scale: 1.05; /* Effetto di zoom al passaggio del mouse */
 }

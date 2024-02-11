@@ -4,6 +4,7 @@ import { ProductService } from '../../services/product.service';
 import { Product } from '../../model/product';
 import { ErrorService } from '../../services/error.service';
 import { AnimationsService } from '../../services/animations.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -20,9 +21,11 @@ export class ProductListComponent{
   constructor(
     private productService: ProductService,
     private animationService: AnimationsService,
-    private errorService: ErrorService) { }
+    private errorService: ErrorService,
+    private router: Router) { }
 
   products: Product[] = [];
+  selectedProduct: Product | undefined;
   length: number = 0;
 
   ngOnInit(): void {
@@ -84,6 +87,10 @@ export class ProductListComponent{
   }
 
   openDetail(product: Product) {
+    this.selectedProduct = product;
+    localStorage.setItem('selectedProduct', JSON.stringify(this.selectedProduct));
+    localStorage.setItem('previousPage', '/product-list')
+    this.router.navigate(['/product-detail'])
   }
 }
 

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Product } from '../../model/product';
 import { User } from '../../model/user';
+import { ProductService } from '../../services/product.service';
+import { ErrorService } from '../../services/error.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -12,9 +14,13 @@ import { User } from '../../model/user';
 })
 export class ProductDetailComponent {
 
-  constructor() { }
+  constructor(private productService:ProductService, private errorService:ErrorService) { }
 
-  selectedProduct: Product | undefined;
+  product: Product | undefined;
+
+  productProxy: Product | undefined;
+
+  selectedProduct: Product | undefined = undefined;
 
   idItem: number = 0;
   name: string = '';
@@ -22,33 +28,56 @@ export class ProductDetailComponent {
   description: string = '';
   location: string = '';
   image: string = '';
-  assignedUser: User | undefined | string;
+  length: number = 0;
+  assignedUser: string = '';
   assigned: boolean = false;
+  previusPage: string = '';
 
   requestProductWindow: boolean = false;
   returnProductWindow: boolean = false;
   
   ngOnInit() {
+    const previousPage = localStorage.getItem('previousPage');
+    if (previousPage !== null && previousPage !== undefined) {
+      this.previusPage = previousPage;
+    }
     const selectedProduct = localStorage.getItem('selectedProduct');
     if (selectedProduct !== null && selectedProduct !== undefined) {
       this.selectedProduct = JSON.parse(selectedProduct);
 
       if(this.selectedProduct != null && this.selectedProduct != undefined){
-        if(this.selectedProduct.idItem != null && this.selectedProduct.idItem != undefined && this.selectedProduct.idItem != 0)
-          this.idItem = this.selectedProduct.idItem;
-        this.name = this.selectedProduct?.name;
-        this.type = this.selectedProduct?.type;
-        if(this.selectedProduct?.description != null && this.selectedProduct?.description != undefined && this.selectedProduct?.description != "")
-          this.description = this.selectedProduct?.description;
-        if(this.selectedProduct?.location != null && this.selectedProduct?.location != undefined && this.selectedProduct?.location != "")
-          this.location = this.selectedProduct.location;
-        this.image = this.selectedProduct?.image;
-        if(this.selectedProduct.assignedUser != null && this.assignedUser != undefined)
-          this.assignedUser = this.selectedProduct.assignedUser;
-        if(this.assignedUser != null && this.assignedUser != undefined && this.assignedUser != ""){
-          this.assigned = true;
-        }
+        this.product = this.selectedProduct;
+        this.getAllInfo();
       }
+    }
+  }
+
+  getAllInfo(){
+    if (this.product && this.product.idItem) {
+      this.productService.getProduct(this.product.idItem).subscribe({
+        next: (data) => {
+          this.productProxy = data;
+          
+          this.description = this.productProxy?.description || '';
+          if (this.productProxy?.location && this.productProxy?.location != 'Magazzino')
+            this.location = this.productProxy?.location || '';
+        },
+        error: (error) => {
+          this.errorService.handleError(error);
+        }
+      });
+      this.name = this.product.name || '';
+      this.type = this.product.type || '';
+      this.image = this.product.image || '';
+      this.length = this.image ? this.image.length : 0;
+      
+      if (this.product.assignedUser && typeof this.product.assignedUser === 'object')
+        this.assignedUser = this.product.assignedUser.email;
+      else 
+        this.assignedUser = '';
+
+      if (this.assignedUser && this.assignedUser.length > 0)
+        this.assigned = true;
     }
   }
 
@@ -66,7 +95,8 @@ export class ProductDetailComponent {
   }
 
   isAnImage(image : string): boolean {
-    if(image == null || image == "" || !image.startsWith('data:image/')){
+    console.log(image);
+    if(image == null || image == ""){
       return false;
     }
     return true;
