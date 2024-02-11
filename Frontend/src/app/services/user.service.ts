@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs'
 import { User } from '../model/user';
+import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserManagementService {
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private errorService:ErrorService) { }
 
   getAllUsers(): Observable<any[]>{
      return this.http.get<any[]>("http://localhost:8080/api/allUsers");
@@ -24,29 +25,87 @@ export class UserManagementService {
     return this.http.get<User[]>('http://localhost:8080/api/users', { params: params });
   }
 
-  banUser(email: String): Observable<any> {
-    return this.http.post('http://localhost:8080/api/banUser', email);
+  banUser(user: User) {
+    if(user.email != undefined && user.email != null && user.email != "") {
+      const params = { params: new HttpParams().set('email', user.email)}
+      this.http.post('http://localhost:8080/api/banUser', null, params).subscribe({
+        next: () => {
+          return;
+        },
+        error: (error) => {
+          this.errorService.handleError(error);
+        }
+      });
+    }
   }
 
-  unbanUser(email: String): Observable<any> {
-    return this.http.post('http://localhost:8080/api/unbanUser', email);
+  unbanUser(user: User) {
+    if(user.email != undefined && user.email != null && user.email != "") {
+      const params = { params: new HttpParams().set('email', user.email)}
+      this.http.post('http://localhost:8080/api/unbanUser', null, params).subscribe({
+        next: () => {
+          return;
+        },
+        error: (error) => {
+          this.errorService.handleError(error);
+        }
+      });
+    }
   }
 
-  promoteUser(email: String): Observable<any> {
-    return this.http.post('http://localhost:8080/api/promoteUser', email);
+  promoteUser(user: User) {
+    if(user.email != undefined && user.email != null && user.email != "") {
+      const params = { params: new HttpParams().set('email', user.email)}
+      this.http.post('http://localhost:8080/api/promoteUser', null, params).subscribe({
+        next: () => {
+          return;
+        },
+        error: (error) => {
+          this.errorService.handleError(error);
+        }
+      });
+    }
   }
 
-  demoteUser(email: String): Observable<any> {
-    return this.http.post('http://localhost:8080/api/demoteUser', email);
+  demoteUser(user: User) {
+    if(user.email != undefined && user.email != null && user.email != "") {
+      const params = { params: new HttpParams().set('email', user.email)}
+      this.http.post('http://localhost:8080/api/demoteUser', null, params).subscribe({
+        next: () => {
+          return;
+        },
+        error: (error) => {
+          this.errorService.handleError(error);
+        }
+      });
+    }
   }
 
-  refuseUser(email: String): Observable<any> {
-    return this.http.post('http://localhost:8080/api/refuseUser', email);
+  refuseUser(user: User) {
+    if(user.email != undefined && user.email != null && user.email != "") {
+      const params = { params: new HttpParams().set('email', user.email)}
+      this.http.post('http://localhost:8080/api/refuseUser', null, params).subscribe({
+        next: () => {
+          return;
+        },
+        error: (error) => {
+          this.errorService.handleError(error);
+        }
+      });
+    }
   }
 
-  acceptUser(email: String): Observable<any> {
-    return this.http.post('http://localhost:8080/api/acceptUser', email);
+  acceptUser(user: User) {
+    if(user.email != undefined && user.email != null){
+      const params = { params: new HttpParams().set('email', user.email) };
+      this.http.post('http://localhost:8080/api/acceptUser', null, params).subscribe({
+        next: () => {
+          return;
+        },
+        error: (error) => {
+          this.errorService.handleError(error);
+        }
+      });
+    }
   }
-
-
 }

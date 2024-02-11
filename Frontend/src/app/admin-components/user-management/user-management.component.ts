@@ -87,58 +87,23 @@ export class UserManagementComponent {
   }
 
   onPromote(user: User) {
-    this.userService.promoteUser(user.email).subscribe({
-      next: (data) => {
-        this.getAllUsers();
-      },
-      error: (error: any) => {
-        this.errorService.handleError(error);
-      }
-    });
+    this.userService.promoteUser(user);
   }
 
   onLock(user: User) {
-    this.userService.banUser(user.email).subscribe({
-      next: (data) => {
-        this.getAllUsers();
-      },
-      error: (error: any) => {
-        this.errorService.handleError(error);
-      }
-    });
+    this.userService.banUser(user);
   }
 
   onUnlock(user: User) {
-    this.userService.unbanUser(user.email).subscribe({
-      next: (data) => {
-        this.getAllUsers();
-      },
-      error: (error: any) => {
-        this.errorService.handleError(error);
-      }
-    });
+    this.userService.unbanUser(user);
   }
 
   onAccept(user: User) {
-    this.userService.acceptUser(user.email).subscribe({
-      next: (data) => {
-        this.getAllUsers();
-      },
-      error: (error: any) => {
-        this.errorService.handleError(error);
-      }
-    });
+    this.userService.acceptUser(user);
   }
-  
+
   onReject(user: User) {
-    this.userService.refuseUser(user.email).subscribe({
-      next: (data) => {
-        this.getAllUsers();
-      },
-      error: (error: any) => {
-        this.errorService.handleError(error);
-      }
-    });
+    this.userService.refuseUser(user);
   }
 }
 

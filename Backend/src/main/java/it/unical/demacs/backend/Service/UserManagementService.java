@@ -94,6 +94,7 @@ public class UserManagementService {
             User user = DatabaseHandler.getInstance().getUserDao().findByEmail(email).join();
             if (user.getRole() == null || user.getRole().equals("np")) {
                 user.setRole("e");
+                return ResponseEntity.ok().body("User promoted to employee");
             } else if (user.getRole().equals("e")) {
                 user.setRole("s");
                 return ResponseEntity.ok().body("User promoted to storekeeper");
