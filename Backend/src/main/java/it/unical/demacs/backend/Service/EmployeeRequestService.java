@@ -33,7 +33,6 @@ public class EmployeeRequestService {
             if (idEmployeeRequestString != null && !idEmployeeRequestString.isEmpty()) {
                 employeeRequest = new EmployeeRequest(Long.parseLong(idEmployeeRequestString));
             }
-            String email = request.getParameter("email");
             assert employeeRequest != null;
             if (DatabaseHandler.getInstance().getEmployeeRequestDao().deleteEmployeeRequest(employeeRequest.getIdEmployeeRequest()).join()) {
                 outputJSON(response, "Request deleted", "0");
@@ -42,6 +41,9 @@ public class EmployeeRequestService {
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+        finally {
+            DatabaseHandler.getInstance().closeConnection();
         }
     }
 
@@ -144,26 +146,38 @@ public class EmployeeRequestService {
         }
     }
 
-    public void refuseEmployeeRequest(HttpServletRequest request, HttpServletResponse response) {
+    public void changeStatusEmployeeRequest(HttpServletRequest request, HttpServletResponse response) {
         try {
             DatabaseHandler.getInstance().openConnection();
             EmployeeRequest employeeRequest = null;
             String idEmployeeRequestString = request.getParameter("idEmployeeRequest");
+            String newStatus = request.getParameter("newStatus");
+
             if (idEmployeeRequestString != null && !idEmployeeRequestString.isEmpty()) {
                 employeeRequest = new EmployeeRequest(Long.parseLong(idEmployeeRequestString));
             }
 
             assert employeeRequest != null;
+            if(newStatus.equals("r")){
+                newStatus = "refused";
+            }
+            else if(newStatus.equals("a")){
+                newStatus = "accepted";
+            }
             if (employeeRequest.getStatus().equals("pending")) {
-                employeeRequest.setStatus("refused");
+                employeeRequest.setStatus(newStatus);
                 DatabaseHandler.getInstance().getEmployeeRequestDao().updateEmployeeRequest(employeeRequest).join();
-                outputJSON(response, "Request refused", "0");
+                String responseMessage = "Request status changed to " + newStatus;
+                outputJSON(response, responseMessage , "0");
             } else {
                 outputJSON(response, "Error refusing request", "1");
             }
 
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+        finally {
+            DatabaseHandler.getInstance().closeConnection();
         }
     }
 
@@ -186,4 +200,5 @@ public class EmployeeRequestService {
             DatabaseHandler.getInstance().closeConnection();
         }
     }
+
 }
