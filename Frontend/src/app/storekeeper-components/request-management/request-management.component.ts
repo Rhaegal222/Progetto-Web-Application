@@ -86,27 +86,13 @@ export class RequestManagementComponent {
   // accetta la richista
   acceptRequest(request: Request) {
     request.status = "accepted";
-    this.requestService.editRequest(request.idRequest, request.status).subscribe({
-      next: () => {
-        return
-      },
-      error: (error) => {
-        this.errorService.handleError(error);
-      }
-    });
+    this.requestService.acceptRequest(request.idRequest);
   }
 
   // rifiuta la richiesta
   rejectRequest(request: Request) {
     request.status = "rejected";
-    this.requestService.editRequest(request.idRequest, request.status).subscribe({
-      next: () => {
-        return
-      },
-      error: (error) => {
-        this.errorService.handleError(error);
-      }
-    });
+    this.requestService.rejectRequest(request.idRequest);
   }
 }
 
