@@ -33,7 +33,6 @@ public class EmployeeRequestService {
             if (idEmployeeRequestString != null && !idEmployeeRequestString.isEmpty()) {
                 employeeRequest = new EmployeeRequest(Long.parseLong(idEmployeeRequestString));
             }
-            String email = request.getParameter("email");
             assert employeeRequest != null;
             if (DatabaseHandler.getInstance().getEmployeeRequestDao().deleteEmployeeRequest(employeeRequest.getIdEmployeeRequest()).join()) {
                 outputJSON(response, "Request deleted", "0");
@@ -42,6 +41,9 @@ public class EmployeeRequestService {
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+        finally {
+            DatabaseHandler.getInstance().closeConnection();
         }
     }
 
@@ -164,6 +166,9 @@ public class EmployeeRequestService {
 
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+        finally {
+            DatabaseHandler.getInstance().closeConnection();
         }
     }
 

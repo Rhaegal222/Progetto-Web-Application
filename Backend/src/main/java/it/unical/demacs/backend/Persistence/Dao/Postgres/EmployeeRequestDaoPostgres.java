@@ -184,7 +184,7 @@ public class EmployeeRequestDaoPostgres implements EmployeeRequestDao {
             st.setString(5, employeeRequest.getStatus());
             st.setString(6, employeeRequest.getType());
             st.setDate(7, Date.valueOf(employeeRequest.getDate()));
-            st.setLong(9, employeeRequest.getIdEmployeeRequest());
+            st.setLong(8, employeeRequest.getIdEmployeeRequest());
             int rowsAffected = st.executeUpdate();
             st.close();
             return CompletableFuture.completedFuture(rowsAffected > 0);
