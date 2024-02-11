@@ -88,22 +88,27 @@ export class UserManagementComponent {
 
   onPromote(user: User) {
     this.userService.promoteUser(user);
+    this.getAllUsers();
   }
 
   onLock(user: User) {
     this.userService.banUser(user);
+    this.getAllUsers();
   }
 
   onUnlock(user: User) {
     this.userService.unbanUser(user);
+    this.getAllUsers();
   }
 
   onAccept(user: User) {
     this.userService.acceptUser(user);
+    this.getAllUsers();
   }
 
   onReject(user: User) {
     this.userService.refuseUser(user);
+    this.getAllUsers();
   }
 }
 

@@ -1,6 +1,18 @@
 <ul class="items">
-    <li *ngIf="!isAuth" routererLinkActive="active" routerLink="/login">Accedi</li>
-    <li *ngIf="!isAuth" routererLinkActive="active" routerLink="/registration">Registrati</li>
-    <li routerLinkActive="active" routerLink="/contacts">Contatti</li>
-    <li *ngIf="isAuth" routerLinkActive="active" routerLink="/login" (click)="logout()">Esci</li>
+    <li *ngIf="!isAuth" routererLinkActive="active" routerLink="/login">
+        <span class="material-icons">login</span>
+        <p>Accedi</p>
+    </li>
+    <li *ngIf="!isAuth" routererLinkActive="active" routerLink="/registration">
+        <span class="material-icons">person_add</span>
+        <p>Registrati</p>
+    </li>
+    <li routerLinkActive="active" routerLink="/contacts">
+        <span class="material-icons">contact_support</span>
+        <p>Contatti</p>
+    </li>
+    <li *ngIf="isAuth" routerLinkActive="active" routerLink="/login" (click)="logout()">
+        <span class="material-icons">logout</span>
+        <p>Esci</p>
+    </li>
 </ul>

@@ -1,5 +1,14 @@
 <ul class="items">
-    <li *ngIf="isAuth" routererLinkActive="active" routerLink="/request-management">Gestione richieste</li>
-    <li *ngIf="isAuth" routererLinkActive="active" routerLink="/product-management">Gestione prodotti</li>
-    <li *ngIf="isAuth" routererLinkActive="active" routerLink="/report">Report</li>
+    <li *ngIf="isAuth" routererLinkActive="active" routerLink="/request-management">
+        <span class="material-icons">all_inbox</span>
+        <p>Gestione richieste</p>
+    </li>
+    <li *ngIf="isAuth" routererLinkActive="active" routerLink="/product-management">
+        <span class="material-icons">takeout_dining</span>
+        <p>Gestione prodotti</p>
+    </li>
+    <li *ngIf="isAuth" routererLinkActive="active" routerLink="/report">
+        <span class="material-icons">bar_chart</span>
+        <p>Report</p>
+    </li>
 </ul>

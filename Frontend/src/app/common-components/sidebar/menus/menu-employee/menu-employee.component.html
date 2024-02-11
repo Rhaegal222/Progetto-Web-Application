@@ -1,6 +1,18 @@
 <ul class="items">
-    <li *ngIf="isAuth" routererLinkActive="active" routerLink="/product-list">Prodotti</li>
-    <li *ngIf="isAuth" routerLinkActive="active" routerLink="/user-product">I miei prodotti</li>
-    <li *ngIf="isAuth" routerLinkActive="active" routerLink="/requests-forwarded">Richieste inoltrate</li>
-    <li *ngIf="isAuth" routerLinkActive="active" routerLink="/profile">Profilo</li>
+    <li *ngIf="isAuth" routererLinkActive="active" routerLink="/product-list">
+        <span class="material-icons">inventory_2</span>
+        <p>Prodotti</p>
+    </li>
+    <li *ngIf="isAuth" routerLinkActive="active" routerLink="/user-product">
+        <span class="material-icons">category</span>
+        <p>I miei prodotti</p>
+    </li>
+    <li *ngIf="isAuth" routerLinkActive="active" routerLink="/requests-forwarded">
+        <span class="material-icons">forward_to_inbox</span> 
+        <p>Richieste inoltrate</p>
+    </li>
+    <li *ngIf="isAuth" routerLinkActive="active" routerLink="/profile">
+        <span class="material-icons">person</span> 
+        <p>Profilo</p>
+    </li>
 </ul>
