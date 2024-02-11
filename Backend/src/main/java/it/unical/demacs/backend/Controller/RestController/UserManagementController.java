@@ -36,4 +36,8 @@ public class UserManagementController {
         else if (role == null || role.equals("all")) {return userManagementService.searchUsers(search, "");}
         else {return userManagementService.searchUsers(search, role);}
     }
+    @GetMapping("/api/getUser")
+    public ResponseEntity<?> getUser(@RequestParam("email") String email) {
+        return userManagementService.getUserProxy(email);
+    }
 }

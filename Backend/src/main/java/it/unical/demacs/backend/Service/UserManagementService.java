@@ -1,6 +1,8 @@
 package it.unical.demacs.backend.Service;
 
+import it.unical.demacs.backend.Persistence.Dao.Postgres.UserProxy;
 import it.unical.demacs.backend.Persistence.DatabaseHandler;
+import it.unical.demacs.backend.Persistence.Model.Item;
 import it.unical.demacs.backend.Persistence.Model.User;
 import it.unical.demacs.backend.Persistence.RegexHandler;
 import it.unical.demacs.backend.Service.Request.NewPasswordRequest;
@@ -137,6 +139,22 @@ public class UserManagementService {
                 }
             } else {
                 return ResponseEntity.status(401).body("{\"message\": \"Invalid\"}");
+            }
+        }
+        finally {
+            DatabaseHandler.getInstance().closeConnection();
+        }
+    }
+
+    public ResponseEntity<?> getUserProxy(String email) {
+        try {
+            DatabaseHandler.getInstance().openConnection();
+            UserProxy userProxy = (UserProxy) DatabaseHandler.getInstance().getUserDao().findByEmail(email).join();
+            if (userProxy == null) {
+                return ResponseEntity.badRequest().body("{\"message\": \"No user found\"}");
+            } else {
+                ArrayList<Item> userItems = (userProxy.getItems() != null) ? userProxy.getItems() : new ArrayList<>();
+                return ResponseEntity.ok(userItems);
             }
         }
         finally {
