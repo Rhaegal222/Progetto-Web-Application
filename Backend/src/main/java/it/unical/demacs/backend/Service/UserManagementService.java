@@ -94,18 +94,21 @@ public class UserManagementService {
             User user = DatabaseHandler.getInstance().getUserDao().findByEmail(email).join();
             if (user.getRole() == null || user.getRole().equals("np")) {
                 user.setRole("e");
-                return ResponseEntity.ok().body("User promoted to employee");
+                // Salva nel db
+                DatabaseHandler.getInstance().getUserDao().updateRole(user);
+                return ResponseEntity.ok().body("{\"message\": \"User promoted to employee\"}");
             } else if (user.getRole().equals("e")) {
                 user.setRole("s");
-                return ResponseEntity.ok().body("User promoted to storekeeper");
+                DatabaseHandler.getInstance().getUserDao().updateRole(user);
+                return ResponseEntity.ok().body("{\"message\": \"User promoted to storekeeper\"}");
             } else if (user.getRole().equals("s")) {
                 user.setRole("a");
                 DatabaseHandler.getInstance().getUserDao().updateRole(user);
-                return ResponseEntity.ok().body("User promoted to admin");
+                return ResponseEntity.ok().body("{\"message\": \"User promoted to admin\"}");
             } else if (user.getRole().equals("a")) {
-                return ResponseEntity.status(401).body("User is already admin");
+                return ResponseEntity.status(401).body("{\"message\": \"User already admin\"}");
             }
-            return ResponseEntity.status(401).body("Unknown error");
+            return ResponseEntity.status(401).body("{\"message\": \"Unknown error\"}");
         } finally {
             DatabaseHandler.getInstance().closeConnection();
         }

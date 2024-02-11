@@ -25,6 +25,8 @@ export class ErrorService {
   handleError(error: any) {
     if (error.message === 'Email already in use'){
       return
+    } else if (error.status === 400) {
+      console.error('Richiesta non valida');      
     } else if (error.status === 401) {
       console.error('Non autorizzato');
     } else if (error.status === 402) {
@@ -51,6 +53,7 @@ export class ErrorService {
       console.error('Errore di rete');
     } else {
       console.error('Errore sconosciuto');
+      console.error(error);
     }
   }
 }

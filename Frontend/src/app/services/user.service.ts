@@ -27,8 +27,7 @@ export class UserManagementService {
 
   banUser(user: User) {
     if(user.email != undefined && user.email != null && user.email != "") {
-      const params = { params: new HttpParams().set('email', user.email)}
-      this.http.post('http://localhost:8080/api/banUser', null, params).subscribe({
+      this.http.post('http://localhost:8080/api/banUser?email='+user.email, null).subscribe({
         next: () => {
           return;
         },
@@ -41,8 +40,7 @@ export class UserManagementService {
 
   unbanUser(user: User) {
     if(user.email != undefined && user.email != null && user.email != "") {
-      const params = { params: new HttpParams().set('email', user.email)}
-      this.http.post('http://localhost:8080/api/unbanUser', null, params).subscribe({
+      this.http.post('http://localhost:8080/api/unbanUser?email='+user.email, null).subscribe({
         next: () => {
           return;
         },
@@ -55,8 +53,7 @@ export class UserManagementService {
 
   promoteUser(user: User) {
     if(user.email != undefined && user.email != null && user.email != "") {
-      const params = { params: new HttpParams().set('email', user.email)}
-      this.http.post('http://localhost:8080/api/promoteUser', null, params).subscribe({
+      this.http.post('http://localhost:8080/api/promoteUser?email='+user.email, null).subscribe({
         next: () => {
           return;
         },
@@ -69,8 +66,7 @@ export class UserManagementService {
 
   demoteUser(user: User) {
     if(user.email != undefined && user.email != null && user.email != "") {
-      const params = { params: new HttpParams().set('email', user.email)}
-      this.http.post('http://localhost:8080/api/demoteUser', null, params).subscribe({
+      this.http.post('http://localhost:8080/api/demoteUser?email='+user.email, null).subscribe({
         next: () => {
           return;
         },
@@ -83,8 +79,7 @@ export class UserManagementService {
 
   refuseUser(user: User) {
     if(user.email != undefined && user.email != null && user.email != "") {
-      const params = { params: new HttpParams().set('email', user.email)}
-      this.http.post('http://localhost:8080/api/refuseUser', null, params).subscribe({
+      this.http.post('http://localhost:8080/api/refuseUser?email='+user.email, null).subscribe({
         next: () => {
           return;
         },
@@ -97,8 +92,7 @@ export class UserManagementService {
 
   acceptUser(user: User) {
     if(user.email != undefined && user.email != null){
-      const params = { params: new HttpParams().set('email', user.email) };
-      this.http.post('http://localhost:8080/api/acceptUser', null, params).subscribe({
+      this.http.post('http://localhost:8080/api/acceptUser?email='+user.email, null).subscribe({
         next: () => {
           return;
         },
