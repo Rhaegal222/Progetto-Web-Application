@@ -30,8 +30,30 @@ export class RequestService {
     return this.http.get<Request[]>('http://localhost:8080/api/requests', { params: params });
   }
 
-  editRequest(id : number, status : string): Observable<Request> {
-    let params = new HttpParams().set('idRequest', id.toString()).set('status', status);
-    return this.http.put<Request>("http://localhost:8080/api/editRequest", {params : params});
+  rejectRequest(id : number){
+    if(id != undefined && id != null) {
+      this.http.post('http://localhost:8080/api/changeStatusRequest?idEmployeeRequest='+id+'&newStatus=r', null).subscribe({
+        next: () => {
+          return;
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      });
+    }
   }
-}
+
+  acceptRequest(id : number){
+    if(id != undefined && id != null) {
+      this.http.post('http://localhost:8080/api/changeStatusRequest?idEmployeeRequest='+id+'&newStatus=a', null).subscribe({
+        next: () => {
+          return;
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      });
+    }
+  }
+    
+  }
