@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { ProductService } from '../../../services/product.service';
 import { AnimationsService } from '../../../services/animations.service';
 import { Product } from '../../../model/product';
+import { ProductProxy } from '../../../model/productProxy';
 import { ImgbbService } from '../../../services/imgbb.service';
 import { ErrorService } from '../../../services/error.service';
 
@@ -29,6 +30,8 @@ export class EditProductComponent {
 
   @Input() product: Product | undefined;
 
+  productProxy: ProductProxy | undefined;
+
   idItem: number = 0;  
   name: string = '';
   type: string = '';
@@ -42,42 +45,32 @@ export class EditProductComponent {
   ngOnInit(): void {
 
     this.animationsService.initResizeObserver('edit-product');
-    
+
+    this.initObservable();
+
+    this.getAllInfo();
+  }
+
+  ngAfterView() {
+    this.getAllInfo();
+  }
+
+  getAllInfo(){
     if (this.product && this.product.idItem) {
       this.productService.getProduct(this.product.idItem).subscribe({
+        next: (data) => {
+          this.productProxy = data;
+          
+          this.description = this.productProxy?.description || '';
+          if (this.productProxy?.location && this.productProxy?.location != 'Magazzino')
+            this.location = this.productProxy?.location || '';
+        },
         error: (error) => {
           this.errorService.handleError(error);
         }
       });
-      
-      this.idItem = this.product.idItem;
       this.name = this.product.name || '';
       this.type = this.product.type || '';
-      this.description = this.product.description || '';
-      if (this.product.location) {
-        this.location = this.product.location;
-      }
-      this.image = this.product.image || '';
-      this.length = this.image ? this.image.length : 0;
-
-      if (this.product.assignedUser && typeof this.product.assignedUser === 'object')
-        this.assigned_user = this.product.assignedUser.email;
-      else 
-        this.assigned_user = '';
-      
-      if (this.assigned_user && this.assigned_user.length > 0)
-        this.assigned = true;
-    }
-  }
-
-  ngAfterView() {
-    if (this.product) {
-      this.name = this.product.name || '';
-      this.type = this.product.type || '';
-      this.description = this.product.description || '';
-      if (this.product.location) {
-        this.location = this.product.location;
-      }
       this.image = this.product.image || '';
       this.length = this.image ? this.image.length : 0;
       

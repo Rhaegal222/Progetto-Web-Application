@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs'
 import { Product } from '../model/product';
 import { ErrorService } from './error.service';
+import { ProductProxy } from '../model/productProxy';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,8 @@ export class ProductService {
     return this.http.get<Product[]>("http://localhost:8080/api/allItems");
   }
 
-  getProduct(idItem: number) {
+  getProduct(idItem: number): Observable<any> {
     let params = new HttpParams().set('idItem', idItem.toString());
-  
     return this.http.get('http://localhost:8080/api/getItem', { params });
   }
   
@@ -58,8 +58,7 @@ export class ProductService {
 
   deleteProduct(product: Product) {
     if(product.idItem != undefined && product.idItem != null){
-      const params = { params: new HttpParams().set('idItem', product.idItem.toString()) };
-      this.http.post('http://localhost:8080/api/deleteItem', null, params).subscribe({
+      this.http.post('http://localhost:8080/api/deleteItem?idItem='+product.idItem.toString(), null).subscribe({
         next: () => {
           return;
         },
