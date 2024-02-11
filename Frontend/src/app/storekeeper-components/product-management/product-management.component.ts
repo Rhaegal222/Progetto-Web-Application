@@ -32,8 +32,8 @@ export class ProductManagementComponent {
   editProductWindow: boolean = false;
 
   ngOnInit(): void {
-    this.observeProductListLenght();
     this.productService.checkIfStoreWorks();
+    this.observeProductListLenght();
     this.getAllProducts();
   }
 

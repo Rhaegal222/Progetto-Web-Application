@@ -1,9 +1,7 @@
 package it.unical.demacs.backend.Controller.RestController;
 
-import it.unical.demacs.backend.Persistence.Model.EmployeeRequest;
 import it.unical.demacs.backend.Service.ReportService;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

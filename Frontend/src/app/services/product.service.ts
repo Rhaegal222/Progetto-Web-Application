@@ -20,7 +20,6 @@ export class ProductService {
     return this.http.get('http://localhost:8080/api/getItem', { params });
   }
   
-
   getProducts(searchValue: string = '', category: string = ''): Observable<Product[]> {
     let params = new HttpParams();
    

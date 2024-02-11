@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 public class ItemDaoPostgres implements ItemDao {
@@ -48,7 +49,13 @@ public class ItemDaoPostgres implements ItemDao {
                 item.setType(rs.getString("type"));
                 item.setImage(rs.getString("image_base64"));
                 if(rs.getLong("assigned_user") != 0){
-                    item.setAssignedUser(new User(rs.getLong("assigned_user")));
+                    User assignedUser = new User(rs.getLong("assigned_user"));
+                    if(!Objects.equals(assignedUser.getEmail(), "magazzino.unical@libero.it")){
+                        item.setAssignedUser(assignedUser);
+                    }
+                    else{
+                        item.setAssignedUser(null);
+                    }
                 }
                 else{
                     item.setAssignedUser(null);
