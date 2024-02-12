@@ -75,7 +75,7 @@ export class ProductRequestComponent {
       requestingUser: this.emailUser
     };
     this.requestService.sendRequest(request);
-    console.log('Richiesta prodotto inviata');
+    this.requestService.updateLocalRequests(request);
     this.onClose();
   }
 }

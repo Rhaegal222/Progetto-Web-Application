@@ -68,15 +68,10 @@ export class RequestsForwardedComponent {
   }
 
   getAllRequests() {
-    this.requestService.getRequests().subscribe({
-      next: (data) => {
-        this.requests = data;
-        this.filterRequests();
-      },
-      error: (error: any) => {
-        this.errorService.handleError(error);
-      }
-    });
+    const request = localStorage.getItem('requests');
+    if (request !== null && request !== undefined) {
+      this.requests = JSON.parse(request);
+    }
   }
 
   filterRequests(){
