@@ -8,4 +8,5 @@ export interface Product{
     location?:string;
     image:string;
     assignedUser: User | string;
+    emailUser?: string;
 }

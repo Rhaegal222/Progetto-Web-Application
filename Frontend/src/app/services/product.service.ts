@@ -34,6 +34,7 @@ export class ProductService {
   }
 
   editProduct(product: Product) {
+    console.log(product);
     this.http.post("http://localhost:8080/api/modifyItem", product).subscribe({
       next: () => {
         return;

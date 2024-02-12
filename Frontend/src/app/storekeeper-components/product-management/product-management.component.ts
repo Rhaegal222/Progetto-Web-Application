@@ -109,7 +109,6 @@ export class ProductManagementComponent {
   }
 
   getAllProducts(){
-    console.log("Getting all products");
     setTimeout(() => {
       this.productService.getAllProducts().subscribe({
         next: (data) => {

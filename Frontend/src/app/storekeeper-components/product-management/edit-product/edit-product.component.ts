@@ -69,6 +69,7 @@ export class EditProductComponent {
           this.errorService.handleError(error);
         }
       });
+      this.idItem = this.product.idItem;
       this.name = this.product.name || '';
       this.type = this.product.type || '';
       this.image = this.product.image || '';
@@ -222,7 +223,8 @@ export class EditProductComponent {
       description: this.description,
       location: this.location,
       image: this.image,
-      assignedUser: this.assigned_user
+      assignedUser: this.assigned_user,
+      emailUser: this.assigned_user
     };
 
     this.productService.editProduct(product);
