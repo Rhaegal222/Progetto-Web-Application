@@ -38,8 +38,8 @@ export class SearchBarComponent {
   requestStatus = [
     {key: 'all', name: 'Tutti gli stati', visible: false},
     {key: 'pending', name: 'In attesa', visible: true},
-    {key: 'approved', name: 'Approvata', visible: true},
-    {key: 'rejected', name: 'Rifiutata', visible: true},
+    {key: 'accepted', name: 'Approvata', visible: true},
+    {key: 'refused', name: 'Rifiutata', visible: true},
   ];
   status: string = 'Tutti gli stati';
   

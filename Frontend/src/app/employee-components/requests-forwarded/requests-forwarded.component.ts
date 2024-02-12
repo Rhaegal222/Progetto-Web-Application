@@ -4,9 +4,6 @@ import { RequestService } from '../../services/request.service';
 import { Request } from '../../model/request';
 import { ErrorService } from '../../services/error.service';
 import { AuthService } from '../../services/auth.service';
-import { error } from 'console';
-// Remove the import statement for 'requestDetailsEventData'
-// import { requestDetailsEventData } from '../../storekeeper-components/request-management/request-management.component';
 
 @Component({
   selector: 'app-requests-forwarded',
