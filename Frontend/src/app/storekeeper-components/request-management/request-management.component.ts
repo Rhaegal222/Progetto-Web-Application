@@ -94,6 +94,11 @@ export class RequestManagementComponent {
     request.status = "rejected";
     this.requestService.rejectRequest(request.idEmployeeRequest);
   }
+
+  // visualizza i dettagli della richiesta
+  showDetails(request: Request) {
+    console.log(request);
+  }
 }
 
 export interface onSearchEventData {

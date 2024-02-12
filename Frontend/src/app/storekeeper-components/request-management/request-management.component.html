@@ -37,7 +37,7 @@
                     <div class="card-row btn">
                         <button *ngIf="request.status == 'pending'" (click)="acceptRequest(request)" class="btn btn-success">Accetta</button>
                         <button *ngIf="request.status == 'pending'" (click)="rejectRequest(request)" class="btn btn-danger">Rifiuta</button>
-                        <button *ngIf="request.status != 'pending'" (click)="rejectRequest(request)" class="btn btn-danger">Visualizza</button>
+                        <button *ngIf="request.status != 'pending'" (click)="showDetails(request)" class="btn btn-danger">Visualizza</button>
                     </div>
                 </div>
             </div>
