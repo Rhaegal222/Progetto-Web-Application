@@ -10,6 +10,8 @@ export class RequestService {
 
   constructor(private http:HttpClient) { }
 
+  requests: Request[] = [];
+
   getAllRequests(): Observable<Request[]> {
     return this.http.get<Request[]>("http://localhost:8080/api/allRequests");
   }
@@ -69,4 +71,14 @@ export class RequestService {
     });
   }
 
+  updateLocalRequests(request: Request){
+    const requests = localStorage.getItem('requests')
+    if(requests !== null && requests !== undefined){
+      this.requests = JSON.parse(requests);
+      this.requests.push(request);
+      localStorage.removeItem('requests')
+      localStorage.setItem('requests', JSON.stringify(this.requests))
+      console.log('aggiornate local requests', localStorage.getItem('requests'))
+    }
+  }
 }

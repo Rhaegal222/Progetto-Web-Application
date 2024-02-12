@@ -96,11 +96,13 @@ export class RequestManagementComponent {
   acceptRequest(request: Request) {
     if (request.idEmployeeRequest !== undefined) {
       this.requestService.acceptRequest(request.idEmployeeRequest);
+      window.location.reload();
     }
   }
   rejectRequest(request: Request) {
     if (request.idEmployeeRequest !== undefined) {
       this.requestService.rejectRequest(request.idEmployeeRequest);
+      window.location.reload();
     }
   }
 }
