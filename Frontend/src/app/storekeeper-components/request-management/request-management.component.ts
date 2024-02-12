@@ -92,6 +92,17 @@ export class RequestManagementComponent {
   onClose(eventData: requestDetailsEventData) {
     this.isShowingDetails = eventData.requestDetailsWindow;
   }
+
+  acceptRequest(request: Request) {
+    if (request.idEmployeeRequest !== undefined) {
+      this.requestService.acceptRequest(request.idEmployeeRequest);
+    }
+  }
+  rejectRequest(request: Request) {
+    if (request.idEmployeeRequest !== undefined) {
+      this.requestService.rejectRequest(request.idEmployeeRequest);
+    }
+  }
 }
 
 export interface onSearchEventData {

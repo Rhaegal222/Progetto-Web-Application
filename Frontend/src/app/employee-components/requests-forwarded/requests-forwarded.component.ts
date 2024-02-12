@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RequestService } from '../../services/request.service';
 import { Request } from '../../model/request';
 import { ErrorService } from '../../services/error.service';
+// Remove the import statement for 'requestDetailsEventData'
+// import { requestDetailsEventData } from '../../storekeeper-components/request-management/request-management.component';
 
 @Component({
   selector: 'app-requests-forwarded',
@@ -24,6 +26,8 @@ export class RequestsForwardedComponent {
   requestProduct: Request[] = [];
 
   length: number = 0;
+
+  isShowingDetails: boolean = false;
 
   ngOnInit(): void {
     this.initObservable();
@@ -82,19 +86,24 @@ export class RequestsForwardedComponent {
     this.returnedRequests = this.requests.filter(request => request.type === "returnRequest");
     console.log(this.returnedRequests);
   }
-  
-  /*
-  OnOpenRequestDetails(request: Request) {
-    this.selectedRequest = request;
+
+  @Output() onShowDetailsEvent = new EventEmitter<Request>();
+
+  openDetails(request: Request) {
+    this.isShowingDetails = true;
+    localStorage.setItem('selectedRequest', JSON.stringify(request));
   }
 
-  OnCloseRequestDetails() {
-    this.selectedRequest = undefined;
+  onClose(eventData: requestDetailsEventData) {
+    this.isShowingDetails = eventData.requestDetailsWindow;
   }
-  */
 }
 
-interface onSearchEventData {
+export interface onSearchEventData {
   searchValue: string;
   element: string;
+}
+
+export interface requestDetailsEventData {
+  requestDetailsWindow: boolean;
 }

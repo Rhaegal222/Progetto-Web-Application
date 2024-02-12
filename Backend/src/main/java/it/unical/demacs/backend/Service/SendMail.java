@@ -3,6 +3,7 @@ package it.unical.demacs.backend.Service;
 import it.unical.demacs.backend.Persistence.DatabaseHandler;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.scheduling.annotation.Async;
 
 import java.util.Properties;
 import javax.mail.Message;
@@ -28,6 +29,7 @@ public class SendMail {
         return instance;
     }
 
+    @Async
     public void sendEmail(String requestTitle, String requestMotivation, String destinationEmail) {
         final String username = "magazzino.unical@libero.it";
         final String password = "Web.app2024";

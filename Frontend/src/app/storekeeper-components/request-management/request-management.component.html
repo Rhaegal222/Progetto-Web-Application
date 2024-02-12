@@ -35,7 +35,9 @@
                         <span>{{request.date}}</span>
                     </div>
                     <div class="card-row btn">
-                        <button (click)="openDetails(request)" class="btn btn-danger">Visualizza</button>
+                        <button *ngIf="request.status == 'accepted' || request.status == 'refused'"(click)="openDetails(request)" class="btn btn-danger">Visualizza</button>
+                        <button *ngIf="request.status == 'pending'"(click)="acceptRequest(request)" class="btn-primary">Accetta</button>
+                        <button *ngIf="request.status == 'pending'"(click)="rejectRequest(request)" class="btn-primary">Rifiuta</button>
                     </div>
                 </div>
             </div>
@@ -72,7 +74,9 @@
                         <span>{{request.date}}</span>
                     </div>
                     <div class="card-row btn">
-                        <button (click)="openDetails(request)" class="btn btn-danger">Visualizza</button>
+                        <button *ngIf="request.status == 'accepted' || request.status == 'refused'"(click)="openDetails(request)" class="btn btn-danger">Visualizza</button>
+                        <button *ngIf="request.status == 'pending'"(click)="acceptRequest(request)" class="btn-primary">Accetta</button>
+                        <button *ngIf="request.status == 'pending'"(click)="rejectRequest(request)" class="btn-primary">Rifiuta</button>
                     </div>
                 </div>
             </div>

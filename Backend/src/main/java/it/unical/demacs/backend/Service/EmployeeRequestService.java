@@ -54,15 +54,18 @@ public class EmployeeRequestService {
             String title = sendReqRequest.getTitle();
             String description = sendReqRequest.getDescription();
             String type = sendReqRequest.getType();
-            String date = sendReqRequest.getDate();
-            long product = sendReqRequest.getProduct();
-            long user = sendReqRequest.getUser();
-            if(title.isEmpty() || description.isEmpty() || type.isEmpty() || date.isEmpty() || product == 0 || user == 0) {
+            String unFormattedDate = sendReqRequest.getDate();
+            String date = unFormattedDate.substring(0, 10);
+
+
+            long product = sendReqRequest.getRequestedItem();
+            String emailUser = sendReqRequest.getRequestingUser();
+            if(type.isEmpty() || emailUser.isEmpty() || date.isEmpty() || product == 0) {
                 return ResponseEntity.status(400).body("Invalid request");
             }
 
 
-            User requestingUser = DatabaseHandler.getInstance().getUserDao().findByPrimaryKey(user).join();
+            User requestingUser = DatabaseHandler.getInstance().getUserDao().findByEmail(emailUser).join();
             Item requestedItem = DatabaseHandler.getInstance().getItemDao().findByPrimaryKey(product).join();
 
             String requestTitle = null;
