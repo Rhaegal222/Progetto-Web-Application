@@ -61,6 +61,7 @@ export class RequestsForwardedComponent {
       this.requestService.getRequests(this.searchValue, this.status).subscribe({
         next: (data) => {
           this.requests = data;
+          this.filterRequests();
         },
         error: (error: any) => {
           this.errorService.handleError(error);
