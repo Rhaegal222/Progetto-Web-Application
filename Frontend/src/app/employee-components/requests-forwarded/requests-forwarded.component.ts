@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 import { RequestService } from '../../services/request.service';
 import { Request } from '../../model/request';
 import { ErrorService } from '../../services/error.service';
+import { AuthService } from '../../services/auth.service';
+import { error } from 'console';
 // Remove the import statement for 'requestDetailsEventData'
 // import { requestDetailsEventData } from '../../storekeeper-components/request-management/request-management.component';
 
@@ -19,7 +21,10 @@ import { ErrorService } from '../../services/error.service';
 
 export class RequestsForwardedComponent {
 
-  constructor(private requestService: RequestService, private errorService: ErrorService) { }
+  constructor(
+    private requestService: RequestService, 
+    private errorService: ErrorService,
+    private authService: AuthService) { }
 
   requests: Request[] = [];
   returnedRequests: Request[] = [];
@@ -68,10 +73,15 @@ export class RequestsForwardedComponent {
   }
 
   getAllRequests() {
-    const request = localStorage.getItem('requests');
-    if (request !== null && request !== undefined) {
-      this.requests = JSON.parse(request);
-    }
+    this.requestService.getUserRequests(this.authService.getUserEmail()).subscribe({
+      next: (data) => {
+        this.requests = data;
+        this.filterRequests();
+      },
+      error: (error: any) => {
+        this.errorService.handleError(error);
+      }
+    });
   }
 
   filterRequests(){

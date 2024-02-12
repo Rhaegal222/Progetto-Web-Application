@@ -32,6 +32,12 @@ export class RequestService {
     return this.http.get<Request[]>('http://localhost:8080/api/requests', { params: params });
   }
 
+  getUserRequests(email : String): Observable<any>{
+    let params = new HttpParams().set('email', email.toString())
+    return this.http.get('http://localhost:8080/api/getUserRequests', { params });
+  }
+
+
   rejectRequest(id : number){
     if(id != undefined && id != null) {
       this.http.post('http://localhost:8080/api/changeStatusRequest?idEmployeeRequest='+id+'&newStatus=r', null).subscribe({
