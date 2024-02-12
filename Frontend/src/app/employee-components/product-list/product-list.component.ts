@@ -80,7 +80,7 @@ export class ProductListComponent{
   }
 
   isAnImage(image : string): boolean {
-    if(image == null || image == "" || !image.startsWith('data:image/')){
+    if(image == null || image == "" || !image.startsWith('http')){
       return false;
     }
     return true;
