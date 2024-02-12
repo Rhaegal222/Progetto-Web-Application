@@ -35,10 +35,10 @@
     <div *ngIf="products.length == 0" class="no-products">
         <h1>Nessun prodotto</h1>
     </div>
-    <div *ngIf="addProductWindow" class="add-product">
+    <div *ngIf="addProductWindow" class="popup-window">
         <app-add-product (onEvent)="onClose($event)"></app-add-product>
     </div>
-    <div *ngIf="editProductWindow" class="add-product">
+    <div *ngIf="editProductWindow" class="popup-window">
         <app-edit-product *ngIf="selectedProduct" [product]="selectedProduct" (onEvent)="onClose($event)"></app-edit-product>
     </div>
 </div>

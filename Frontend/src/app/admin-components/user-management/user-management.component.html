@@ -64,7 +64,7 @@
     <div *ngIf="users.length == 0" class="no-products">
         <h1>Nessun utente registrato</h1>
     </div>
-    <div *ngIf="userDetailsWindow" class="add-product">
+    <div *ngIf="userDetailsWindow" class="popup-window">
         <app-add-product (onEvent)="OnCloseUserDetails()"></app-add-product>
     </div>
 </div>

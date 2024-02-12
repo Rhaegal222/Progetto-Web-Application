@@ -79,5 +79,6 @@
         </div>
     </div>
 </div>
-<app-request-details *ngIf="isShowingDetails" (closeEvent)="onClose($event)"></app-request-details>
-
+<div *ngIf="isShowingDetails" class="popup-window"> 
+    <app-request-details (closeEvent)="onClose($event)"></app-request-details>
+</div>

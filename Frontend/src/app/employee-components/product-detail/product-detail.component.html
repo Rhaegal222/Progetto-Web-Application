@@ -30,9 +30,9 @@
     </div>
   </div>
 </div>
-<div *ngIf="requestProductWindow" class="add-product">
+<div *ngIf="requestProductWindow" class="popup-window">
   <app-product-request *ngIf="selectedProduct" [product]="selectedProduct" (OnCloseEvent)="onClose()"></app-product-request>
 </div>
-<div *ngIf="returnProductWindow" class="add-product">
+<div *ngIf="returnProductWindow" class="popup-window">
   <app-product-return *ngIf="selectedProduct" [product]="selectedProduct" (onEvent)="onClose()"></app-product-return>
 </div>
