@@ -20,8 +20,16 @@ import java.util.ArrayList;
 public class EmployeeRequestService {
 
     void outputJSON(HttpServletResponse response, String message, String error) throws IOException {
+        response.setHeader("Access-Control-Allow-Origin", ""); // Attenzione: l'uso del carattere '' è sconsigliato in produzione per ragioni di sicurezza
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+        response.setHeader("Access-Control-Max-Age", "3600");
+
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
+        if (error == null) {
+            response.setStatus(200);
+        }
         response.getWriter().write(" {\"message\": \"" + message + "\", \"errorCode\": \"" + error + "\"}");
     }
 
