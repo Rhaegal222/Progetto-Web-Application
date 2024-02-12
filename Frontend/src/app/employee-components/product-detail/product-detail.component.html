@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="column">
-        <div *ngIf="previusPage == '/product-management'" class="product-details">
+        <div *ngIf="previusPage == '/product-management' || previusPage == '/user-product'" class="product-details">
           <h5>Id: <span>{{ idItem }}</span></h5>
           <h5>Posizione: <span>{{ location }}</span></h5>
           <h5>Disponibilità: <span>{{ assigned ? 'Non disponibile' : 'Disponibile' }}</span></h5>
@@ -34,8 +34,8 @@
   </div>
 </div>
 <div *ngIf="requestProductWindow" class="popup-window">
-  <app-product-request *ngIf="selectedProduct" [product]="selectedProduct" (OnCloseEvent)="onClose()"></app-product-request>
+  <app-product-request *ngIf="selectedProduct" [product]="selectedProduct" (onCloseEvent)="onClose($event)"></app-product-request>
 </div>
 <div *ngIf="returnProductWindow" class="popup-window">
-  <app-product-return *ngIf="selectedProduct" [product]="selectedProduct" (onEvent)="onClose()"></app-product-return>
+  <app-product-return *ngIf="selectedProduct" [product]="selectedProduct" (onCloseEvent)="onClose($event)"></app-product-return>
 </div>

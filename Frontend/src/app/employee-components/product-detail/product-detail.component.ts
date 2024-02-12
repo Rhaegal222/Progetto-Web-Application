@@ -92,8 +92,13 @@ export class ProductDetailComponent {
     this.returnProductWindow = true;
   }
 
-  onClose(){
-    this.requestProductWindow = false;
-    this.returnProductWindow = false;    
+  onClose(eventData: productRequestEventData){
+    this.requestProductWindow = eventData.requestProductWindow;
+    this.returnProductWindow = eventData.requestProductWindow;    
   }
+   
+}
+
+export interface productRequestEventData {
+  requestProductWindow: boolean;
 }

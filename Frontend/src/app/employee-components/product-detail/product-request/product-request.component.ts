@@ -88,17 +88,17 @@ export class ProductRequestComponent {
     }
   }
 
-  @Output() onEvent = new EventEmitter<productReqestEventData>();
+  @Output() onCloseEvent = new EventEmitter<productRequestEventData>();
 
-  OnCloseEvent() {
-    const eventData: productReqestEventData = {
+  onClose() {
+    const eventData: productRequestEventData = {
       requestProductWindow: false
     };
-    this.onEvent.emit(eventData);
+    this.onCloseEvent.emit(eventData);
   }
 
 }
 
-export interface productReqestEventData {
+export interface productRequestEventData {
   requestProductWindow: boolean;
 }
