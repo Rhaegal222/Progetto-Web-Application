@@ -9,11 +9,9 @@ import java.util.ArrayList;
 @Getter
 public class JwtAuthResponse {
     private final String accessToken;
-    private ArrayList<EmployeeRequest> requests;
 
-    public JwtAuthResponse(String accessToken, ArrayList<EmployeeRequest> requests) {
+    public JwtAuthResponse(String accessToken) {
         this.accessToken = accessToken;
-        this.requests = requests;
     }
 
 }

@@ -37,8 +37,7 @@ public class AuthenticationService{
                     else{
                         //Contenuto della response entity
                         String jwt = jwtService.generateToken(user);
-                        ArrayList<EmployeeRequest> requests = user.getEmployeeRequests();
-                        return ResponseEntity.ok(new JwtAuthResponse(jwt , requests));
+                        return ResponseEntity.ok(new JwtAuthResponse(jwt));
                     }
                 } else {
                     return ResponseEntity.badRequest().body("{\"message\": \"Wrong username/password\"}");
