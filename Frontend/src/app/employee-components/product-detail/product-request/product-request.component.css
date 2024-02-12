@@ -28,6 +28,7 @@ header .close {
 
 header .close:hover {
     color: red;
+    scale: 1.05;
 }
 
 .form-control.description {
@@ -87,4 +88,3 @@ header .close:hover {
 .sidebar-open {
     padding-left: 250px;
 }
-

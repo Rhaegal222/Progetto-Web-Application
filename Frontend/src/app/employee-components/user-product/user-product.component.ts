@@ -82,11 +82,9 @@ export class UserProductComponent {
 
   // Salva il prodotto selezionato in localStorage e reindirizza l'utente alla pagina del dettaglio del prodotto
   openDetail(product: Product) {
-    //Riumuovo se c'é qualche prodotto in localStorage
-    localStorage.removeItem('product');
-
-    // Salva il prodotto selezionato in localStorage
-    localStorage.setItem('product', JSON.stringify(product));
+    localStorage.removeItem('selectedProduct');
+    localStorage.setItem('previousPage', '/user-product');
+    localStorage.setItem('selectedProduct', JSON.stringify(product));
     window.location.href = '/product-detail';
   }
 

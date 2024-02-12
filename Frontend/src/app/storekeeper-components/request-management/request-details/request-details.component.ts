@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Request } from '../../../model/request';
 import { Product } from '../../../model/product';
 import { User } from '../../../model/user';
+import { RequestService } from '../../../services/request.service';
 
 @Component({
   selector: 'app-request-details',
@@ -18,7 +19,7 @@ import { User } from '../../../model/user';
 
 export class RequestDetailsComponent {
 
-  constructor() { }
+  constructor(private requestService: RequestService) {  }
 
   request: Request | undefined;
   selectedRequest: Request | undefined;
@@ -60,7 +61,24 @@ export class RequestDetailsComponent {
       this.idEmployeeRequest = this.request.idEmployeeRequest;
       this.title = this.request.title;
       this.description = this.request.description;
-      this.status = this.request.status;
+      
+      if (this.request.status) {
+        switch (this.request.status) {
+          case 'pending':
+            this.status = 'In attesa';
+            break;
+          case 'accepted':
+            this.status = 'Accettata';
+            break;
+          case 'rejected':
+            this.status = 'Rifiutata';
+            break;
+          default:
+            this.status = 'In attesa';
+            break;
+        }
+      }
+
       this.type = this.request.type;
       this.date = this.request.date;
       this.requestedItem = this.request.requestedItem;
@@ -90,21 +108,20 @@ export class RequestDetailsComponent {
     this.onClose();
   }
 
-  /*
-  acceptRequest(request: Request) {
-    request.status = "accepted";
-    this.requestService.acceptRequest(request.idEmployeeRequest);
+  acceptRequest() {
+    const request = this.request;
+    request!.status = "accepted";
+    this.requestService.acceptRequest(request!.idEmployeeRequest);
+    this.onClose();
   }
 
-  // rifiuta la richiesta
-  rejectRequest(request: Request) {
-    request.status = "rejected";
-    this.requestService.rejectRequest(request.idEmployeeRequest);
+  rejectRequest() {
+    const request = this.request;
+    request!.status = "rejected";
+    console.log(request);
+    this.requestService.rejectRequest(request!.idEmployeeRequest);
+    this.onClose();
   }
-
-  <button *ngIf="request.status == 'pending'" (click)="acceptRequest(request)" class="btn btn-success">Accetta</button>
-  <button *ngIf="request.status == 'pending'" (click)="rejectRequest(request)" class="btn btn-danger">Rifiuta</button>
-  */
 
 }
 

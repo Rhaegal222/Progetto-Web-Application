@@ -19,11 +19,14 @@
         </div>
       </div>
       <div class="column">
-        <div class="product-details">
+        <div *ngIf="previusPage == '/product-management'" class="product-details">
+          <h5>Id: <span>{{ idItem }}</span></h5>
           <h5>Posizione: <span>{{ location }}</span></h5>
           <h5>Disponibilità: <span>{{ assigned ? 'Non disponibile' : 'Disponibile' }}</span></h5>
+          <h5 *ngIf="assigned">Assegnato a: <span>{{ assignedUser }}</span></h5>
+
       </div>
-      <div class="product-buttons">
+      <div *ngIf="!(previusPage == '/product-management')" class="product-buttons">
         <button *ngIf="!assigned" class="btn-primary" (click)="requestProduct()">Richiedi</button>
         <button *ngIf="assigned" class="btn-primary" (click)="returnProduct()">Restituisci</button>
       </div>

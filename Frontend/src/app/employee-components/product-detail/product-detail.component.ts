@@ -9,6 +9,8 @@ import { ErrorService } from '../../services/error.service';
   templateUrl: './product-detail.component.html',
   styleUrls: [
     './product-detail.component.css',
+    '../../styles/container.css',
+    '../../styles/content.css',
     '../../styles/buttons.css'
   ]
 })
@@ -66,6 +68,7 @@ export class ProductDetailComponent {
           this.errorService.handleError(error);
         }
       });
+      this.idItem = this.product.idItem || 0;
       this.name = this.product.name || '';
       this.type = this.product.type || '';
       this.image = this.product.image || '';
