@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header (searchEvent)="onSearch($event)"></app-header>
 <div class="container">
     <div class="column">
         <h1>Richieste di reso</h1>
@@ -12,10 +12,22 @@
                 </div>
                 <div class="card-body">
                     <div class="card-row">
+                        <h5>Da: </h5>
+                        <span>{{request.requestingUser}}</span>
+                    </div>
+                    <div *ngIf="request.status == 'pending'" class="card-row">
                         <h5>Stato: </h5>
-                        <span class="material-icons">{{request.status}}</span>
-                        <p *ngIf="request.status == 'pending'">In attesa</p>
+                        <span class="material-icons">pending</span>
+                        <p>In attesa</p>
+                    </div>
+                    <div *ngIf="request.status == 'accepted'" class="card-row">
+                        <h5>Stato: </h5>
+                        <span class="material-icons">done</span>
                         <p *ngIf="request.status == 'accepted'">Accettata</p>
+                    </div>
+                    <div *ngIf="request.status == 'rejected'" class="card-row">
+                        <h5>Stato: </h5>
+                        <span class="material-icons">clear</span>
                         <p *ngIf="request.status == 'rejected'">Rifiutata</p>
                     </div>
                     <div class="card-row">
@@ -41,10 +53,22 @@
                 </div>
                 <div class="card-body">
                     <div class="card-row">
+                        <h5>Da: </h5>
+                        <span>{{request.requestingUser}}</span>
+                    </div>
+                    <div *ngIf="request.status == 'pending'" class="card-row">
                         <h5>Stato: </h5>
-                        <span class="material-icons">{{request.status}}</span>
-                        <p *ngIf="request.status == 'pending'">In attesa</p>
+                        <span class="material-icons">pending</span>
+                        <p>In attesa</p>
+                    </div>
+                    <div *ngIf="request.status == 'accepted'" class="card-row">
+                        <h5>Stato: </h5>
+                        <span class="material-icons">done</span>
                         <p *ngIf="request.status == 'accepted'">Accettata</p>
+                    </div>
+                    <div *ngIf="request.status == 'rejected'" class="card-row">
+                        <h5>Stato: </h5>
+                        <span class="material-icons">clear</span>
                         <p *ngIf="request.status == 'rejected'">Rifiutata</p>
                     </div>
                     <div class="card-row">
@@ -59,4 +83,6 @@
         </div>
     </div>
 </div>
-
+<div *ngIf="isShowingDetails" class="popup-window"> 
+    <app-request-details (closeEvent)="onClose($event)"></app-request-details>
+</div>
