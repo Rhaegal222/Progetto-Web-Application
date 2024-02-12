@@ -167,6 +167,7 @@ public class ItemDaoPostgres implements ItemDao {
         try (
                 PreparedStatement st = this.con.prepareStatement(query)) {
             st.setLong(1, id);
+
             int rowsAffected = st.executeUpdate();
             
             return CompletableFuture.completedFuture(rowsAffected > 0);

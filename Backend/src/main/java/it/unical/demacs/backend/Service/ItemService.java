@@ -2,6 +2,7 @@ package it.unical.demacs.backend.Service;
 
 import it.unical.demacs.backend.Persistence.Dao.Postgres.ItemProxy;
 import it.unical.demacs.backend.Persistence.DatabaseHandler;
+import it.unical.demacs.backend.Persistence.Model.EmployeeRequest;
 import it.unical.demacs.backend.Persistence.Model.Item;
 import it.unical.demacs.backend.Persistence.Model.User;
 import it.unical.demacs.backend.Service.Request.*;
@@ -233,6 +234,18 @@ public class ItemService {
     public ResponseEntity<?> deleteItem(long idItem) {
         try{
             DatabaseHandler.getInstance().openConnection();
+            Item item = new Item(idItem);
+            User user = item.getAssignedUser();
+            ArrayList<EmployeeRequest> requests = DatabaseHandler.getInstance().getEmployeeRequestDao().findByItem(idItem).join();
+
+            for(EmployeeRequest request : requests){
+                DatabaseHandler.getInstance().getEmployeeRequestDao().deleteEmployeeRequest(request.getIdEmployeeRequest());
+            }
+            if(user.getIdUser() == 11){
+                item.setAssignedUser(null);
+                DatabaseHandler.getInstance().getItemDao().updateItem(item);
+            }
+
             CompletableFuture<Boolean> deleteResult = DatabaseHandler.getInstance().getItemDao().deleteItem(idItem);
             if (deleteResult.get()) {
                 // Item inserted successfully

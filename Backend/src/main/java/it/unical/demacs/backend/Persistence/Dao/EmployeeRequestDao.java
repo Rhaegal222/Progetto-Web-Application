@@ -22,4 +22,6 @@ public interface EmployeeRequestDao {
     CompletableFuture<ArrayList<EmployeeRequest>> getRequestsByStatus(String status);
 
     CompletableFuture<ArrayList<EmployeeRequest>> getRequestsByUser(long user);
+    CompletableFuture<ArrayList<EmployeeRequest>> findByItem(long idItem);
+
 }
