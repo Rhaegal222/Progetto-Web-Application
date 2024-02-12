@@ -35,6 +35,7 @@ import { EditProductComponent } from './storekeeper-components/product-managemen
 import { UserProductComponent } from './employee-components/user-product/user-product.component';
 import { ContactsComponent } from './common-components/contacts/contacts.component';
 import { ReportComponent } from './storekeeper-components/report/report.component';
+import { BarChartComponent } from './storekeeper-components/report/bar-chart/bar-chart.component';
 import { PieChartComponent } from './storekeeper-components/report/pie-chart/pie-chart.component';
 import { ChartToolsComponent } from './storekeeper-components/report/chart-tools/chart-tools.component';
 
@@ -67,6 +68,7 @@ import { ChartToolsComponent } from './storekeeper-components/report/chart-tools
     UserProductComponent,
     ContactsComponent,
     ReportComponent,
+    BarChartComponent,
     PieChartComponent,
     ChartToolsComponent
 ],
