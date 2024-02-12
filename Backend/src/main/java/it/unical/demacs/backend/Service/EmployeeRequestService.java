@@ -93,7 +93,7 @@ public class EmployeeRequestService {
             return ResponseEntity.ok("Email sent successfully to admins");
         } catch (Exception e) {
             // Gestione delle eccezioni durante l'invio dell'email
-            return ResponseEntity.status(500).body("Error sending email: " + e.getMessage());
+            return ResponseEntity.status(500).body("Error sending email: " + e.getMessage() + " " + e.getCause());
         }
         finally {
             DatabaseHandler.getInstance().closeConnection();
