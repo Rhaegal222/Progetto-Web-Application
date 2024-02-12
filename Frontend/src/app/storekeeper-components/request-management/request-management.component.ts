@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RequestService } from '../../services/request.service';
 import { Request } from '../../model/request';
@@ -25,6 +25,8 @@ export class RequestManagementComponent {
 
   length: number = 0;
 
+  isShowingDetails: boolean = false;
+
   ngOnInit(): void {
     this.initObservable();
     this.getAllRequests();
@@ -47,7 +49,6 @@ export class RequestManagementComponent {
   status: string = 'all';
 
   onSearch(eventData: onSearchEventData) {
-    console.log(eventData);
     if (eventData.searchValue === "" && eventData.element === "all") {
       this.getAllRequests();
     } else {
@@ -78,30 +79,26 @@ export class RequestManagementComponent {
   filterRequests(){
     // filtra le richieste in base allo stato e le aggiunge alle liste corrispondenti
     this.requestProduct = this.requests.filter(request => request.type === "requestProduct");
-    console.log(this.requestProduct);
     this.returnedRequests = this.requests.filter(request => request.type === "returnRequest");
-    console.log(this.returnedRequests);
   }
 
-  // accetta la richista
-  acceptRequest(request: Request) {
-    request.status = "accepted";
-    this.requestService.acceptRequest(request.idEmployeeRequest);
+  @Output() onShowDetailsEvent = new EventEmitter<Request>();
+
+  openDetails(request: Request) {
+    this.isShowingDetails = true;
+    localStorage.setItem('selectedRequest', JSON.stringify(request));
   }
 
-  // rifiuta la richiesta
-  rejectRequest(request: Request) {
-    request.status = "rejected";
-    this.requestService.rejectRequest(request.idEmployeeRequest);
-  }
-
-  // visualizza i dettagli della richiesta
-  showDetails(request: Request) {
-    console.log(request);
+  onClose(eventData: requestDetailsEventData) {
+    this.isShowingDetails = eventData.requestDetailsWindow;
   }
 }
 
 export interface onSearchEventData {
   searchValue: string;
   element: string;
+}
+
+export interface requestDetailsEventData {
+  requestDetailsWindow: boolean;
 }

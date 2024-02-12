@@ -38,6 +38,8 @@ export class ProductReturnComponent {
 
   ngOnInit(): void {
 
+    console.log(this.product);
+
     this.animationsService.initResizeObserver('product-request');
     
     if (this.product && this.product.idItem) {

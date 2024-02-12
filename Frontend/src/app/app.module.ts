@@ -38,6 +38,7 @@ import { ReportComponent } from './storekeeper-components/report/report.componen
 import { BarChartComponent } from './storekeeper-components/report/bar-chart/bar-chart.component';
 import { PieChartComponent } from './storekeeper-components/report/pie-chart/pie-chart.component';
 import { ChartToolsComponent } from './storekeeper-components/report/chart-tools/chart-tools.component';
+import { RequestDetailsComponent } from './storekeeper-components/request-management/request-details/request-details.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { ChartToolsComponent } from './storekeeper-components/report/chart-tools
     ReportComponent,
     BarChartComponent,
     PieChartComponent,
-    ChartToolsComponent
+    ChartToolsComponent,
+    RequestDetailsComponent
 ],
   imports: [
     BrowserModule,
