@@ -110,10 +110,11 @@ public class EmployeeRequestService {
         }
     }
 
-    public ResponseEntity<?> getUserRequests(long user) {
+    public ResponseEntity<?> getUserRequests(String email) {
         try {
             DatabaseHandler.getInstance().openConnection();
-            ArrayList<EmployeeRequest> requests = DatabaseHandler.getInstance().getEmployeeRequestDao().getRequestsByUser(user).join();
+            User user = DatabaseHandler.getInstance().getUserDao().findByEmail(email).join();
+            ArrayList<EmployeeRequest> requests = DatabaseHandler.getInstance().getEmployeeRequestDao().getRequestsByUser(user.getIdUser()).join();
             return ResponseEntity.ok(requests);
         } finally {
             DatabaseHandler.getInstance().closeConnection();

@@ -27,7 +27,7 @@ public class EmployeeRequestController {
         return employeeRequestService.searchRequest(status, search);
     }
     @GetMapping("/api/getUserRequests")
-    public ResponseEntity<?> getUserRequests(@RequestParam long user) {return employeeRequestService.getUserRequests(user);}
+    public ResponseEntity<?> getUserRequests(@RequestParam String email) {return employeeRequestService.getUserRequests(email);}
     @GetMapping("/api/requests")
     public ResponseEntity<?> searchRequest(@RequestParam(required = false) String status, @RequestParam(required = false) String search) {
         if (search == null && (status == null || status.equals("all"))) {return employeeRequestService.allRequests();}
