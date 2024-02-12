@@ -29,7 +29,7 @@ export class RequestDetailsComponent {
   description:string = '';
   status:string = '';
   type:string = '';
-  date:string = '';
+  date:Date = new Date();
   requestedItem:Product | undefined;
   idItem:number = 0;
   nameItem:string = '';
@@ -58,7 +58,7 @@ export class RequestDetailsComponent {
       }
     }
     if (this.request) {
-      this.idEmployeeRequest = this.request.idEmployeeRequest;
+      this.idEmployeeRequest = this.request.idEmployeeRequest || 0;
       this.title = this.request.title;
       this.description = this.request.description;
       
@@ -81,16 +81,21 @@ export class RequestDetailsComponent {
 
       this.type = this.request.type;
       this.date = this.request.date;
-      this.requestedItem = this.request.requestedItem;
+      if(typeof this.request.requestedItem === 'object')
+        this.requestedItem = this.request.requestedItem;
       if (this.request.requestedItem) {
-        this.idItem = this.request.requestedItem.idItem || 0;
-        this.nameItem = this.request.requestedItem.name;
-        this.typeItem = this.request.requestedItem.type;
-        this.descriptionItem = this.request.requestedItem.description || '';
+        if(typeof this.request.requestedItem === 'object'){
+          this.idItem = this.request.requestedItem.idItem || 0;
+          this.nameItem = this.request.requestedItem.name;
+          this.typeItem = this.request.requestedItem.type;
+          this.descriptionItem = this.request.requestedItem.description || '';
+        }
       }
-      this.requestingUser = this.request.requestingUser;
-      if (this.request.requestingUser) {
-        this.emailUser = this.request.requestingUser.email;
+      if(typeof this.request.requestingUser === 'object'){
+        this.requestingUser = this.request.requestingUser;
+        if (this.request.requestingUser) {
+          this.emailUser = this.request.requestingUser.email;
+        }
       }
     }
   }
@@ -111,7 +116,8 @@ export class RequestDetailsComponent {
   acceptRequest() {
     const request = this.request;
     request!.status = "accepted";
-    this.requestService.acceptRequest(request!.idEmployeeRequest);
+    if(request != undefined && request.idEmployeeRequest != undefined && request.idEmployeeRequest != null)
+      this.requestService.acceptRequest(request.idEmployeeRequest);
     this.onClose();
   }
 
@@ -119,7 +125,8 @@ export class RequestDetailsComponent {
     const request = this.request;
     request!.status = "rejected";
     console.log(request);
-    this.requestService.rejectRequest(request!.idEmployeeRequest);
+    if(request != undefined && request.idEmployeeRequest != undefined && request.idEmployeeRequest != null)
+      this.requestService.rejectRequest(request.idEmployeeRequest);
     this.onClose();
   }
 

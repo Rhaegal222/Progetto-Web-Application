@@ -56,5 +56,16 @@ export class RequestService {
       });
     }
   }
-    
+
+  sendRequest(request: Request){
+    this.http.post('http://localhost:8080/api/sendRequest', request).subscribe({
+      next: () => {
+        return;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
   }
+
+}

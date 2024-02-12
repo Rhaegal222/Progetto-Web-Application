@@ -2,8 +2,9 @@ import { Component, Input, EventEmitter, Output} from '@angular/core';
 import { ProductService } from '../../../services/product.service';
 import { AnimationsService } from '../../../services/animations.service';
 import { Product } from '../../../model/product';
-import { ProductProxy } from '../../../model/productProxy';
 import { ErrorService } from '../../../services/error.service';
+import { RequestService } from '../../../services/request.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-product-return',
@@ -19,25 +20,23 @@ import { ErrorService } from '../../../services/error.service';
 export class ProductReturnComponent {
 
   constructor(
-    private productService: ProductService, 
+    private productService: ProductService,
+    private requestService: RequestService, 
     private animationsService: AnimationsService, 
-    private errorService: ErrorService) { }
+    private errorService: ErrorService,
+    private authService: AuthService) { }
 
   productRequestWindow: boolean = true;
 
   @Input() product: Product | undefined;
 
-  productProxy: ProductProxy | undefined;
-
   idItem: number = 0;
-  name: string = '';
-  type: string = '';
+  emailUser: string = '';
+
+  title: string = '';
   description: string = '';
-  location: string = '';
-  image: string = '';
-  length: number = 0;
-  assigned: boolean = false;
-  assignedUser: string = '';
+  date = new Date();
+  type = 'returnRequest';
 
   ngOnInit(): void {
 
@@ -51,33 +50,9 @@ export class ProductReturnComponent {
   }
 
   getAllInfo(){
-    if (this.product && this.product.idItem) {
-      this.productService.getProduct(this.product.idItem).subscribe({
-        next: (data) => {
-          this.productProxy = data;
-          
-          this.description = this.productProxy?.description || '';
-          if (this.productProxy?.location && this.productProxy?.location != 'Magazzino')
-            this.location = this.productProxy?.location || '';
-        },
-        error: (error) => {
-          this.errorService.handleError(error);
-        }
-      });
-      this.idItem = this.product.idItem || 0;
-      this.name = this.product.name || '';
-      this.type = this.product.type || '';
-      this.image = this.product.image || '';
-      this.length = this.image ? this.image.length : 0;
-      
-      if (this.product.assignedUser && typeof this.product.assignedUser === 'object')
-        this.assignedUser = this.product.assignedUser.email;
-      else 
-        this.assignedUser = '';
-
-      if (this.assignedUser && this.assignedUser.length > 0)
-        this.assigned = true;
-    }
+    if (this.product && this.product.idItem)
+      this.idItem = this.product.idItem;
+    this.emailUser = this.authService.getUserEmail();
   }
 
   @Output() onCloseEvent = new EventEmitter<productReqestEventData>();
@@ -87,9 +62,22 @@ export class ProductReturnComponent {
       requestProductWindow: false
     };
     this.onCloseEvent.emit(eventData);
-    console.log('onClose');
   }
 
+  onReturn() {
+    const request = {
+      title: this.title,
+      description: this.description,
+      status: 'pending',
+      type: this.type,
+      date: this.date,
+      requestedItem: this.idItem,
+      requestingUser: this.emailUser
+    };
+    this.requestService.sendRequest(request);
+    console.log('Richiesta di restituzione inviata');
+    this.onClose();
+  }
 }
 
 export interface productReqestEventData {
