@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -153,28 +154,36 @@ public class EmployeeRequestService {
         try {
             DatabaseHandler.getInstance().openConnection();
             EmployeeRequest employeeRequest = null;
+            Item item = null;
             String idEmployeeRequestString = request.getParameter("idEmployeeRequest");
             String newStatus = request.getParameter("newStatus");
 
+
             if (idEmployeeRequestString != null && !idEmployeeRequestString.isEmpty()) {
                 employeeRequest = new EmployeeRequest(Long.parseLong(idEmployeeRequestString));
+                item = employeeRequest.getRequestedItem();
             }
-
             assert employeeRequest != null;
+
+
             if(newStatus.equals("r")){
                 newStatus = "refused";
             }
             else if(newStatus.equals("a")){
                 newStatus = "accepted";
+                User requestingUser = DatabaseHandler.getInstance().getUserDao().findByEmail(employeeRequest.getRequestingUser().getEmail()).join();
+                item.setAssignedUser(requestingUser);
             }
             if (employeeRequest.getStatus().equals("pending")) {
                 employeeRequest.setStatus(newStatus);
-                DatabaseHandler.getInstance().getEmployeeRequestDao().updateEmployeeRequest(employeeRequest).join();
-                String responseMessage = "Request status changed to " + newStatus;
-                outputJSON(response, responseMessage , "0");
             } else {
                 outputJSON(response, "Error refusing request", "1");
             }
+
+            DatabaseHandler.getInstance().getEmployeeRequestDao().updateEmployeeRequest(employeeRequest).join();
+            DatabaseHandler.getInstance().getItemDao().updateItem(employeeRequest.getRequestedItem()).join();
+            String responseMessage = "Request status changed to " + newStatus;
+            outputJSON(response, responseMessage , "0");
 
         } catch (IOException e) {
             throw new RuntimeException(e);

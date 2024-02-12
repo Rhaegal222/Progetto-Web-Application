@@ -7,37 +7,14 @@
         </header>
         <form>
             <div class="form-group">
-                <input type="text" class="form-control" id="name" name="name" [(ngModel)]="name" placeholder="Nome">
+                <input type="text" class="form-control" id="name" name="name" [(ngModel)]="title" placeholder="Oggetto">
             </div>
             <div class="form-group">
-                <input class="form-control"id="category" name="category"[(ngModel)]="type"placeholder="Categoria">
+                <textarea class="form-control" id="description" name="description" [(ngModel)]="description" placeholder="Perchè vuoi richiedere questo prodotto?" rows="4" cols="50"></textarea>
             </div>
-            <div class="form-group">
-                <textarea class="form-control" id="description" name="description" [(ngModel)]="description" placeholder="Descrizione" rows="4" cols="50"></textarea>
-            </div>
-            <div class="form-group">
-                <label class="form-check">
-                    <input type="checkbox" checked="checked" name="assigned" [(ngModel)]="assigned">
-                    <span class="checkmark"></span>
-                </label>
-                <span class="form-check-label">Assegnato</span>
-            </div>
-            <div *ngIf="assigned" class="form-group">
-                <input class="form-control" id="location" name="location"[(ngModel)]="location"placeholder="Posizione">
-            </div>
-            <div *ngIf="assigned" class="form-group">
-                <input class="form-control" type="text" class="form-control" id="assigned_user" name="assigned_user" [(ngModel)]="assigned_user" placeholder="Email dell'assegnatario">
-            </div>
-            <div class="form-group">
-                <div class="image-preview-box">
-                    <div class="image-container">
-                        <img *ngIf="image!=''" class="image" [src]="image" alt="Immagine caricata">
-                    </div>
-                </div>
-            </div>                        
             <div class="form-group btn-row">
                 <button class="btn btn-primary" (click)="onClose()" type="button">Annulla</button>
-                <button class="btn btn-primary" type="button">Salva</button>
+                <button class="btn btn-primary" (click)="onReturn()" type="button">Salva</button>
             </div>
         </form>
     </div>

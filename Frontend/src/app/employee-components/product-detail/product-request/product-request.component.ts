@@ -3,6 +3,8 @@ import { ProductService } from '../../../services/product.service';
 import { AnimationsService } from '../../../services/animations.service';
 import { Product } from '../../../model/product';
 import { ErrorService } from '../../../services/error.service';
+import { RequestService } from '../../../services/request.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-product-request',
@@ -18,87 +20,66 @@ import { ErrorService } from '../../../services/error.service';
 export class ProductRequestComponent {
 
   constructor(
-    private productService: ProductService, 
+    private productService: ProductService,
+    private requestService: RequestService, 
     private animationsService: AnimationsService, 
-    private errorService: ErrorService) { }
+    private errorService: ErrorService,
+    private authService: AuthService) { }
 
   productRequestWindow: boolean = true;
 
   @Input() product: Product | undefined;
 
   idItem: number = 0;
-  name: string = '';
-  type: string = '';
+  emailUser: string = '';
+
+  title: string = '';
   description: string = '';
-  location: string = '';
-  image: string = '';
-  length: number = 0;
-  assigned: boolean = false;
-  assigned_user: string = '';
+  date = new Date();
+  type = 'requestProduct';
 
   ngOnInit(): void {
 
     this.animationsService.initResizeObserver('product-request');
     
-    if (this.product && this.product.idItem) {
-      this.productService.getProduct(this.product.idItem).subscribe({
-        error: (error) => {
-          this.errorService.handleError(error);
-        }
-      });
-      
-      this.idItem = this.product.idItem;
-      this.name = this.product.name || '';
-      this.type = this.product.type || '';
-      this.description = this.product.description || '';
-      if (this.product.location) {
-        this.location = this.product.location;
-      }
-      this.image = this.product.image || '';
-      this.length = this.image ? this.image.length : 0;
-
-      if (this.product.assignedUser && typeof this.product.assignedUser === 'object')
-        this.assigned_user = this.product.assignedUser.email;
-      else 
-        this.assigned_user = '';
-      
-      if (this.assigned_user && this.assigned_user.length > 0)
-        this.assigned = true;
-    }
+    this.getAllInfo();
   }
 
   ngAfterView() {
-    if (this.product) {
-      this.name = this.product.name || '';
-      this.type = this.product.type || '';
-      this.description = this.product.description || '';
-      if (this.product.location) {
-        this.location = this.product.location;
-      }
-      this.image = this.product.image || '';
-      this.length = this.image ? this.image.length : 0;
-      
-      if (this.product.assignedUser && typeof this.product.assignedUser === 'object')
-        this.assigned_user = this.product.assignedUser.email;
-      else 
-        this.assigned_user = '';
-
-      if (this.assigned_user && this.assigned_user.length > 0)
-        this.assigned = true;
-    }
+    this.getAllInfo();
   }
 
-  @Output() onCloseEvent = new EventEmitter<productRequestEventData>();
+  getAllInfo(){
+    if (this.product && this.product.idItem)
+      this.idItem = this.product.idItem;
+    this.emailUser = this.authService.getUserEmail();
+  }
+
+  @Output() onCloseEvent = new EventEmitter<productReqestEventData>();
 
   onClose() {
-    const eventData: productRequestEventData = {
+    const eventData: productReqestEventData = {
       requestProductWindow: false
     };
     this.onCloseEvent.emit(eventData);
   }
 
+  onReturn() {
+    const request = {
+      title: this.title,
+      description: this.description,
+      status: 'pending',
+      type: this.type,
+      date: this.date,
+      requestedItem: this.idItem,
+      requestingUser: this.emailUser
+    };
+    this.requestService.sendRequest(request);
+    console.log('Richiesta prodotto inviata');
+    this.onClose();
+  }
 }
 
-export interface productRequestEventData {
+export interface productReqestEventData {
   requestProductWindow: boolean;
 }
