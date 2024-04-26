@@ -1,15 +1,15 @@
 import { Component} from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserManagementService } from '../../services/user.service'; // Servizio per ottenere i dati degli utenti
-import { ErrorService } from '../../services/error.service'; // Servizio per gestire gli errori
-import { User } from '../../model/user';
+import { UserManagementService } from '../../../services/user.service'; // Servizio per ottenere i dati degli utenti
+import { ErrorService } from '../../../services/error.service'; // Servizio per gestire gli errori
+import { User } from '../../../models/user';
 
 @Component({
   selector: 'app-user-management',
   templateUrl: './user-management.component.html',
   styleUrls: [
     './user-management.component.css',
-    '../../styles/grid.css',
+    '../../../styles/grid.css',
     '../../styles/list.css',
     '../../styles/buttons.css',
   ]
@@ -20,11 +20,11 @@ export class UserManagementComponent {
     private userService: UserManagementService,
     private errorService: ErrorService
     ) {}
-  
+
   users: User[] = [];
   selectedUser: User | undefined;
   length: number = 0;
-  
+
   userDetailsWindow: boolean = false;
 
   ngOnInit(): void {

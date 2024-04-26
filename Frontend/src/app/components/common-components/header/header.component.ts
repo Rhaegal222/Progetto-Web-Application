@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { AnimationsService } from '../../services/animations.service';
+import { AnimationsService } from '../../../services/animations.service';
 import { addProductEventData } from './tools-bar/tools-bar.component';
 
 @Component({

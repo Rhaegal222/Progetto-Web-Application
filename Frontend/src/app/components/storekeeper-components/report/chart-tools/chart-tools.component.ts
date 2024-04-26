@@ -3,9 +3,9 @@ import { Component, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-chart-tools',
   templateUrl: './chart-tools.component.html',
-  styleUrls: [ 
+  styleUrls: [
     './chart-tools.component.css',
-    '../../../styles/buttons.css',
+    '../../../../styles/buttons.css',
   ]
 })
 export class ChartToolsComponent {
@@ -16,7 +16,7 @@ export class ChartToolsComponent {
 
   key : string = 'month';
 
-  elements = [ 
+  elements = [
     {key: 'day', name: 'Giorno', visible: true},
     {key: 'month', name: 'Mese', visible: false},
     {key: 'year', name: 'Anno', visible: true},

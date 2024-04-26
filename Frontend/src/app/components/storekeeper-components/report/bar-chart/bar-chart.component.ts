@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Chart } from 'chart.js';
-import { RequestService } from '../../../services/request.service';
-import { Request } from '../../../model/request';
-import { ErrorService } from '../../../services/error.service';
+import { RequestService } from '../../../../services/request.service';
+import { Request } from '../../../../models/request';
+import { ErrorService } from '../../../../services/error.service';
 
 @Component({
   selector: 'app-bar-chart',
@@ -23,7 +23,7 @@ export class BarChartComponent {
 
       data: {// values on X-Axis
         labels: ['2022-05-10', '2022-05-11', '2022-05-12','2022-05-13',
-								 '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ], 
+								 '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ],
 	       datasets: [
           {
             label: "Richieste di reso",
@@ -36,7 +36,7 @@ export class BarChartComponent {
             data: ['542', '542', '536', '327', '17',
 									 '0.00', '538', '541'],
             backgroundColor: 'grey'
-          }  
+          }
         ]
       },
       options: {

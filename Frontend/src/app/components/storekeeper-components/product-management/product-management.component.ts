@@ -1,9 +1,9 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductService } from '../../services/product.service';
-import { Product } from '../../model/product';
+import { ProductService } from '../../../services/product.service';
+import { Product } from '../../../models/product';
 import { Router } from '@angular/router';
-import { ErrorService } from '../../services/error.service';
+import { ErrorService } from '../../../services/error.service';
 
 
 @Component({
@@ -11,7 +11,7 @@ import { ErrorService } from '../../services/error.service';
   templateUrl: './product-management.component.html',
   styleUrls: [
     './product-management.component.css',
-    '../../styles/grid.css',
+    '../../../styles/grid.css',
     '../../styles/list.css',
     '../../styles/buttons.css',
   ]
@@ -20,8 +20,8 @@ import { ErrorService } from '../../services/error.service';
 export class ProductManagementComponent {
 
   constructor(
-    private productService: ProductService, 
-    private router: Router, 
+    private productService: ProductService,
+    private router: Router,
     private errorService: ErrorService) { }
 
   products: Product[] = [];
@@ -71,7 +71,7 @@ export class ProductManagementComponent {
       });
     }
   }
-  
+
   onOpen(evenData: addProductEventData) {
     this.addProductWindow = evenData.addProductWindow;
   }

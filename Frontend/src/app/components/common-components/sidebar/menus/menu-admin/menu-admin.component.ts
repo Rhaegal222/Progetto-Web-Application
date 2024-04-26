@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../../../services/auth.service';
+import { AuthService } from '../../../../../services/auth.service';
 
 @Component({
   selector: 'app-menu-admin',
@@ -12,7 +12,7 @@ export class MenuAdminComponent {
 
   authToken: string = '';
   isAuth: boolean = false;
-  
+
   ngDoCheck() {
     if(this.authService.isAuthenticated() && this.authService.isAdmin()) {
       this.isAuth = true;
@@ -20,5 +20,5 @@ export class MenuAdminComponent {
       this.isAuth = false;
     }
   }
-  
+
 }

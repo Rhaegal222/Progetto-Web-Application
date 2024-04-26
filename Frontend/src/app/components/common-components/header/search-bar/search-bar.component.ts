@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './search-bar.component.html',
   styleUrls: [
     './search-bar.component.css',
-    '../../../styles/buttons.css',
+    '../../../../styles/buttons.css',
   ]
 })
 
@@ -42,7 +42,7 @@ export class SearchBarComponent {
     {key: 'refused', name: 'Rifiutata', visible: true},
   ];
   status: string = 'Tutti gli stati';
-  
+
   key: string = 'all';
 
   elements: any[] = [];

@@ -1,16 +1,16 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RequestService } from '../../services/request.service';
-import { Request } from '../../model/request';
-import { ErrorService } from '../../services/error.service';
-import { AuthService } from '../../services/auth.service';
+import { RequestService } from '../../../services/request.service';
+import { Request } from '../../../models/request';
+import { ErrorService } from '../../../services/error.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-requests-forwarded',
   templateUrl: './requests-forwarded.component.html',
   styleUrls: [
     './requests-forwarded.component.css',
-    '../../styles/grid.css',
+    '../../../styles/grid.css',
     '../../styles/list.css',
     '../../styles/buttons.css'
   ]
@@ -19,7 +19,7 @@ import { AuthService } from '../../services/auth.service';
 export class RequestsForwardedComponent {
 
   constructor(
-    private requestService: RequestService, 
+    private requestService: RequestService,
     private errorService: ErrorService,
     private authService: AuthService) { }
 

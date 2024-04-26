@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Chart } from 'chart.js';
-import { RequestService } from '../../../services/request.service';
-import { Request } from '../../../model/request';
-import { ErrorService } from '../../../services/error.service';
+import { RequestService } from '../../../../services/request.service';
+import { Request } from '../../../../models/request';
+import { ErrorService } from '../../../../services/error.service';
 
 
 @Component({
@@ -39,8 +39,8 @@ export class PieChartComponent {
           'Richieste di prodotto'
         ],
 	      datasets: [{
-          data: [ 
-            this.returnedRequestsLength, 
+          data: [
+            this.returnedRequestsLength,
             this.requestProductLength
           ],
           backgroundColor: [

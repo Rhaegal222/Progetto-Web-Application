@@ -1,17 +1,17 @@
 import { Component, Input, EventEmitter, Output} from '@angular/core';
-import { ProductService } from '../../../services/product.service';
-import { AnimationsService } from '../../../services/animations.service';
-import { Product } from '../../../model/product';
-import { ErrorService } from '../../../services/error.service';
-import { RequestService } from '../../../services/request.service';
-import { AuthService } from '../../../services/auth.service';
+import { ProductService } from '../../../../services/product.service';
+import { AnimationsService } from '../../../../services/animations.service';
+import { Product } from '../../../../models/product';
+import { ErrorService } from '../../../../services/error.service';
+import { RequestService } from '../../../../services/request.service';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-product-request',
   templateUrl: './product-request.component.html',
   styleUrls: [
     './product-request.component.css',
-    '../../../styles/container.css',
+    '../../../../styles/container.css',
     '../../../styles/content.css',
     '../../../styles/buttons.css',
     '../../../styles/form.css'
@@ -21,8 +21,8 @@ export class ProductRequestComponent {
 
   constructor(
     private productService: ProductService,
-    private requestService: RequestService, 
-    private animationsService: AnimationsService, 
+    private requestService: RequestService,
+    private animationsService: AnimationsService,
     private errorService: ErrorService,
     private authService: AuthService) { }
 
@@ -41,7 +41,7 @@ export class ProductRequestComponent {
   ngOnInit(): void {
 
     this.animationsService.initResizeObserver('product-request');
-    
+
     this.getAllInfo();
   }
 

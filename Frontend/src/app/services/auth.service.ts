@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { User } from '../model/user';
+import { User } from '../models/user';
 import { ErrorService } from './error.service';
 
 @Injectable({
@@ -11,7 +11,7 @@ import { ErrorService } from './error.service';
 export class AuthService {
 
   constructor(
-    private http:HttpClient, 
+    private http:HttpClient,
     private router:Router,
     private errorService: ErrorService) { }
 
@@ -134,9 +134,9 @@ export class AuthService {
 
   trylogin(email: string, password: string): Observable<any> {
     var user:User = {"email": email, "password": password};
-    return this.http.post("http://localhost:8080/api/login", user, {withCredentials: true});  
+    return this.http.post("http://localhost:8080/api/login", user, {withCredentials: true});
   }
-  
+
   login(email: string, password: string) {
     this.trylogin(email, password).subscribe({
       next: (response) => {

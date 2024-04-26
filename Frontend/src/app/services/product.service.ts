@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs'
-import { Product } from '../model/product';
+import { Product } from '../models/product';
 import { ErrorService } from './error.service';
 
 @Injectable({
@@ -18,10 +18,10 @@ export class ProductService {
     let params = new HttpParams().set('idItem', idItem.toString());
     return this.http.get('http://localhost:8080/api/getItem', { params });
   }
-  
+
   getProducts(searchValue: string = '', category: string = ''): Observable<Product[]> {
     let params = new HttpParams();
-   
+
     if (searchValue) {
       params = params.set('search', searchValue);
     }
@@ -86,6 +86,6 @@ export class ProductService {
       }
     });
 
-        
+
   }
 }

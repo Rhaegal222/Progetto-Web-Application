@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: [
-    '../../styles/container.css',
+    '../../../styles/container.css',
     '../../styles/content.css',
     '../../styles/form.css',
     '../../styles/buttons.css'
@@ -17,7 +17,7 @@ export class RegistrationComponent {
   lastName: FormControl = new FormControl();
   email: FormControl = new FormControl();
   password: FormControl = new FormControl();
-  
+
   passwordInputType: string = 'password';
   passwordVisible: boolean = false;
 
@@ -33,7 +33,7 @@ export class RegistrationComponent {
     var surname = this.lastName.value;
     var email = this.email.value;
     var password = this.password.value;
-    
+
     this.authService.register(name, surname, email, password);
   }
 }

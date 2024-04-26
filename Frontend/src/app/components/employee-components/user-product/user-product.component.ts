@@ -1,18 +1,18 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductService } from '../../services/product.service';
-import { Product } from '../../model/product';
-import { UserProxy } from '../../model/user';
-import { ErrorService } from '../../services/error.service';
-import { UserManagementService } from '../../services/user.service';
-import { AuthService } from '../../services/auth.service';
+import { ProductService } from '../../../services/product.service';
+import { Product } from '../../../models/product';
+import { UserProxy } from '../../../models/user';
+import { ErrorService } from '../../../services/error.service';
+import { UserManagementService } from '../../../services/user.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-user-product',
   templateUrl: './user-product.component.html',
-  styleUrls: [ 
+  styleUrls: [
     './user-product.component.css',
-    '../../styles/grid.css',
+    '../../../styles/grid.css',
     '../../styles/list.css',
     '../../styles/buttons.css',
   ]
@@ -20,7 +20,7 @@ import { AuthService } from '../../services/auth.service';
 export class UserProductComponent {
 
   constructor(
-    private productService: ProductService, 
+    private productService: ProductService,
     private errorService: ErrorService,
     private userService: UserManagementService,
     private authService: AuthService) { }
@@ -77,7 +77,7 @@ export class UserProductComponent {
       error: (error) => {
         this.errorService.handleError(error);
       }
-    });   
+    });
   }
 
   // Salva il prodotto selezionato in localStorage e reindirizza l'utente alla pagina del dettaglio del prodotto

@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../../../../services/auth.service';
 import { Router } from '@angular/router';
 
 var box : any;
@@ -9,7 +9,7 @@ var box : any;
   templateUrl: './tools-bar.component.html',
   styleUrls: [
     './tools-bar.component.css',
-    '../../../styles/buttons.css',
+    '../../../../styles/buttons.css',
   ]
 })
 
@@ -19,7 +19,7 @@ export class ToolsBarComponent {
   ngOnInit(): void {
     if (this.router.url === '/product-management') {
       if (this.authService.isStorekeeper() || this.authService.isAdmin())
-        this.isAuthorized = true; 
+        this.isAuthorized = true;
       else
       this.isAuthorized = false;
     }
@@ -31,7 +31,7 @@ export class ToolsBarComponent {
   }
 
   pages : string[] = ['/request-management', '/requests-forwarded'];
-  
+
   isActive : boolean = true;
   isAuthorized : boolean = false;
   isShowing : boolean = true;
@@ -40,7 +40,7 @@ export class ToolsBarComponent {
     this.isActive = !this.isActive;
 
     box = document.getElementById('box');
-    
+
     if (box == null) return;
 
     if(this.isActive) {

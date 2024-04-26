@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './report.component.html',
   styleUrls: [
     './report.component.css',
-    '../../styles/container.css',
+    '../../../styles/container.css',
     '../../styles/content.css',
   ]
 })

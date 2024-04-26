@@ -1,16 +1,16 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductService } from '../../../services/product.service';
-import { AnimationsService } from '../../../services/animations.service';
-import { ImgbbService } from '../../../services/imgbb.service';
-import { ErrorService } from '../../../services/error.service';
+import { ProductService } from '../../../../services/product.service';
+import { AnimationsService } from '../../../../services/animations.service';
+import { ImgbbService } from '../../../../services/imgbb.service';
+import { ErrorService } from '../../../../services/error.service';
 
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
   styleUrls: [
     './add-product.component.css',
-    '../../../styles/container.css',
+    '../../../../styles/container.css',
     '../../../styles/content.css',
     '../../../styles/buttons.css',
     '../../../styles/form.css'
@@ -20,8 +20,8 @@ import { ErrorService } from '../../../services/error.service';
 export class AddProductComponent {
 
   constructor(
-    private productService: ProductService, 
-    private animationsService: AnimationsService, 
+    private productService: ProductService,
+    private animationsService: AnimationsService,
     private imgbbService: ImgbbService,
     private errorService: ErrorService
     ) { }
@@ -36,7 +36,7 @@ export class AddProductComponent {
   length: number = 0;
   assigned: boolean = false;
   assigned_user: string = '';
-  
+
   categories = [
     {key: 'laptop', name: 'Laptop', visible: true},
     {key: 'software', name: 'Software', visible: true},
@@ -61,7 +61,7 @@ export class AddProductComponent {
   ngOnInit(): void {
     this.initObservable();
     this.initObserveEnterKey();
-    this.animationsService.initResizeObserver('addProductWindow');    
+    this.animationsService.initResizeObserver('addProductWindow');
   }
 
   initObserveEnterKey() {
@@ -102,10 +102,10 @@ export class AddProductComponent {
       location => location.visible && location.name.toLowerCase().includes(query)
     );
     this.showLocationsBox = true;
-  }  
+  }
 
   selectCategory(suggestion: data) {
-    this.type = suggestion.name; 
+    this.type = suggestion.name;
     this.showCategoriesBox = false;
   }
 
@@ -126,7 +126,7 @@ export class AddProductComponent {
       }
     }, 150);
   }
-  
+
   showSuggestions(inputId: string) {
     if (inputId === 'category' && this.filteredCategories.length > 0) {
       this.showCategoriesBox = true;
@@ -151,29 +151,29 @@ export class AddProductComponent {
     }
   }
 
-  /* 
+  /*
     addImage(event: Event): void {
     const input = event.target as HTMLInputElement;
-  
+
     if (input.files && input.files.length) {
       const file = input.files[0];
       const reader = new FileReader();
-  
+
       reader.onload = () => {
         const base64String = reader.result as string;
         this.image = base64String;
       };
-  
+
       reader.onerror = (error) => {
         console.error('Errore nella lettura del file:', error);
       };
-  
+
       reader.readAsDataURL(file);
     }
   }
   */
-    
-    
+
+
   removeImage(): void {
     this.image = '';
     const input = document.getElementById('image') as HTMLInputElement;
@@ -191,11 +191,11 @@ export class AddProductComponent {
       assignedUser: this.assigned_user,
       image: this.image
     };
-    
+
     this.productService.addProduct(product);
     this.onCloseEvent();
   }
-  
+
   @Output() onEvent = new EventEmitter<addProductEventData>();
 
   onCloseEvent() {

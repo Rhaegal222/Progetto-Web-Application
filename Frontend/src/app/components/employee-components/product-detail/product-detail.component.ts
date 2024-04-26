@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { Product } from '../../model/product';
-import { User } from '../../model/user';
-import { ProductService } from '../../services/product.service';
-import { ErrorService } from '../../services/error.service';
+import { Product } from '../../../models/product';
+import { User } from '../../../models/user';
+import { ProductService } from '../../../services/product.service';
+import { ErrorService } from '../../../services/error.service';
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: [
     './product-detail.component.css',
-    '../../styles/container.css',
+    '../../../styles/container.css',
     '../../styles/content.css',
     '../../styles/buttons.css'
   ]
@@ -37,7 +37,7 @@ export class ProductDetailComponent {
 
   requestProductWindow: boolean = false;
   returnProductWindow: boolean = false;
-  
+
   ngOnInit() {
     const previousPage = localStorage.getItem('previousPage');
     if (previousPage !== null && previousPage !== undefined) {
@@ -59,7 +59,7 @@ export class ProductDetailComponent {
       this.productService.getProduct(this.product.idItem).subscribe({
         next: (data) => {
           this.productProxy = data;
-          
+
           this.description = this.productProxy?.description || '';
           if (this.productProxy?.location && this.productProxy?.location != 'Magazzino')
             this.location = this.productProxy?.location || '';
@@ -73,10 +73,10 @@ export class ProductDetailComponent {
       this.type = this.product.type || '';
       this.image = this.product.image || '';
       this.length = this.image ? this.image.length : 0;
-      
+
       if (this.product.assignedUser && typeof this.product.assignedUser === 'object')
         this.assignedUser = this.product.assignedUser.email;
-      else 
+      else
         this.assignedUser = '';
 
       if (this.assignedUser && this.assignedUser.length > 0)
@@ -94,9 +94,9 @@ export class ProductDetailComponent {
 
   onClose(eventData: productRequestEventData){
     this.requestProductWindow = eventData.requestProductWindow;
-    this.returnProductWindow = eventData.requestProductWindow;    
+    this.returnProductWindow = eventData.requestProductWindow;
   }
-   
+
 }
 
 export interface productRequestEventData {

@@ -1,15 +1,15 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Request } from '../../../model/request';
-import { Product } from '../../../model/product';
-import { User } from '../../../model/user';
-import { RequestService } from '../../../services/request.service';
+import { Request } from '../../../../models/request';
+import { Product } from '../../../../models/product';
+import { User } from '../../../../models/user';
+import { RequestService } from '../../../../services/request.service';
 
 @Component({
   selector: 'app-request-details',
   templateUrl: './request-details.component.html',
   styleUrls: [
     './request-details.component.css',
-    '../../../styles/container.css',
+    '../../../../styles/container.css',
     '../../../styles/content.css',
     '../../../styles/buttons.css',
     '../../../styles/form.css'
@@ -61,7 +61,7 @@ export class RequestDetailsComponent {
       this.idEmployeeRequest = this.request.idEmployeeRequest || 0;
       this.title = this.request.title;
       this.description = this.request.description;
-      
+
       if (this.request.status) {
         switch (this.request.status) {
           case 'pending':

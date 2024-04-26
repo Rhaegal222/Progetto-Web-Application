@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductService } from '../../services/product.service';
-import { Product } from '../../model/product';
-import { ErrorService } from '../../services/error.service';
-import { AnimationsService } from '../../services/animations.service';
+import { ProductService } from '../../../services/product.service';
+import { Product } from '../../../models/product';
+import { ErrorService } from '../../../services/error.service';
+import { AnimationsService } from '../../../services/animations.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,13 +11,13 @@ import { Router } from '@angular/router';
   templateUrl: './product-list.component.html',
   styleUrls: [
     './product-list.component.css',
-    '../../styles/grid.css',
+    '../../../styles/grid.css',
     '../../styles/list.css',
     '../../styles/buttons.css'
   ]
 })
 export class ProductListComponent{
-  
+
   constructor(
     private productService: ProductService,
     private animationService: AnimationsService,
@@ -61,8 +61,8 @@ export class ProductListComponent{
         }
       });
     }
-  }  
-  
+  }
+
   getAllProducts(){
     this.productService.getAllProducts().subscribe({
       next: (data) => {

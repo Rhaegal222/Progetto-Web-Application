@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { User } from '../../model/user';
-import { ErrorService } from '../../services/error.service';
-import { AuthService } from '../../services/auth.service';
-import { UserManagementService } from '../../services/user.service';
+import { User } from '../../../models/user';
+import { ErrorService } from '../../../services/error.service';
+import { AuthService } from '../../../services/auth.service';
+import { UserManagementService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: [
     './profile.component.css',
-    '../../styles/form.css',
+    '../../../styles/form.css',
     '../../styles/container.css',
     '../../styles/content.css',
     '../../styles/buttons.css'
@@ -37,7 +37,7 @@ export class ProfileComponent {
         this.users = data;
         this.firstName = this.users[0].name || '';
         this.lastName = this.users[0].surname || '';
-        
+
         if (this.users[0].banned === true) {
           this.users[0].role = 'Utente bannato';
         } else if ( this.users[0].role === '' ||  this.users[0].role === null) {

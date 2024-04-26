@@ -1,18 +1,18 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductService } from '../../../services/product.service';
-import { AnimationsService } from '../../../services/animations.service';
-import { Product } from '../../../model/product';
-import { ProductProxy } from '../../../model/productProxy';
-import { ImgbbService } from '../../../services/imgbb.service';
-import { ErrorService } from '../../../services/error.service';
+import { ProductService } from '../../../../services/product.service';
+import { AnimationsService } from '../../../../services/animations.service';
+import { Product } from '../../../../models/product';
+import { ProductProxy } from '../../../../models/productProxy';
+import { ImgbbService } from '../../../../services/imgbb.service';
+import { ErrorService } from '../../../../services/error.service';
 
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
   styleUrls: [
     './edit-product.component.css',
-    '../../../styles/container.css',
+    '../../../../styles/container.css',
     '../../../styles/content.css',
     '../../../styles/buttons.css',
     '../../../styles/form.css'
@@ -21,8 +21,8 @@ import { ErrorService } from '../../../services/error.service';
 export class EditProductComponent {
 
   constructor(
-    private productService: ProductService, 
-    private animationsService: AnimationsService, 
+    private productService: ProductService,
+    private animationsService: AnimationsService,
     private imgbbService: ImgbbService,
     private errorService: ErrorService) { }
 
@@ -32,7 +32,7 @@ export class EditProductComponent {
 
   productProxy: ProductProxy | undefined;
 
-  idItem: number = 0;  
+  idItem: number = 0;
   name: string = '';
   type: string = '';
   description: string = '';
@@ -60,7 +60,7 @@ export class EditProductComponent {
       this.productService.getProduct(this.product.idItem).subscribe({
         next: (data) => {
           this.productProxy = data;
-          
+
           this.description = this.productProxy?.description || '';
           if (this.productProxy?.location && this.productProxy?.location != 'Magazzino')
             this.location = this.productProxy?.location || '';
@@ -74,17 +74,17 @@ export class EditProductComponent {
       this.type = this.product.type || '';
       this.image = this.product.image || '';
       this.length = this.image ? this.image.length : 0;
-      
+
       if (this.product.assignedUser && typeof this.product.assignedUser === 'object')
         this.assigned_user = this.product.assignedUser.email;
-      else 
+      else
         this.assigned_user = '';
 
       if (this.assigned_user && this.assigned_user.length > 0)
         this.assigned = true;
     }
   }
-  
+
   categories = [
     {key: 'laptop', name: 'Laptop', visible: true},
     {key: 'software', name: 'Software', visible: true},
@@ -118,7 +118,7 @@ export class EditProductComponent {
       }
     });
   }
-  
+
   filterCategories(event: any) {
     const query = event.target.value.toLowerCase();
     this.filteredCategories = this.categories.filter(
@@ -133,7 +133,7 @@ export class EditProductComponent {
       location => location.visible && location.name.toLowerCase().includes(query)
     );
     this.showLocationsBox = true;
-  }  
+  }
 
   selectCategory(suggestion: data) {
     this.type = suggestion.name;
@@ -157,7 +157,7 @@ export class EditProductComponent {
       }
     }, 150);
   }
-  
+
   showSuggestions(inputId: string) {
     if (inputId === 'category' && this.filteredCategories.length > 0) {
       this.showCategoriesBox = true;
@@ -180,23 +180,23 @@ export class EditProductComponent {
     }
   }
 
-  /* 
+  /*
     addImage(event: Event): void {
     const input = event.target as HTMLInputElement;
-  
+
     if (input.files && input.files.length) {
       const file = input.files[0];
       const reader = new FileReader();
-  
+
       reader.onload = () => {
         const base64String = reader.result as string;
         this.image = base64String;
       };
-  
+
       reader.onerror = (error) => {
         console.error('Errore nella lettura del file:', error);
       };
-  
+
       reader.readAsDataURL(file);
     }
   }

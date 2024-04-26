@@ -1,15 +1,15 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RequestService } from '../../services/request.service';
-import { Request } from '../../model/request';
-import { ErrorService } from '../../services/error.service';
+import { RequestService } from '../../../services/request.service';
+import { Request } from '../../../models/request';
+import { ErrorService } from '../../../services/error.service';
 
 @Component({
   selector: 'app-request-management',
   templateUrl: './request-management.component.html',
-  styleUrls: [ 
+  styleUrls: [
     './request-management.component.css',
-    '../../styles/grid.css',
+    '../../../styles/grid.css',
     '../../styles/list.css',
     '../../styles/buttons.css'
   ]

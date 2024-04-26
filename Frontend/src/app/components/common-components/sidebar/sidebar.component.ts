@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { AnimationsService } from '../../services/animations.service';
+import { AnimationsService } from '../../../services/animations.service';
 
 var arrow : any;
 var sidebar : any;
@@ -15,7 +15,7 @@ export class SidebarComponent implements OnInit {
   lastComponentLoaded: string = '';
   authToken: string = '';
   isAuth: boolean = false;
-  
+
   constructor(private router: Router, private animationsService: AnimationsService) {}
 
   ngDoCheck() {
@@ -50,7 +50,7 @@ export class SidebarComponent implements OnInit {
       } else if ((window.innerWidth >= 768) && (window.innerWidth < 992)) {
         sidebar.classList.toggle('menu-close');
         arrow.classList.toggle('arrow-right');
-      } 
+      }
     }
   }
 
@@ -87,7 +87,7 @@ export class SidebarComponent implements OnInit {
       let lineTop = document.getElementById('lineTop');
       let lineMid = document.getElementById('lineMid');
       let lineBot = document.getElementById('lineBot');
-    
+
 
       if (lineTop && lineMid && lineBot) {
         lineTop.classList.toggle('line-top', false);
@@ -102,7 +102,7 @@ export class SidebarComponent implements OnInit {
     sidebar.classList.toggle('menu-open', true);
 
     let posA = -250;
-    let posB = 10; 
+    let posB = 10;
     sidebar.style.left = posA + 'px';
     arrow.style.left = posB + 'px';
 
@@ -114,7 +114,7 @@ export class SidebarComponent implements OnInit {
         arrow.removeAttribute('style');
       } else {
         posA+=10;
-        posB+=10; 
+        posB+=10;
         sidebar.style.left = posA + 'px';
         arrow.style.left = posB + 'px';
         requestAnimationFrame(frame);
@@ -147,7 +147,7 @@ export class SidebarComponent implements OnInit {
         arrow.removeAttribute('style');
       }
     }
-    requestAnimationFrame(frame);   
+    requestAnimationFrame(frame);
   }
 
   rotationArrow(arrow: HTMLElement){
@@ -160,7 +160,7 @@ export class SidebarComponent implements OnInit {
           arrow.classList.toggle('arrow-left', true);
           arrow.classList.toggle('arrow-right', false);
         } else {
-          pos-=3; 
+          pos-=3;
           arrow.style.transform = 'matrix(1, 0, 0, 1, 0, 0) rotate(' + pos + 'deg)';
         }
       }
